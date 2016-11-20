@@ -4,10 +4,10 @@ var path = require('path');
 var fs = require('fs');
 exports.output = path.resolve(__dirname, 'output');
 
-var CDN_DOMAIN = '//static.cn';
-var PREFIX = 'cms-front/v/[oss_version]';
+// var CDN_DOMAIN = '//static.cn';
+// var PREFIX = 'cms-front/v/1';
 
-var AliOss = require('edp-build-alioss');
+// var AliOss = require('edp-build-alioss');
 
 // var moduleEntries = 'html,htm,phtml,tpl,vm,js';
 // var pageEntries = 'html,htm,phtml,tpl,vm';
@@ -25,17 +25,17 @@ exports.getProcessors = function () {
         ]
     });
 
-    var alioss = new AliOss({
-        files: [
-            'src/*',
-            'src/**/*',
-            'dep/*',
-            'dep/**/*'
-        ],
-        bucket: '',
-        prefix: PREFIX,
-        region: ''
-    });
+    // var alioss = new AliOss({
+    //     files: [
+    //         'src/*',
+    //         'src/**/*',
+    //         'dep/*',
+    //         'dep/**/*'
+    //     ],
+    //     bucket: '',
+    //     prefix: PREFIX,
+    //     region: ''
+    // });
 
     var cssProcessor = new CssCompressor();
 
@@ -170,14 +170,14 @@ exports.getProcessors = function () {
 
     return {
         'debug': [
-            alioss
+            // alioss
         ],
         'default': [
             lessProcessor,
             moduleProcessor,
             pathMapperProcessor,
             stringReplacer,
-            alioss
+            // alioss
         ],
         'test': [
             lessProcessor,
@@ -202,7 +202,7 @@ exports.getProcessors = function () {
             jsProcessor,
             pathMapperProcessor,
             stringReplacer,
-            alioss
+            // alioss
         ]
     };
 };
