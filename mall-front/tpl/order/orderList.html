@@ -1,0 +1,81 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="item"}}
+{{/block}}
+{{block name="title"}}我的订单 - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/order/list.css">
+{{/block}}
+{{block name="body"}}
+<div class="container order-list">
+    <div class="margin-big-top margin-big-bottom tab">
+        <div class="tab-head">
+            <ul class="tab-nav">
+                <li class="active"><a href="/order/list">我的订单</a> </li>
+                <li><a href="/order/refund-list">我的退款</a> </li>
+                <li><a href="/tuan/find-orders">我的团购</a></li>
+            </ul>
+        </div>
+        <div class="order-list-box tab-body tab-body-bordered bg-white">
+            <div class="tab-panel active">
+                {{if $orderList|@count neq 0 }}
+                    {{foreach $orderList as $order }}
+                    <div class="panel margin-top margin-15-bottom order-item" data-order-id="{{$order['orderId']}}">
+                        <div class="panel-head">
+                            {{if $order['status'] eq 0}}
+                            <em class="block text-big margin-bottom text-black">等待付款</em>
+                            {{elseif $order['status'] eq 1}}
+                            <em class="block text-big margin-bottom text-black">已完成</em>
+                            {{elseif $order['status'] eq 2}}
+                            <em class="block text-big margin-bottom text-black">已取消</em>
+                            {{elseif $order['status'] eq 3}}
+                            <em class="block text-big margin-bottom text-black">已取消</em>
+                            {{/if}}
+                            <div class="line text-gray">
+                                <div class="xb3 xm3 xs6 xl12"><em>{{$order['createdTime']|date_format:'%Y-%m-%d %H:%M:%S'}}</em></div>
+                                <div class="xb3 xm3 xs6 xl12">订单号：<em class="text-black">{{$order['orderId']}}</em></div>
+                                <div class="xb3 xm3 xs6 xl12">购车人：<em class="text-black">{{$order['userInfo']['userName']}}</em></div>
+                                <div class="xb3 xm3 xs6 xl12 text-black total_amount">
+                                    订单金额：<em class="text text-red">{{$order['deposit']/100}}</em>
+                                    <small class="margin-right">元</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body height-big bg-white">
+                            <div class="line">
+                                <div class="xb4 xm4 xs12 xl12 text-gray">
+                                    <img src="{{$order['product']['image']|cdn}}" alt="">
+                                </div>
+                                <div class="xb4 xm4 xs12 xl12">
+                                    <div class="good-detail">
+                                        <span>{{$order['product']['name']}}</span>
+                                        <div class="specification">
+                                            {{foreach $order['product']['specification'] as $specification }}
+                                            <div><label>{{$specification['name']}}：</label><em>{{$specification['specificationValue']['name']}}</em></div>
+                                            {{/foreach}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="xb4 xm4 xs12 xl12 text-center">
+                                    {{if $order['status'] eq 0}}
+                                    <a class="button bg-red margin-bottom paybtn" href="/order/payment?orderId={{$order['orderId']}}">立即支付</a>
+                                    <br class="hidden-s hidden-l">
+                                    {{/if}}
+                                    <a class="button margin-bottom" href="/order/detail?orderId={{$order['orderId']}}">订单详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/foreach}}
+                {{else}}
+                    <div class="oredernotip">
+                        您还没有订单，去 <a href="/site/index" class="button bg-red">选车</a>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+{{/block}}

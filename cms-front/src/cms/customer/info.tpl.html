@@ -1,0 +1,175 @@
+<!-- target: TPL_costomer_info -->
+<div class="customer-info bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>客户管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/customer/list">客户列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">客户详情</span>
+    </div>
+    <div class="bbmc-content">
+        <dl class="dl-horizontal">
+            <dt>姓名：</dt>
+            <dd>
+                <span id="naming" v-show="isNaming">${userInfo.name}</span>
+                <div v-if="isAllow('customer.update')" style="display: inline-block">
+                    <a href="javascript:void(0)" v-show="isNaming" @click="nameToggle" class="editbtn">修改</a>
+                    <div style="display: inline-block" v-show="!isNaming">
+                        <div class="rating-ctrl">
+                            <input data-ui-id="customer-name"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   data-ui-number="100"
+                                   data-ui-max="100"
+                                   data-ui-name="customer-name"
+                                   data-ui-value="${userInfo.name}">
+                            <button
+                                    data-ui-type="Button"
+                                    data-ui-id="updateName"
+                                    data-ui-skin="primary"
+                                    type="button" id="updateName">确认</button>
+                            <button
+                                    data-ui-type="Button"
+                                    data-ui-id="cancelName"
+                                    type="button" @click="nameToggle">取消</button>
+                        </div>
+                    </div>
+                </div>
+
+            </dd>
+            <dt>手机号：</dt>
+            <dd>${userInfo.phone}</dd>
+            <dt>用户等级：</dt>
+            <dd>
+                <span id="rating" v-show="isRating">{{userInfo.rating}} {{userInfo.rating | keyToValue }}</span>
+                <div v-if="isAllow('customer.update')" style="display: inline-block">
+                    <a href="javascript:void(0)" v-show="isRating" @click="ratingToggle" class="editbtn">修改</a>
+                    <div style="display: inline-block" v-show="!isRating">
+                        <div class="rating-ctrl">
+                            <select
+                                    data-ui-type="Select"
+                                    data-ui-id="ratingSele"
+                                    data-ui-width="200"
+                                    name="ratingSele"
+                                    data-ui-selected-index="0"
+                                    data-ui-value="${userInfo.rating}" id="ratingSele" >
+                                <!-- for: ${allRating} as ${rating} -->
+                                <option value="${rating.value}">${rating.value} ${rating.name}</option>
+                                <!-- /for -->
+                            </select>
+                            <button
+                                    data-ui-type="Button"
+                                    data-ui-id="updateRating"
+                                    data-ui-skin="primary"
+                                    type="button" id="updateRating">确认</button>
+                            <button
+                                    data-ui-type="Button"
+                                    data-ui-id="cancel"
+                                    type="button" id="cancel" @click="ratingToggle">取消</button>
+                        </div>
+                    </div>
+                </div>
+
+            </dd>
+            <dt>销售顾问：</dt>
+            <dd>
+                <span id="ownerName">
+                    <!-- if: ${userInfo.owner} -->
+                    {{userInfo.owner.name}}
+                    <!-- else -->
+                    无
+                    <!-- /if -->
+                </span>
+                <a href="javascript:void(0)" @click="distribute" class="editbtn" v-if="isAllow('customer.distribute') || isAllow('customer.distribute-public')">分配</a>
+            </dd>
+        </dl>
+    </div>
+    <div class="bbmc-content" v-if="grouponData.length && isAllow('groupon-activity.list') && isLevelAllow('groupon-activity.list')">
+        <h2><i class="icon-ticket"></i>团购活动报名</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="grouponTable" data-ui-datasource="@grouponData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content" v-if="tuanData.length && isAllow('tuan-order.list') && isLevelAllow('tuan-order.list')">
+        <h2><i class="icon-ticket"></i>旧团购活动订单</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="tuanTable" data-ui-datasource="@tuanData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content"  v-if="voucherData.length && isAllow('voucher-order.list') && isLevelAllow('voucher-order.list')">
+        <h2><i class="icon-ticket"></i>优惠券活动订单</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="voucherTable" data-ui-datasource="@voucherData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content" v-if="exhibitionData.length && isAllow('exhibition-coupon-order.list') && isLevelAllow('exhibition-coupon-order.list')">
+        <h2><i class="icon-ticket"></i>车展活动订单</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="exhibitionTable" data-ui-datasource="@exhibitionData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content">
+        <h2><i class="icon-direction"></i>跟进记录</h2>
+        <div class="track-wrap">
+            <div class="track-new" v-if="isAllow('customer-track.add')">
+                <div data-ui-type="TextBox"
+                     data-ui-id="textLine"
+                     data-ui-value=""
+                     data-ui-mode="textarea"
+                     data-ui-width="600"
+                     data-ui-height="60"
+                     class="textLine">
+                </div>
+                <div class="track-bar">
+                    <button
+                            data-ui-type="Button"
+                            data-ui-id="addTrack"
+                            data-ui-skin="primary"
+                            type="button" @click="addTrack"><i class="icon-plus"></i>添加记录</button>
+                </div>
+            </div>
+            <ul class="track-list">
+                <li v-for="track in trackList.data" v-cloak class="track">
+                    <div class="track-avatar">
+                        <span v-if="track.user" v-text="track.user.name|first-letter"></span>
+                        <span v-else v-text="track.user_company_name|first-letter"></span>
+                    </div>
+                    <div class="track-content">
+                        <div class="track-header">
+                            <!--<a v-if="track.user" href="#/user/customer/list~user_company_id={{track.user.id}}" v-text="track.user.name"></a>-->
+                            <span v-if="track.user" v-text="track.user.name"></span>
+                            <span v-else>{{track.user_company_name}}<small>(已删除)</small></span>
+                            <time v-text="track.updated_time | date"></time>
+                        </div>
+                        <div class="track-body" v-if="track.type==config.TRACK_TYPE_COMMON">
+                            <p v-text="track.content"></p>
+                        </div>
+                        <div class="track-body" v-if="track.type==config.TRACK_TYPE_CUSTOMER_RATING">
+                            <p>更新客户等级为<i class="type-rating" v-text="track.content"></i></p>
+                        </div>
+                        <div class="track-body" v-if="track.type==config.TRACK_TYPE_CUSTOMER_OWNER">
+                            <p>更新客户归属为<i class="type-owner" v-text="track.content"></i></p>
+                        </div>
+                        <div class="track-body" v-if="track.type==config.TRACK_TYPE_CUSTOMER_NAME">
+                            <p>更新客户姓名为<i class="type-name" v-text="track.content"></i></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div data-ui-type="Pager" data-ui-id="pager"
+                 data-ui-page-type="plain"
+                 data-ui-count="@trackList.totalCount"
+                 data-ui-page="@trackList.pageNo"
+                 data-ui-page-size="@trackList.pageSize">
+            </div>
+        </div>
+    </div>
+</div>

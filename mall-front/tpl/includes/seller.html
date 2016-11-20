@@ -1,0 +1,18 @@
+<a class="v-seller" href="tel:{{$data.phone}}">
+    <dl>
+        <dt>
+            {{if $data.avatar}}
+            <img src="{{$data.avatar}}" alt="头像" width="64" height="64" style="border-radius: 50%">
+            {{else}}
+            <img src="/static/images/avatar.png" alt="头像" width="64" height="64">
+            {{/if}}
+        </dt>
+        <dd class="v-seller-info">
+                <h4>{{$data.name}}</h4>
+                <p>电话：{{$data.phone}}</p>
+        </dd>
+        <dd class="v-seller-tel">
+            <i class="v-seller-tel"></i>
+        </dd>
+    </dl>
+</a>

@@ -1,0 +1,56 @@
+<!-- target: TPL_site_activities -->
+<div class="site-activities">
+    <!-- use: TPL_common_page_header_simple(title="活动列表") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <ul style="margin-top: 10px;" class="ui-list ui-list-one ui-list-link ui-list-active ui-list-cover ui-border-tb" v-if="activityTypes" v-cloak>
+            <li class="" @click="isLevelAllow('groupon-activity') && redirect('/groupon/activity/list')">
+                <div class="ui-list-thumb">
+                    <span class="icon-tuan"></span>
+                </div>
+                <div class="ui-list-info">
+                    <h4 class="ui-txt-info">
+                        团购活动 (<small v-text="activityTypes.groupon_count"></small>)
+                        <i class="ui-label-s" v-if="!isLevelAllow('groupon-activity')">未开通</i>
+                    </h4>
+                </div>
+            </li>
+            <li class="ui-border-t" @click="isLevelAllow('tuan|tuan-order') && redirect('/tuan/list')">
+                <div class="ui-list-thumb">
+                    <span class="icon-tuan"></span>
+                </div>
+                <div class="ui-list-info">
+                    <h4 class="ui-txt-info">
+                        旧版团购活动 (<small v-text="activityTypes.tuan_count"></small>)
+                        <i class="ui-label-s" v-if="!isLevelAllow('tuan|tuan-order')">未开通</i>
+                    </h4>
+                </div>
+            </li>
+            <li class="ui-border-t" @click="isLevelAllow('activity|voucher-order') && redirect('/voucher/activity/list')">
+                <div class="ui-list-thumb">
+                    <span class="icon-coupon"></span>
+                </div>
+                <div class="ui-list-info">
+                    <h4 class="ui-txt-info">
+                        优惠券活动 (<small v-text="activityTypes.voucher_activity_count"></small>)
+                        <i class="ui-label-s" v-if="!isLevelAllow('activity|voucher-order')">未开通</i>
+                    </h4>
+                </div>
+            </li>
+            <li class="ui-border-t" @click="isLevelAllow('exhibition-coupon-activity|exhibition-coupon-order') && redirect('/exhibition/list')">
+                <div class="ui-list-thumb">
+                    <span class="icon-che"></span>
+                </div>
+                <div class="ui-list-info">
+                    <h4 class="ui-txt-info">
+                        车展活动 (<small v-text="activityTypes.exhibition_count"></small>)
+                        <i class="ui-label-s" v-if="!isLevelAllow('exhibition-coupon-activity|exhibition-coupon-order')">未开通</i>
+                    </h4>
+                </div>
+            </li>
+        </ul>
+        <div class="ui-center" v-else>
+            <p class="ui-txt-info">无活动</p>
+        </div>
+    </section>
+</div>

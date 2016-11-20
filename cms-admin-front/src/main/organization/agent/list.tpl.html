@@ -1,0 +1,39 @@
+<!-- target: TPL_organization_agent_list -->
+<div class="organization-agent-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <!-- if: ${organization_id} -->
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <!-- /if -->
+        <span>经纪人管理</span>
+        <span class="divider">/</span>
+        <span class="active">经纪人列表</span>
+    </div>
+    <div class="bbmc-content">
+        <!-- if: ${organization_id} -->
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="agent",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+        <!-- /if -->
+                <div class="ui-row">
+                    <div class="ui-group">
+                        <form data-ui-type="Form" data-ui-id="filter">
+                            <div data-ui-type="SearchBox"
+                                 data-ui-placeholder="按手机号搜索"
+                                 data-ui-id="searchbox"
+                                 data-ui-text="${phone}"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="list-table">
+                    <!-- import: listTableWithCommand -->
+                </div>
+                <div class="list-table-footer">
+                    <!-- import: listPager -->
+                </div>
+        <!-- if: ${organization_id} -->
+                    </div>
+                </div>
+        <!-- /if -->
+    </div>
+</div>

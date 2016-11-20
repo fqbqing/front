@@ -1,0 +1,64 @@
+<!-- target: TPL_tuan/order_check -->
+<div class="tuan-order-check">
+    <!-- use: TPL_common_page_header(title="核销订单") -->
+    <section class="ui-container">
+        <div v-if="order">
+            <div class="check-notice" v-if="order.status!=3">
+                <i class="ui-icon-warn check-notice-icon"></i>
+                <p class="check-notice-main">
+                    确定 <span v-text="order.name"></span>
+                    <small class="ui-txt-muted" v-text="order.phone"></small>
+                </p>
+                <p>
+                    参与本店
+                    <i v-text="order.tuan.tuan_time|date 'YYYY-MM-DD'"></i>
+                    举办的
+                    『<span v-text="order.tuan.title"></span>』
+                    并享受"<span v-text="order.tuan.coupon_title"></span>"进行优惠购车？
+                </p>
+                <div class="check-info">
+                    选择购买车型：<br>
+                    <ul class="intention ui-row">
+                        <li class="ui-col ui-col-33" v-for="item in order.tuan.intention">
+                            <div class="ui-group-radio">
+                                <input id="intention{{$index}}" v-model="intention" lazy type="radio" name="intention" value="{{item}}">
+                                <label for="intention{{$index}}" class="ui-nowrap"><span v-text="item"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="checkSale">确定</button>
+                    <button class="ui-btn-lg" @click="toHome">取消</button>
+                </div>
+            </div>
+            <div class="check-notice" v-else>
+                <i class="ui-icon-success check-notice-icon"></i>
+                <p class="check-notice-main">
+                    <span v-text="order.name"></span>
+                    <small class="ui-txt-muted" v-text="order.phone"></small>
+                </p>
+                <p>
+                    参与本店
+                    <i v-text="order.tuan.tuan_time|date 'YYYY-MM-DD'"></i>
+                    举办的
+                    『<span v-text="order.tuan.title"></span>』
+                    并享受"<span v-text="order.tuan.coupon_title"></span>"进行优惠购车资格已被使用！
+                </p>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">确定</button>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="ui-notice">
+                <i></i>
+                <p>抱歉，无法核销！</p>
+                <p>可能原因：该客户由其他销售顾问负责</p>
+                <div class="ui-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">返回</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

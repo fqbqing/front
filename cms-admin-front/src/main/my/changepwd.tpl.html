@@ -1,0 +1,61 @@
+<!-- target: TPL_my_changepwd -->
+<div class="my-changepwd bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>个人中心</span>
+        <span class="divider">/</span>
+        <span class="active">修改密码</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <span class="tip"> 温馨提示：请安全设置密码，不要将密码设置为个人财产密码!</span>
+                <div class="form-row">
+                    <div class="form-key form-key-required">原密码：</div>
+                    <div class="form-value">
+                        <input data-ui-id="oldPassword"
+                               data-ui-type="TextBox"
+                               type="password"
+                               data-ui-required="required"
+                               data-ui-required-error-message="原密码不能为空"
+                               data-ui-width="200"
+                               name="oldPassword"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">新密码：</div>
+                    <div class="form-value">
+                        <input data-ui-id="newPassword"
+                               data-ui-type="TextBox"
+                               type="password"
+                               data-ui-required="required"
+                               data-ui-required-error-message="新密码不能为空"
+                               data-ui-width="200"
+                               name="newPassword"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">重新输入密码：</div>
+                    <div class="form-value">
+                        <input data-ui-id="confirmPwd"
+                               data-ui-type="TextBox"
+                               type="password"
+                               data-ui-required="required"
+                               data-ui-required-error-message="请重新输入密码"
+                               data-ui-rel="newPassword"
+                               data-ui-width="200"
+                               name="confirmPwd"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="primary" class="ui-button-submit" type="submit">提交</button>
+                        <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" class="ui-button-submit" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

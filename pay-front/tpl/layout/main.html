@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="{{block name='keywords'}}{{/block}}" />
+    <meta name="description" content="{{block name='description'}}{{/block}}" />
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>{{block name='title'}}收银台 - 车大卖{{/block}}</title>
+    <!--[if lt IE 9]>
+    <script src="/static/dep/bootstrap/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/static/css/common.less">
+    <script src="/static/dep/jquery.min.js"></script>
+    {{block name="head"}}{{/block}}
+</head>
+<body>
+<noscript>
+    <div class="nojs alert alert-warn">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+{{block name="header"}}
+{{if $smarty.get.theme|default:'' neq 'simple'}}
+    {{include file="include/header.html"}}
+{{/if}}
+{{/block}}
+<div class="yi-body">
+    {{block name="body"}}{{/block}}
+</div>
+{{block name="footer"}}
+    {{include file="include/footer.html"}}
+{{/block}}
+{{block name="js"}}
+{{/block}}
+</body>
+</html>

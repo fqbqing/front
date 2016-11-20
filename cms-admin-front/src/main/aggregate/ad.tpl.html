@@ -1,0 +1,58 @@
+<!-- target: TPL_aggregate_ad -->
+<div class="aggregate-ad bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">聚合推广管理</span>
+        <span class="divider">/</span>
+        <span class="active">广告位管理</span>
+    </div>
+
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <esuibox v-if="isAllow('ad.add')">
+                        <button type="button" data-ui-type="Button" data-ui-skin="primary" data-ui-id="addAdvertise">
+                            <i class="icon-plus"></i>新增推广
+                        </button>
+                    </esuibox>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label>地区：</label>
+                        <select data-ui-type="Select" data-ui-id="province_id" data-ui-name="province_id" data-ui-value="${province_id}" data-ui-skin="primary">
+                            <!-- for: ${province} as ${pr} -->
+                            <option value="${pr.id}">${pr.name}</option>
+                            <!-- /for -->
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>广告位：</label>
+                        <select data-ui-type="Select" data-ui-id="place" data-ui-name="place" data-ui-value="${place}" data-ui-skin="primary">
+                            <!-- for: ${ad_place} as ${pl} -->
+                            <option value="${pl.value}">${pl.text}</option>
+                            <!-- /for -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>平台：</label>
+                        <select data-ui-type="Select" data-ui-id="platform" data-ui-name="platform" data-ui-value="${platform}" data-ui-skin="primary">
+                            <option value="1">PC端</option>
+                            <option value="2">移动端</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+    </div>
+
+
+</div>

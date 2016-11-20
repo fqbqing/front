@@ -1,0 +1,40 @@
+<!-- target: TPL_order_groupon_list -->
+<div class="order-groupon-list bbmc-content-wrap" v-if="isAllow('groupon-activity.list') && isLevelAllow('groupon-activity.list')">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">新版团购活动</span>
+        <span class="divider">/</span>
+        <span class="active">报名列表</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <div data-ui-type="SearchBox" data-ui-placeholder="手机号" data-ui-id="searchbox" data-ui-text="${phone}"></div>
+                    <input type="checkbox" data-ui-id="exclude"
+                           data-ui-type="CheckBox" data-ui-checked="${exclude}" name="exclude" value="staff" title="排除内部员工">
+                </div>
+                <div>
+                    <label class="title">订单状态：</label>
+                    <div data-ui-type="BoxGroup" data-ui-id="tuanStatus" data-ui-skin="custom"
+                         data-ui-name="order_status" data-ui-box-type="checkbox" data-ui-value="${order_status}" >
+                        <!--<input type="checkbox" name="order_status" title="全部" value="">-->
+                        <!-- for: ${grouponStatus} as ${st} -->
+                        <input type="checkbox" name="order_status" title="${st.text}" value="${st.value}">
+                        <!-- /for -->
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="list-table">
+            <!-- if: ${groupon} --><h2>${groupon.name}</h2><!-- /if -->
+            <!-- import: listTableWithCommandAndSubrow -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <a data-ui-type="Button" class="button bg-sub" href="/api/activity-signup/groupon-excel?${exportUrl}">导出</a>
+        </div>
+
+    </div>
+</div>

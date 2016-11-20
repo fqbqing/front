@@ -1,0 +1,185 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="guide"}}
+{{/block}}
+{{block name="title"}}购车指南 - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+    <link rel="stylesheet" href="/static/css/site/guide.css">
+{{/block}}
+{{block name="body"}}
+
+{{assign var="type" value="process"}}
+{{if isset($smarty.get.type)}}
+{{assign var="type" value="`$smarty.get.type`"}}
+{{/if}}
+<div class="container-layout padding-big-top padding-big-bottom">
+    <div class="container padding">
+        <div class="xb3 xm3 xs12 xl12 guide-head">
+            <ul class="nav padding-big guide-nav bg-white">
+                <li><span>购车指南</span>
+                    <ul class="sub-nav">
+                        <li {{if $type eq 'process'}}class="active"{{/if}}><a href="/site/guide?type=process">特惠买车</a> </li>
+                        <li {{if $type eq 'discount'}}class="active"{{/if}}><a href="/site/guide?type=discount">车展优惠</a> </li>
+                    </ul>
+                </li>
+                <li><span>关于我们</span>
+                    <ul class="sub-nav">
+                        <li {{if $type eq 'introductes'}}class="active"{{/if}}><a href="/site/guide?type=introductes">叭叭介绍</a> </li>
+                        <li {{if $type eq 'contact'}}class="active"{{/if}}><a href="/site/guide?type=contact">联系我们</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="xb9 xm9 xs12 xl12 bg-white padding-big guide-body">
+            {{if $type eq 'process'}}
+            <div id="guide-process" class="guide-item">
+                <h2 class="guide-title">购车流程</h2>
+                <img src="/static/images/guide-process.png" alt="" class="process-bg img-responsive">
+                <h2 class="guide-title">叭叭特惠买车4大保障</h2>
+                <ul class="line list-media">
+                    <li class="xb6 xm6 xs6 xl12">
+                        <div class="media media-x">
+                            <a class="float-left padding-left padding-right" href="#">
+                                <img src="/static/images/ad-1.png" class="radius" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <div>
+                                    <strong>价格给力</strong>
+                                    叭叭买车会在众多商家中挑选价格最具优势的商家合作，保证价格竞争力。
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="xb6 xm6 xs6 xl12">
+                        <div class="media media-x">
+                            <a class="float-left padding-left padding-right" href="#">
+                                <img src="/static/images/ad-2.png" class="radius" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <div>
+                                    <strong>订金随时退</strong>
+                                    如果想更换其它车型，如果看车试驾不满意，如果对4S店服务不满意，不买车订金随时退。
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="line list-media">
+                    <li class="xb6 xm6 xs6 xl12">
+                        <div class="media media-x">
+                            <a class="float-left padding-left padding-right" href="#">
+                                <img src="/static/images/ad-3.png" class="radius" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <div>
+                                    <strong>认证商家</strong>
+                                    叭叭买车的合作经销商全部为正规4S店，入驻时会严格审核厂商经营许可证，签订合作经销商诚信服务协议。
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="xb6 xm6 xs6 xl12">
+                        <div class="media media-x">
+                            <a class="float-left padding-left padding-right" href="#">
+                                <img src="/static/images/ad-4.png" class="radius" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <div>
+                                    <strong>省心省力</strong>
+                                    不用再东奔西跑挨家砍价，在叭叭买车上直接选择最满意的车型，线上付订金线下直接到店看车提车。
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {{elseif $type eq 'discount'}}
+            <div id="discount-guide" class="guide-item">
+                <h2 class="guide-title">叭叭买车车展优惠服务</h2>
+                <div>
+                    <div class="line discount-item">
+                        <a class="xb5 xm5 xs5 xl12" href="#">
+                            <img src="/static/images/service-1.png" class="radius" alt="...">
+                        </a>
+                        <div class="xb7 xm7 xs7 xl12 media-body">
+                            <strong>1元抢购车展门票</strong>
+                            <p>叭叭买车作为华中国际车展、东盟国际车展、郑州国际车展等全国10几大车展的官方战略合作伙伴，为您提供1元看车展的专享福利。</p>
+                        </div>
+                    </div>
+                    <div class="line discount-item">
+                        <a class="xb5 xm5 xs5 xl12 float-right">
+                            <img src="/static/images/service-2.png" class="radius" alt="...">
+                        </a>
+                        <div class="xb7 xm7 xs7 xl12 media-body">
+                            <strong>各大品牌购车补贴</strong>
+                            <p> 叭叭买车联合宝马、英菲尼迪、大众、丰田等各大品牌为您提供丰厚的车展现场购车现金补贴。</p>
+                        </div>
+                    </div>
+                    <div class="line discount-item">
+                        <a class="xb5 xm5 xs5 xl12" href="#">
+                            <img src="/static/images/service-3.png" class="radius" alt="...">
+                        </a>
+                        <div class="xb7 xm7 xs7 xl12 media-body">
+                            <strong>幸运半价车摇奖</strong>
+                            <p>叭叭买车会在车展现场开展半价车摇奖活动，真正的底价，真正的半价购车资格大奖，另有iPhone 6s、iPhone6 Plus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{elseif $type eq 'introductes'}}
+            <div id="guide-introduces" class="guide-item">
+                <h2 class="guide-title">叭叭介绍</h2>
+                <div class="">
+                    <img src="/static/images/aboutus-banner.jpg" style="width: 100%;">
+                </div>
+                <p class="margin-big-top">
+                    叭叭买车是一个专业的互联网+汽车电商平台，通过车展特价、品牌特卖等方式为购车者达成低价成交,帮助用户回避消费陷阱，提供贴心的指导和服务，实现轻松买车。
+                </p>
+                <p>
+                    叭叭买车已与全国二十余城市年度权威车展合作，在车展前提供参展车型及优惠信息，帮助购车者锁定车展价，一站式搞定选车、购车。同时与数十个主流汽车品牌合作，深入行业供应链，为汽车厂商提供完善可靠的新车线上销售。
+                </p>
+
+            </div>
+            {{elseif $type eq 'contact'}}
+            <div id="guide-contact" class="guide-item">
+                <h2 class="guide-title">联系我们</h2>
+                <div>
+                    <h3>客户服务</h3>
+                    <p>如果您在使用叭叭买车平台时，出现任何问题或建议，请联系：</p>
+                    <p>
+                        客服电话：<em class="phone">4008-955-088</em><br>
+                       <span class="deadline">周一至周日（9:00-21:00）</span>
+                    </p>
+                </div>
+                <div>
+                    <h3>商务合作</h3>
+                    <p>如果您想与叭叭买车洽谈商务合作、市场合作及媒体合作等，请联系：</p>
+                    <p>联系电话：010-62682938 </p>
+                </div>
+                <div>
+                    <h3>公司地址</h3>
+                    <p>电话：010-62682938</p>
+                    <p>地址：北京市海淀区海淀北二街8号中关村SOHO1007室 </p>
+                    <p>邮编：100080</p>
+                </div>
+                <div class="car-bg">
+                    <img src="/static/images/car.png" alt="" style="position: absolute;right:0px;bottom:0px;width:100%;">
+                </div>
+
+            </div>
+            {{else}}
+            <div class="padding-large text-center">
+                页面不存在
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+{{/block}}
+
+
+
+
+

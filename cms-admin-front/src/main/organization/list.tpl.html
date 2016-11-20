@@ -1,0 +1,56 @@
+<!-- target: TPL_organization_list -->
+<div class="organization-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">加盟店列表</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <div data-ui-type="SearchBox"
+                         data-ui-placeholder="按加盟店名称搜索"
+                         data-ui-id="searchbox"
+                         data-ui-text="${name}"></div>
+                </div>
+                <div class="filter-wrap brand-wrap">
+                    <label class="title">品牌筛选：</label>
+                    <div class="brand-tree">
+                        <brand :datasource="brands" :initial-data="initialData" v-ref:brands></brand>
+                        <div>
+                            <ul class="ui-brand-item">
+                                <li v-for="brandsItem in selectedBrandsData">
+                                    <span v-text="brandsItem.name">奥迪</span><button class="remove" type="button" title="删除" @click="removeBrands(brandsItem.id)">╳</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-wrap">
+                    <label class="title">城市筛选：</label>
+                    <!-- if: ${provinceData} -->
+                    <select data-ui-type="Select" data-ui-id="provinceSelect" data-ui-name="province_id" data-ui-value="${province_id}" class="province-select" data-ui-width="200" data-ui-skin="primary">
+                        <option value="">全部</option>
+                        <!-- for: ${provinceData} as ${item} -->
+                        <option value="${item.id}">${item.name}</option>
+                        <!-- /for -->
+                    </select>
+                    <!-- /if -->
+                </div>
+
+
+            </div>
+        </form>
+
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <a data-ui-type="Button" class="button bg-sub" href="/api/organization/excel?${exportUrl}" target="_blank" data-ui-skin="spring">导出</a>
+        </div>
+    </div>
+
+
+</div>

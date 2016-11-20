@@ -1,0 +1,45 @@
+<div class="main-index">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <h1 class="title">{{user.name}}</h1>
+    </header>
+    <ui-tabbar></ui-tabbar>
+    <div class="content">
+        <div class="menu-box">
+            <div class="stat">
+                <div class="stat-item">
+                    <div>现金收益</div>
+                    <p><span v-text="statistics.income/100|currency '￥' 2"></span>元</p>
+                </div>
+                <div class="stat-item">
+                    <div>优惠券收益</div>
+                    <p><span v-text="statistics.couponCount"></span>张</p>
+                </div>
+            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <a v-link="{path:'/activity/list'}">
+                        <i class="menu-icon icon-cubes"></i>
+                        <p class="menu-label">活动</p>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a v-link="{path:'/award/cash'}">
+                        <i class="menu-icon icon-yen"></i>
+                        <p class="menu-label">收益</p>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <i class="menu-icon icon-th-list"></i>
+                    <p class="menu-label">订单</p>
+                </div>
+                <div class="menu-item">
+                    <a v-link="{path:'/my'}">
+                        <i class="menu-icon icon-user"></i>
+                        <p class="menu-label">我</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

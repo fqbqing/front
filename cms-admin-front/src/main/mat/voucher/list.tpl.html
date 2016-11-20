@@ -1,0 +1,42 @@
+<!-- target: TPL_mat_voucher_list -->
+<div class="mat-voucher-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <!-- if: ${organization_id} -->
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <!-- else-->
+        <span class="active">活动管理</span>
+        <span class="divider">/</span>
+        <!-- /if -->
+        <span class="active">优惠券管理</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <div data-ui-type="SearchBox"
+                         data-ui-placeholder="按优惠券名称搜索"
+                         data-ui-id="searchbox"
+                         data-ui-text="${name}"></div>
+                </div>
+                <div>
+                    <div class="search-bar">
+                        <label class="title">优惠券类型：</label>
+                        <div data-ui-type="BoxGroup" data-ui-id="voucherType" data-ui-skin="custom"
+                             data-ui-name="type" data-ui-box-type="radio" data-ui-value="${type}" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+    </div>
+
+
+</div>

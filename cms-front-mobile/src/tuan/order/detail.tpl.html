@@ -1,0 +1,75 @@
+<!-- target: TPL_tuan/order_detail -->
+<div class="tuan_order_detail">
+    <!-- use: TPL_common_page_header(title="订单详情") -->
+    <section class="ui-container">
+        <section class="ui-panel">
+            <h2>订单信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b">
+                    <h5>
+                        <span>团购</span>
+                        <span class="ui-panel-title-tips ui-nowrap ui-whitespace ui-col-67" v-if="order.tuan">{{order.tuan.title}}</span>
+                        <span class="ui-panel-title-tips" v-else><i class="ui-txt-warning">不存在</i></span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5><span>订单号</span><span class="ui-panel-title-tips">{{order.id}}</span></h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5><span>意向车型</span><span class="ui-panel-title-tips">{{order.intention}}</span></h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>下单/报名时间</span>
+                        <span class="ui-panel-title-tips">{{order.created_time|date}}</span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>订单支付金额(元)</span>
+                        <span class="ui-panel-title-tips">{{order.amount|currency 2}}</span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>支付方式</span>
+                        <span class="ui-panel-title-tips">{{order.payment|payment-text}}</span>
+                    </h5>
+                </li>
+                <li class="">
+                    <h5>
+                        <span>订单状态</span>
+                        <span class="ui-select ui-panel-title-tips">
+                            <select v-model="order.status">
+                                <option v-for="item in const.TUAN_STATUS"
+                                        value="{{item.value}}">
+                                    {{item.text}}
+                                </option>
+                            </select>
+                        </span>
+                    </h5>
+                </li>
+            </ul>
+        </section>
+        <section class="ui-panel">
+            <h2>客户信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b">
+                    <h5>
+                        <span>姓名</span>
+                        <span class="ui-panel-title-tips">{{order.name}}</span>
+                    </h5>
+                </li>
+                <li>
+                    <h5>
+                        <span>手机号</span>
+                        <span class="ui-panel-title-tips"><a href="tel:{{order.phone}}">{{order.phone}}</a></span>
+                    </h5>
+                </li>
+            </ul>
+            <div class="ui-btn-wrap">
+                <button class="ui-btn ui-btn-danger ui-btn-lg" @click="updateOrder">保存</button>
+            </div>
+        </section>
+    </section>
+</div>

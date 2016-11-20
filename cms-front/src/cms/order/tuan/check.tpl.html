@@ -1,0 +1,38 @@
+<!-- target: TPL_order_tuan_check -->
+<div class="order-tuan-check bbmc-content-wrap">
+    <div>
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <!-- if: ${checkType} == 'checkSale' -->
+                <div class="form-row">
+                    <div class="form-key">核销码：</div>
+                    <div class="form-value">
+                        <input type="text" data-ui-name="cn" data-ui-type="TextBox"
+                               data-ui-required-error-message="请输入核销码"
+                               data-ui-required="required">
+                    </div>
+                </div>
+                <!-- /if -->
+                <!-- if: ${order.tuan} -->
+                <div class="form-row">
+                    <div class="form-key">购买车型：</div>
+                    <div class="form-value">
+                        <div data-ui-type="BoxGroup" data-ui-id="deal_model"
+                             data-ui-required-error-message="请选择购买车型"
+                             data-ui-required="required"
+                             data-ui-name="deal_model" data-ui-box-type="radio">
+                            <!-- for: ${order.tuan.intention} as ${st} -->
+                            <input type="radio" name="deal_model" title="${st}" value="${st}">
+                            <!-- /for -->
+                        </div>
+                    </div>
+                </div>
+                <!-- else -->
+                <p>团购已删除，不能核销</p>
+                <!-- /if -->
+            </div>
+        </form>
+    </div>
+</div>
+<!-- target: TPL_order_tuan_check_child -->
+<!-- import: TPL_order_tuan_check -->

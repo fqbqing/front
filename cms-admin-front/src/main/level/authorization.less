@@ -1,0 +1,40 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.level-authorization {
+    .ctrl-wrap {
+        overflow: hidden;
+    }
+    .ctrl-list {
+        .clearfix();
+        //float: left;
+        //width: 50%;
+        margin: 0;
+        padding: 8px;
+        //background: #f9f9f9;
+        background: @bb-main-bgcolor * 0.8;
+        &:nth-child(even) {
+            background: @bb-main-bgcolor;
+        }
+        dt {
+            float: left;
+            width: 150px;
+            font-size: 14px;
+            padding: 5px 0;
+        }
+        dd {
+            margin-left: 150px;
+            color: #999;
+        }
+    }
+    .act-list {
+        margin-left: 20px;
+        li {
+            padding: 5px 0;
+            float: left;
+            margin-right: 20px;
+        }
+    }
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>车大卖 - 营销管理系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <link rel="dns-prefetch" href="//static.chedamai.cn">
+    <link rel="stylesheet" href="../src/cms/main.less?r[__version__]=1" />
+    <link rel="stylesheet" href="//cdn.bootcss.com/intro.js/2.1.0/introjs.css">
+    <!--<script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js"></script> -->
+    <script src="../esl.js"></script>
+</head>
+
+<body>
+<!--[if lt IE 9]>
+<div class="browsehappy">
+    <em>车大卖</em>提醒您，<br>
+    <p>
+        您使用的浏览器已经过时了<br>
+        请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a> 以获取更好的用户体验。
+    </p>
+</div>
+<![endif]-->
+<div class="header">
+    <div class="logo">
+        <a href="/">
+            <img src="../src/common/img/logowhite.png" height="20"><small>营销管理系统</small>
+            <i class="level">{{$organization.level.name}}</i>
+        </a>
+    </div>
+    <ul id="nav" class="nav"></ul>
+    <div class="search" id="headerSearch">
+        <div class="content">
+            <input type="text" placeholder="按手机号搜索" autocomplete="off" name="phone">
+            <button type="button" class="icon-search"></button>
+        </div>
+    </div>
+    <div class="user-info">
+        <a href="http://static.chedamai.cn/doc/v1/product_description/data.html" target="_blank" class="manual">产品说明</a>
+        <a href="#/my/info" class="user-name">
+            <img src="../src/common/img/avatar.png" width="32" height="32" style="vertical-align: middle;border-radius: 50%"/>
+            <span></span>
+        </a>
+        <a href="/logout" title="退出登录" style="color:#F36A6A;"><i class="icon-logout"></i>退出</a>
+    </div>
+</div>
+
+<div class="main-area">
+    <div id="main"></div>
+</div>
+<div id="launchScreen">
+    <div class="launch-center">
+        <div class="ring rotate animated infinite"></div>
+        <img src="../src/common/img/login-circle.png" width="85" height="85" class="launch-logo">
+    </div>
+</div>
+<script>
+require.config({
+    'baseUrl': '../src',
+    'urlArgs': 'r[__version__]=1',
+    'paths': {},
+    'packages': [
+        {
+            'name': 'bat-ria',
+            'location': '../dep/bat-ria/0.2.4/src',
+            'main': 'main'
+        },
+        {
+            'name': 'datepicker',
+            'location': '../dep/datepicker/1.3.21/src',
+            'main': 'datepicker'
+        },
+        {
+            'name': 'ef',
+            'location': '../dep/ef/3.1.0-vue.1/src',
+            'main': 'main'
+        },
+        {
+            'name': 'eoo',
+            'location': '../dep/eoo/0.1.2/src',
+            'main': 'main'
+        },
+        {
+            'name': 'er',
+            'location': '../dep/er/3.1.0-beta.6/src',
+            'main': 'main'
+        },
+        {
+            'name': 'er-track',
+            'location': '../dep/er-track/0.9.1/src',
+            'main': 'main'
+        },
+        {
+            'name': 'est',
+            'location': '../dep/est/2.0.1/src',
+            'main': ''
+        },
+        {
+            'name': 'esui',
+            'location': '../dep/esui/3.1.0/src',
+            'main': 'main'
+        },
+        {
+            'name': 'etpl',
+            'location': '../dep/etpl/3.0.0/src',
+            'main': 'main'
+        },
+        {
+            'name': 'jquery',
+            'location': '../dep/jquery/1.9.1/src',
+            'main': 'jquery'
+        },
+        {
+            'name': 'mini-event',
+            'location': '../dep/mini-event/1.0.2/src',
+            'main': 'main'
+        },
+        {
+            'name': 'moment',
+            'location': '../dep/moment/2.9.0/src',
+            'main': 'moment'
+        },
+        {
+            'name': 'underscore',
+            'location': '../dep/underscore/1.8.5/src',
+            'main': 'underscore'
+        },
+        {
+            'name': 'urijs',
+            'location': '../dep/urijs/1.12.0/src',
+            'main': 'URI'
+        },
+        {
+            'name': 'vue',
+            'location': '../dep/vue/1.0.10/src',
+            'main': 'vue'
+        },
+        {
+            'name': 'jquery.cookie',
+            'location': '../dep/jquery.cookie/1.4.0',
+            'main': 'jquery.cookie'
+        },
+        {
+            'name': 'webuploader',
+            'location': '../dep/webuploader/0.1.5',
+            'main': 'webuploader'
+        },
+        {
+            'name': 'zeroclipboard',
+            'location': '../dep/zeroclipboard/2.2.1/src',
+            'main': 'ZeroClipboard'
+        },
+        {
+            'name': 'ueditor',
+            'location': '../dep/ueditor/1.4.3',
+            'main': 'ueditor.all'
+        },
+        {
+            'name': 'bbfont',
+            'location': '../dep/bbfont/1.1.0/src',
+            'main': 'index'
+        },
+        {
+            'name': 'highcharts',
+            'location': '../dep/highcharts/4.2.4/src',
+            'main': 'main'
+        }
+    ]
+});
+document.write( '<script src="' + require.toUrl('dep.js') + '"></scr' + 'ipt>' );
+</script>
+<script src="../src/common/amd-plugins/js.js"></script>
+<script src="../src/common/amd-plugins/css.js"></script>
+<!--<script src="//cdn.bootcss.com/intro.js/2.1.0/intro.js"></script>-->
+<script>
+require(['cms/main'], function (main) {
+    main.start();
+});
+</script>
+<!--<script src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js"></script>-->
+</body>
+</html>

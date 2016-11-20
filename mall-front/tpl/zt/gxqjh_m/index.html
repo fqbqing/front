@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="2016尚格广西（秋季）汽车交易会" />
+    <meta name="description" content="广西国际汽车文化节由南宁尚格会展服务有限公司承办，自2011年创办至今，已成功举办4届，是广西区年中规模最大的车市营销盛会，收到区内外汽车业界的一致好评与认可。 "/>
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>2016尚格广西（秋季）汽车交易会</title>
+    <link rel="stylesheet" href="/static/zt/gxqjh/mobile.less">
+    <link rel="stylesheet" href="/static/libs/swiper/css/swiper.less">
+    <script>
+        var GLOBAL = {};
+        {{if $app->user->isGuest}}
+        GLOBAL['USER'] = {isGuest:true};
+        {{else}}
+        GLOBAL['USER'] = {
+            isGuest:false,
+            name: '{{$app->user->getIdentity()->name}}',
+            phone: '{{$app->user->getIdentity()->phone}}'
+        };
+        {{/if}}
+    </script>
+    {{include file="includes/tongji.html"}}
+</head>
+<body class="signup-page">
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+<div class="container">
+    <div class="block-img">
+        <img src="//img01.chedamai.cn/asset/20160912-gxqjh/1.png">
+        <a name="signup"></a>
+    </div>
+    <div class="page2">
+        <!--<div class="banner"></div>-->
+        <div class="header">
+            <img src="/static/zt/gxqjh/img/28.png" width="83" height="20" alt="报名抢票">
+            <div>已有<em>{{$groupon.beautify_number + $statistics.signupCount}}</em>人报名</div>
+        </div>
+        <!--
+        <ul class="nav nav-tabs" id="ticketOpt">
+            <li>
+                <input type="radio" checked name="ticket" value="e-ticket" id="e-ticket">
+                <label for="e-ticket"><span>电子票</span></label>
+            </li>
+            <li>
+                <input type="radio" name="ticket" value="paper-ticket" id="paper-ticket">
+                <label for="paper-ticket"><span>纸质票(送签到礼)</span></label>
+            </li>
+        </ul>
+        -->
+        <div class="tab-content signup-form">
+            <div class="form-group form-group-inline">
+                <label for="username">姓名：</label>
+                <input id="username" name="username" class="form-control" type="text" placeholder="请输入您的真实姓名">
+            </div>
+            <div class="form-group form-group-inline">
+                <label for="phone">手机号：</label>
+                <input id="phone" name="phone" class="form-control" type="text" placeholder="请输入手机号">
+            </div>
+            <div class="form-group form-group-inline form-item-with-action">
+                <label for="verifyCode">验证码：</label>
+                <input id="verifyCode" name="verifyCode" class="form-control" type="text" class="verify-code">
+                <button type="button" tabindex="-1" id="getVerifyCode" class="form-item-action btn btn-default">获取验证码</button>
+            </div>
+            <div class="form-group form-group-inline">
+                <label>预购品牌：</label>
+                <select name="brand" id="brand" class="form-control"></select>
+            </div>
+            <div class="form-group form-group-inline">
+                <label>预购车型：</label>
+                <input type="text" class="form-control" name="vehicle">
+            </div>
+            <!--
+            <div class="form-group form-group-inline paper-ticket-opt" id="idCard">
+                <label>身份证：</label>
+                <input type="text" class="form-control" name="idCard" placeholder="请正确填写，否则会影响礼品的领取">
+            </div>
+            <div class="form-group paper-ticket-opt" id="address">
+                <label>地址：</label>
+                <input type="text" class="form-control" name="address" placeholder="提供详细的通信地址，方便纸质票的邮寄">
+            </div>
+            <div class="form-group form-group-inline paper-ticket-opt">
+                <label>邮费支付：</label>
+                <select name="postage" id="postage" class="form-control">
+                    <option value="在线支付">在线支付</option>
+                    <option value="到付">到付</option>
+                </select>
+            </div>
+            -->
+            <div class="form-group1">
+                <button id="buy" class="btn btn-lg btn-block"><span>10元抢票</span></button>
+                <!--<p style="text-align: center; line-height: 2;">{{$groupon.beautify_number + $statistics.signupCount}}人已报名</p>-->
+            </div>
+            <div class="tips">
+                <!--<p>1、9.16前购买纸质票可邮寄到家，邮费可选择到付</p>-->
+                <!--<p>2、9月17日起购买纸质票的观众，可直接凭购票截图与本人身份证至现场兑票处领取。</p>-->
+                <!--<p>3、纸质票可凭票现场领取限量3M车膜签到礼，送完即止</p>-->
+                <p>1、9月22日12点起停售家庭套票与纸质票</p>
+                <p>2、支付10元可获得1张电子票，请注意查收</p>
+            </div>
+        </div>
+    </div>
+    <div class="block-img">
+        <!--
+        <a href="http://dwz.sungoal.org/8krJGy">
+            <img src="//img01.chedamai.cn/asset/20160912-gxqjh/dmblh-h.jpg" style="width: 100%">
+        </a>
+        -->
+        <a href="/activity/coupon/voucher?id=715">
+            <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/2.png">
+        </a>
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/3.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/4.png">
+        <!-- Swiper -->
+        <div class="swiper-container swiper-exhibition">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/1.png" class="swiper-lazy">
+                    <!-- Preloader image -->
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/2.png" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/3.png" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/4.png" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/5.png" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="//img01.chedamai.cn/asset/20160912-gxqjh/zhanguan/6.png" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+        <div class="brand-swiper-tips">滑动查看参展品牌</div>
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/5.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/6.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/7.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/8.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/9-1.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/9-2.png">
+        <img src="/static/images/img-loading.png" data-original="//img01.chedamai.cn/asset/20160912-gxqjh/10.png">
+    </div>
+</div>
+<div class="toolbar">
+    <div class="toolbar-items">
+        <a href="tel:4008-955-088"><div>咨询热线</div><p>（9:00 - 18:00）</p></a>
+        <a href="#signup"><div>报名抢票</div><p>数量有限</p></a>
+        <a href="/activity/coupon/voucher?id=715">
+            <div>支付100定金<br>抢2000元补贴</div>
+        </a>
+    </div>
+    <p>关注微信【广西车展】，了解最新特价车型优惠</p>
+</div>
+{{weixin_share
+    activityId="`$groupon.id`"
+    title="`$groupon.name|escape:'html'`"
+    titleFormat='{0}邀请您参加“{1}”'
+    desc="9月23-25日南宁国际会展中心盛大开幕，免费寄票，签到有礼，更有千元购车补贴等你拿"
+    link="/activity/groupon/`$groupon.id`.html"
+    imgUrl="http:`$groupon.share_image|cdnfix`"}}
+<script src="/static/libs/zepto.min.js"></script>
+<script src="/static/libs/zepto.lazyload.js"></script>
+<script src="/static/libs/swiper/swiper.jquery.js"></script>
+<script src="/static/libs/swiper/swiper.animate1.0.2.min.js"></script>
+<!--<script src="/static/libs/jquery.js"></script>-->
+<!--<script src="/static/libs/jquery.lazyload.js"></script>-->
+<script src="/static/zt/gxqjh/mobile.js"></script>
+<script>
+    $('[data-original]').lazyload({
+//        event: 'touchmove',
+        container: '.container'
+    });
+    $(function () {
+        app.init({
+            groupon: {{json_encode($groupon)}}
+        });
+    });
+</script>
+</body>
+</html>

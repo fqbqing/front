@@ -1,0 +1,244 @@
+#navbar-part .bg-inverse .nav-inline li {
+    float: left;
+    margin-right: 1px;
+}
+#navbar-part {
+    padding: 0;
+}
+#navbar-part .nav {
+    padding: 0;
+}
+#navbar-part .nav-inline li a {
+    padding: 5px 15px;
+    text-indent: 0;
+}
+#navbar-part .navbar-action {
+    float: right;
+    display: none;
+    padding: 3px 10px;
+}
+#navbar-part.affix .navbar-action {
+    display: block;
+}
+.anchor {
+    position: relative;
+    top: -50px;
+    visibility: hidden;
+    display: block;
+}
+.item-price {
+    margin: 20px 0;
+    background: #f5f5f5;
+}
+
+
+/**/
+.detail-container {
+    background-color: #fff;
+}
+.item-price {
+    color: #515151;
+}
+.detail-line {
+    border: 1px solid #ddd;
+}
+.good-detail .price {
+    margin-right: 3px;
+}
+.good-detail del {
+    margin-left: 5px;
+}
+.good-detail .discount {
+    margin-left: 5px;
+    margin-right: 3px;
+    font-size: 18px;
+}
+#payBtn,#buyBtn {
+    font-size: 16px;
+    text-align: center;
+}
+.spec-val {
+    position: relative;
+    top: 10px;
+    display: inline-block;
+}
+.spec-val li {
+    float: left;
+    margin-right: 25px;
+}
+.spec-val li.active {
+    padding: 2px;
+    border: 1px solid #f00;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.spec-val li.active span {
+    width: 22px;
+    height: 22px;
+}
+.spec-val li span {
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}
+.spec-val li.bg-first span,
+.spec-val li:nth-child(1) span {
+    background-color: #f7f6f1;
+}
+.spec-val li.bg-second span,
+.spec-val li:nth-child(2) span {
+    background-color: #070a01;
+}
+.spec-val li.bg-third span,
+.spec-val li:nth-child(3) span {
+    background-color: #c0c0c0;
+}
+.spec-val li.bg-four span,
+.spec-val li:nth-child(4) span {
+    background-color: #b7ab92;
+}
+.good-config {
+    padding: 0;
+    background-color: #575a5e;
+}
+.good-config .nav li {
+    float: left;
+}
+.good-config .nav a {
+    line-height: 34px;
+    color: #fff;
+}
+.good-config .nav .active a,
+.good-config .nav a:hover,
+.good-config .nav li:first-child a {
+    background-color: #ff4f4b;
+    color: #fff;
+}
+.thumb {
+    position: relative;
+    overflow: hidden;
+}
+.thumb .pager-prev,
+.thumb .pager-next {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    margin-top: -25px;
+    border: none;
+    border-radius: 0;
+    background-color: #fff;
+    color: #626262;
+}
+.thumb .pager-prev {
+    left: 0;
+}
+.thumb .pager-next {
+    right: 0;
+}
+
+.item-wrap {
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px;
+}
+.item-wrap ul {
+    width: 99999999px;
+    padding: 0;
+    margin: 0;
+    -webkit-transition: margin-left .3s linear;
+    -moz-transition: margin-left .3s linear;
+      -o-transition: margin-left .3s linear;
+         transition: margin-left .3s linear;
+}
+.item-wrap .item {
+    float: left;
+    list-style: none;
+}
+.item-wrap .item img {
+    border: 1px solid #fff;
+}
+.item-wrap .active img {
+    border-color: #e33;
+}
+.item-wrap .item-inner {
+    position: relative;
+    padding-top: 60%;
+    margin: 4px;
+}
+.item-wrap .item img {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 100%;
+}
+.item-show {
+    position: relative;
+    overflow: hidden;
+    padding-top: 60%;
+}
+.item-show img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.specification-item {
+    margin: 15px 0;
+    overflow: hidden;
+    line-height: 24px;
+}
+.specification .meta {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 0px 10px;
+    margin: 1px 5px;
+    border: 2px solid #fec;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #fff;
+}
+.specification .meta-active {
+    border-color: #f60;
+}
+.specification .meta-active:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-right-color: #f60;
+}
+.specification-name {
+    float: left;
+    width: 70px;
+}
+.specification-list {
+    margin-left: 70px;
+}
+.specification input {
+    display: none;
+}
+.detail-title {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    background: #ddd;
+}
+.detail-title:before {
+    margin-right: 10px;
+}
+.detail-content img {
+    max-width: 100%;
+}
+.detail-desc-wrap {
+    padding: 10px 40px;
+}
+@media (max-width: 760px) {
+    .detail-desc-wrap {
+        padding: 10px;
+    }
+}

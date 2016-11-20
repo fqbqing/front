@@ -1,0 +1,50 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="item"}}
+{{assign var="HEADER_FIXED_STYLE" value=""}}
+{{/block}}
+{{block name="title"}}叭叭买车 - 订单支付{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/order/pay.css">
+{{/block}}
+{{block name="header"}}
+    {{if $orderType neq 'tuan'}}
+    <!--团购模式下不需要展示头部导航-->
+    {{include file="includes/header.html"}}
+    {{/if}}
+{{/block}}
+{{block name="body"}}
+<input type="hidden" value="{{$isInWeixin}}" id="isInWeixin">
+<input type="hidden" value="{{$orderType}}" id="orderType">
+<div class="container bg-white pay-container">
+    <h2>微信支付</h2>
+    <div class="pay-wrap">
+        <div class="padding-big line">
+            {{if !$isInWeixin}}
+            <div class="suc-wrap none">
+                <div class="xb6 xm6 xs6 xl12 pay-detail">
+                    <div class="text-center text-black">
+                        <span class="text-big">应付金额（元）</span>
+                        <p class="margin-top"><strong class="icon-rmb text-dot text-large"><em class="deposit"></em></strong></p>
+                        <img src="" alt="" class="wechat-qrcode">
+                    </div>
+                </div>
+                <div class="xb6 xm6 xs6 xl12 wechat-hint">
+                    <img src="/static/images/wechat-hint.png" class="img-responsive">
+                </div>
+            </div>
+            <div class="fail-wrap none">
+                <p class="text-big errmsg">抱歉，系统繁忙，请重试</p>
+            </div>
+            {{else}}
+            <div class="fail-wrap">
+                <p class="text-big errmsg"></p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/order/pay.js"></script>
+{{/block}}

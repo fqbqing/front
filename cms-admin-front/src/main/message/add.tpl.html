@@ -1,0 +1,55 @@
+<!-- target: TPL_message_add -->
+<div class="message-add bbmc-content-wrap">
+    <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+        <div class="form-block">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-value message-title">
+                        <input data-ui-id="title"
+                            data-ui-type="TextBox"
+                            data-ui-required="required"
+                            data-ui-width="800"
+                            name="title"
+                            data-ui-value="@formData.title"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-value">
+                        <div class="richeditor">
+                            <div data-ui-type="RichTextEditor"
+                                 name="content"
+                                 v-esui="formData.content"
+                                 data-ui-editor-content="{{formData.content}}"
+                                 data-ui-editor-options="@editorOptions"
+                                 data-ui-required="required"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-operation">
+                        <esuibox v-if="isAllow('message-job.save')" class="esuibox">
+                            <button data-ui-type="Button" data-ui-id="submitDrafts" data-ui-skin="spring" type="button">保存草稿</button>
+                        </esuibox>
+                        <esuibox v-if="isAllow('message-job.send|message-job.draft-send')" class="esuibox">
+                            <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring" type="button">发送</button>
+                        </esuibox>
+                    </div>
+                    <div class="form-value">
+                        <input data-ui-id="receivers"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               name="receivers"
+                               data-ui-value="ALL" hidden readonly/>
+                        发送对象：全部经销商
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- target: TPL_message_add_child -->
+<!-- import: TPL_message_add -->
+

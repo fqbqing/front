@@ -1,0 +1,15 @@
+{
+    "name": "zepto",
+    "description": "Zepto is a minimalist JavaScript library for modern browsers with a largely jQuery-compatible API.",
+    "version": "1.1.6",
+    "main": "zepto",
+    "repository": "git://github.com/ecomfe/dep-zepto.git",
+    "maintainers": [
+        {
+            "name": "Firede",
+            "email": "firede@firede.us"
+        }
+    ],
+    "license": "MIT",
+    "bugs": "https://github.com/ecomfe/dep-zepto/issues"
+}

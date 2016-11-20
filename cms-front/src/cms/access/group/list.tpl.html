@@ -1,0 +1,29 @@
+<!-- target: TPL_access_group_list -->
+<div class="access-group-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>权限管理</span>
+        <span class="divider">/</span>
+        <span class="active">用户组列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button v-if="isAllow('user-group.add')" data-ui-type="Button" data-ui-id="addGroupBtn" data-ui-skin="primary" type="button">
+                <i class="icon-plus"></i>添加组
+            </button>
+            <div class="ui-group">
+                <form data-ui-type="Form" data-ui-id="filter">
+                    <div data-ui-type="SearchBox" data-ui-placeholder="组名" data-ui-id="searchbox" data-ui-text="${name}"></div>
+                </form>
+            </div>
+        </div>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button v-if="isAllow('user-group.delete')" data-ui-type="Button" data-ui-id="deleteGroupBtn" data-ui-skin="warn" type="button">
+                <i class="icon-trash-empty"></i>批量删除
+            </button>
+        </div>
+    </div>
+</div>

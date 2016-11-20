@@ -1,0 +1,17 @@
+<!-- target: TPL_message_detail -->
+<div class="message-detail bbmc-content-wrap">
+    <div class="message-detail-body">
+        <h1 class="title">${notice.title}</h1>
+        <small class="date">${notice.created_time|date}</small>
+        <div class="message-detail-content">
+            <div>
+                <p>${notice.content|raw}</p>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- target: TPL_message_detail_child -->
+<!-- import: TPL_message_detail -->

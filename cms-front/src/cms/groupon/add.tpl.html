@@ -1,0 +1,192 @@
+<!-- target: TPL_groupon_add -->
+<div class="groupon-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <a href="#/groupon/list">团购活动</a>
+        <span class="divider">/</span>
+        <span class="active"><!-- if: ${id} -->修改<!-- else -->创建<!-- /if -->活动</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item ui-tab-item-active"><a href="javascript:void(0)">活动信息</a></li>
+                <!-- if: ${id} -->
+                <li class="ui-tab-item"><a href="#/groupon/page~id=${id}">页面样式</a></li>
+                <!-- /if -->
+            </ul>
+            <div class="ui-tab-content">
+                <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div class="form-row">
+                            <div class="form-key form-key-required">活动名称：</div>
+                            <div class="form-value">
+                                <input data-ui-id="name"
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-width="400"
+                                       data-ui-name="name"
+                                       data-ui-value="@formData.name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">举办时间：</div>
+                            <div class="form-value">
+                                <input data-ui-id="activityTime"
+                                       data-ui-type="DatePicker"
+                                       data-ui-format="YYYY-MM-DD HH:mm"
+                                       data-ui-required="required"
+                                       data-ui-name="activity_time"
+                                       data-ui-value="@formData.activity_time">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">报名截止时间：</div>
+                            <div class="form-value">
+                                <input data-ui-id="signupEndTime"
+                                       data-ui-type="DatePicker"
+                                       data-ui-format="YYYY-MM-DD HH:mm"
+                                       data-ui-required="required"
+                                       data-ui-value="@formData.signup_end_time"
+                                       name="signup_end_time">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">封面图片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="大小不超过2M，建议图片尺寸为750px*480px"
+                                     data-ui-name="image"
+                                     data-ui-value="@formData.image"
+                                     data-ui-required="required"
+                                     data-ui-required-error-message="请上传封面图片"
+                                     data-ui-id="uploaderCover">选择文件
+                                </div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewcover">
+                                        <img src="${formData.image}" alt="预览图片">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">微信分享图片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="大小不超过2M，尺寸不小于100*100px，且长宽比为1：1"
+                                     data-ui-name="share_image"
+                                     data-ui-value="@formData.share_image"
+                                     data-ui-required-error-message="请上传微信分享图片"
+                                     data-ui-id="uploaderShare">选择文件
+                                </div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewshare">
+                                        <img src="${formData.share_image}" alt="预览图片">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">报名人数美化：</div>
+                            <div class="form-value">
+                                <input data-ui-id="beautify_number"
+                                       data-ui-type="TextBox"
+                                       data-ui-hint-type="prefix"
+                                       data-ui-hint="真实人数+"
+                                       data-ui-number="100"
+                                       data-ui-max="100"
+                                       data-ui-name="beautify_number"
+                                       data-ui-value="@formData.beautify_number" data-ui-placeholder="请输入美化人数">
+                                <span data-ui-type="Label">人</span>
+
+                                <div class="form-extra">
+                                    若该活动真实报名人数为20人，输入美化人数30人，则美化后网页显示的报名人数为50人
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">
+                                活动类型：
+                            </div>
+                            <div class="form-value">
+                                <div data-ui-type="RadioSelect" data-ui-name="grouponType"
+                                     data-ui-id="grouponType"></div>
+                            </div>
+                        </div>
+                        <esuibox v-if="grouponType != config.GROUPON_TYPE_FREE" v-cloak>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">意向金描述：</div>
+                                <div class="form-value">
+                                    <input data-ui-id="intention"
+                                           data-ui-type="TextBox"
+                                           data-ui-required="required"
+                                           data-ui-max-length="50"
+                                           data-ui-name="intention_name"
+                                           data-ui-placeholder="如：支付199抵1000购车款"
+                                           data-ui-value="<!-- if: ${formData.intention} -->${formData.intention.name}<!-- /if -->">
+
+                                    <div class="form-extra">不超过50个字符</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">意向金金额：</div>
+                                <div class="form-value">
+                                    <input data-ui-id="amount"
+                                           data-ui-type="TextBox"
+                                           data-ui-required="required"
+                                           data-ui-dollars=""
+                                           data-ui-min="0.01"
+                                           data-ui-name="intention_amount"
+                                           data-ui-validity-label="amountErrorMessage"
+                                           data-ui-value="<!-- if: ${formData.intention} -->${formData.intention.amount|amount}<!-- /if -->">
+                                    <span data-ui-type="Label">元</span>
+                                    <span data-ui-type="Validity" data-ui-id="amountErrorMessage"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">意向金退还政策：</div>
+                                <div class="form-value">
+                                    <div class="form-row">
+                                        <div class="form-value">
+                                            <div data-ui-type="TextBox"
+                                                 data-ui-required="required"
+                                                 data-ui-max-length="50"
+                                                 data-ui-value="<!-- if: ${formData.intention} -->${formData.intention.instruction}<!-- /if -->"
+                                                 data-ui-width="400"
+                                                 data-ui-height="100"
+                                                 data-ui-mode="textarea"
+                                                 data-ui-name="intention_instruction"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </esuibox>
+                        <!--if: ${organization.agent_spread}  == ${constants.AGENT_SPREAD_YES} || (${formData.agentAwards} && ${formData.agentAwards.length}) -->
+                        <div class="form-row">
+                            <div class="form-key">
+                                经纪人推广：
+                            </div>
+                            <div class="form-value">
+                                <div data-ui-type="RadioSelect" data-ui-name="agent_spread"
+                                     data-ui-id="agentSpread" data-ui-value="<!-- if: ${formData.agent_spread} -->${formData.agent_spread}<!-- else -->${constants.AGENT_SPREAD_NO}<!-- /if -->"></div>
+                            </div>
+                        </div>
+                        <!--/if-->
+                    </div>
+                </form>
+                <!--if: ${organization.agent_spread}  == ${constants.AGENT_SPREAD_YES} || (${formData.agentAwards} && ${formData.agentAwards.length}) -->
+                <esuibox v-show="agent_spread != 0" v-cloak class="agent-spread-panel">
+                    <div data-ui-type="ActionPanel" data-ui-id="actionPanel" data-ui-url="/groupon/award" data-ui-height="700"></div>
+                </esuibox>
+                <!--/if-->
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring" type="button">提交</button>
+                        <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="link" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

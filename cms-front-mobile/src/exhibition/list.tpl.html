@@ -1,0 +1,33 @@
+<!-- target: TPL_exhibition_list -->
+<div class="exhibition-list">
+    <!-- use: TPL_common_page_header_simple(title="活动列表") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <search-box name="search" placeholder="按名称搜索"></search-box>
+        <div class="ui-row filterbar">
+            <div class="ui-col ui-col-67">共<i v-text="totalCount"></i>场</div>
+            <div class="ui-col ui-col-33 text-right">
+                <!--// 待定-->
+            </div>
+        </div>
+        <listview v-ref:listview :api="api.listExhibition" :page-no="1" :page-size="15">
+            <ul class="ui-list ui-list-pure ui-list-link ui-list-active ui-list-cover ui-border-t" v-cloak v-if="exhibitions.length">
+                <li class="ui-border-b" v-for="exhibition in exhibitions" @click="redirect('/exhibition/detail', {exhibition_id: exhibition.id})">
+                    <h4>{{exhibition.activity_title}}</h4>
+                    <p>
+                        活动时间：{{exhibition.activity_start_time|date 'YYYY-MM-DD HH:mm'}}
+                        <i class="tuan-status tuan-status-online">已上线</i>
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="exhibition.order_count"></i><div>全部订单</div></li>
+                        <li><i class="gray" v-text="exhibition.claimed_order_count"></i><div>已认领</div></li>
+                        <li><i class="gray" v-text="exhibition.unclaimed_order_count"></i><div>未认领</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <p class="ui-txt-info">无活动</p>
+            </div>
+        </listview>
+    </section>
+</div>

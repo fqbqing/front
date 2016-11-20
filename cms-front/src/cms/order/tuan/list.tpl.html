@@ -1,0 +1,60 @@
+<!-- target: TPL_order_tuan_list -->
+<div class="order-tuan-list bbmc-content-wrap" v-if="isAllow('tuan-order.list') && isLevelAllow('tuan-order.list')">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <span class="active">团购订单</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <div data-ui-type="SearchBox" data-ui-placeholder="手机号" data-ui-id="searchbox" data-ui-text="${phone}"></div>
+                    <input type="checkbox" data-ui-id="exclude"
+                           data-ui-type="CheckBox" data-ui-checked="${exclude}" name="exclude" value="staff" title="排除内部员工">
+                </div>
+                <div>
+                    <label class="title">订单状态：</label>
+                    <div data-ui-type="BoxGroup" data-ui-id="tuanOrderStatus" data-ui-skin="custom"
+                         data-ui-name="status" data-ui-box-type="checkbox" data-ui-value="${status}" >
+                        <!-- for: ${tuanOrderStatus} as ${st} -->
+                        <input type="checkbox" name="status" title="${st.text}" value="${st.value}">
+                        <!-- /for -->
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="list-table">
+            <!-- if: ${tuanInfo} --><h2>${tuanInfo.title}</h2><!-- /if -->
+            <!-- import: listTableWithCommandAndSubrow -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <a data-ui-type="Button" class="button bg-sub" href="/api/tuan-order/excel?${exportUrl}">导出</a>
+        </div>
+        <div data-ui="type:Dialog;width:400;height:200;mask:true;id:staticDg;closeOnHide:false;needFoot:false">
+            <h1 data-role="title">订单核销</h1>
+            <div data-role="content">
+              <div class="qrcode-from">
+                  <div class="qrcode-ctrl">
+                      <label for="cn">核销码：</label>
+                      <input data-ui-id="cn"
+                             data-ui-type="TextBox"
+                             data-ui-required="required"
+                             data-ui-max-length="16"
+                             data-ui-width="200"
+                             data-ui-name="cn">
+                  </div>
+                  <button data-ui-type="Button"
+                          data-ui-id="submit"
+                          class="ui-button-submit"
+                          data-ui-skin="spring"
+                          type="submit">提交</button>
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>

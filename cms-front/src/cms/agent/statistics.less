@@ -1,0 +1,62 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.agent-statistics {
+
+  .data-block {
+    padding: 20px 30px !important;
+    border-right: 1px solid @bb-border-color;
+    text-align: center;
+    .stat-value {
+      font-size: 26px;
+      margin: 10px 0;
+      color: @bb-main-color;
+    }
+    .stat-name {
+      margin: 10px 0;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+  .data-block-bottom {
+    border-bottom: 1px solid @bb-border-color;
+  }
+  .data-block-left {
+    border-left: 1px solid @bb-border-color;
+  }
+  .data-block-last {
+    border-right: none;
+  }
+  .row-compact {
+    display: flex;
+  }
+  .data-center {
+    display: -webkit-box;  /* 老版本语法: Safari,  iOS, Android browser, older WebKit browsers.  */
+    display: -moz-box;    /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox;  /* 混合版本语法: IE 10 */
+    display: -webkit-flex;  /* 新版本语法： Chrome 21+ */
+    display: flex;       /* 新版本语法： Opera 12.1, Firefox 22+ */
+    /*垂直居中*/
+    /*老版本语法*/
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    /*混合版本语法*/
+    -ms-flex-align: center;
+    /*新版本语法*/
+    -webkit-align-items: center;
+    align-items: center;
+
+    /*水平居中*/
+    /*老版本语法*/
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    /*混合版本语法*/
+    -ms-flex-pack: center;
+    /*新版本语法*/
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+}

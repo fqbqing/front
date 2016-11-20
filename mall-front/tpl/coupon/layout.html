@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{{assign var="STATIC_URL" value=$smarty.const.STATIC_URL}}
+{{assign var="CHEDAMAI_URL" value=$smarty.const.CHEDAMAI_URL}}
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="{{block name='keywords'}}车大卖 团购 活动 购车{{/block}}" />
+    <meta name="description" content="{{block name='description'}}车大卖营销管理系统{{/block}}" />
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>{{block name='title'}}来领购车礼吧！{{/block}}</title>
+    <link rel="stylesheet" href="/static/css/coupon/common.less">
+    <script>
+        var GLOBAL = {};
+        GLOBAL['STATIC_URL'] = '{{$STATIC_URL}}';
+        {{if $app->user->isGuest}}
+        GLOBAL['USER'] = {isGuest:true};
+        {{else}}
+        GLOBAL['USER'] = {
+            isGuest:false,
+            phone: '{{$app->user->getIdentity()->phone}}'
+        };
+        {{/if}}
+    </script>
+    {{block name="head"}}{{/block}}
+    {{include file="includes/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+<div class="container container-theme-{{$theme|default:'default'}}">
+    {{block name="body"}}{{/block}}
+</div>
+<script src="/static/js/env.js"></script>
+<script src="/static/libs/moment.js"></script>
+<script src="/static/libs/zepto.min.js"></script>
+<script src="/static/libs/vue.js"></script>
+<script src="/static/ui/frozen.js"></script>
+{{block name="js"}}{{/block}}
+</body>
+</html>

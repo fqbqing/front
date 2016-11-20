@@ -1,0 +1,56 @@
+<div class="page main-register">
+    <div class="content">
+        <div class="register-content">
+            <div class="banner">
+                <div class="banner-image"></div>
+            </div>
+            <div class="list-block inset list-block-form">
+                <div class="special-title">
+                    <div class="special-title-left"></div>
+                    <h2 class="organization-name" v-text="organization.name"></h2>
+                    <div class="special-title-right"></div>
+                </div>
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon-user"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" :disabled="isLogin" v-model="formData.name" placeholder="真实姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon-phone"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" :disabled="isLogin" v-model="formData.phone" placeholder="手机号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li v-if="!isLogin">
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon-lock"></i></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    <input type="text" v-model="formData.code" placeholder="验证码">
+                                </div>
+                                <div class="item-after">
+                                    <ui-verifycode :phone="formData.phone"></ui-verifycode>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="content-block">
+                    <button type="button" :disabled="!organization" @click="register" class="button button-big button-fill button-warning">
+                        成为该店经纪人
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

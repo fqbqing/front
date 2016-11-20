@@ -1,0 +1,115 @@
+nav {
+    padding: 12px 0;
+    line-height: 20px;
+    text-align: center;
+    font-size: 0;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+}
+
+nav > a,
+nav > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 15px;
+}
+
+nav a,
+nav a:visited {
+    color: inherit;
+}
+
+nav > span {
+    position: relative;
+    color: #da2e4c;
+}
+
+nav > span:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -18px;
+    height: 2px;
+    background: #da2e4c;
+}
+
+.list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list li {
+    margin: 15px 5px;
+    border: 1px solid #e4ca83;
+    background: #fff7d4;
+}
+.list li a {
+    display: block;
+    color: #000;
+}
+.list li .title {
+    overflow: hidden;
+    padding:8px;
+    font-size: 12px;
+    line-height: 18px;
+    background: #ffffff;
+}
+
+.list li .title > div {
+    font-size: 10px;
+    line-height: 1.5;
+    white-space: nowrap;
+    color: #666464;
+}
+
+.list li .content {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    width: 100%;
+    border-top: 1px dashed #e4ca83;
+}
+
+.list li .content .info {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    padding: 8px 15px 8px 8px;
+    line-height: 1.5em;
+    vertical-align: middle;
+}
+.list .info .name {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.list .info .tuantip {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.list .info .price em {
+    color: #da2e4c;
+}
+.list .status {
+    margin: 9px 10px;
+    background: center no-repeat;
+    background-size: contain;
+    text-align: center;
+    vertical-align: middle;
+}
+.list .status img {
+    width: 55px;
+    margin-bottom: 5px;
+}
+.list .status i {
+    color: #2c5899;
+}
+
+

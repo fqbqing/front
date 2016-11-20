@@ -1,0 +1,93 @@
+<!-- target: TPL_organization_edit -->
+<div class="bbmc-content-wrap organization-edit">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>4S店管理</span>
+        <span class="divider">/</span>
+        <span class="active">修改基本信息</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="org-form">
+            <div class="form-block">
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-key">4S店名称：</div>
+                        <div class="form-value">
+                            <input data-ui-id="name"
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="name"
+                                data-ui-value="@formData.group.name" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">4S店logo：</div>
+                        <div class="form-value">
+                            <div data-ui-type="WebUploader"
+                                 data-ui-hint="请选择封面图片（大小不超过2M）"
+                                 data-ui-name="logo"
+                                 data-ui-id="uploader"
+                                 data-ui-value="${formData.logo}">选择文件</div>
+                            <div class="form-extra">
+                                <div class="preview cover-image" id="preview">
+                                    <!-- if: ${formData.logo}-->
+                                    <img src="${formData.logo}" alt="预览图片" class="logo">
+                                    <!-- /if-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">4S店地址：</div>
+                        <div class="form-value">
+                            <input data-ui-id="address"
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="address"
+                                data-ui-value="@formData.address" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">4S店电话：</div>
+                        <div class="form-value">
+                            <input data-ui-id="phone"
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="phone"
+                                data-ui-value="@formData.phone" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">公共数据是否公开：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup"
+                                 data-ui-id="publicCustomers"
+                                 data-ui-name="show_public_customers"
+                                 data-ui-box-type="radio"
+                                 data-ui-value="@formData.show_public_customers"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">是否开启经纪人模式：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup"
+                                 data-ui-id="agentSpread"
+                                 data-ui-name="agent_spread"
+                                 data-ui-box-type="radio"
+                                 data-ui-value="@formData.agent_spread"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring" type="submit">提交</button>
+                            <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" type="button">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

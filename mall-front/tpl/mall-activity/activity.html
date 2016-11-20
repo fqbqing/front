@@ -1,0 +1,46 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="activity"}}
+    {{assign var="HEADER_FIXED_STYLE" value=""}}
+{{/block}}
+{{block name="title"}}叭叭买车 - 活动展示{{/block}}
+{{block name="head"}}
+{{/block}}
+{{block name="body"}}
+<div class="container activity-container">
+    {{if $activity['image']}}
+    <div class="image-default margin-big-top margin-big-bottom">
+        <img src="{{$activity['image']|cdn}}" alt="" width="100%">
+    </div>
+    {{/if}}
+    <div class="line-middle margin-big-top margin-big-bottom">
+        {{foreach $goods as $good}}
+        <div class="xb3 xm4 xs4 xl6 margin-bottom">
+            <div class="good-container">
+                <div class="good-image">
+                    <a href="/good/detail?goodId={{$good.id}}">
+                        <img data-original="{{$good.defaultImage|cdn}}">
+                    </a>
+                </div>
+                <div class="good-body">
+                    <h2 title="{{$good.name}}">
+                        <a target="_blank" href="/good/detail?goodId={{$good.id}}">{{$good.name}}</a>
+                    </h2>
+                    <p class="good-tags">
+                        {{foreach $good['tags'] as $tag}}
+                        <a href="javascript:void(0);" class="good-tag">{{$tag['name']}}</a>
+                        {{/foreach}}
+                    </p>
+                    <p class="good-market-price"><del>市场价：<em class="icon-rmb">{{$good.market_price/1000000}}</em>万元</del></p>
+                    <p class="good-price"><em class="icon-rmb">{{$good.low_price/1000000}}</em>万元</p>
+                </div>
+            </div>
+        </div>
+        {{foreachelse}}
+        <div class="text-center margin-large">暂无商品</div>
+        {{/foreach}}
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+{{/block}}

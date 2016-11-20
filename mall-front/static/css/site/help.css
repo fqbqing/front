@@ -1,0 +1,20 @@
+.bb-help-nav {
+    float: left;
+    width: 200px;
+}
+.bb-help-content {
+    margin-left: 210px;
+    overflow: hidden;
+}
+
+@media (max-width:760px){
+    .bb-help-nav {
+        float: none;
+    }
+    .bb-help-nav .nav-navicon {
+        display: block;
+    }
+    .bb-help-content {
+        margin-left: 0;
+    }
+}

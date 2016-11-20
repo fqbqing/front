@@ -1,0 +1,67 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.groupon-award {
+
+  .form-row {
+    margin: 0;
+  }
+  .configure-tips {
+    margin: 3px;
+    padding: 0 5px;
+    text-align: left;
+  }
+  .configure-wrap {
+    display: inline-block;
+    width: 900px;
+    padding-bottom: 20px;
+    text-align: center;
+    border: 1px solid @bb-border-color;
+    .award-row {
+      margin-left: 40px;
+      .award-label, .award-value{
+        float: left;
+      }
+      .award-label {
+        margin-right: 10px;
+      }
+      .award-value {
+        text-align: left;
+      }
+    }
+
+  }
+  .voucher-info {
+    position: relative;
+    width: 300px;
+    margin-top: 10px;
+    padding: 10px 10px 10px 20px;
+    border-top: 1px dashed #fff;
+    border-bottom: 1px dashed #fff;
+    background: #72b349;
+    color: #fff;
+    &:after, &:before{
+      content: '';
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    &:before{
+      left: -5px;
+    }
+    &:after{
+      right: -5px;
+    }
+    h2 {
+      margin: 0;
+    }
+
+  }
+
+}

@@ -1,0 +1,101 @@
+<!-- target: TPL_tuan_detail -->
+<div class="tuan-detail">
+    <!-- use: TPL_common_page_header(title="活动详情") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li class="current">基本信息</li>
+                <li @click="redirect('/tuan/order/list', {tuan_id: tuan.id, claimed: '1'})">已认领订单</li>
+                <li @click="resetRouter('/tuan/channel', {tuan_id: query.tuan_id})">渠道效果</li>
+            </ul>
+            <ul class="ui-tab-content" v-cloak>
+                <li class="current">
+                    <section class="ui-panel">
+                        <h1 style="line-height: 44px;" v-text="tuan.title"></h1>
+                        <ul class="ui-list ui-list-pure ui-border-tb">
+                            <li class="ui-border-b">
+                                <h5>
+                                    <span>活动时间</span>
+                                    <span class="ui-panel-title-tips">{{tuan.tuan_time|date}}</span>
+                                </h5>
+                            </li>
+                            <li class="ui-border-b">
+                                <h5>
+                                    <span>报名截至时间</span>
+                                    <span class="ui-panel-title-tips">{{tuan.end_time|date}}</span>
+                                </h5>
+                            </li>
+                            <li>
+                                <h5>
+                                    <span>意向金</span>
+                                    <span class="ui-panel-title-tips">{{tuan.amount|currency 2}}</span>
+                                </h5>
+                            </li>
+                        </ul>
+                        <div class="ui-btn-group" style="margin: 10px auto 0; width: 240px;">
+                            <button class="ui-btn ui-btn-primary" @click="href('/api/tuan/transmit?id=' + tuan.id)">直接分享</button>
+                            <button class="ui-btn ui-btn-primary" @click="showShareQRCode">二维码分享</button>
+                        </div>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-t">
+                        <h2 class="ui-arrowlink" @click="redirect('/tuan/order/list', {tuan_id: tuan.id, claimed: '1'})">
+                            <span>已认领订单</span>
+                            <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                            <!--<span class="ui-panel-title-tips ui-txt-highlight">{{statOrder.today_claimed_count}}/{{statOrder.claimed_count}}</span>-->
+                        </h2>
+                        <ul class="ui-list ui-list-pure ui-list-stat ui-border-tb">
+                            <li class="ui-border-b">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{statOrder.today_claimed_count}}/{{statOrder.claimed_count}}</i><div>全部</div></li>
+                                    <li><i>{{statOrder.today_paid_count}}/{{statOrder.paid_count}}</i><div>已支付</div></li>
+                                    <li><i>{{statOrder.today_used_count}}/{{statOrder.used_count}}</i><div>已成交</div></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{statOrder.today_apply_refund_count}}/{{statOrder.apply_refund_count}}</i><div>申请退款</div></li>
+                                    <li><i>{{statOrder.today_refunding_count}}/{{statOrder.refunding_count}}</i><div>退款中</div></li>
+                                    <li><i>{{statOrder.today_refunded_count}}/{{statOrder.refunded_count}}</i><div>已退款</div></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-tb" style="margin-top: 5px;">
+                        <h2 class="ui-arrowlink" @click="redirect('/tuan/order/list', {tuan_id: tuan.id, claimed: '0'})">
+                            <span style="margin: 0 auto;">未认领订单<i>({{statOrder.unclaimed_count}})</i></span>
+                            <!--<small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>-->
+                            <!--<span class="ui-txt-highlight ui-panel-title-tips">{{statOrder.today_unclaimed_count}}/{{statOrder.unclaimed_count}}</span>-->
+                        </h2>
+                    </section>
+                    <section class="ui-panel">
+                        <h2>报名车型统计</h2>
+                        <table class="ui-table ui-table-pure ui-border-tb">
+                            <tr><th>车型</th><th>已报名</th><th>已支付</th></tr>
+                            <tr v-for="item in statIntention">
+                                <td v-text="item.intention"></td>
+                                <td v-text="item.signup_order_count"></td>
+                                <td v-text="item.paid_order_count"></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section class="ui-panel">
+                        <h2>成交车型统计<small>({{buyedCarCount}})</small></h2>
+                        <dl class="dl-stat-percent ui-border-b" :class="{'ui-border-t': $index==0}" v-for="deal in statDealModel | orderBy 'count' -1">
+                            <dt class="ui-nowrap" v-text="deal.deal_model"></dt>
+                            <dd>
+                                <div class="progress" :style="{width:deal.count/buyedCarCount*100 + '%'}"></div>
+                                <em v-text="deal.count"></em>
+                            </dd>
+                        </dl>
+                    </section>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="qrcode-wrap" v-if="qrCodeImage && isQRCodeImageShow" v-cloak @click="isQRCodeImageShow=false">
+        <div class="qrcode">
+            <img :src="qrCodeImage" width="200" height="200">
+        </div>
+    </div>
+</div>

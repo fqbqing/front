@@ -1,0 +1,13 @@
+{
+    "History.md": "ec25c5c53cf5204f48f2ea17618a7c71",
+    "README.md": "c73d0086161ba7f9d465b6c488bb5d6b",
+    "cookie.js": "4334e89cb81b80a7ddbfc0ce110d9e94",
+    "demo/basic.html": "4b25140abf746cf9ec65d968c609cb4e",
+    "demo/demo.css": "7508e0e63d832e0357baed54b84f142c",
+    "lib/cookie.js": "72e281713243fa5fd4dfb9a3b3a9ded0",
+    "package.json": "36534b084bb040420fbc60b7d816240c",
+    "src/cookie.js": "83ebda653784c02f2c04a84abe35ac15",
+    "test/cookie.spec.js": "96cbe6c18034d4df2b495a91d8035780",
+    "test/run-jasmine.js": "7c0d964113df9f083f21291056e23f0a",
+    "test/runner.html": "1627e80cf9d67043e8e7c390a03a0d6f"
+}

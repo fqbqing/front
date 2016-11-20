@@ -1,0 +1,49 @@
+<!-- target: TPL_activity_coupon_list -->
+<div class="activity-coupon-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <!-- if: ${organization_id} -->
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <!-- else-->
+        <span class="active">活动管理</span>
+        <span class="divider">/</span>
+        <!-- /if -->
+        <span class="active">优惠券活动</span>
+    </div>
+    <div class="bbmc-content">
+        <!-- if: ${organization_id} -->
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="activity",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+        <!-- /if -->
+                <div class="ui-row">
+                    <div class="ui-group">
+                        <div class="filter-wrap">
+                            <select data-ui-type="Select" data-ui-id="search_type" data-ui-name="search_type" data-ui-value="${search_type}" class="search-select" data-ui-width="140" data-ui-skin="primary">
+                                <option value="1">按活动名称搜索</option>
+                                <option value="0">按车大卖联系人搜索</option>
+                            </select>
+                        </div>
+                        <form data-ui-type="Form" data-ui-id="filter" class="filter-form">
+                            <div data-ui-type="SearchBox"
+                                 data-ui-placeholder="输入关键字搜索"
+                                 data-ui-id="searchbox"
+                                 data-ui-text="${name}"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="list-table">
+                    <!-- import: listTableWithCommand -->
+                </div>
+                <div class="list-table-footer">
+                    <!-- import: listPager -->
+                </div>
+        <!-- if: ${organization_id} -->
+            </div>
+        </div>
+        <!-- /if -->
+
+    </div>
+
+
+</div>

@@ -1,0 +1,53 @@
+{{extends file="layout/simple.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="login"}}
+{{/block}}
+{{block name="title"}}
+    {{if isset($smarty.get.loginType)}}
+    验证手机号
+    {{else}}
+    用户登录 - {{$TITLE_SUFFIX}}
+    {{/if}}
+{{/block}}
+{{block name="head"}}
+<style>
+    .field-error .input {
+        border-color: red;
+    }
+    .error-tip {
+        display: none;
+    }
+    .field-error .error-tip {
+        display: block;
+    }
+    .field-error .tips {
+        display: none;
+    }
+    .label .float-right {
+        line-height: 40px;;
+    }
+    h1 {
+        margin: 20px 0;
+        line-height: 1.5;
+    }
+    h1 p {
+        font-size: 12px;
+    }
+</style>
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    <h1 class="text-center margin">
+        {{if isset($smarty.get.loginType)}}
+        验证手机号
+        <p>* 您可以输入手机号码查看</p>
+        {{else}}
+        登录
+        {{/if}}
+    </h1>
+    {{include file="includes/login_box.html"}}
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/site/login.js"></script>
+{{/block}}

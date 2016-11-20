@@ -1,0 +1,72 @@
+{{extends file="layout/weixinmain.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}报名详情页{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/weixin/detail.css">
+{{/block}}
+{{block name="body"}}
+<div class="container-box tuan-detail">
+    <input type="hidden" value="{{$data['id']}}" id="orderId">
+    <div>
+        <div class="detail-head">
+            <h1 class="pure">报名成功大礼包</h1>
+        </div>
+        <div class="detail-body">
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                <div class="service">
+                    <ul>
+                        {{foreach $data['tuan']['coupon_tags'] as $tags}}
+                        <li><i></i><span>{{$tags}}</span></li>
+                        {{/foreach}}
+                    </ul>
+                    <a href="/tuan/pay?orderId={{$data['order_id']}}" class="btn paybtn">立即支付</a>
+                </div>
+                <div class="explain">
+                    <h4>{{$data['amount']/100}}元对买车而言的价值在哪里</h4>
+                    <ol>
+                        {{foreach $data['tuan']['coupon_content'] as $content}}
+                        <li>{{$content}}</li>
+                        {{/foreach}}
+                    </ol>
+                    <div style="overflow: hidden">
+                        <div class="guide ensured">
+                            <h5>购车大礼包意向金退还政策</h5>
+                            <ol>
+                                {{foreach $data['tuan']['coupon_refund'] as $refund}}
+                                <li>{{$refund}}</li>
+                                {{/foreach}}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="call">
+            {{if isset($data['signupChannel'])}}
+            {{if isset($data['signupChannel']['userGroup'])}}
+            <a href="tel:{{$data['signupChannel']['userGroup']['organization']['phone']}}">
+                {{$data['signupChannel']['userGroup']['organization']['phone']}}
+                <span>{{$data['signupChannel']['userGroup']['name']}}</span>
+            </a>
+            {{elseif isset($data['signupChannel']['userCompany'])}}
+            <a href="tel:{{$data['signupChannel']['userCompany']['phone1']}}">
+                {{$data['signupChannel']['userCompany']['phone1']}}
+                <span>销售顾问：{{$data['signupChannel']['userCompany']['name']}}</span>
+            </a>
+            {{/if}}
+            {{else}}
+            <a href="tel:4008955088"> 4008-955-088  <span> 叭叭买车客服热线</span></a>
+            {{/if}}
+        </div>
+    </div>
+
+</div>
+{{/block}}
+{{block name="js"}}
+{{include file="./weixinshare.html"}}
+
+{{/block}}

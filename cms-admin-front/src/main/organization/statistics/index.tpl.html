@@ -1,0 +1,159 @@
+<!-- target: TPL_organization_statistics_index -->
+<div class="organization-statistics-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span>数据统计</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="statistics",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="bbmc-panel total-kpi">
+                                <div class="bbmc-panel-head">
+                                    <h2>关键指标 <small v-text="Date.now()|date '(YYYY-MM-DD)'"></small></h2>
+                                    <div class="panel-action">
+                                        <div data-ui-type="RadioSelect" data-ui-id="kpiTypeRadio"></div>
+                                    </div>
+                                </div>
+                                <div class="bbmc-panel-body">
+                                    <template v-if="kpiType=='today'">
+                                        <div class="row row-compact">
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">新增团购报名</h3>
+                                                <p class="stat-value"><em v-text="stat.today.tuanOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">新增优惠券领券</h3>
+                                                <p class="stat-value"><em v-text="stat.today.voucherOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">新增车展报名</h3>
+                                                <p class="stat-value"><em v-text="stat.today.exhibitionOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">新增客户</h3>
+                                                <p class="stat-value"><em v-text="stat.today.customerCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">客户跟进</h3>
+                                                <p class="stat-value"><em v-text="stat.today.customerTrackCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">全部客户</h3>
+                                                <p class="stat-value"><em v-text="stat.all.customerCount"></em></p>
+                                            </div>
+                                        </div>
+                                        <div class="row row-compact">
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">新增经纪人</h3>
+                                                <p class="stat-value"><em v-text="stat.today.agentCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">新增经纪人客户报名</h3>
+                                                <p class="stat-value"><em v-text="stat.today.agentSignupCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">新增经纪人客户成交</h3>
+                                                <p class="stat-value"><em v-text="stat.today.agentDealCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">经纪人花费</h3>
+                                                <p class="stat-value"><em v-text="stat.today.agentCost|amount"></em></p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="row row-compact">
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">团购报名总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.tuanOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">优惠券领券总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.voucherOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">车展报名总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.exhibitionOrderCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">客户总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.customerCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">客户跟进总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.customerTrackCount"></em></p>
+                                            </div>
+                                            <div class="col-md-2 data-block bbmc-border-b">
+                                                <h3 class="stat-name">全部客户</h3>
+                                                <p class="stat-value"><em v-text="stat.all.customerCount"></em></p>
+                                            </div>
+                                        </div>
+                                        <div class="row row-compact">
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">经纪人总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.agentCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">经纪人客户报名总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.agentSignupCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">经纪人客户成交总数</h3>
+                                                <p class="stat-value"><em v-text="stat.all.agentDealCount"></em></p>
+                                            </div>
+                                            <div class="col-md-3 data-block">
+                                                <h3 class="stat-name">经纪人总花费</h3>
+                                                <p class="stat-value"><em v-text="stat.all.agentCost|amount"></em></p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2>关键指标详解</h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <div data-ui-type="DateRangePicker" data-ui-id="dateRange"></div>
+                                <h3>趋势图</h3>
+                                <div data-ui-type="RadioSelect" data-ui-id="kpis"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div data-ui-type="Highchart" data-ui-id="kpiChart"></div>
+                                    </div>
+                                </div>
+                                <h3>详细数据</h3>
+                                <table class="table table-kpi">
+                                    <tr>
+                                        <th>日期</th>
+                                        <th>团购报名</th>
+                                        <th>优惠券领券</th>
+                                        <th>车展报名</th>
+                                        <th>新增客户</th>
+                                        <th>客户跟进</th>
+                                    </tr>
+                                    <tr v-for="item in kpi | orderBy 'date' -1">
+                                        <td v-text="item.date"></td>
+                                        <td v-text="item.data.tuanOrderCount"></td>
+                                        <td v-text="item.data.voucherOrderCount"></td>
+                                        <td v-text="item.data.exhibitionOrderCount"></td>
+                                        <td v-text="item.data.customerCount"></td>
+                                        <td v-text="item.data.customerTrackCount"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

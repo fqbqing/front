@@ -1,0 +1,87 @@
+.award-voucher-detail {
+
+    .voucher {
+        margin: 20px;
+        background: #fff;
+        position: relative;
+        padding: 20px 10px;
+        text-align: center;
+        font-size: .7rem;
+        &:before, &:after {
+            content: '';
+            background: #eee;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            margin-left: -15px;
+        }
+        &:before {
+            top: -15px;
+        }
+        &:after {
+            bottom: -15px;
+        }
+        h1 {
+            margin: .75rem 0;
+            font-size: 1rem;
+        }
+        .voucher-info {
+            margin-top: 20px;
+            p {
+                font-size: .7rem;
+                margin: 5px 0 0;
+            }
+        }
+        h2 {
+            font-size: .7rem;
+            color: #666;
+            position: relative;
+            margin: 15px 30px;
+            span {
+                background: #fff;
+                position: relative;
+                z-index: 1;
+                padding: 0 10px;
+            }
+            &:before {
+                content: '';
+                position: absolute;
+                border-bottom: 1px solid #eee;
+                top: 50%;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+    .order-cn {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+    .voucher-detail {
+        text-align: left;
+        font-size: .5rem;
+        margin: 0 .5rem 1rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        h3 {
+            font-size: .75rem;
+            margin: 1rem 0 0;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .used-box {
+        p {
+            margin-top: 0;
+            font-size: 1rem;
+        }
+        .icon-ok-circle {
+            font-size: 3.5rem;
+            color: #06b906;
+        }
+    }
+}

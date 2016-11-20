@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+body {
+    background: #f6f6f6;
+}
+.panel {
+    background: #fff;
+    color: #333;
+    //border-left: 1px solid #ddd;
+    box-shadow: -1px 0 10px #aaa;
+}
+.panel-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, .5);
+}
+.page, .page-group {
+    background: none;
+}
+.with-panel-right-reveal, .with-panel-left-reveal {
+    .panel-overlay {
+        background: rgba(0, 0, 0, 0);
+    }
+}

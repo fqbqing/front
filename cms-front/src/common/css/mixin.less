@@ -1,0 +1,146 @@
+/**
+ * Color settings
+ */
+
+// Basic status
+@bat-success-color: #008000;
+@bat-warning-color: #FF9A00;
+@bat-alert-color: #FF0000;
+@bat-aux-color: #9C9A9C;
+
+// Link colors
+@bat-link-color: #3377AA;
+@bat-link-hover-color: #FF6600;
+
+// Background & border color
+@bat-border-blue: #BAD5F1;
+@bat-border-light-blue: #DBEBFA;
+@bat-bg-dark-blue: #B6D2F1;
+@bat-bg-blue: #E7F1FB;
+@bat-bg-light-blue: #F1F6FC;
+
+// 上面的要改掉
+
+// 常规边
+@omon-border: 1px solid @bce-border-color;
+
+.bat-linkify() {
+    padding-right: 0;
+    padding-left: 0;
+    color: @bat-link-color;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+        color: @bat-link-hover-color;
+    }
+}
+
+.skin-loading-dialog {
+    box-shadow: 0 2px 10px 0 #999;
+    border: 2px solid #D6E7F2;
+    padding: 0 12px 0 36px;
+    background: url(../img/loading.gif) no-repeat 10px center #FCFCFC;
+    line-height: 44px;
+    color: #3377AA;
+    font-weight: 700;
+    font-size: 12px;
+
+    .ui-dialog-head {
+        display: none;
+    }
+
+    .ui-dialog-body {
+        padding: 0;
+    }
+}
+
+@grid-columns:              12;
+@grid-gutter-width:         10px;
+@grid-float-breakpoint:     768px;
+// Creates a wrapper for a series of columns
+.make-row(@gutter: @grid-gutter-width) {
+    // Then clear the floated columns
+    .clearfix();
+//    margin-left:  (@gutter / -2);
+//    margin-right: (@gutter / -2);
+    // Negative margin nested rows out to align the content of columns
+    .row {
+        .clearfix();
+        margin-left:  (@gutter / -2);
+        margin-right: (@gutter / -2);
+        box-sizing: border-box;
+    }
+}
+//// Generate the medium columns
+//.make-md-column(@columns; @gutter: @grid-gutter-width) {
+//    width: percentage((@columns / @grid-columns));
+//}
+//
+//// Generate the medium column offsets
+//.make-md-column-offset(@columns) {
+//    margin-left: percentage((@columns / @grid-columns));
+//}
+
+.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+    .col-@{class}-@{index} {
+        width: percentage((@index / @grid-columns));
+    }
+}
+.calc-grid-column(@index, @class, @type) when (@type = offset) {
+    .col-@{class}-offset-@{index} {
+        margin-left: percentage((@index / @grid-columns));
+    }
+}
+
+.make-grid-columns() {
+    // Common styles for all sizes of grid columns, widths 1-12
+    .col(@index) { // initial
+        @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+        .col((@index + 1), @item);
+
+        //@{item} {
+        //    .make-md-column(1);
+        //}
+        //.col-md-offset-@{index} {
+        //    .make-md-column-offset(1);
+        //}
+    }
+    .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
+        @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+        .col((@index + 1), ~"@{list}, @{item}");
+
+        //@{item} {
+        //    .make-md-column(@index);
+        //}
+        //.col-md-offset-@{index} {
+        //    .make-md-column-offset(@index);
+        //}
+    }
+    .col(@index, @list) when (@index > @grid-columns) { // terminal
+        @{list} {
+            position: relative;
+            // Prevent columns from collapsing when empty
+            min-height: 1px;
+            // Inner gutter via padding
+            padding: ceil((@grid-gutter-width / 2));
+            //padding-left:  ceil((@grid-gutter-width / 2));
+            padding-right: floor((@grid-gutter-width / 2));
+
+            // Calculate width based on number of columns available
+            float: left;
+            box-sizing: border-box;
+        }
+    }
+    .col(1); // kickstart it
+}
+// Basic looping in LESS
+.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+    .calc-grid-column(@index, @class, @type);
+    // next iteration
+    .loop-grid-columns((@index - 1), @class, @type);
+}
+.make-grid(@class) {
+    .loop-grid-columns(@grid-columns, @class, width);
+    .loop-grid-columns(@grid-columns, @class, offset);
+}

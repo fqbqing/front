@@ -1,0 +1,12 @@
+{
+    "name": "saber-track",
+    "version": "0.0.1",
+    "contributors": [
+        {
+        }
+    ],
+    "dependencies": {
+    },
+    "main": "main",
+    "description": "用于Saber的页面访问统计套件"
+}

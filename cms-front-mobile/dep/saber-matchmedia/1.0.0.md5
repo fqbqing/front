@@ -1,0 +1,10 @@
+{
+    "History.md": "35824cb32dc0672e977ab791c0683ad6",
+    "README.md": "f3c23138e4d9d8ec3d1cf2a996d89632",
+    "demo/lite.html": "20b8badbe92374fe8759b2c167a56e24",
+    "demo/standard.html": "948c1f6803922f96a3ccec6ac7fa717a",
+    "package.json": "71902dc77191ac10cb15663b7ca5b995",
+    "src/lite.js": "2065cd614dc5bf4274c7942ebc995cf4",
+    "src/main.js": "a7417f7fdb72a5b41198151ade23583c",
+    "test/browser-check.html": "2448472379256e395a338d8aa22b9feb"
+}

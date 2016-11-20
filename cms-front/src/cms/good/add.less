@@ -1,0 +1,85 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.good-add {
+
+    .tag-list {
+        clear: both;
+        margin: 0 -8px -8px;
+        overflow: hidden;
+        li {
+            float: left;
+            margin: 8px;
+            border: 2px solid #f60;
+            padding: 2px 6px 2px 15px;
+            line-height: 20px;
+            position: relative;
+            overflow: hidden;
+            &:after {
+                position: absolute;
+                right: 0;
+                bottom: -8px;
+                content: '';
+                width: 0;
+                height: 0;
+                border: 8px solid transparent;
+                border-right-color: #f60;
+            }
+        }
+        .remove {
+            background: none;
+            border: none;
+        }
+    }
+    .image-list {
+        margin: 0 -5px;
+        li {
+            float: left;
+            margin: 5px;
+            border: 1px solid #ddd;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
+            position: relative;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+                vertical-align: middle;
+            }
+            .remove {
+                position: absolute;
+                right: 0;
+                top: 0;
+                background: #ddd;
+                border: none;
+                line-height: 1;
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    }
+    .cover-image {
+        img {
+            max-height: 100px;
+        }
+    }
+
+    .detail-list {
+        clear: both;
+        li {
+            margin: 0 0 10px 0;
+        }
+        .detail-title {
+            padding: 2px 0;
+        }
+        .richeditor {
+            max-width: 1000px;
+        }
+    }
+
+}

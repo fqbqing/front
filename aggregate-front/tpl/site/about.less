@@ -1,0 +1,43 @@
+
+.banner {
+    position: relative;
+    padding-top: 12.5%;
+    background: url(../../static/images/about/banner.jpg) center center no-repeat;
+    background-size: auto 100%;
+    min-height: 120px;
+    margin-top: -20px;
+}
+.main {
+    max-width: 720px;
+}
+.about-panel {
+    h2 {
+        color: #ff6a21;
+        font-size: 22px;
+        font-weight: 400;
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    p {
+        color: #666;
+    }
+}
+.icon-intro:before {
+    background: url(../../static/images/about/icon_intro.png) left center no-repeat;
+}
+.icon-staff:before {
+    background: url(../../static/images/about/icon_staff.png) left center no-repeat;
+}
+.icon-contact:before {
+    background: url(../../static/images/about/icon_contact.png) left center no-repeat;
+}
+.icon-intro, .icon-staff, .icon-contact {
+    &:before {
+        content: '';
+        width: 22px;
+        height: 22px;
+        margin-right: 8px;
+        background-size: cover;
+        float: left;
+    }
+}

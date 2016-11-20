@@ -1,0 +1,40 @@
+<!-- target: TPL_exhibition_coupon_activity_list -->
+<div class="exhibition-coupon-activity-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">平台活动</span>
+        <span class="divider">/</span>
+        <span class="active">车展列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <small class="text-notes">(平台将不定期推出平台活动，经销商可以报名参加)</small>
+            <div class="ui-group">
+                <form data-ui-type="Form" data-ui-id="filter">
+                    <div data-ui-type="SearchBox"
+                         data-ui-placeholder="按活动名称搜索"
+                         data-ui-id="searchbox"
+                         data-ui-text="${title}"></div>
+                </form>
+            </div>
+        </div>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+        <div data-ui="type:Dialog;width:400;height:320;mask:true;id:staticDg;closeOnHide:false;needFoot:false">
+            <h1 data-role="title">二维码分享</h1>
+            <div data-role="content">
+                <div class="tuan-list-dialog-share-content">
+                    <img src="" alt="" class="cont-qrcode">
+                    <p>扫描二维码查看<em class="cont-title"></em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

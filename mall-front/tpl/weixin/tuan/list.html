@@ -1,0 +1,47 @@
+{{extends file="layout/weixinmain.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}订单中心{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/weixin/list.css">
+{{/block}}
+{{block name="body"}}
+<div class="container-box">
+    <nav>
+        <span>我的活动</span>
+        <!--<a href="">我的订单</a>-->
+        <!--<a href="">我的退款</a>-->
+    </nav>
+    <ul class="list">
+        {{foreach $data as $item }}
+        <li class="coupon">
+            <div class="title">
+                <div>订单编号：<em>{{$item['order_id']}}</em></div>
+                <div class="created-time">报名时间：<em>{{$item['created_time']|date_format:'%Y-%m-%d %H:%M:%S'}}</em></div>
+            </div>
+
+            <a {{if $item['order_id'] != 0}} href="/tuan/tuan-order-detail?orderId={{$item['order_id']}}"  {{else}} href="javascript:void(0)" {{/if}}>
+                <div class="content">
+                    <div class="info">
+                        <h2 class="name">{{$item['tuan']['title']}}</h2>
+                        <span class="tuantip">{{$item['tuan']['content']}}</span>
+                        <span class="price">订金：<em>¥{{$item['tuan']['amount']/100}}</em></span>
+                    </div>
+                    <div class="status">
+                        <img src="/static/images/weixin/applyed.png" alt=""><br>
+                        {{if $item['order_id'] != 0}}
+                        <i>查看详情</i>
+                        {{/if}}
+                    </div>
+                </div>
+            </a>
+        </li>
+        {{foreachelse}}
+        <li><p style="text-align: center;height:36px;line-height: 36px;padding:0px;margin:0px;">暂无订单</p></li>
+        {{/foreach}}
+    </ul>
+</div>
+{{/block}}
+{{block name="js"}}
+{{/block}}

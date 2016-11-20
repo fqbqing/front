@@ -1,0 +1,11 @@
+@media (min-width: 1000px) {
+    .good-detail {
+        margin-left: 30px;
+    }
+}
+ul.tab-nav {
+    padding-left: 0;
+}
+.order-list .order-list-box {
+    border-top-left-radius: 0;
+}

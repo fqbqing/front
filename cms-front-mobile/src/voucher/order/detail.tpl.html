@@ -1,0 +1,50 @@
+<!-- target: TPL_voucher/order_detail -->
+<div class="voucher_order_detail">
+    <!-- use: TPL_common_page_header(title="订单详情") -->
+    <section class="ui-container">
+        <section class="ui-panel">
+            <h2>客户信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b">
+                    <h5><span>姓名</span><span class="ui-panel-title-tips">{{voucher_orders[0].customer.name}}</span></h5>
+                </li>
+                <li class="">
+                    <h5><span>手机号</span><span class="ui-panel-title-tips"><a href="tel://{{voucher_orders[0].customer.phone}}">{{voucher_orders[0].customer.phone}}</a></span></h5>
+                </li>
+            </ul>
+            <h2>已领取优惠券</h2>
+            <ul class="order-list">
+                <li v-for="order in voucher_orders">
+                    <div class="order">
+                        <h4>{{order.voucher.name}} <small v-if="order.amount!='0'">{{order.amount|currency 2}}</small></h4>
+                        <p>{{order.created_time|date}}</p>
+                        <p>状态：<span class="order-status">{{order.status|voucher-order-status-text}}</span></p>
+                        <p v-if="order.amount!='0'">支付方式：<span>{{order.payment|voucher-payment-text}}</span></p>
+                        <p>领取渠道：<span>{{order.signupChannel.name}}</span></p>
+                        <p v-if="order.usedChannel">核销渠道：<span>{{order.usedChannel.name}}</span></p>
+                    </div>
+                </li>
+            </ul>
+            <!--<ul class="ui-list ui-list-pure voucher-list" v-for="voucher_order in voucher_orders">-->
+                <!--<li class="ui-border-b">-->
+                    <!--<h5><span>优惠券 <i v-if="voucher_orders.length > 1">{{$index+1}}</i> </span><span class="ui-panel-title-tips">{{voucher_order.voucher.name}}</span></h5>-->
+                <!--</li>-->
+                <!--<li class="ui-border-b">-->
+                    <!--<h5><span>领取时间</span><span class="ui-panel-title-tips">{{voucher_order.created_time|date}}</span></h5>-->
+                <!--</li>-->
+                <!--<li class="ui-border-b">-->
+                    <!--<h5><span>价格</span><span class="ui-panel-title-tips">{{voucher_order.amount|currency 2}}</span></h5>-->
+                <!--</li>-->
+                <!--<li class="ui-border-b">-->
+                    <!--<h5><span>优惠券状态</span><span class="ui-panel-title-tips">{{voucher_order.status}}</span></h5>-->
+                <!--</li>-->
+                <!--<li class="ui-border-b">-->
+                    <!--<h5><span>支付方式</span><span class="ui-panel-title-tips">{{voucher_order.payment}}</span></h5>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<h5><span>核销渠道</span><span class="ui-panel-title-tips">{{voucher_order.signupChannel.name}}</span></h5>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </section>
+    </section>
+</div>

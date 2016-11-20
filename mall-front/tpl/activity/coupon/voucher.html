@@ -1,0 +1,96 @@
+{{extends file="./layout.html"}}
+{{block name='title'}}活动优惠券 - {{$activity.name|escape:'html'}}{{/block}}
+{{block name='description'}}{{$activity.brief|escape:'html'}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/activity/coupon/voucher.less">
+{{/block}}
+{{block name="body"}}
+<header class="banner">
+    <div class="content">
+        <p>{{$activity.voucher_introduce_text|escape:'html'}}</p>
+    </div>
+</header>
+<section class="part part-line vouchers">
+    <h2><span>优惠券</span></h2>
+    {{if $app->user->isGuest}}
+    <p class="text-right">
+        <a href="/site/login-c?url={{'/activity/coupon/voucher?id='|escape:'url'}}{{$activity.id}}">我已领取</a>
+    </p>
+    {{/if}}
+    <div class="voucher-list">
+        {{foreach $vouchers as $voucher}}
+        <div class="item">
+            <div class="voucher{{if isset($voucher.order) && $voucher.order.status == 5}} voucher-used{{/if}}{{if $voucher.end_time|is_expired eq '1'}} voucher-expire{{/if}}">
+                {{if isset($voucher.order)}}
+                <a href="/activity/voucher/{{$activity.id}}/{{$voucher.id}}">
+                {{/if}}
+                <div class="voucher-info">
+                    <div class="img">
+                        <img src="{{$voucher.image_url|cdnfix}}@70w_70h_1e_1c_70-1ci.png">
+                    </div>
+                    <div class="content">
+                        <h3>{{$voucher.name|escape:'html'}}</h3>
+                        <p>{{$voucher.brief|escape:'html'}}</p>
+                    </div>
+                </div>
+                <div class="voucher-extra">
+                    <i class="mark"></i>
+                    <div class="extra">
+                        {{if isset($voucher.order)}}
+                        <div class="voucher-status voucher-status-claimed">
+                            已领取
+                            <p>点击查看详情</p>
+                        </div>
+                        {{elseif intval($voucher.used_count) >= intval($voucher.count)}}
+                        <div class="voucher-status">已领完</div>
+                        {{elseif $voucher.end_time|is_expired eq '0'}}
+                        <a class="btn" href="/activity/voucher/{{$activity.id}}/{{$voucher.id}}">立即领取</a>
+                        {{else}}
+                        <div class="voucher-status">已过期</div>
+                        {{/if}}
+                        <dl>
+                            <dt>有效期：</dt>
+                            <dd>
+                                {{if $voucher.end_time eq '0'}}
+                                长期有效
+                                {{else}}
+                                {{$voucher.start_time|date_format:'%Y.%m.%d'}} - {{$voucher.end_time|date_format:'%Y.%m.%d'}}
+                                {{/if}}
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                {{if isset($voucher.order)}}
+                </a>
+                {{/if}}
+            </div>
+        </div>
+        {{/foreach}}
+    </div>
+</section>
+<section class="part text-center">
+    <a class="btn btn-view-activity" href="/activity/coupon/{{$activity.id}}.html">查看活动详情</a>
+</section>
+<section class="part instruction">
+    <dl>
+        <dt>活动说明</dt>
+        <dd>
+            {{$activity.rule|escape:'html'|nl2br}}
+        </dd>
+    </dl>
+</section>
+<section class="part part-line seller">
+    <h2><span>购车顾问</span></h2>
+    <div class="part-content">
+        {{v_seller file="/includes/seller.html" activityId="`$activity.id`"}}
+    </div>
+</section>
+{{/block}}
+{{block name="js"}}
+{{weixin_share
+    activityId="`$activity.id`"
+    title="`$activity.name|escape:'html'`"
+    desc="`$activity.brief|escape:'html'`"
+    link="/activity/coupon/`$activity.id`.html"
+    imgUrl="http:`$activity.share_image_url|cdnfix`"}}
+{{/block}}

@@ -1,0 +1,38 @@
+<!-- target: TPL_my_info -->
+<div class="my-info bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>个人中心</span>
+        <span class="divider">/</span>
+        <span class="active">我的信息</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <div class="bbmc-detail">
+            <dl class="dl-horizontal">
+                <dt>头像：</dt>
+                <dd>
+                    <div class="form-extra">
+                        <div class="image">
+                            <editable-image :src.sync="user.avatar" v-ref:uploadImage></editable-image>
+                        </div>
+                    </div>
+                </dd>
+                <dt>姓名：</dt>
+                <dd>${user.name}</dd>
+                <dt>手机号：</dt>
+                <dd>${user.phone1}</dd>
+                <dt>所属部门：</dt>
+                <dd>
+                    <!-- if: ${user.group} -->
+                    ${user.group.name}
+                    <!-- else -->
+                    无
+                    <!-- /if -->
+                </dd>
+                <dt>职位：</dt>
+                <dd>
+                    ${user.title}
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<!-- target: TPL_order_detail -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>订单管理</span>
+    <span class="divider">/</span>
+    <span><a href="#/order/list">商城订单列表</a></span>
+    <span class="divider">/</span>
+    <span class="active"><!-- if: ${id} -->修改<!-- else -->添加<!-- /if -->订单</span>
+</div>
+<div class="order-detail bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key">订单号：</div>
+                    <div class="form-value">${orderInfo.order_id}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">货品：</div>
+                    <div class="form-value">
+                        <span>${orderInfo.product.name}</span>
+                        <span>${orderInfo.product.amount | amount}元</span>
+                        <div>
+                            <!-- for: ${orderInfo.product.specification} as ${specification}-->
+                            <span class="speci">${specification.specificationValue.name}</span>
+                            <!-- /for -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">订单支付金额(元)：</div>
+                    <div class="form-value">${orderInfo.deposit | amount}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">支付方式：</div>
+                    <div class="form-value">${orderInfo.payment | paymentText}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">姓名：</div>
+                    <div class="form-value">${orderInfo.user_info.user_name}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">手机号：</div>
+                    <div class="form-value">${orderInfo.user_info.user_phone}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">订单状态：</div>
+                    <div class="form-value">
+                        <select data-ui-type="Select" data-ui-id="orderStatus" data-ui-width="200" name="orderStatus" data-ui-selected-index="0" data-ui-value="${orderInfo.status}">
+                            <!-- for: ${orderStatus} as ${st} -->
+                            <option value="${st.value}">${st.text}</option>
+                            <!-- /for -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">其他信息：</div>
+                    <div class="form-value">
+                        <!-- if:  ${orderInfo.get_car_code} -->
+                        <p>提车码：<span> ${orderInfo.get_car_code}</span> </p>
+                        <!-- /if -->
+                    <p>定金有效期：<span>${orderInfo.created_time | date} 至 ${orderInfo.expire_time | date}</span> </p>
+                    <p>提车方式：<span>${orderInfo.get_car}</span> </p>
+                    <p>交易方式：<span>${orderInfo.trade}</span></p>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">订单创建时间：</div>
+                <div class="form-value">${orderInfo.created_time | date}</div>
+            </div>
+
+
+            <!--<div class="form-row">
+                <div class="form-key">订单备注：</div>
+                <div class="form-value">
+                     <textarea data-ui-id="remarks"
+                               data-ui-type="TextBox"
+                               data-ui-width="400"
+                               data-ui-height="80"
+                               rows="4"
+                               name="remarks"></textarea>
+                </div>
+            </div>-->
+
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="primary" class="ui-button-submit" type="submit">保存
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" class="ui-button-reset" type="reset">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

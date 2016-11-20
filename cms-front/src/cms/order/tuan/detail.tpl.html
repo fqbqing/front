@@ -1,0 +1,101 @@
+<!-- target: TPL_order_tuan_detail -->
+<div class="order-tuan-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/order/tuan/list">团购订单</a></span>
+        <span class="divider">/</span>
+        <span class="active">订单详情</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key">订单号：</div>
+                    <div class="form-value">${orderInfo.order_id}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">团购名称：</div>
+                    <div class="form-value">${orderInfo.tuan.title}</div>
+                </div>
+
+                <!-- if: ${orderInfo.tuan.is_coupon} == '1' -->
+                <div class="form-row">
+                    <div class="form-key">订单支付金额(元)：</div>
+                    <div class="form-value">${orderInfo.amount | amount}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">支付方式：</div>
+                    <div class="form-value">${orderInfo.payment | paymentText}</div>
+                </div>
+                <!-- /if -->
+
+                <div class="form-row">
+                    <div class="form-key">意向车型：</div>
+                    <div class="form-value">${orderInfo.intention}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">意向购车方式：</div>
+                    <div class="form-value">${orderInfo.car_buying_way | mapCarBuyWay}</div>
+                </div>
+                <!-- if: ${orderInfo.car_buying_status} == 1 -->
+                <div class="form-row">
+                    <div class="form-key">成交车型：</div>
+                    <div class="form-value">${orderInfo.deal_model}</div>
+                </div>
+                <!-- /if -->
+                <div class="form-row">
+                    <div class="form-key">姓名：</div>
+                    <div class="form-value">${orderInfo.name} </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">手机号：</div>
+                    <div class="form-value">${orderInfo.phone}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">订单状态：</div>
+                    <div class="form-value">${orderInfo.status | tuanOrderStatus}</div>
+                   <!-- <div class="form-value">
+                        <select data-ui-type="Select" data-ui-id="orderStatus" data-ui-width="200" name="orderStatus" data-ui-selected-index="0" data-ui-value="${orderInfo.status}">
+                            &lt;!&ndash; for: ${tuanOrderStatus} as ${st} &ndash;&gt;
+                            <option value="${st.value}">${st.text}</option>
+                            &lt;!&ndash; /for &ndash;&gt;
+                        </select>
+                    </div>-->
+                </div>
+                <div class="form-row">
+                    <div class="form-key">报名时间：</div>
+                    <div class="form-value">${orderInfo.created_time | date}</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key">是否签到：</div>
+                    <div class="form-value">
+                        <!-- if: ${orderInfo.sign_in_status} == ${constants.SIGN_IN_STATUS_NO}-->否<!-- else -->是<!-- /if -->
+                    </div>
+                </div>
+
+                <!--<div class="form-row">
+                    <div class="form-key">订单备注：</div>
+                    <div class="form-value">
+                         <textarea data-ui-id="remarks"
+                                   data-ui-type="TextBox"
+                                   data-ui-width="400"
+                                   data-ui-height="80"
+                                   rows="4"
+                                   name="remarks"></textarea>
+                    </div>
+                </div>-->
+
+                <!--<div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="primary" class="ui-button-submit" type="submit">保存
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" class="ui-button-reset" type="reset">取消</button>
+                    </div>
+                </div>-->
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>车大卖 - 登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <link rel="dns-prefetch" href="//static.chedamai.cn">
+    <link rel="stylesheet" href="../src/main/main.less?r[__version__]=1"/>
+    <!--<script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js"></script> -->
+    <script src="../esl.js"></script>
+    <style>
+        .loginbox {
+            width: 300px;
+            margin: 100px auto 10px;
+            background: #1F2A33;
+            padding: 20px 80px;
+            box-sizing: content-box;
+            box-shadow: 0 0 6px #ddd inset;
+            border-radius: 5px;
+        }
+
+        .loginbox h1 {
+            text-align: center;
+        }
+        .loginbox .form-key {
+            width: 60px;
+        }
+
+        .loginbox .form-value {
+            margin-left: 65px;
+        }
+
+        .ui-button-large {
+            width: 60px;
+        }
+        .error-message {
+            position: fixed;
+            width: 300px;
+            margin-left: -150px;
+            top: 30%;
+            left: 50%;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!--[if lt IE 9]>
+<div class="browsehappy">
+    <em>车大卖</em>提醒您，<br>
+    <p>
+        您使用的浏览器已经过时了<br>
+        请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a> 以获取更好的用户体验。
+    </p>
+</div>
+<![endif]-->
+<div class="header">
+    <div class="logo"><img src="../src/common/img/logo-admin.png" height="20"><small>超级管理端</small></div>
+    <ul id="nav" class="nav"></ul>
+</div>
+
+<div class="main-area">
+    <div class="loginbox" id="loginbox">
+        <form method="POST" v-on:submit.prevent="submit">
+            <h1>车大卖超级管理端</h1>
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key">手机号：</div>
+                    <div class="form-value">
+                        <div class="ui-textbox">
+                            <input type="text" name="phone" v-model="phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">密码：</div>
+                    <div class="form-value">
+                        <div class="ui-textbox">
+                            <input type="password" name="password" v-model="password">
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <button type="submit" class="ui-button skin-primary-button ui-button-large">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="error-message" v-cloak v-text="message" v-show="showError"></div>
+
+<script>
+    require.config({
+        'baseUrl': '../src',
+        'urlArgs': 'r[__version__]=1',
+        'paths': {},
+        'packages': [
+            {
+                'name': 'bat-ria',
+                'location': '../dep/bat-ria/0.2.4/src',
+                'main': 'main'
+            },
+            {
+                'name': 'ef',
+                'location': '../dep/ef/3.1.0-vue.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'datepicker',
+                'location': '../dep/datepicker/1.3.21/src',
+                'main': 'datepicker'
+            },
+            {
+                'name': 'eoo',
+                'location': '../dep/eoo/0.1.2/src',
+                'main': 'main'
+            },
+            {
+                'name': 'er',
+                'location': '../dep/er/3.1.0-beta.6/src',
+                'main': 'main'
+            },
+            {
+                'name': 'er-track',
+                'location': '../dep/er-track/0.9.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'est',
+                'location': '../dep/est/2.0.1/src',
+                'main': ''
+            },
+            {
+                'name': 'esui',
+                'location': '../dep/esui/3.1.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'etpl',
+                'location': '../dep/etpl/3.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'jquery',
+                'location': '../dep/jquery/1.9.1/src',
+                'main': 'jquery'
+            },
+            {
+                'name': 'mini-event',
+                'location': '../dep/mini-event/1.0.2/src',
+                'main': 'main'
+            },
+            {
+                'name': 'moment',
+                'location': '../dep/moment/2.9.0/src',
+                'main': 'moment'
+            },
+            {
+                'name': 'underscore',
+                'location': '../dep/underscore/1.8.5/src',
+                'main': 'underscore'
+            },
+            {
+                'name': 'urijs',
+                'location': '../dep/urijs/1.12.0/src',
+                'main': 'URI'
+            },
+            {
+                'name': 'vue',
+                'location': '../dep/vue/1.0.10/src',
+                'main': 'vue'
+            },
+            {
+                'name': 'jquery.cookie',
+                'location': '../dep/jquery.cookie/1.4.0',
+                'main': 'jquery.cookie'
+            },
+            {
+                'name': 'webuploader',
+                'location': '../dep/webuploader/0.1.5',
+                'main': 'webuploader'
+            },
+            {
+                'name': 'zeroclipboard',
+                'location': '../dep/zeroclipboard/2.2.1/src',
+                'main': 'ZeroClipboard'
+            },
+            {
+                'name': 'ueditor',
+                'location': '../dep/ueditor/1.4.3',
+                'main': 'ueditor.all'
+            },
+            {
+                'name': 'bbfont',
+                'location': '../dep/bbfont/1.1.0/src',
+                'main': 'index'
+            },
+            {
+                'name': 'highcharts',
+                'location': '../dep/highcharts/4.2.4/src',
+                'main': 'main'
+            }
+        ]
+    });
+</script>
+<script src="../src/common/amd-plugins/js.js"></script>
+<script src="../src/common/amd-plugins/css.js"></script>
+<script>
+    require(['common/login'], function (main) {
+        main.start();
+    });
+</script>
+</body>
+</html>

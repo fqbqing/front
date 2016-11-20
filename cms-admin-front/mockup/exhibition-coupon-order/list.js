@@ -1,0 +1,132 @@
+/**
+ * Created by Administrator on 2016/4/8 0008.
+ */
+
+var mockup = require('bat-ria-tool/mockup');
+
+exports.response = function (path, params) {
+
+    return mockup.ok({
+        totalCount: "4",
+        pageNo: 1,
+        pageSize: 15,
+        orderBy: null,
+        order: null,
+        data: [
+            {
+                id: "60",
+                exhibition_coupon_activity_id: "2",
+                exhibition_coupon_id: "5",
+                user_id: "2",
+                name: "18611081833",
+                phone: "18611081833",
+                customer_id: "44",
+                status: "3",
+                deal_customer_id: "0",
+                extra: '{"deal_phone":"17605365627","deal_identification":"130622","pay_way":"1","image_ids":"1,2","deal_name":"liushiyun"}',
+                valid_status: "0",
+                created_time: "1460522444",
+                updated_time: "1460635931",
+                created_by: "mall_2",
+                modified_by: "super_1",
+                channel: "20020",
+                order_id: "1460522444533346",
+                signupChannel: {
+                    id: "20020",
+                    related_id: "79",
+                    name: "李发钰",
+                    type: "1",
+                    valid_status: "0",
+                    created_time: "1456823987",
+                    updated_time: "1457434719",
+                    modified_by: "mall-console_anonymous",
+                    created_by: "admin_24",
+                    organization_id: "36"
+                },
+                customer: {
+                    id: "44",
+                    organization_id: "36",
+                    name: "测试删除",
+                    phone: "18611081833",
+                    gender: null,
+                    channel: "20011",
+                    rating: "D",
+                    updated_time: "1459102187",
+                    created_time: "1458368899",
+                    valid_status: "0",
+                    modified_by: "admin_63",
+                    created_by: "mall_2",
+                    user_company_id: "78",
+                    user_id: "0",
+                    identification: ""
+                },
+                deal_phone: "17605365627",
+                deal_identification: "130622",
+                pay_way: "1",
+                image_ids: "1,2",
+                deal_name: "liushiyun",
+                exhibitionCouponActivity: {
+                    id: "2",
+                    exhibition_coupon_id: "5",
+                    exhibition_id: "1",
+                    organization_id: "36",
+                    extra: "",
+                    valid_status: "0",
+                    created_time: "1459326146",
+                    updated_time: "1459326146",
+                    created_by: "admin_24",
+                    modified_by: "admin_24",
+                    defaultImage: "/uploadFiles/388bb3e5a968b9fafb9049f3be64791b.png",
+                    shareImage: "/uploadFiles/07eeb8b9dc52c63bedf0be2394d02b73.jpg",
+                    exhibitionCoupon: {
+                        id: "5",
+                        exhibition_id: "1",
+                        image_default_id: "1",
+                        share_image_id: "7",
+                        activity_start_time: "1459785600",
+                        activity_end_time: "1459795600",
+                        coupon_start_time: "1459785600",
+                        coupon_end_time: "1459785600",
+                        extra: '{"activity_title":"\u5357\u4eac\u8f66\u5c55\u8d2d\u8f66\u793c","activity_introduction":"\u8f66\u5c55\u89c2\u4f17\u5747\u53ef\u9886\u53d6","activity_address":"\u5357\u4eac\u8f66\u5c55","coupon":"10\u5143\u8d2d\u7535\u996d\u7172\u5238","activity_invitation":"\u9080\u8bf7\u60a8\u6765\u9886\u8d2d\u8f66\u793c","activity_page_title":"\u6765\u9886\u8d2d\u8f66\u793c\u5427","coupon_used_introduction":"\u5747\u53ef\u4f7f\u7528","coupon_used_detail_introduction":"\u8f66\u5c55\u7528\u6237\u5747\u53ef\u4f7f\u7528"}',
+                        valid_status: "0",
+                        created_time: "1459485048",
+                        updated_time: "1459485048",
+                        created_by: "admin_24",
+                        modified_by: "admin_24",
+                        defaultImage: {
+                            id: "1",
+                            usage: "0",
+                            extension: "png",
+                            signature: "388bb3e5a968b9fafb9049f3be64791b",
+                            updated_time: "1451124196",
+                            created_time: "1451124196",
+                            valid_status: "0",
+                            modified_by: "system",
+                            created_by: "system"
+                        },
+                        shareImage: {
+                            id: "7",
+                            usage: "0",
+                            extension: "jpg",
+                            signature: "07eeb8b9dc52c63bedf0be2394d02b73",
+                            updated_time: "1451124916",
+                            created_time: "1451124916",
+                            valid_status: "0",
+                            modified_by: "system",
+                            created_by: "system"
+                        },
+                        activity_title: "南京车展购车礼",
+                        activity_introduction: "车展观众均可领取",
+                        activity_address: "南京车展",
+                        coupon: "10元购电饭煲券",
+                        activity_invitation: "邀请您来领购车礼",
+                        activity_page_title: "来领购车礼吧",
+                        coupon_used_introduction: "均可使用",
+                        coupon_used_detail_introduction: "车展用户均可使用"
+                    }
+                }
+            }
+        ]
+    });
+
+};

@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+}
+.container {
+    background: #f6f6f6;
+    margin: 0 auto;
+    max-width: 750px;
+    padding: 20px;
+    min-height: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+    a {
+        color: #61749b;
+        text-decoration: none;
+    }
+}
+.tuan-info {
+    text-align: center;
+    border-bottom: 1px dashed #ddd;
+    .icon-sign {
+        width: 95px;
+        height: 95px;
+        background: url(../../images/icon-sign-in.png) center center no-repeat;
+        background-size: cover;
+        margin: 20px auto;
+    }
+    h1 {
+        font-size: 18px;
+        color: #666;
+        margin: 20px;
+    }
+    p {
+        margin: 20px 0 30px;
+    }
+}
+.order-info {
+    .item-title {
+        text-align: center;
+        font-size: 18px;
+        color: #888;
+        margin: 30px 0;
+        background: url(../../images/sign-item-title-bg.png) center center no-repeat;
+        background-size: 301px 19px;
+    }
+    .item-content {
+        text-align: center;
+        .btn {
+            width: 100%;
+            background: #ff6c15;
+            border-radius: 4px;
+            border: none;
+            color: #fff;
+            height: 40px;
+            line-height: 40px;
+            display: block;
+            text-align: center;
+            &:active {
+                box-shadow: 0px 5px 10px rgba(100, 100, 100, .3) inset;
+            }
+        }
+        .signined {
+            font-size: 24px;
+            color: #999;
+        }
+    }
+    ul {
+        font-size: 16px;
+        li {
+            margin: 15px 0;
+            span {
+                color: #666;
+            }
+        }
+    }
+    p.tips {
+        color: #999;
+        margin: 30px 0;
+        text-align: center;
+    }
+}
+.order-signined {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        right: 20px;
+        bottom: 0;
+        width: 105px;
+        height: 105px;
+        background: url(../../images/activity/tuan/signined.png) center center no-repeat;
+        background-size: cover;
+    }
+}

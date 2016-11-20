@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    background-color: #f3f3f3;
+}
+[v-clock] {
+    display: none;
+}
+.loginbox {
+    max-width: 640px;
+    padding: 15px 25px;
+    margin: 0 auto;
+}
+.btn {
+    outline: none;
+    border: none;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    text-align: center;
+    background-color: #ff6a21;
+    color: rgba(255,255,255,.9);
+    border-radius: 3px;
+}
+.loginbox .btn {
+    border-radius: 3px;
+    text-align: center;
+    padding: 0 10px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.loginbox .btn:active {
+    background: #FF7536;
+}
+.loginbox .btn:disabled {
+    background: #c8c8c8;
+    /*box-shadow: 0 2px 0 #b3b3b3;*/
+}
+.loginbox .vcode-btn {
+    width: 100px;
+    /*height: 35px;*/
+    margin-left: 5px;
+    /*line-height: 40px;*/
+    font-size: 12px;
+}
+.loginbox .btn-block {
+    display: block;
+    width: 100%;
+}
+.loginbox .error-info {
+    font-size: 12px;
+    color: #cf000a;
+    min-height: 20px;
+}
+.loginbox .form-item {
+    position: relative;
+    margin: 10px 0;
+}
+.loginbox .form-item input {
+    display: block;
+    font-size: 14px;
+    height: 40px;
+    padding: 3px 5px 3px 30px;
+    margin-bottom: 10px;
+    line-height: 30px;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    -webkit-appearance:none;
+}
+.loginbox .form-item input:focus {
+    border-color: #ff6a21;
+    outline: none;
+}
+.form-item-right .vcode-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.form-item-right .textbox {
+    margin-right: 110px;
+}
+.loginbox p {
+    margin: 0px;
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+}
+.login-header, .box-header {
+    text-align: center;
+    box-shadow: 0 0 10px #ddd;
+}
+.box-header {
+    padding: 20px;
+}
+.box-body {
+    padding: 10px;
+}
+.login-header h2, .box-header h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: normal;
+    color: #515151;
+}
+.login-header h2 {
+    margin-bottom: 0;
+    height: 50px;
+    line-height: 50px;
+    color: #ff6a21;
+    background-color: #fff;
+    border-bottom: 1px solid #d8d8d8;
+}
+.box-body {
+    text-align: center;
+}
+.box-body button {
+    width: 150px
+}
+
+.icon-user, .icon-phone, .icon-psd {
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 12px;
+    left: 12px;
+}
+
+.icon-user {
+    background: url(/static/images/icon/user.png) center center no-repeat;
+    background-image: -webkit-image-set(url(/static/images/icon/user.png) 1x,url(/static/images/icon/user@2x.png) 2x);
+}
+.icon-phone {
+    background: url(/static/images/icon/phone.png) center center no-repeat;
+    background-image: -webkit-image-set(url(/static/images/icon/phone.png) 1x,url(/static/images/icon/phone@2x.png) 2x);
+}
+.icon-psd {
+    background: url(/static/images/icon/key.png) center center no-repeat;
+    background-image: -webkit-image-set(url(/static/images/icon/key.png) 1x,url(/static/images/icon/key@2x.png) 2x);
+}
+
+.tip {
+    border-left: 2px solid #ddd;
+    padding-left: 5px;
+}

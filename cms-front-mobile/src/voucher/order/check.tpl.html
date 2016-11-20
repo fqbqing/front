@@ -1,0 +1,46 @@
+<!-- target: TPL_voucher/order_check -->
+<div class="voucher-order-check">
+    <header class="ui-header ui-header-stable ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>订单核销</h1>
+    </header>
+    <section class="ui-container">
+        <div v-if="order">
+            <div class="voucher">
+                <h2>
+                    <span v-text="order.voucher.name"></span>
+                    <small v-if="order.activity">({{order.activity.name}})</small>
+                </h2>
+                <div class="voucher-content">
+                    <p><time>{{order.created_time|date}}</time></p>
+                    <p>订单状态：<span class="voucher-status" v-text="order.status|voucher-order-status-text"></span></p>
+                    <div v-if="order.agent">
+                        <p>姓名：<span v-text="order.agent.name"></span></p>
+                        <p>手机号：<span v-text="order.agent.phone"></span></p>
+                    </div>
+                    <div v-else>
+                        <p>姓名：<span v-text="order.name"></span></p>
+                        <p>手机号：<span v-text="order.phone"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="check-btn" v-if="order.status!=5">
+                <button class="ui-btn-primary ui-btn-lg" @click="checkSale">确认核销</button>
+                <button class="ui-btn-lg" @click="toHome">取消</button>
+            </div>
+        </div>
+        <div v-else>
+            <div class="ui-notice">
+                <i></i>
+                <p>抱歉，无法核销！</p>
+                <p>可能原因：<br>
+                    该客户由其他销售顾问负责；<br>
+                    核销码错误或不存在。
+                </p>
+                <div class="ui-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">返回</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

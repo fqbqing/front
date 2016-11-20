@@ -1,0 +1,192 @@
+{{extends file="layout/weixinmain.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}报名详情页{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/weixin/detail.css">
+{{/block}}
+{{block name="body"}}
+<div class="container-box tuan-detail">
+    <input type="hidden" value="{{$data['order_id']}}" id="orderId">
+    <div>
+        <div class="detail-head">
+            <h1>{{$data['tuan']['page_title']}}</h1>
+        </div>
+        <div class="detail-body">
+            <span class="caption">活动信息</span>
+            <div class="activity">
+                <p>购车价格：<em>{{$data['tuan']['price']}}</em></p>
+                <p>举办时间：<em>{{$data['tuan']['tuan_time']|date_format:'%Y年%m月%d日 %H点'}}</em></p>
+                <p class="location">
+                    购车地址：
+                    <span>
+                        <em>{{$data['tuan']['agency']}}</em><br>
+                        <em class="address">[{{$data['tuan']['address']}}]</em>
+                    </span>
+                </p>
+                <p>报名状态：<em>已报名</em></p>
+            </div>
+            {{if $data['status'] == 0 || $data['status'] == 1}}
+            <span class="caption">报名成功大礼包</span>
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                <div class="service">
+                    <ul>
+                        {{foreach $data['tuan']['coupon_tags'] as $tags}}
+                        <li><i></i><span>{{$tags}}</span></li>
+                        {{/foreach}}
+                    </ul>
+                    <a href="/tuan/pay?orderId={{$data['order_id']}}" class="btn paybtn">立即支付</a>
+                </div>
+
+                <div class="explain">
+                    <!-- -->
+                    <h4>{{$data['amount']/100}}元对买车而言的价值在哪里</h4>
+                    <ol>
+                        {{foreach $data['tuan']['coupon_content'] as $content}}
+                        <li>{{$content}}</li>
+                        {{/foreach}}
+                    </ol>
+
+                    <div style="overflow: hidden">
+                        <span class="caption">意向金退还政策 <i></i></span>
+                        <div class="guide ensured">
+                            <h5>购车大礼包意向金退还政策</h5>
+                            <ol>
+                                {{foreach $data['tuan']['coupon_refund'] as $refund}}
+                                <li>{{$refund}}</li>
+                                {{/foreach}}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--支付过后-->
+            {{elseif $data['status'] == 2}}
+            <span class="caption">报名成功大礼包</span>
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--已支付-->
+                        <div id="qrcode" data-cn="{{$data['cn']}}"><img src="" alt=""></div>
+                        <p>{{$data['cn']}}</p>
+                        <span>使用时请出示该二维码或号码</span>
+                    </div>
+                    <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                    <button class="btn active refundbtn" data-status="{{$data['status']}}">我要退款</button>
+                </div>
+            </div>
+            {{elseif  $data['status'] == 3}}
+            <span class="caption">报名成功大礼包</span>
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--已购车-->
+                        <img src="/static/images/weixin/used.png" alt="" width="60" height="60">
+                        <p>已使用</p>
+                    </div>
+                    <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                </div>
+            </div>
+            {{elseif $data['status'] == 4}}
+            <span class="caption">报名成功大礼包</span>
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--退款中-->
+                        <h4>退款中</h4>
+                        <small>(退款预计于3-15个工作日内退还到您的支付账户，请注意查收)</small>
+                    </div>
+                    <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                </div>
+            </div>
+
+
+            {{elseif $data['status'] == 5}}
+            <span class="caption">报名成功大礼包</span>
+            <div class="gift-wrap">
+                <h3>{{$data['tuan']['coupon_title']}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--已退款-->
+                        <h4>退款完成</h4>
+                    </div>
+                    <span class="price"><em>¥{{$data['amount']/100}}</em>意向金</span>
+                </div>
+            </div>
+            {{/if}}
+
+        </div>
+
+        <div>
+            <span class="caption">购车信息</span>
+            <div class="car-info">
+                <p>期望特惠车型：<em>{{$data['intention']}}</em></p>
+                <p>期望购车方式：
+                    <em>
+                    {{if $data['car_buying_way'] == 1}}
+                    全款购车
+                    {{elseif $data['car_buying_way'] == 2}}
+                    贷款购车
+                    {{elseif $data['car_buying_way'] == 3}}
+                    未确定
+                    {{else}}
+                    {{/if}}
+                    </em>
+                </p>
+                <p>购车人： <em>{{$data['name']}}</em></p>
+                <p>手机号码：<em>{{$data['phone']}}</em></p>
+            </div>
+        </div>
+        <div class="call">
+            {{if isset($data['signupChannel'])}}
+                {{if isset($data['signupChannel']['userGroup'])}}
+                <a href="tel:{{$data['signupChannel']['userGroup']['organization']['phone']}}">
+                    {{$data['signupChannel']['userGroup']['organization']['phone']}}
+                    <span>{{$data['signupChannel']['userGroup']['name']}}</span>
+                </a>
+                {{elseif isset($data['signupChannel']['userCompany'])}}
+                <a href="tel:{{$data['signupChannel']['userCompany']['phone1']}}">
+                    {{$data['signupChannel']['userCompany']['phone1']}}
+                    <span>销售顾问：{{$data['signupChannel']['userCompany']['name']}}</span>
+                </a>
+                {{/if}}
+            {{else}}
+                <a href="tel:4008955088"> 4008-955-088  <span> 叭叭买车客服热线</span></a>
+            {{/if}}
+
+        </div>
+    </div>
+    {{if $data['status'] == 2}}
+    <div class="box-layout">
+    </div>
+    <div class="box-wrap">
+        <div id="box" class="box">
+            <div class="box-header">
+                <h4>是否确认发起退款申请？</h4>
+            </div>
+            <div class="box-body">
+                <small>退款审核通过后，会在3个工作日内将诚意金退回您的支付账户，请注意查收！</small>
+            </div>
+            <div class="box-footer">
+                <button class="btn ok">确认退款</button>
+                <button class="btn cancel">取消</button>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    <div class="favorite"></div>
+    <div class="favorite-box">
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+{{include file="./weixinshare.html"}}
+<script src="/static/weixin/detail.js"></script>
+{{/block}}

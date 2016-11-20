@@ -1,0 +1,35 @@
+<!-- target: TPL_organization_activity_exihibition_list -->
+<div class="organization-activity-exihibition-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <!-- if: ${organization_id} -->
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <!-- else-->
+        <span class="active">活动管理</span>
+        <span class="divider">/</span>
+        <!-- /if -->
+        <span class="active">车展列表</span>
+    </div>
+    <div class="bbmc-content">
+        <!-- if: ${organization_id} -->
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="activity",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <!-- /if -->
+                <div class="list-table">
+                    <!-- import: listTableWithCommand -->
+                </div>
+                <div class="list-table-footer">
+                    <!-- import: listPager -->
+                </div>
+                <!-- if: ${organization_id} -->
+            </div>
+        </div>
+        <!-- /if -->
+    </div>
+
+
+
+</div>
+
+

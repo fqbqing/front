@@ -1,0 +1,160 @@
+body {
+    font: 14px/18px "Microsoft Yahei","微软雅黑",Tahoma,Arial,Helvetica,STHeiti;
+    background-color: #f3f3f3;
+    color: #515151;
+}
+.ui-header {
+    background-color: #fff;
+}
+.ui-header h1 {
+    text-align: left;
+    padding-left: 10px;
+}
+.ui-header h1 img {
+    vertical-align: middle;
+}
+.ui-header .ui-btn {
+    min-width: 45px;
+    padding: 10px 0;
+    background: #fff;
+    color: #666;
+}
+.ui-header .ui-btn span {
+    display: block;
+    height: 4px;
+    line-height: 4px;
+}
+.ui-header .ui-btn span:before {
+    content: '';
+    display: block;
+    width: 15px;
+    margin: 0 auto;
+    border-bottom: 2px solid #bbb;
+}
+.navbar-body {
+    display: none;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.98);
+}
+.navbar-body-active {
+    display: block;
+}
+.navbar-body li {
+    padding: 0 10px;
+}
+.navbar-body li a {
+    display: block;
+    font-size: 16px;
+    color: #333;
+}
+.navbar-body li:hover {
+    background-color: rgba(240, 240, 240, 0.98);
+}
+.navbar-body .userinfo a {
+    display: inline-block;
+    margin-right: 8px;
+}
+.ui-tiled a {
+    color: #333;
+}
+.ui-slider-banner {
+    padding-top: 69.3333%;
+}
+.bb-brand-list {
+    padding: 10px 0;
+    text-align: center;
+    background-color: #fff;
+}
+.bb-brand-list img {
+    width: 60px;
+    height: 60px;
+}
+.ui-list {
+    background: none;
+}
+.active-title:before {
+    content: '';
+    position: relative;
+    bottom: -2px;
+    left: 0;
+    display: inline-block;
+    width: 5px;
+    height: 16px;
+    background-color: #f00;
+}
+.active-title span {
+    padding-left: 10px;
+    font-size: 20px;
+}
+/* 商品 */
+.good-container {
+    background: #fff;
+    margin: 2px;
+    padding: 4px;
+    -webkit-transition: all .2s linear;
+             transition: all .2s linear;
+}
+.good-container:hover {
+    -webkit-box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+
+}
+.good-container .good-image img {
+    /*-webkit-transition: all .2s linear;*/
+    /*transition: all .2s linear;*/
+}
+.good-container:hover .good-image img {
+    /*-webkit-transform: scale(1.1);*/
+    /*transform: scale(1.1);*/
+}
+.good-image a {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    padding-top: 60%;
+
+}
+.good-image a img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+.good-body h2 {
+    height: 44px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 22px;
+}
+.good-body h2 a {
+    color: #333;
+}
+.good-market-price, .good-market-price em {
+    color: #ccc;
+}
+.good-body p {
+    margin: 5px 0;
+}
+.good-tags {
+    overflow: hidden;
+    height: 24px;
+    padding: 5px 0;
+}
+.good-tags .good-tag {
+    padding: 1px 3px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    background: #fff;
+    color: #ccc;
+}
+.good-tags .good-tag:hover {
+    color: #ccc;
+}
+.good-price em {
+    font-size: 25px;
+    color: #e33;
+}
+.icon-rmb:before {
+    display: inline-block;
+    content: '￥'
+}

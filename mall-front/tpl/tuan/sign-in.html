@@ -1,0 +1,57 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}入场签到{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/tuan/sign-in.less">
+<style>
+</style>
+{{/block}}
+{{block name="body"}}
+<div class="tuan-info">
+    <div class="icon-sign"></div>
+    <h1>{{$tuan.title}}</h1>
+    <p>
+        <a href="/tuan/?tuanId={{$tuan.id}}">查看本活动</a>
+    </p>
+</div>
+{{if $tuanOrder}}
+<div class="order-info{{if $tuanOrder.sign_in_status == 1}} order-signined{{/if}}">
+    <div class="item-title">
+        <h2>报名信息</h2>
+    </div>
+    <ul>
+        <li>期望特惠车型：<span>{{$tuanOrder.intention}}</span></li>
+        <li>期望购车方式：
+            <span>
+            {{if $tuanOrder.car_buying_way == '1'}}
+                全款购车
+            {{elseif $tuanOrder.car_buying_way == '2'}}
+                贷款购车
+            {{else}}
+                未确定
+            {{/if}}
+            </span>
+        </li>
+        <li>姓名：<span>{{$tuanOrder.name|default:'匿名'}}</span></li>
+        <li>手机号：<span>{{$tuanOrder.phone}}</span></li>
+    </ul>
+    {{if $tuanOrder.sign_in_status == 0}}
+    <div class="item-content">
+        <button class="btn" type="button" id="signin" data-orderid="{{$tuanOrder.order_id}}">确认签到</button>
+    </div>
+    {{/if}}
+</div>
+{{else}}
+<div class="order-info">
+    <div class="item-title">
+        <h2>报名信息</h2>
+    </div>
+    <p class="tips">您还未报名活动~</p>
+    <div class="item-content">
+        <a class="btn" href="/tuan/?tuanId={{$tuan.id}}&signin=1">立即报名</a>
+    </div>
+</div>
+{{/if}}
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/tuan/signin.js"></script>
+{{/block}}

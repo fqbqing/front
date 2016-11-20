@@ -1,0 +1,111 @@
+<!-- target: TPL_tuan/order_list -->
+<div class="tuan_order_list">
+    <!-- use: TPL_common_page_header(title="活动订单") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <ul class="ui-tab-nav ui-border-b" v-show="query.claimed==1">
+            <li @click="resetRouter('/tuan/detail', {tuan_id: query.tuan_id})">基本信息</li>
+            <li class="current">已认领订单</li>
+            <li @click="resetRouter('/tuan/channel', {tuan_id: query.tuan_id})">渠道效果</li>
+        </ul>
+        <search-box name="search" placeholder="按手机号搜索"></search-box>
+        <div class="ui-row filterbar">
+            <div class="ui-col ui-col-50">共<span v-text="totalCount"></span>人</div>
+            <div class="ui-col ui-col-50 text-right">
+                <button type="button" @click="$refs.orderstatussheet.showActionSheet">订单状态<i class="ui-icon-unfold"></i></button>
+            </div>
+        </div>
+        <listview v-ref:listview :api="api.listTuanOrder" :page-no="1" :page-size="15" :extra-data="listExtraData">
+            <ul class="ui-list ui-list-pure ui-border-tb" v-cloak v-if="orders.length">
+                <li v-for="order in orders" :class="{'ui-border-t':$index > 0}">
+                    <div class="order-info" @click="toggleOrder(order)">
+                        <h4 class="ui-nowrap">
+                            <template v-if="order.customer && order.customer.name != order.name">
+                                {{order.customer.name}}<i class="ui-txt-muted">({{order.name}})</i>
+                            </template>
+                            <template v-else>
+                                {{order.name}}
+                            </template>
+                            <small class="ui-txt-muted">({{order.phone}})</small>
+                        </h4>
+                        <p class="ui-row">
+                            <label class="ui-col ui-col-25">报名时间：</label>
+                            <span class="ui-col ui-col-75">{{order.created_time|date 'YYYY-MM-DD HH:mm'}}</span>
+                        </p>
+                        <p class="ui-row">
+                            <label class="ui-col ui-col-25">单号：</label>
+                            <span v-text="order.order_id" class="ui-col ui-col-75"></span>
+                        </p>
+                        <p class="ui-row">
+                            <label class="ui-col ui-col-25">订单状态：</label>
+                        <span class="ui-col ui-col-75">
+                            {{order.status|tuan-order-status-text}}
+                            <small>({{order.payment|payment-text}})</small>
+                        </span>
+                        </p>
+                        <p class="ui-row">
+                            <label class="ui-col ui-col-25">意向车型：</label>
+                            <span class="ui-col ui-col-75">{{order.intention}}</span>
+                        </p>
+                        <p class="ui-row" v-if="order.car_buying_status == 1">
+                            <label class="ui-col ui-col-25">成交车型：</label>
+                            <span class="ui-col ui-col-75">{{order.deal_model}}</span>
+                        </p>
+                    </div>
+                    <div class="order-extra" v-if="order.showExtraInfo">
+                        <div class="ui-row">
+                            <label class="ui-col ui-col-25">是否签到：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="order.sign_in_status != 0">是</template>
+                                <template v-else>否</template>
+                            </span>
+                        </div>
+                        <div class="ui-row">
+                            <label class="ui-col ui-col-25">报名渠道：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="order.signupChannel">
+                                    {{order.signupChannel.name}}
+                                </template>
+                                <template v-else>无渠道</template>
+                            </span>
+                        </div>
+                        <div class="ui-row">
+                            <label class="ui-col ui-col-25">核销渠道：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="order.usedChannel">
+                                    {{order.usedChannel.name}}
+                                </template>
+                                <template v-else>未核销</template>
+                            </span>
+                        </div>
+                        <template v-if="order.customer">
+                            <div class="ui-row">
+                                <label class="ui-col ui-col-25">客户分级：</label>
+                                <span class="ui-col ui-col-75">
+                                    <i class="ui-badge" :class="order.customer.rating|rating-class">{{order.customer.rating|dft '未定'}}级</i>
+                                </span>
+                            </div>
+                            <div class="ui-row track" v-if="order.lastestTrack">
+                                <label class="ui-col">上次跟进记录：<small v-text="order.lastestTrack.created_time|date"></small></label>
+                                <div class="ui-col">
+                                    {{order.lastestTrack.content}}
+                                </div>
+                            </div>
+                            <div class="ui-btn-group">
+                                <a class="ui-btn ui-btn-primary" href="tel:{{order.phone}}">电话联系</a>
+                                <button class="ui-btn" @click="redirect('/customer/detail', {id: order.customer.id})">客户信息</button>
+                                <button class="ui-btn"
+                                        v-if="(order.status==0||order.status==1) && order.car_buying_status==0"
+                                        @click="redirect('/tuan/order/deal', {order_id: order.order_id})">标为已购车</button>
+                            </div>
+                        </template>
+                    </div>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <p class="ui-txt-info">无订单</p>
+            </div>
+        </listview>
+        <actionsheet v-ref:orderstatussheet title="按订单状态筛选" :actions="const.TUAN_STATUS|support-all-option"></actionsheet>
+    </section>
+</div>

@@ -1,0 +1,39 @@
+<!-- target: TPL_my_info -->
+<div class="my_info">
+    <!-- use: TPL_common_page_header_simple(title="个人中心") -->
+    <!-- use: TPL_common_page_footer(name="my") -->
+    <section class="ui-container">
+        <div class="ui-center">
+            <div class="ui-avatar-lg">
+                <!--if: ${info.avatar}-->
+                <img src="${info.avatar|linkCDN}" alt="个人头像" width="100%" height="100%">
+                <!--/if-->
+            </div>
+        </div>
+        <ul class="ui-list ui-list-pure ui-border-tb" v-cloak>
+            <!--<li class="ui-border-b">-->
+                <!--<h5><span>用户名</span><span class="ui-panel-title-tips">{{info.username}}</span></h5>-->
+            <!--</li>-->
+            <li class="ui-border-b">
+                <h5><span>姓名</span><span class="ui-panel-title-tips">{{info.name}}</span></h5>
+            </li>
+            <li class="ui-border-b">
+                <h5><span>职位</span><span class="ui-panel-title-tips">{{info.title}}</span></h5>
+            </li>
+            <li class="ui-border-b">
+                <h5><span>手机号</span><span class="ui-panel-title-tips">{{info.phone1}}</span></h5>
+            </li>
+            <li class="">
+                <h5><span>所属组</span><span class="ui-panel-title-tips">{{info.group.name}}</span></h5>
+            </li>
+        </ul>
+        <ul class="ui-list ui-list-pure ui-list-link ui-list-active ui-list-cover ui-border-tb" style="margin-top: 10px;">
+            <li @click="redirect('/my/changepwd')">
+                <h5><span>修改密码</span></h5>
+            </li>
+        </ul>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn ui-btn-danger ui-btn-lg" @click="logout">退出</button>
+        </div>
+    </section>
+</div>

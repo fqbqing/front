@@ -1,0 +1,75 @@
+.activity-list {
+    .content-block-title {
+        margin-top: 0.75rem;
+    }
+    .list-block {
+        p {
+            margin: 0 0 5px;
+        }
+        .item-subtitle {
+            font-size: 12px;
+        }
+        .item-content {
+            padding-left: 0.5rem;
+        }
+        .item-link {
+            border-radius: 5px 5px 0 0;
+        }
+        li .item-inner {
+            &:after {
+                display: block;
+            }
+        }
+        li > .item-inner {
+            &:after {
+                display: none;
+            }
+        }
+    }
+    .button-agent {
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+    .item-extra {
+        font-size: 14px;
+        padding-left: 0.5rem;
+    }
+    .award {
+        font-size: 12px;
+        margin: 0;
+        dt {
+            width: 80px;
+            float: left;
+        }
+        dd {
+            margin-left: 80px;
+        }
+        em {
+            font-weight: 500;
+            font-style: normal;
+            color: #007aff;
+            &.stage-signup {
+                color: @color-primary;
+            }
+        }
+    }
+    .coupon {
+        margin: 5px 0 0;
+        dt {
+            width: 70px;
+            float: left;
+        }
+        dd {
+            margin-left: 80px;
+            font-size: 12px;
+        }
+        .ui-voucher {
+            padding: 4px 14px;
+        }
+    }
+    .item-expired {
+        color: #999;
+    }
+}

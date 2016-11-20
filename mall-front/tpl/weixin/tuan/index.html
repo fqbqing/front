@@ -1,0 +1,190 @@
+{{extends file="layout/weixinmain.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}{{$data['title']}}{{/block}}
+{{block name="head"}}
+<script src="/static/weixin/vue.js"></script>
+<link rel="stylesheet" href="/static/weixin/index.css">
+{{/block}}
+{{block name="body"}}
+<div class="container-box">
+    <div class="img-box">
+        <img src="{{$data['defaultImage']}}" alt="活动封面图片">
+        <span>{{$data['num']}}人已报名！</span>
+    </div>
+    <h2 class="name">{{$data['title']}}</h2>
+    <div class="detail">
+        {{if isset($data.content) && $data.content != ''}}
+        <span class="tuantip">{{$data['content']}} <br><small>（{{$data['slogan']}}）</small></span>
+        {{/if}}
+        <p>
+            {{foreach $data['tuan_tags'] as $tags}}
+            <span>{{$tags}}</span>
+            {{/foreach}}
+        </p>
+        <div class="service">
+            {{foreach $data['characteristics'] as $characteristics}}
+            <div class="service-item">
+               <span class="title">{{$characteristics['title']}}</span>
+                <p>{{$characteristics['content']}}</p>
+            </div>
+            {{/foreach}}
+        </div>
+    </div>
+    <div class="countdown">
+        <span>活动倒计时</span>
+        <input type="hidden" value="{{$data['start_time']}}">
+        <div class="time">
+            <em v-text="countdown.d1">0</em>
+            <em v-text="countdown.d2">0</em>
+            <i class="day"></i>
+            <em v-text="countdown.h1">0</em>
+            <em v-text="countdown.h2">0</em>
+            <i class="dot"></i>
+            <em v-text="countdown.m1">0</em>
+            <em v-text="countdown.m2">0</em>
+            <i class="dot"></i>
+            <em v-text="countdown.s1">0</em>
+            <em v-text="countdown.s2">0</em>
+        </div>
+    </div>
+    <div class="activity">
+        <div class="activity-info">
+            <div>
+                <p class="price">购车价格：<em>{{$data['price']}}</em></p>
+                <p class="time">举办时间：<em>{{$data['tuan_time']|date_format:'%Y年%m月%d日 %H:%M'}}</em></p>
+                <p class="address">购车地址：<span><em>{{$data['agency']}}</em><br><em class="adress">[{{$data['address']}}]</em></span></p>
+            </div>
+        </div>
+        <span class="reminder"><em>温馨提示：</em>现场订车用户请携身份证和订金（现金或刷卡皆可）以便现场办理订车手续</span>
+    </div>
+    {{if count($data['gift']) > 0}}
+    <div class="guide emphasize">
+        <h3><span> 多 重 豪 礼 </span></h3>
+        <ul>
+            {{foreach $data['gift'] as $gift}}
+            <li>
+                <h4>{{$gift['title']}}</h4>
+                <p>{{$gift['content']}}</p>
+            </li>
+            {{/foreach}}
+        </ul>
+    </div>
+    {{/if}}
+    {{if count($data['process']) > 0}}
+    <div class="guide join">
+        <h3><span> 参 与 流 程 </span></h3>
+        <ul class="process">
+            {{foreach $data['process'] as $process}}
+            <li class="pro-item">
+                <span class="item-title"><i>{{$process['title']}}</i></span><p class="item-text">{{$process['content']}}</p>
+            </li>
+            {{/foreach}}
+        </ul>
+    </div>
+    {{/if}}
+    <div style="overflow: hidden">
+        <div class="guide ensured">
+            <h5>购车大礼包意向金退还政策</h5>
+            <ol>
+                {{foreach $data['coupon_refund'] as $refund}}
+                <li>
+                   {{$refund}}
+                </li>
+                {{/foreach}}
+            </ol>
+        </div>
+    </div>
+    <div class="footer-apply">
+        <div class="call">
+            {{if isset($data['channel'])}}
+            {{if isset($data['channel']['userGroup'])}}
+            <a href="tel:{{$data['channel']['userGroup']['organization']['phone']}}">
+                <span>{{$data['channel']['userGroup']['name']}}</span>
+                {{$data['channel']['userGroup']['organization']['phone']}}
+            </a>
+            {{elseif isset($data['channel']['userCompany'])}}
+            <a href="tel:{{$data['channel']['userCompany']['phone1']}}">
+                <span>销售顾问：{{$data['channel']['userCompany']['name']}}</span>
+                {{$data['channel']['userCompany']['phone1']}}
+            </a>
+            {{/if}}
+            {{else}}
+            <a href="tel:4008955088"><span>叭叭买车</span>4008-955-088</a>
+            {{/if}}
+        </div>
+        {{if $data['status'] == 1}}
+        <div class="oper">
+            {{if $data['tuanStatus'] == 2}}
+            <div class="oper-btn ends">
+                <a href="javascript:void(0)">活动已结束</a>
+            </div>
+            {{else}}
+            {{if $app->user->isGuest}}
+            <button class="oper-btn applyed" type="button" @click="showLogin=1">我已报名</button>
+            <button class="oper-btn apply" type="button" @click="showLogin=2">免费报名</button>
+            {{else}}
+            {{if $data['tuanStatus'] == 0}}
+            <a href="/tuan/show-tuan-detail?tuanId={{$data['id']}}" class="oper-btn apply">免费报名</a>
+            {{elseif $data['tuanStatus'] == 1}}
+            <a href="/tuan/tuan-order-detail?orderId={{$data['orderId']}}" class="oper-btn">已报名，查看详情</a>
+            {{/if}}
+            {{/if}}
+            {{/if}}
+        </div>
+        {{/if}}
+
+    </div>
+    <div class="win-backtop totop" id="totop"></div>
+</div>
+<div class="loginbox-mask" v-show="showLogin!=0" v-cloak></div>
+<div class="loginbox" v-show="showLogin!=0" v-cloak>
+    <button class="loginbox-close-btn" @click="showLogin=0" type="button">✕</button>
+    <div class="login-header">
+        <h2>验证手机号码</h2>
+        <p>报名或查看报名情况</p>
+    </div>
+    <form @submit.prevent="login">
+        <div class="form-item">
+            <input type="text" v-model="phone" @focus="hideErrorMessage" placeholder="请输入您的手机号码">
+        </div>
+        <div class="form-item">
+            <input type="text" v-model="verifyCode" @focus="hideErrorMessage" placeholder="请输入验证码">
+            <button type="button" @click="sendVerifyCode" :disabled="!canSendVerifyCode" class="btn vcode-btn" v-text="verifyCodeText"></button>
+        </div>
+        <div class="form-item">
+            <button type="submit" class="btn btn-block" v-text="loginText"></button>
+        </div>
+        <div class="error-info" v-text="loginErrorMessage"></div>
+    </form>
+    <p>* 如一直无法收到验证码，请检查短信是否被拦截，或者更换手机号码</p>
+</div>
+
+<div class="box-mask" v-show="showBox" v-cloak></div>
+<div class="box" v-show="showBox" v-cloak>
+    <div class="box-header">
+        <h2>您还未报名</h2>
+    </div>
+   <div class="box-body">
+       <button type="button" class="btn btn-block" @click="refresh">去报名</button>
+   </div>
+</div>
+<div>
+    <div class="favorite" @click="showFavorite"></div>
+    <div class="favorite-box" v-show="isFavorite" @click="showFavorite" v-cloak>
+</div>
+
+</div>
+<script>
+    window.BBNS = {
+        endTime: '{{$data.end_time}}',
+        tuanId: '{{$data.id}}',
+        orderId: '{{$data.orderId}}'
+    };
+</script>
+{{/block}}
+{{block name="js"}}
+{{include file="./weixinshare.html"}}
+<script src="/static/weixin/index.js"></script>
+{{/block}}

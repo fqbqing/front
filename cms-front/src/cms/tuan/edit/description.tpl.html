@@ -1,0 +1,105 @@
+<!-- target: TPL_tuan_edit_description -->
+<div class="tuan-edit-description bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <a href="#/tuan/list">团购列表</a>
+        <span class="divider">/</span>
+        <span class="active">活动信息</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/tuan/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/gift~id=${id}">多重好礼</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/signup~id=${id}">报名信息</a></li>
+                <!--if: ${formData.is_coupon} > 0-->
+                <li class="ui-tab-item"><a href="#/tuan/edit/coupon~id=${id}">优惠信息</a></li>
+                <!--/if-->
+           </ul>
+           <div class="ui-tab-content tuan-form-wrap">
+               <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+               <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="bbmc-detail tuan-form">
+                       <div class="form-body">
+                           <div class="form-row">
+                               <div class="form-key form-key-required">活动价格：</div>
+                               <div class="form-value">
+                                   <input data-ui-id="price"
+                                          data-ui-type="TextBox"
+                                          data-ui-required="required"
+                                          data-ui-max-length="12"
+                                          data-ui-width="400"
+                                          data-ui-name="price"
+                                          data-ui-value="@formData.price">
+                                   <div class="form-extra">不超过12个字符</div>
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-key form-key-required">活动举办时间：</div>
+                               <div class="form-value">
+                                   <input data-ui-id="tuan_time"
+                                          data-ui-type="DatePicker"
+                                          data-ui-required="required"
+                                          data-ui-name="tuan_time"
+                                          data-ui-value="@formData.tuan_time">
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-key form-key-required">报名截止时间：</div>
+                               <div class="form-value">
+                                   <input data-ui-id="end_time"
+                                          data-ui-type="DatePicker"
+                                          data-ui-required="required"
+                                          data-ui-value="@formData.end_time"
+                                          name="end_time">
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-key form-key-required">4S店名称：</div>
+                               <div class="form-value">
+                                   <input data-ui-id="agency"
+                                          data-ui-type="TextBox"
+                                          data-ui-required="required"
+                                          data-ui-max-length="30"
+                                          data-ui-width="400"
+                                          data-ui-name="agency"
+                                          data-ui-value="@formData.agency" >
+                                   <div class="form-extra">不超过30个字符</div>
+                               </div>
+                           </div>
+                           <div class="form-row">
+                               <div class="form-key form-key-required">详细地址：</div>
+                               <div class="form-value">
+                                   <input data-ui-id="address"
+                                          data-ui-type="TextBox"
+                                          data-ui-required="required"
+                                          data-ui-max-length="30"
+                                          data-ui-width="400"
+                                          data-ui-name="address"
+                                          data-ui-value="@formData.address">
+                                   <div class="form-extra">不超过30个字符</div>
+                               </div>
+                           </div>
+
+                           <div class="form-row">
+                               <div class="form-key"></div>
+                               <div class="form-value">
+                                   <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+               </form>
+
+           </div>
+       </div>
+   </div>
+
+
+</div>
+
+
+

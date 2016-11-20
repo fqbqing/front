@@ -1,0 +1,13 @@
+<div class="award-index">
+    <ui-navbar title="收益" :can-back="false"></ui-navbar>
+    <ui-tabbar></ui-tabbar>
+    <div class="bar bar-header-secondary">
+        <div class="buttons-tab">
+            <a v-link="{path:'/award/cash'}" class="button">现金收益</a>
+            <a v-link="{path:'/award/voucher'}" class="button">优惠券收益</a>
+        </div>
+    </div>
+    <div class="content">
+        <router-view></router-view>
+    </div>
+</div>

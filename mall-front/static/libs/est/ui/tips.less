@@ -1,0 +1,65 @@
+
+@import "../variables.less";
+@tips-padding:                          20px 15px;
+@tips-info:                             #0090ff;
+@tips-success:                          #65d521;
+@tips-warn:                             #f76249;
+
+@poptips-height:                        40px;
+@poptips-bg:                            rgba(0,0,0,.8);
+@poptips-border:                        4px;
+
+.ui-tips{
+    padding: @tips-padding;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    i{
+        display: inline-block;
+        width: 32px;
+        height: 1px;
+        vertical-align: top;
+    }
+}
+.ui-tips i:before{
+//@include icon;
+//    content: $icon-info;
+//    color: $tips-info;
+//    line-height: 21px;
+}
+.ui-tips-success i:before{
+    //content: $icon-success;
+    //color: $tips-success;
+}
+.ui-tips-warn i:before{
+    //content: $icon-warn;
+    //color: $tips-warn;
+}
+
+
+.ui-poptips{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: @z-index-poptips;
+    box-sizing: border-box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    text-align: center;
+}
+
+.ui-poptips-cnt{
+    display: inline-block;
+    background-color: @poptips-bg;
+    color:#fff;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    padding: 15px 20px;
+    margin: 20px;
+    border-radius: @poptips-border;
+}

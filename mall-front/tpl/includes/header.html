@@ -1,0 +1,38 @@
+<div style="width: 100%; z-index: 999;" class="container-layout bg-white border-bottom header">
+    <div class="container">
+        <div class="navbar radius">
+            <div class="navbar-head">
+                <button class="button bg icon-navicon" data-target="#globalNavbar"></button>
+                <a href="/" class="logo">
+                    <img src="/static/images/logo2x.png" width="130" height="28" class="web-logo"/>
+                </a>
+            </div>
+            <div class="navbar-body nav-navicon" id="globalNavbar">
+                <ul class="nav nav-big nav-inline nav-menu">
+                    <li {{if $MENU_NAME eq 'index'}}class="active"{{/if}}><a href="/site/index">首页</a></li>
+                    <li {{if $MENU_NAME eq 'activity'}}class="active"{{/if}}><a href="/mall-activity/?activityId=1">特惠买车</a></li>
+                    <li {{if $MENU_NAME eq 'exhibition'}}class="active"{{/if}}><a href="/site/exhibition">车展优惠</a></li>
+                    <li {{if $MENU_NAME eq 'guide'}}class="active"{{/if}}><a href="/site/guide">购车指南</a></li>
+                    <!--<li {{if $MENU_NAME eq 'help'}} class="active"{{/if}}><a href="/site/help">帮助中心</a> </li>-->
+                    <!--<li {{if $MENU_NAME eq 'about'}} class="active"{{/if}}><a href="/site/about">关于我们</a> </li>-->
+                </ul>
+
+                <div class="navbar-text navbar-right info-bar">
+
+                    {{if $app->user->isGuest}}
+                    {{if $app->requestedRoute neq 'site/login'}}
+                    <a href="javascript:void(0);" data-login="{{$app->request->url}}">
+                        <img src="/static/images/admin.png" style="vertical-align: -3px;">
+                        登录
+                    </a>
+                    {{/if}}
+                    {{else}}
+                    <a href="#" class="text-red">{{$app->user->getIdentity()->phone|regex_replace:"/(\d{3})\d{4}(\d{4})/":"$1****$2"}}</a>
+                    <a href="/site/logout" target="_top" class="margin-right">退出</a>
+                    <a href="/order/list" target="_top" class="order-a"><img src="/static/images/order.png" alt="">我的订单</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

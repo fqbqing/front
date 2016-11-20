@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{{assign var="CDN_URL" value=$smarty.const.CDN_URL}}
+<html lang="zh-cn">
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="{{block name='keywords'}}{{/block}}购车、汽车、买车、汽车特卖、车特卖、优惠买车、优惠购车、便宜汽车" />
+    <meta name="description" content="{{block name='description'}}车大卖-汽车特卖汇，覆盖全国主流城市及车型品牌，甄选了本地优质销商4S店实时在线播报店内优惠活动，免费为购车用户提供安全专业的购车引导，车大卖热线:4008-955-088{{/block}}" />
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>{{block name='title'}}车大卖 - 汽车特卖汇{{/block}}</title>
+    <link rel="stylesheet" href="/static/css/common.less">
+    <script src="/static/dep/jquery/jquery.min.js"></script>
+    {{block name="head"}}{{/block}}
+    {{include file="include/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs alert alert-warn">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+{{block name="header"}}
+    {{include file="include/header.html"}}
+{{/block}}
+<div class="x-body">
+    {{block name="body"}}{{/block}}
+</div>
+{{block name="footer"}}
+    {{include file="include/footer.html"}}
+{{/block}}
+{{block name="js"}}
+{{/block}}
+</body>
+</html>

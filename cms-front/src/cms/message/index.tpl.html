@@ -1,0 +1,45 @@
+<!-- target: TPL_message_index -->
+<div class="message-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">消息中心</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="message-wrap">
+            <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+                <ul data-role="navigator" class="ui-tab-navigator">
+                    <li class="ui-tab-item ui-tab-item-active"><a href="#/message/index">公告</a></li>
+                </ul>
+
+            </div>
+            <div class="ui-tab-content ui-tab-content-top-border">
+                <div class="ui-tab-panel" title="公告" v-if="messageList.data && messageList.data.length>0">
+                    <ul class="message-list">
+                        <li v-for="notice in messageList.data" @click="loadMessageDetail(notice._id.$id,$index,notice.status)" :class="{messageactive:(currentMessageId==notice._id.$id)}">
+                            <h4 class="ui-nowrap">
+                                {{notice.type == config.MESSAGE_TYPE_ANNOUNCEMENT ? notice.title : notice.job.title}}
+                                <i v-text="notice.status==config.MESSAGE_STATUS_UNREAD?'未读':''" class="ui-badge" v-if="notice.status==config.MESSAGE_STATUS_UNREAD">未读</i>
+                            </h4>
+                            <small>{{notice.created_time | date}}</small>
+                        </li>
+                    </ul>
+                    <div class="list-table-footer">
+                        <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                             data-ui-count="@messageList.totalCount" data-ui-page="@messageList.pageNo" data-ui-page-size="@messageList.pageSize"
+                             data-ui-url-template="@messageList.urlTemplate" data-ui-layout="alignRight">
+                        </div>
+                    </div>
+                </div>
+                <div class="no-content-tip" v-else>
+                    暂时没有公告信息
+                </div>
+
+            </div>
+        </div>
+        <div class="detail-wrap">
+            <div data-ui-type="ActionPanel" data-ui-id="actionPanel" data-ui-url="" data-ui-height="700"></div>
+        </div>
+
+
+    </div>
+
+</div>

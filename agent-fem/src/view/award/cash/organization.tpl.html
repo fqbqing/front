@@ -1,0 +1,49 @@
+<div class="page award-cash-organization">
+    <!-- 标题栏 -->
+    <ui-navbar title="现金收益">
+        <a v-link="{path:'/award/cash/withdraw-list'}" class="icon pull-right">提现记录</a>
+    </ui-navbar>
+    <div class="bar bar-header-secondary">
+        <div class="buttons-tab">
+            <a v-link="{path:'/award/cash/organization/total', replace: true}" class="button">总收益</a>
+            <a v-link="{path:'/award/cash/organization/toWithdraw', replace: true}" class="button">可提现收益</a>
+            <a v-link="{path:'/award/cash/organization/withdrew', replace: true}" class="button">已提现收益</a>
+        </div>
+    </div>
+    <div class="content">
+        <ui-listview v-ref:listview :api="$api.listOrganizationCashAward"
+                     :query="{type: $route.params.type}"
+                     ptr-content=".award-cash-organization > .content">
+            <div class="content-panel">
+                <p v-if="$route.params.type=='total'"><i v-text="stat.total/100|currency '￥' 2">0</i>元</p>
+                <p v-if="$route.params.type=='toWithdraw'">
+                    <i v-text="stat.toWithdraw/100|currency '￥' 2">0</i>元
+                </p>
+                <p v-if="$route.params.type=='withdrew'"><i v-text="stat.withdrew/100|currency '￥' 2">0</i>元</p>
+                <div class="withdraw-apply">
+                    提现中: <span v-text="stat.withdrawApply/100|currency '￥' 2"></span>元
+                </div>
+            </div>
+            <div class="content-block-title">分经销商收益</div>
+            <div class="list-block list-block-full inset" v-if="listData.length">
+                <ul class="cash-order">
+                    <li v-for="data in listData" track-by="organization.id">
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">
+                                        <div v-text="data.organization.name"></div>
+                                    </div>
+                                    <span class="currency">{{data.amount/100|currency '￥' 2}}</span>元
+                                </div>
+                                <div class="item-subtitle" v-if="$route.params.type=='toWithdraw'">
+                                    <button type="button" :disabled="data.amount==0" @click="withdraw(data.organization.id)" class="button button-fill button-warning">提现</button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </ui-listview>
+    </div>
+</div>

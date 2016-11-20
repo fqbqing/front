@@ -1,0 +1,81 @@
+<!-- target: TPL_tuan_edit_signup -->
+<div class="bbmc-content-wrap tuan-edit-signup">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <a href="#/tuan/list">团购列表</a>
+        <span class="divider">/</span>
+        <span class="active">报名信息</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/tuan/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/gift~id=${id}">多重好礼</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/edit/signup~id=${id}">报名信息</a></li>
+                <li class="ui-tab-item" v-if="formData.is_coupon > 0"><a href="#/tuan/edit/coupon~id=${id}">优惠信息</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="bbmc-detail tuan-form">
+                    <div class="form-body">
+                        <div v-show="intentions.length">
+                            <div class="form-row">
+                                <div class="form-key form-key-required">期望车型：</div>
+                                <div class="form-value intention">
+                                    <div class="form-extra">（每项不超过6个字符）</div>
+                                    <div class="form-row-item" v-for="intention in intentions" track-by="$index">
+                                        <esuibox>
+                                            <div
+                                                    v-esui="intention"
+                                                    data-ui-type="TextBox"
+                                                    data-ui-required="required"
+                                                    data-ui-max-length="6"
+                                                    data-ui-width="100"
+                                                    data-ui-value="{{intention}}"
+                                                    data-ui-name="intentionValue"></div>
+                                            <button v-show="intentions.length > 1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeIntention($index)">删除</button>
+                                        </esuibox>
+                                    </div>
+                                    <div class="form-extra">
+                                        <button data-ui-type="Button" data-ui-id="addIntentionBtn" data-ui-skin="danger" type="button" id="addIntentionBtn" class="form-extra-btn">
+                                            <i class="icon-plus"></i>增加期望车型
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-row">
+                                <div class="form-key">期望购车方式：</div>
+                                <div class="form-value">
+                                    <div class="form-row-item" v-for="buyWay in carBuyWay">
+                                        <input
+                                                v-esui="buyWay"
+                                                data-ui-type="TextBox"
+                                                data-ui-required="required"
+                                                data-ui-max-length="6"
+                                                data-ui-width="100"
+                                                data-ui-value="{{buyWay}}"
+                                                data-ui-name="buyWay" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

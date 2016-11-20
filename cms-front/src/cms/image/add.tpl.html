@@ -1,0 +1,41 @@
+<!-- target: TPL_image_add -->
+<div class="image-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>图片管理</span>
+        <span class="divider">/</span>
+        <span class="active"><!-- if: ${id} -->关联移动版<!-- else -->添加<!-- /if -->图片</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <div class="bbmc-detail">
+            <!-- if: !${id} -->
+            <div class="upload-pc-image uploader-wrap">
+                <h3>添加图片（大小不超过2M）</h3>
+
+                <div id="dnd-area" class="dnd-area">
+                    <p>将照片拖到这里</p>
+
+                    <div data-ui-type="WebUploader"
+                         data-ui-name="uploader"
+                         data-ui-id="uploader">或点击选择图片
+                    </div>
+                </div>
+                <div class="preview">
+                    <div data-ui-type="Panel" data-ui-id="preview"></div>
+                </div>
+            </div>
+            <!--/if-->
+            <div class="upload-mobile-image upload-mobile-image-hidden uploader-wrap">
+                <h3>关联移动版图片</h3>
+                <div class="dnd-mobile-area">
+                    <div data-ui-type="WebUploader"
+                         data-ui-name="uploaderMobile"
+                         data-ui-id="uploaderMobile">点击选择图片
+                    </div>
+                </div>
+                <div class="preview-mobile">
+                    <div data-ui-type="Panel" data-ui-id="previewMobile"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

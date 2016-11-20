@@ -1,0 +1,103 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.organization-staff-index {
+
+
+  .item {
+    cursor: pointer;
+  }
+  .group-tree,
+  .group-staff {
+    border: 1px solid @bb-border-color;
+    background: @bb-box-bgcolor;
+    h1 {
+      font-size: 14px;
+      color: @bb-normal-color;
+      margin: 0;
+      line-height: 30px;
+    }
+    .ui-row {
+      margin: 5px;
+    }
+    .ui-row:after {
+      clear: none;
+    }
+  }
+  .group-tree {
+    float: left;
+    width: 300px;
+    .group-nav {
+      border-top: 1px solid @bb-border-color;
+    }
+    li {
+      clear: both;
+    }
+    .group-item {
+      height: 30px;
+      line-height: 30px;
+      position: relative;
+      &.active {
+        color: #f50;
+        background-color: @bb-box-bgcolor * 0.7;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: @bb-box-bgcolor * 0.9;
+        > .group-oper {
+          display: block;
+        }
+      }
+      span {
+        float: left;
+      }
+      .group-oper {
+        display: none;
+        position: absolute;
+        right: 5px;
+        top: 0;
+      }
+      .group-item-gap {
+        height: 30px;
+      }
+      .group-item-icon {
+        width: 20px;
+        height: 30px;
+        //background: url(../../../src/common/img/slideDown.png) no-repeat center center;
+      }
+      .slideDown {
+        //background-image: url(../../../src/common/img/slideUp.png);
+      }
+      .slideUp {
+        background: none;
+      }
+    }
+    a {
+      padding: 0 5px;
+      font-size: 12px;
+      font-weight: normal;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  .group-staff {
+    //background-color: #fff;
+    margin-left: 310px;
+  }
+  .staff-name {
+    &:after {
+      content: '组管理员';
+      float: right;
+      padding: 0 2px;
+      margin-left: 5px;
+      margin-right: 5px;
+      color: #ff6c15;
+      border: 1px solid #ff6c15;
+      border-radius: 2px;
+    }
+  }
+
+
+}

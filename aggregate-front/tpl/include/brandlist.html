@@ -1,0 +1,94 @@
+
+<div class="x-brand">
+    <div class="brand-title">品牌</div>
+    <!--<div class="brand-more">-->
+        <!--<a href="javascript:void(0);">更多<i class="glyphicon glyphicon-triangle-bottom"></i></a>-->
+    <!--</div>-->
+
+    <div class="brand-top-list">
+        <a href="/s/{{$type}}/{{$city.id}}.html" {{if !isset($brand)}} class="active" {{/if}}>全部</a>
+        {{foreach $aggregateBrands as $item}}
+        <a href="/s/{{$type}}/{{$city.id}}-{{$item.id}}.html" {{if $item.name == $brand.name}} class="active" {{/if}}>{{$item.name}}</a>
+        {{/foreach}}
+    </div>
+    {{*
+    <!--
+    <div class="brand-list">
+        <dl>
+            <dt>A</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>B</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>C</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>D</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>E</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>F</dt>
+            <dd>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+                <a href="/site/tuan/gs-10.html">宝马</a>
+            </dd>
+        </dl>
+    </div>
+    -->*}}
+</div>
+<script>
+$(function () {
+    $('.x-brand .brand-more a').on('click', function () {
+        var $this = $(this);
+        var $icon = $this.find('.glyphicon');
+        var $list = $this.closest('.x-brand').find('.brand-list');
+        if ($icon.hasClass('glyphicon-triangle-bottom')) {
+            $icon.removeClass('glyphicon-triangle-bottom');
+            $icon.addClass('glyphicon-triangle-top');
+            $list.show();
+        }
+        else {
+            $icon.removeClass('glyphicon-triangle-top');
+            $icon.addClass('glyphicon-triangle-bottom');
+            $list.hide();
+        }
+    });
+    $('.x-brand .brand-list').on('mouseleave', function () {
+        $(this).hide();
+        var $icon = $(this).closest('.x-brand').find('.brand-more .glyphicon');
+        $icon.removeClass('glyphicon-triangle-top');
+        $icon.addClass('glyphicon-triangle-bottom');
+    });
+});
+</script>

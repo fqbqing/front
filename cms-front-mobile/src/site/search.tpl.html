@@ -1,0 +1,166 @@
+<!-- target: TPL_site_search -->
+<div class="site-search">
+    <!-- use: TPL_common_page_header_simple(title="营销管理系统") -->
+    <!-- use: TPL_common_page_footer(name="home") -->
+    <section class="ui-container">
+        <search-box name="search" placeholder="按手机号搜索" :title="query.phone"></search-box>
+        <ul class="search-result">
+            <li>
+                <section v-if="result.customers.data.length > 0" v-cloak>
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-67">客户 <small>查找到<i v-text="result.customers.totalCount"></i>条</small></div>
+                    </div>
+                    <ul class="ui-list ui-list-text ui-list-link ui-list-active ui-list-cover ui-border-tb">
+                        <li :class="{'ui-border-t':$index>0}" v-for="customer in result.customers.data" @click="redirect('/customer/detail', {id: customer.id})">
+                            <div class="ui-list-info">
+                                <h4 v-text="customer.name"></h4>
+                                <p v-text="customer.phone"></p>
+                                <p v-if="customer.owner">归属：<i v-text="customer.owner.name"></i></p>
+                            </div>
+                            <div class="ui-badge" :class="customer.rating|rating-class">{{customer.rating|dft '未定'}}级</div>
+                        </li>
+                    </ul>
+                </section>
+            </li>
+            <li>
+                <section v-if="result.signups.data.length > 0" v-cloak>
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-67">团购报名 <small>查找到<i v-text="result.signups.totalCount"></i>条</small></div>
+                    </div>
+                    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb">
+                        <li v-for="order in result.signups.data" :class="{'ui-border-t':$index > 0}"  @click="redirect('/customer/detail', {id: order.customer_id})">
+                            <div class="order-info">
+                                <h4 class="ui-nowrap">
+                                    {{order.username}}
+                                    <small class="ui-txt-muted">({{order.phone}})</small>
+                                    <small class="fr">{{order.created_time|date 'YYYY-MM-DD HH:mm'}}</small>
+                                </h4>
+                                <p v-if="order.activity" class="tuan-info">
+                                    <span v-text="order.activity.name"></span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </li>
+            <li>
+                <section v-if="result.tuanOrders.data.length > 0" v-cloak>
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-67">旧团购报名 <small>查找到<i v-text="result.tuanOrders.totalCount"></i>条</small></div>
+                    </div>
+                    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb">
+                        <li v-for="order in result.tuanOrders.data" :class="{'ui-border-t':$index > 0}"  @click="redirect('/customer/detail', {id: order.customer_id})">
+                            <div class="order-info">
+                                <h4 class="ui-nowrap">
+                                    <template v-if="order.customer && order.customer.name != order.name">
+                                        {{order.customer.name}}<i class="ui-txt-muted">({{order.name}})</i>
+                                    </template>
+                                    <template v-else>
+                                        {{order.name}}
+                                    </template>
+                                    <small class="ui-txt-muted">({{order.phone}})</small>
+                                    <small class="fr">{{order.created_time|date 'YYYY-MM-DD HH:mm'}}</small>
+                                </h4>
+                                <p v-if="order.tuan" class="tuan-info">
+                                    <span v-text="order.tuan.title"></span>
+                                </p>
+
+                                <p class="ui-row">
+                                    <label class="ui-col ui-col-25">订单号：</label>
+                                    <span class="ui-col ui-col-75">{{order.order_id}}</span>
+                                </p>
+                                <p class="ui-row">
+                                    <label class="ui-col ui-col-25">意向车型：</label>
+                                    <span class="ui-col ui-col-75">{{order.intention}}</span>
+                                </p>
+                                <p class="ui-row" v-if="order.car_buying_status == 1">
+                                    <label class="ui-col ui-col-25">成交车型：</label>
+                                    <span class="ui-col ui-col-75">{{order.deal_model}}</span>
+                                </p>
+                                <p class="ui-row">
+                                    <span class="tuan-order-status">{{order.status|tuan-order-status-text}}</span>
+                                    <span class="payment">{{order.payment|payment-text}}</span>
+                                    <span class="buying-way">{{order.car_buying_way|car-buying-way}}</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </li>
+            <li>
+                <section v-if="result.voucherOrders.data.length > 0" v-cloak>
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-67">优惠券领取 <small>查找到<i v-text="result.voucherOrders.totalCount"></i>条</small></div>
+                    </div>
+                    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb">
+                        <li v-for="order in result.voucherOrders.data" :class="{'ui-border-t':$index > 0}"  @click="redirect('/customer/detail', {id: order.customer_id})">
+                            <div class="order-info">
+                                <h4 class="ui-nowrap">
+                                    <template v-if="order.customer && order.customer.name != order.name">
+                                        {{order.customer.name}}<i class="ui-txt-muted" v-if="order.name">({{order.name}})</i>
+                                    </template>
+                                    <template v-else>
+                                        {{order.name}}
+                                    </template>
+                                    <small class="ui-txt-muted" v-if="order.phone">({{order.phone}})</small>
+                                    <small class="fr">{{order.created_time|date 'YYYY-MM-DD HH:mm'}}</small>
+                                </h4>
+                                <p class="tuan-info">
+                                    <span>{{order.voucher.name}}<small>({{order.activity.name}})</small></span>
+                                </p>
+                                <p class="ui-row">
+                                    <label class="ui-col ui-col-25">订单号：</label>
+                                    <span class="ui-col ui-col-75">{{order.order_id}}</span>
+                                </p>
+                                <p class="ui-row">
+                                    <span class="tuan-order-status">{{order.status|voucher-order-status-text}}</span>
+                                    <span class="payment" v-if="order.voucher.amount!='0'">{{order.payment|voucher-payment-text}}</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </li>
+            <li>
+                <section v-if="result.exhibitionCouponOrders.data.length > 0" v-cloak>
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-67">车展报名 <small>查找到<i v-text="result.exhibitionCouponOrders.totalCount"></i>条</small></div>
+                    </div>
+                    <ul class="ui-list ui-list-pure ui-list-link ui-border-tb">
+                        <li v-for="order in result.exhibitionCouponOrders.data" :class="{'ui-border-t':$index > 0}"  @click="redirect('/customer/detail', {id: order.customer_id})">
+                            <div class="order-info">
+                                <h4 class="ui-nowrap">
+                                    <template v-if="order.customer && order.customer.name != order.name">
+                                        {{order.customer.name}}<i class="ui-txt-muted" v-text="order.name !='' ? '('+ order.name +')' : ''"></i>
+                                    </template>
+                                    <template v-else>
+                                        {{order.name}}
+                                    </template>
+                                    <small class="ui-txt-muted">({{order.phone}})</small>
+                                    <small class="fr">{{order.created_time|date 'YYYY-MM-DD HH:mm'}}</small>
+                                </h4>
+                                <p v-if="order.exhibitionCouponActivity" class="ui-row">
+                                    <span v-text="order.exhibitionCouponActivity.exhibitionCoupon.extra.activity_title"></span>
+                                </p>
+                                <p class="ui-row">
+                                    <label class="ui-col ui-col-25">订单号：</label>
+                                    <span class="ui-col ui-col-75">{{order.order_id}}</span>
+                                </p>
+                                <p class="ui-row">
+                                    <span class="tuan-order-status">{{order.status|exhibition-order-status-text}}</span>
+                                    <span class="payment">{{order.payment|payment-text}}</span>
+                                </p>
+
+                            </div>
+
+                        </li>
+                    </ul>
+                </section>
+            </li>
+        </ul>
+        <div class="ui-center" v-if="!(result && result.customers.data.length && result.customers.data.length && result.customers.data.length)" v-cloak>
+            <p class="ui-txt-info">抱歉！未搜索到相关结果</p>
+        </div>
+    </section>
+
+</div>

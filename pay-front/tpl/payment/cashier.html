@@ -1,0 +1,80 @@
+{{extends file="layout/main.html"}}
+{{block name='title'}}收银台{{/block}}
+{{block name='head'}}
+<link rel="stylesheet" href="./cashier.less">
+{{/block}}
+{{block name="body"}}
+<div class="container">
+
+    <div class="pay-info">
+        <div class="pay-info-item">
+            <p class="pay-amount">应付金额：<em class="glyphicon glyphicon-yen">{{$amount/100}}</em></p>
+            <p class="item">支付项目：<em>{{$orderTitle|escape:'html'}}</em></p>
+        </div>
+        <div class="pay-info-item">
+            <p class="item">收款方：<em>{{$merchantName|escape:'html'}}</em></p>
+        </div>
+        <input type="hidden" name="paymentId" value="{{$paymentId}}">
+        <input type="hidden" name="paySign" value="{{$paySign}}">
+    </div>
+    <div class="paytype-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="javascript:void(0);">选择支付方式</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane pay-pane active">
+                <div class="alert alert-warning pay-message">请选择支付方式</div>
+                <ul class="paytype-box">
+                    {{foreach $payTypes as $paytype}}
+                    {{if $paytype eq '1'}}
+                    <li class="paytype">
+                        <!--<input id="alipay" type="radio" name="paytype" value="alipay">-->
+                        <label data-value="alipay" class="paytype-label paytype-alipay"><span>支付宝支付</span></label>
+                    </li>
+                    {{/if}}
+                    {{if $paytype eq '2'}}
+                    <li class="paytype">
+                        <!--<input id="weixin" type="radio" name="paytype" value="weixin">-->
+                        <label data-value="weixin" class="paytype-label paytype-wx"><span>微信支付</span></label>
+                    </li>
+                    {{/if}}
+                    {{/foreach}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="pay-confirm text-right">
+        <p class="pay-amount">支付：<em class="glyphicon glyphicon-yen">{{$amount/100}}</em></p>
+        <div>
+            <button type="button" id="confirmPay" class="btn btn-pay">确认支付</button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">付款确认</h4>
+            </div>
+            <div class="modal-body">
+                <h5>请您在新打开的页面完成付款</h5>
+                付款完成前请不要关闭此窗口；<br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-main" data-dismiss="modal">已完成付款</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script src="/static/dep/bootstrap/js/modal.js"></script>
+<script src="/static/ui/layer.js"></script>
+<script src="/static/ui/loading.js"></script>
+<script src="cashier.js"></script>
+{{/block}}

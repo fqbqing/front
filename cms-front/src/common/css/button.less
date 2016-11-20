@@ -1,0 +1,158 @@
+.ui-button {
+    border: none;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    padding: 0 15px;
+    background: #ddd;
+    color: #666;
+    &:hover, &:active {
+        background: #ccc;
+        border: none;
+    }
+}
+.ui-searchbox .ui-button, .ui-searchbox .ui-button:active {
+    height: 30px;
+    line-height: 30px;
+    //background-position: 50% -23px;
+    background: @bb-main-color;
+    color: #fff;
+    width: 60px;
+    text-indent: 0;
+    border-radius: 0 3px 3px 0;
+    &:active {
+        //background-position: 50% 2px;
+    }
+}
+.ui-searchbox-focus .ui-button {
+    //background-position: 50% 2px;
+}
+.ui-searchbox {
+    .ui-textbox input {
+        border: 1px solid @bb-main-color;
+        &:hover, &:focus {
+            border-color: @bb-main-color;
+        }
+    }
+}
+.ui-searchbox-focus {
+    .ui-textbox input {
+        border: 1px solid @bb-main-color;
+    }
+}
+
+// default, primary, success, info, warn, danger
+.skin-primary-button,
+.skin-success-button,
+.skin-info-button,
+.skin-warn-button,
+.skin-danger-button,
+.skin-link-button,
+.skin-normal-button{
+    border: none;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    &:active {
+        border: none;
+    }
+}
+.skin-link-button {
+    color: #3291da;
+    background: none;
+    &:hover, &:active {
+        color: #3291da;
+        height: 30px;
+        line-height: 30px;
+        background: none;
+    }
+}
+.skin-primary-button {
+    //background: #0ae;
+    background: @bb-main-color;
+    &:hover {
+        //background: #009FDE;
+        background: @bb-main-color * 0.95;
+    }
+    &:active {
+        background: @bb-main-color * 0.9;
+    }
+}
+.skin-success-button {
+    background: @bb-success-color;
+    &:hover {
+        background: @bb-success-color * 0.95;
+    }
+    &:active {
+        background: @bb-success-color * 0.9;
+    }
+}
+.skin-info-button {
+    background: @bb-info-color;
+    &:hover {
+        background: @bb-info-color * 0.95;
+    }
+    &:active {
+        background: @bb-info-color * 0.9;
+    }
+}
+.skin-warn-button {
+    background: @bb-warn-color;
+    &:hover {
+        background: @bb-warn-color * 0.95;
+    }
+    &:active {
+        background: @bb-warn-color * 0.9;
+    }
+}
+.skin-danger-button {
+    background: @bb-danger-color;
+    &:hover {
+        background: @bb-danger-color * 0.95;
+    }
+    &:active {
+        background: @bb-danger-color * 0.9;
+    }
+}
+.skin-normal-button {
+    background: #ddd;
+    color: #666;
+    &:hover, &:active {
+        background: #ccc;
+    }
+}
+// 尺寸
+.ui-button-large {
+    font-size: 16px;
+    padding: 4px 20px;
+}
+.ui-button-small {
+    font-size: 12px;
+    padding: 0 6px;
+    height: 24px;
+    line-height: 24px;
+}
+.ui-button-submit {
+    font-size: 16px;
+    padding: 2px 30px;
+}
+
+// button>icon
+.ui-button > [class^="icon-"] {
+    margin-left: -5px;
+}
+
+.ui-dialog-foot .ui-button {
+    .skin-normal-button();
+    padding: 0 20px;
+    &:hover {
+        border: none;
+    }
+}
+.ui-dialog-foot .skin-spring-button, .skin-spring-button {
+    .skin-primary-button();
+    &:hover {
+        border: none;
+    }
+}

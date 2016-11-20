@@ -1,0 +1,74 @@
+<!-- target: TPL_exhibition_coupon_order_detail -->
+<div class="exhibition-coupon-order-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">车展活动</span>
+        <span class="divider">/</span>
+        <span class="active">订单详情</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key">订单号：</div>
+                    <div class="form-value">${orderInfo.order_id}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">姓名：</div>
+                    <div class="form-value">
+                        <!-- if: ${orderInfo.customer} -->
+                            <!-- if: ${orderInfo.customer.name}==${orderInfo.name} -->
+                            ${orderInfo.name}
+                            <!-- else  -->
+                            ${orderInfo.name}(${orderInfo.customer.name});
+                            <!-- /if -->
+                        <!-- else  -->
+                        ${orderInfo.name}
+                        <!-- /if -->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">手机号：</div>
+                    <div class="form-value">${orderInfo.phone}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">订单状态：</div>
+                    <div class="form-value">${orderInfo.status | exhibitionStatus}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">报名时间：</div>
+                    <div class="form-value">${orderInfo.created_time | date}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">报名渠道：</div>
+                    <div class="form-value"><!-- if: ${orderInfo.signupChannel} -->${orderInfo.signupChannel.name}<!-- /if --></div>
+                </div>
+                <!-- if: ${orderInfo.exhibitionCouponActivity} -->
+                <div class="form-row">
+                    <div class="form-key">活动名称：</div>
+                    <div class="form-value">${orderInfo.exhibitionCouponActivity.activity_title} </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">优惠券名称：</div>
+                    <div class="form-value">${orderInfo.exhibitionCouponActivity.coupon}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">优惠券有效时间：</div>
+                    <div class="form-value">${orderInfo.exhibitionCouponActivity.coupon_start_time | date}　-　${orderInfo.exhibitionCouponActivity.coupon_end_time | date}</div>
+                </div>
+                <!-- /if -->
+                <!-- if: ${orderInfo.status} == 2 || ${orderInfo.status} == 3-->
+                <div class="form-row">
+                    <div class="form-key">使用时间：</div>
+                    <div class="form-value">${orderInfo.updated_time | date}</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">成交车型：</div>
+                    <div class="form-value">${orderInfo.deal_model}</div>
+                </div>
+                <!-- /if -->
+            </div>
+        </form>
+    </div>
+</div>

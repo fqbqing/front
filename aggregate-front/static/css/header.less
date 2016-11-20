@@ -1,0 +1,108 @@
+@import "variables";
+.x-header {
+    min-width: 980px;
+    background: #fff;
+    padding: 20px;
+    border-bottom: 1px solid @x-border-color;
+    box-shadow: 0 1px 6px #eee;
+}
+.x-header-slogan {
+    background: url(../images/slogan.png) center center no-repeat;
+    width: 213px;
+    height: 28px;
+    float: left;
+}
+.x-header-location-wrap {
+    float: left;
+    line-height: 28px;
+    position: relative;
+    margin-left: 10px;
+    &:hover {
+        .x-header-location-list {
+            display: block;
+        }
+    }
+}
+.x-header-location {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 0 10px 0 12px;
+    i {
+        margin-left: 5px;
+    }
+}
+.x-header-location-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 28px;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 500px;
+    padding: 10px 20px;
+    box-shadow: 1px 1px 3px #eee;
+    dl {
+        margin: 0;
+        padding: 5px 0;
+        border-bottom: 1px dashed #ddd;
+        &:last-child {
+            border-bottom: none;
+        }
+        dt {
+            width: 70px;
+            float: left;
+            margin: 4px;
+        }
+        dd {
+            margin-left: 80px;
+            a {
+                display: inline-block;
+                margin: 4px;
+                color: #333;
+                text-decoration: none;
+            }
+        }
+    }
+}
+.x-footer {
+    min-width: 980px;
+    padding: 30px 0;
+    background: #1e1d23;
+    color: #9c9c9e;
+    .container {
+        width: 720px;
+    }
+    .link {
+        dl {
+            a {
+                color: #7e7c89;
+                text-decoration: none;
+            }
+            dt {
+                float: left;
+                width: 100px;
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 1px;
+                    height: 14px;
+                    background: @x-main-color;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                }
+            }
+            dd {
+                margin-left: 100px;
+                color: #7e7c89;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .copyright {
+        border-left: 1px solid #7e7c89;
+        padding-left: 40px;
+    }
+}

@@ -1,0 +1,85 @@
+<!-- target: TPL_exhibition_detail -->
+<div class="exhibition-detail">
+    <!-- use: TPL_common_page_header(title="活动详情") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li class="current">基本信息</li>
+                <li @click="redirect('/exhibition/order/list', {exhibition_id: exhibition.id, claimed: '1'})">已认领订单</li>
+                <li @click="resetRouter('/exhibition/channel', {exhibition_id: exhibition.id})">渠道效果</li>
+            </ul>
+            <ul class="ui-tab-content" v-cloak>
+                <li class="current">
+                    <section class="ui-panel">
+                        <h1 style="line-height: 44px;" v-text="exhibition.activity_title"></h1>
+                        <ul class="ui-list ui-list-pure ui-border-tb">
+                            <li class="ui-border-b">
+                                <h5>
+                                    <span>活动时间</span>
+                                    <span class="ui-panel-title-tips">{{exhibition.activity_start_time|date 'YYYY-MM-DD HH:mm'}} - {{exhibition.activity_end_time|date 'YYYY-MM-DD HH:mm'}}</span>
+                                </h5>
+                            </li>
+                            <li class="ui-border-b">
+                                <h5>
+                                    <span>活动地点</span>
+                                    <span class="ui-panel-title-tips">{{exhibition.activity_address}}</span>
+                                </h5>
+                            </li>
+                            <li>
+                                <h5>
+                                    <span>优惠券名称</span>
+                                    <span class="ui-panel-title-tips">{{exhibition.coupon}}</span>
+                                </h5>
+                            </li>
+                            <li>
+                                <h5>
+                                    <span>优惠券有效时间</span>
+                                    <span class="ui-panel-title-tips">{{exhibition.coupon_start_time|date 'YYYY-MM-DD HH:mm'}}－{{exhibition.coupon_end_time|date 'YYYY-MM-DD HH:mm'}}</span>
+                                </h5>
+                            </li>
+                        </ul>
+                        <div class="ui-btn-group" style="margin: 10px auto 0; width: 240px;">
+                            <button class="ui-btn ui-btn-primary" @click="href('/api/exhibition-coupon-activity/transmit?id=' + exhibition.id)">直接分享</button>
+                            <button class="ui-btn ui-btn-primary" @click="showShareQRCode">二维码分享</button>
+                        </div>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-t">
+                        <h2 class="ui-arrowlink" @click="redirect('/exhibition/order/list', {exhibition_id: exhibition.id, claimed: '1'})">
+                            <span>已认领订单</span>
+                            <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                            <!--<span class="ui-panel-title-tips ui-txt-highlight">{{statOrder.today_claimed_count}}/{{statOrder.claimed_count}}</span>-->
+                        </h2>
+                        <ul class="ui-list ui-list-pure ui-list-stat ui-border-tb">
+                            <li class="ui-border-b">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{statOrder.today_claimed_count}}/{{statOrder.claimed_count}}</i><div>全部</div></li>
+                                    <li><i>{{statOrder.today_receive_count}}/{{statOrder.receive_count}}</i><div>已领券</div></li>
+                                    <li><i>{{statOrder.today_signin_count}}/{{statOrder.singin_count}}</i><div>已签到</div></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{statOrder.today_done_count}}/{{statOrder.done_count}}</i><div>已使用</div></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-tb" style="margin-top: 5px;">
+                        <h2 class="ui-arrowlink" @click="redirect('/exhibition/order/list', {exhibition_id: exhibition.id, claimed: '0'})">
+                            <span style="margin: 0 auto;">未认领订单<i>({{statOrder.unclaimed_count}})</i></span>
+                            <!--<small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>-->
+                            <!--<span class="ui-txt-highlight ui-panel-title-tips">{{statOrder.today_unclaimed_count}}/{{statOrder.unclaimed_count}}</span>-->
+                        </h2>
+                    </section>
+
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="qrcode-wrap" v-if="qrCodeImage && isQRCodeImageShow" v-cloak @click="isQRCodeImageShow=false">
+        <div class="qrcode">
+            <img :src="qrCodeImage" width="200" height="200">
+        </div>
+    </div>
+</div>

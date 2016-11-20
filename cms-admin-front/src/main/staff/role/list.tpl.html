@@ -1,0 +1,27 @@
+<!-- target: TPL_staff_role_list -->
+<div class="staff-role-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>权限管理</span>
+        <span class="divider">/</span>
+        <span class="active">角色列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row" v-if="isAllow('staff-role.add')">
+            <button data-ui-type="Button" data-ui-id="addBtn" data-ui-skin="primary"
+                    @click="state.add=!state.add"
+                    type="button">
+                <i class="icon-plus"></i>添加角色
+            </button>
+        </div>
+        <esuibox class="add-role-box" v-if="isAllow('staff-role.add') && state.add">
+            <div v-esui="rolename" data-ui-type="TextBox" data-ui-placeholder="请输入要新增的角色名称"></div>
+            <button data-ui-type="Button" @click="addRole" type="button">确定</button>
+        </esuibox>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+    </div>
+</div>

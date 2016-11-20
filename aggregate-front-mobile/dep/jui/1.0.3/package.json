@@ -1,0 +1,11 @@
+{
+  "name": "jui",
+  "version": "1.0.3",
+  "description": "",
+  "main": "main",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mfylee@163.com",
+  "license": "ISC"
+}

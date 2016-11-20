@@ -1,0 +1,48 @@
+<!-- target: TPL_tuan_list -->
+<div class="tuan-list bbmc-content-wrap" v-if="isAllow('tuan.list') && isLevelAllow('tuan.list')">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <span class="active">团购列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/groupon/list">团购列表</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/list">旧版团购</a></li>
+            </ul>
+        </div>
+        <div class="ui-row">
+            <button v-if="isAllow('tuan.add')" data-ui-type="Button" data-ui-id="addTuanBtn" data-ui-skin="primary"
+                    type="button">
+                <i class="icon-plus"></i>添加团购
+            </button>
+            <div class="ui-group">
+                <form data-ui-type="Form" data-ui-id="filter">
+                    <div data-ui-type="SearchBox"
+                         data-ui-placeholder="按团购名称搜索"
+                         data-ui-id="searchbox"
+                         data-ui-text="${title}"></div>
+                </form>
+            </div>
+        </div>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="table" data-ui-datasource="@tableData"
+                 data-ui-order-by="@orderBy" data-ui-order="@order" data-ui-select="@selectMode"
+                 data-ui-extension-tip-type="TableTip"
+                 data-ui-extension-ex-type="TableEx"
+                 data-ui-extension-command-type="Command">
+            </div>
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button v-if="isAllow('tuan.delete')" data-ui-type="Button" data-ui-id="deleteTuanBtn" data-ui-skin="danger"
+                    type="button">
+                <i class="icon-trash-empty"></i>批量删除
+            </button>
+        </div>
+
+    </div>
+</div>

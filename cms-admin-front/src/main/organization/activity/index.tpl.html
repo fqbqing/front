@@ -1,0 +1,32 @@
+<!-- target: TPL_organization_activity_index -->
+<div class="organization-activity-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">加盟店活动</span>
+    </div>
+
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="activity",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="ui-tab-content-panel">
+                    <a href="#/activity/groupon/list~organization_id=${organization_id}">新版团购活动</a>
+                </div>
+                <div class="ui-tab-content-panel">
+                    <a href="#/organization/activity/tuan/list~organization_id=${organization_id}">旧版团购活动</a>
+                </div>
+                <div class="ui-tab-content-panel">
+                    <a href="#/voucher/list~organization_id=${organization_id}">优惠券</a>
+                </div>
+                <div class="ui-tab-content-panel">
+                    <a href="#/activity/coupon/list~organization_id=${organization_id}">优惠券活动</a>
+                </div>
+                <div class="ui-tab-content-panel">
+                    <a href="#/organization/activity/exihibition/list~organization_id=${organization_id}">车展活动</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

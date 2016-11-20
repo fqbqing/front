@@ -1,0 +1,81 @@
+<!-- target: TPL_site_tuan -->
+<div class="site-tuan page">
+    <header class="yj-header bar bar-nav">
+        <div class="slogan"></div>
+        <button v-cloak class="city icon-location open-panel" data-panel=".citylist" v-text="city.name"></button>
+    </header>
+    <section class="content">
+        <!-- if: ${bannerList}.length > 0 -->
+        <section class="banner">
+            <swiper :pagination="bannerList.length>1" v-cloak>
+                <div class="swiper-slide" v-for="banner in bannerList">
+                    <a href="{{banner.url}}" target="_blank">
+                        <img :src="banner.image_url|cdn '@!m-banner-img'"/>
+                    </a>
+                    <div class="swiper-slide-footer">
+                        <h2 v-text="banner.title"></h2>
+                        <h3 v-text="banner.desc"></h3>
+                    </div>
+                </div>
+            </swiper>
+        </section>
+        <!-- /if -->
+        <section class="part">
+            <h2>品牌</h2>
+            <div class="brand-list">
+                <a href="/s/tuan/{{city.id}}" :class="{active: !query.brand}">全部</a>
+                <a href="/s/tuan/{{city.id}}/{{b.id}}" :class="{active: b.id==query.brand}" v-for="b in hotBrands" v-text="b.name"></a>
+            </div>
+        </section>
+        <section class="part part-tuan">
+            <h2>热门活动</h2>
+            <ul class="part-list">
+                <li class="part-item" v-for="tuan in tuanList.data" v-cloak>
+                    <div class="tuan-item">
+                        <div class="tuan-item-img">
+                            <a href="{{tuan.activity.link}}" target="_blank">
+                                <lazy-image :options="{container:'.page>.content'}" :src="tuan.activity.image_url|cdn '@480h_750w_1e_1c.src'"></lazy-image>
+                                <div class="tuan-item-img-footer">
+                                    <p class="time">
+                                        活动时间：
+                                        <time v-text="tuan.activity.tuan_time|date"></time>
+                                    </p>
+
+                                    <i class="state-valid" v-if="tuan.activity.status==1">报名中</i>
+                                    <i class="state-invalid" v-else>已结束</i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="tuan-item-detail">
+                            <h3>
+                                <a href="{{tuan.activity.link}}" target="_blank" v-text="tuan.activity.title"></a>
+                            </h3>
+                            <dl>
+                                <dt>报名人数：</dt>
+                                <dd v-text="tuan.activity.orderCount"></dd>
+                            </dl>
+                            <!--<dl>-->
+                                <!--<dt>活动时间：</dt>-->
+                                <!--<dd><time v-text="tuan.activity.tuan_time|date"></time></dd>-->
+                            <!--</dl>-->
+                            <dl>
+                                <dt>经销商：</dt>
+                                <dd>
+                                    <span v-text="tuan.organization.name"></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="pager button button-block button-light" v-if="hasNextPage" @click="loadTuanByPage" v-cloak>
+                下一页
+            </div>
+        </section>
+        <!-- import: TPL_common_page_footer -->
+    </section>
+</div>
+<div class="panel-overlay"></div>
+<div class="panel panel-right panel-cover citylist">
+    <action-view url="/components/city" :query="{id:city.id,type:1}"></action-view>
+</div>

@@ -1,0 +1,56 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.organization-list {
+  .filter-wrap {
+    overflow: hidden;
+    .title {
+      float: left;
+    }
+    .brand-tree {
+      width: 600px;
+      float: left;
+    }
+    .province-select{
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+  .brand-wrap {
+    min-height: 100px;
+  }
+  .ui-brand-item {
+    li {
+      float: left;
+      margin: 8px;
+      border: 2px solid @sys-blue-color;
+      padding: 2px 6px 2px 15px;
+      line-height: 20px;
+      position: relative;
+      overflow: hidden;
+      color: @sys-blue-color;
+      &:after {
+        position: absolute;
+        right: 0;
+        bottom: -8px;
+        content: '';
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-right-color: @sys-blue-color;
+      }
+      .remove {
+        color: @sys-blue-color;
+        background: none;
+        border: none;
+      }
+    }
+
+  }
+
+
+
+
+}

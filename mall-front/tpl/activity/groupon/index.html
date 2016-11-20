@@ -1,0 +1,214 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}{{$groupon.name|escape:'html'}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/activity/groupon/index.less">
+{{/block}}
+{{block name="body"}}
+<div class="theme-{{$groupon.page_info.theme|default:'default'}}">
+    <div class="header">
+        <div class="tuan-image-box">
+            <div class="tuan-image">
+                <img src="{{$groupon.image|cdnfix}}">
+            </div>
+            <div class="sign-stat">
+                <h1>{{$groupon.name|escape:'html'}}</h1>
+                <p>{{$groupon.beautify_number + $statistics.signupCount}}人已报名</p>
+            </div>
+        </div>
+    </div>
+    <div class="tuan-time-show countdown">
+        <h3>活动倒计时</h3>
+        <div class="time">
+            <em v-text="countdown.d1">0</em>
+            <em v-text="countdown.d2">0</em>
+            <i class="day">天</i>
+            <em v-text="countdown.h1">0</em>
+            <em v-text="countdown.h2">0</em>
+            <i class="dot">:</i>
+            <em v-text="countdown.m1">0</em>
+            <em v-text="countdown.m2">0</em>
+            <i class="dot">:</i>
+            <em v-text="countdown.s1">0</em>
+            <em v-text="countdown.s2">0</em>
+        </div>
+    </div>
+    <section class="part">
+        <h2><span>活动信息</span></h2>
+        <div class="tuan-detail-info">
+            <dl>
+                <dt>优惠价格：</dt>
+                <dd>{{$groupon.page_info.global.price}}</dd>
+                <dt>举办时间：</dt>
+                <dd>{{$groupon.activity_time|date_format:'%Y年%m月%d日 %H:%M'}}</dd>
+                <dt>活动地址：</dt>
+                <dd>
+                    {{$groupon.page_info.global.organization_name}}
+                    <address>{{$groupon.page_info.global.address}}</address>
+                </dd>
+            </dl>
+            <p class="tips">{{$groupon.page_info.global.buytips}}</p>
+        </div>
+    </section>
+    {{foreach $groupon.page_info.items as $item}}
+    <section class="part">
+        {{if $item.type eq 'TITLE'}}
+        <h2><span>{{$item.text}}</span></h2>
+        {{elseif $item.type eq 'ARTICLE'}}
+        <div class="item-article">
+            <h3>{{$item.data.title}}</h3>
+            <div>{{$item.data.content}}</div>
+        </div>
+        {{elseif $item.type eq 'ARTICLE_GROUP'}}
+        <div class="item-article-group">
+            {{foreach $item.data as $data}}
+            <div class="item-article-item">
+                <h3>{{$data.title}}</h3>
+                <div>{{$data.content}}</div>
+            </div>
+            {{/foreach}}
+        </div>
+        {{elseif $item.type eq 'PARAGRAPH'}}
+        <div class="item-text">
+            {{$item.text}}
+        </div>
+        {{elseif $item.type eq 'IMAGE'}}
+        <div class="item-image">
+            <img src="{{$item.url|cdnfix}}" alt="">
+        </div>
+        {{elseif $item.type eq 'IMAGE_TEXT'}}
+        <div class="item-image-text">
+            <img src="{{$item.url|cdnfix}}" alt="">
+            <p>{{$item.text}}</p>
+        </div>
+        {{/if}}
+    </section>
+    {{/foreach}}
+    {{if !isset($signup)}}
+    {{if time() > (int)$groupon.signup_end_time}}
+    <!-- 报名已截止 -->
+    <section class="part">
+        <h2><span>报名已截止</span></h2>
+    </section>
+    {{elseif $groupon.status == 0}}
+    <!-- 未上线 -->
+    <section class="part">
+        <h2><span>活动未上线</span></h2>
+    </section>
+    {{elseif $groupon.status == 1}}
+    <!-- 已上线 -->
+    <section class="part">
+        <h2><span>立即报名</span></h2>
+        <div class="signup">
+            {{foreach $groupon.option as $opt}}
+            <h3>{{$opt.name}}</h3>
+            {{if $opt.type eq 'text'}}
+            <div class="form-item form-item-custom">
+                <input type="text" placeholder="{{$opt.name}}" name="{{$opt.name}}">
+            </div>
+            {{else}}
+            <ul class="intention row">
+                {{foreach explode("\n", $opt.value) as $item}}
+                <li class="col-4">
+                    <input id="{{$opt.name}}_{{$item@index}}" type="{{$opt.type}}" name="{{$opt.name}}" value="{{$item}}">
+                    <label for="{{$opt.name}}_{{$item@index}}" class="tag ui-nowrap"><span>{{$item|escape:'html'}}</span></label>
+                </li>
+                {{/foreach}}
+            </ul>
+            {{/if}}
+            {{/foreach}}
+            <h3>购车人信息</h3>
+            <form @submit.prevent="signup">
+                <div class="form-item">
+                    <label for="username">姓名：</label>
+                    <input id="username" type="text" v-model="sign.username" placeholder="请输入您的真实姓名">
+                </div>
+                <div class="form-item">
+                    <label for="phone">手机号：</label>
+                    <input id="phone" type="text" v-model="sign.phone" :disabled="!isGuest" placeholder="请输入手机号">
+                </div>
+                <div class="form-item form-item-with-action" v-if="isGuest" v-cloak>
+                    <label for="verifyCode">验证码：</label>
+                    <button type="button" tabindex="-1" :disabled="canSendVerifyCode" @click="sendVerifyCode" class="form-item-action" v-text="verifyCodeText"></button>
+                    <input id="verifyCode" type="text" v-model="sign.verifyCode" class="verify-code">
+                </div>
+                <div class="button-block">
+                    <button type="submit" class="ui-button">立即报名</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    {{elseif $groupon.status == 2}}
+    <!-- 已下线 -->
+    <section class="part">
+        <h2><span>活动已下线</span></h2>
+    </section>
+    {{elseif $groupon.status == 3}}
+    <!-- 已结束 -->
+    <section class="part">
+        <h2><span>活动已结束</span></h2>
+    </section>
+    {{/if}}
+    {{else}}
+    <section class="part">
+        <h2><span>报名信息</span></h2>
+        <div class="signup">
+            <div class="button-block">
+                <a href="/activity/groupon/signup-detail?signupId={{$signup.id}}" class="ui-button">已报名，查看详情</a>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    {{if $app->user->isGuest}}
+    <section class="part">
+        <div class="signup">
+            <div class="button-block">
+                <a href="/site/login-c?url={{$app->request->getAbsoluteUrl()|addquery:'check=1'|escape:url}}" class="ui-button">我已报名</a>
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    <section class="part">
+        <h2><span>您的专属销售顾问</span></h2>
+        <div class="part-content">
+            {{v_seller file="/includes/seller.html" activityId="`$groupon.id`"}}
+        </div>
+    </section>
+    <footer>
+        <hr>
+        {{if $organization.agent_spread == 1}}
+        <section class="agent-intro">
+            <a href="{{$app->params['AGENT_URL']}}/register?organizationId={{$organization.group_id}}&source={{$smarty.get.source|default:''}}" target="_blank">
+                <img src="/static/images/activity/groupon/agent-intro.jpg" alt="招募经纪人">
+            </a>
+        </section>
+        {{/if}}
+        <p>{{$organization.name}}出品</p>
+    </footer>
+</div>
+<weixin-favorite class="favorite-wrap"></weixin-favorite>
+{{/block}}
+{{block name="js"}}
+{{if isset($groupon.intention) && !empty($groupon.intention)}}
+    {{assign var="intentionName" value="`$groupon.intention.name`"}}
+{{/if}}
+{{weixin_share
+    activityId="`$groupon.id`"
+    title="`$groupon.name|escape:'html'`"
+    titleFormat='{0}邀请您参加“{1}”'
+    desc="`$groupon.name|escape:'html'`\n`$intentionName|default:''`"
+    link="/activity/groupon/`$groupon.id`.html"
+    imgUrl="http:`$groupon.share_image|cdnfix`"}}
+<script>
+    window.BBNS = {
+        endTime: '{{$groupon.signup_end_time}}',
+        activityId: '{{$groupon.id}}',
+        signupOptions: {{json_encode($groupon.option)}} || [],
+        // 需要检查订单
+        checkOrder: '{{$smarty.get.check|default:""}}',
+        // 报名后需要完成签入
+        signIn: '{{$smarty.get.signin|default:""}}'
+    };
+</script>
+<script src="/static/ui/weixin-favorite.js"></script>
+<script src="/static/js/activity/groupon/index.js"></script>
+{{/block}}

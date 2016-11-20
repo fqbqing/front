@@ -1,0 +1,51 @@
+<div class="award-cash-withdraw">
+    <ui-navbar title="申请提现"></ui-navbar>
+    <div class="content">
+        <div class="content-block withdraw-header">
+            <dl class="organization">
+                <dt v-text="organization.name"></dt>
+                <dd>
+                    电话：<span v-text="organization.phone"></span>
+                </dd>
+                <dd>
+                    地址：<address class="inline-block" v-text="organization.address"></address>
+                </dd>
+            </dl>
+            <dl class="award">
+                <dt>可提现金额</dt>
+                <dd>
+                    <i v-text="stat.toWithdraw/100|currency '￥' 2">0</i>元
+                </dd>
+            </dl>
+        </div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">提现金额<small>(元)</small></div>
+                            <div class="item-input">
+                                <input v-model="amount" type="number" placeholder="请输入您要提现的金额">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">备注</div>
+                            <div class="item-input">
+                                <input v-model="remark" type="text" placeholder="(可选)">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <div>
+                <button type="button" @click="apply" class="button button-block button-big button-fill button-warning">申请提现</button>
+            </div>
+        </div>
+    </div>
+</div>

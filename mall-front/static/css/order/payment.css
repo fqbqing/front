@@ -1,0 +1,44 @@
+.payment-container {
+    margin-top: 28px;
+    padding: 30px;
+}
+.payment {
+    display:  inline-block;
+    width: 220px;
+    height: 48px;
+    margin:  2px 50px 2px 0;
+    border: 2px solid #ddd;
+    line-height:  48px;
+    text-align:  center;
+    font-size: 16px;
+}
+.wechat-icon,
+.alipay-icon {
+    position: relative;
+    top: 8px;
+    margin: 0px 10px;
+}
+.wechat-icon {
+    display:  inline-block;
+    width: 32px;
+    height:  27px;
+    background:  url(../../images/wechat-icon.png) no-repeat;
+}
+.alipay-icon {
+    display:  inline-block;
+    width: 25px;
+    height:  25px;
+    background:  url(../../images/alipay-icon.png) no-repeat;
+}
+.payment.active {
+    background:  #df1418 url(../../images/pay-select.png) right bottom no-repeat;
+}
+.payment-wrap h2 {
+    padding: 20px 0 20px 30px;
+    font-size: 20px;
+    background-color:  #f2f2f2;
+    color: #131313;
+}
+.payment-type {
+    padding: 30px 0px 30px 25px;
+}

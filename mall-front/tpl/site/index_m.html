@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="叭叭买车 天天底价" />
+    <meta name="description" content="叭叭买车 天天底价" />
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>叭叭买车, 天天底价</title>
+    <script>
+//        window.GLOBAL = {};
+//        {{if $app->user->isGuest}}
+//        GLOBAL['USER'] = {isGuest:true};
+//        {{else}}
+//        GLOBAL['USER'] = {
+//            isGuest:false,
+//            phone: '{{$app->user->getIdentity()->phone}}'
+//        };
+//        {{/if}}
+    </script>
+    <script src="/static/libs/zepto.js"></script>
+    <script src="/static/libs/zepto.lazyload.js"></script>
+    <script src="/static/libs/frozen/js/frozen.js"></script>
+    <link rel="stylesheet" href="/static/libs/frozen/css/frozen.css">
+    <link rel="stylesheet" href="/static/css/site/indexm.css">
+    {{include file="includes/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+<header class="ui-header ui-border-b">
+    <h1><img src="/static/images/logo2x.png" width="130" height="28" class="web-logo"/></h1>
+    <button class="ui-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <ul class="navbar-body ui-border-t">
+        <li class="ui-border-b"><div><a href="/">首页</a></div></li>
+        <li class="ui-border-b"><div><a href="/mall-activity/?activityId=1">特惠买车</a></div></li>
+        <li class="ui-border-b"><div><a href="/site/exhibition">车展优惠</a></div></li>
+        <li class="ui-border-b"><div><a href="/site/guide">购车指南</a></div></li>
+        {{if $app->user->isGuest}}
+        <li class="ui-border-b">
+            <a href="/site/login?onlybox">
+                <img src="/static/images/admin.png" style="vertical-align: -3px;">登录
+            </a>
+        </li>
+        {{else}}
+        <li class="ui-border-b"><div><a href="/order/list">我的订单</a></div></li>
+        <li class="ui-border-b">
+            <div class="userinfo">
+                <a href="#">{{$app->user->getIdentity()->phone|regex_replace:"/(\d{3})\d{4}(\d{4})/":"$1****$2"}}</a>
+                <a href="/site/logout" target="_top" class="margin-right">退出</a>
+            </div>
+        </li>
+        {{/if}}
+    </ul>
+</header>
+<!--<footer class="ui-footer ui-footer-btn">-->
+    <!--<ul class="ui-tiled ui-border-t">-->
+        <!--<li class="ui-border-r"><div><a href="/">首页</a></div></li>-->
+        <!--<li class="ui-border-r"><div><a href="/mall-activity/?activityId=1">特惠买车</a></div></li>-->
+        <!--<li class="ui-border-r"><div><a href="/site/exhibition">车展优惠</a></div></li>-->
+        <!--<li><div><a href="/order/list">我的订单</a></div></li>-->
+    <!--</ul>-->
+<!--</footer>-->
+<section class="ui-container">
+    <div class="ui-slider ui-slider-banner">
+        <ul class="ui-slider-content">
+            {{foreach $bannerList as $banner}}
+            <li>
+                <a target="_blank" {{if $banner['url'] != null}} href="{{$banner['url']}}" {{else}} href="/mall-activity/?activityId={{$banner['id']}}" {{/if}}>
+                <img src="{{$banner['image']|cdn}}">
+                </a>
+            </li>
+            {{/foreach}}
+        </ul>
+    </div>
+    <div class="ui-row-flex ui-whitespace bb-brand-list">
+        <div class="ui-col ui-col">
+            <div><img src="/static/images/ad-1.png" class="radius"></div>
+            <strong>价格给力</strong>
+        </div>
+        <div class="ui-col ui-col">
+            <div><img src="/static/images/ad-2.png" class="radius"></div>
+            <strong>订金随时退</strong>
+        </div>
+        <div class="ui-col ui-col">
+            <div><img src="/static/images/ad-3.png" class="radius"></div>
+            <strong>认证商家</strong>
+        </div>
+        <div class="ui-col ui-col">
+            <div><img src="/static/images/ad-4.png" class="radius"></div>
+            <strong>省心省力</strong>
+        </div>
+    </div>
+    <section class="ui-panel">
+        <h2 class="active-title"><span class="">热门活动</span></h2>
+        <ul class="ui-list ui-list-pure">
+            {{foreach $hotActivity as $activity}}
+            <li>
+                <a target="_blank" {{if $activity['url'] != null}} href="{{$activity['url']}}" {{else}} href="/mall-activity/?activityId={{$activity['id']}}" {{/if}}>
+                <img src="{{$activity['image']|cdn}}" alt="" width="100%" height="100%">
+                </a>
+            </li>
+            {{foreachelse}}
+            <div class="text-center margin-large">暂无活动</div>
+            {{/foreach}}
+        </ul>
+    </section>
+    <section class="ui-panel">
+        <h2 class="active-title"><span class="">特卖推荐</span></h2>
+        <ul class="ui-row">
+            {{foreach $discounts as $discount}}
+            <li class="ui-col ui-col-50">
+                <div class="good-container">
+                    <div class="good-image">
+                        <a target="_blank" href="/good/detail?goodId={{$discount.id}}">
+                            <img class="lazy" src="/static/images/blank.gif" data-original="{{$discount.defaultImage|cdn}}">
+                        </a>
+                    </div>
+                    <div class="good-body">
+                        <h2 class="ui-nowrap-multi ui-whitespace" title="{{$discount.name}}">
+                            <a target="_blank" href="/good/detail?goodId={{$discount.id}}">{{$discount.name}}</a>
+                        </h2>
+                        <p class="good-tags">
+                            {{foreach $discount['tags'] as $tag}}
+                            <a href="javascript:void(0);" class="good-tag">{{$tag['name']}}</a>
+                            {{/foreach}}
+                        </p>
+                        <p class="good-market-price"><del>市场价：<em class="icon-rmb">{{$discount.market_price/1000000}}</em>万元</del></p>
+                        <p class="good-price"><em class="icon-rmb">{{$discount.low_price/1000000}}</em>万元</p>
+                    </div>
+                </div>
+            </li>
+            {{foreachelse}}
+            <div class="text-center margin-large">暂无商品</div>
+            {{/foreach}}
+        </ul>
+    </section>
+</section>
+<script>
+    $(function () {
+        /* fz 即 FrozenJS 的意思 */
+        var slider = new fz.Scroll('.ui-slider', {
+            role: 'slider',
+            indicator: true,
+            autoplay: true,
+            interval: 5000
+        });
+        $('.ui-header .ui-btn').on('click', function () {
+            $('.navbar-body').toggleClass('navbar-body-active');
+        });
+        $("img.lazy").lazyload();
+    });
+</script>
+</body>
+</html>

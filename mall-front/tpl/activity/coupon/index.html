@@ -1,0 +1,57 @@
+{{extends file="./layout.html"}}
+{{block name='title'}}{{$coupon.name|escape:'html'}}{{/block}}
+{{block name='description'}}{{$coupon.brief|escape:'html'}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/activity/coupon/index.less">
+{{/block}}
+{{block name="body"}}
+<header class="banner">
+    <div class="content">
+        <h1>{{$coupon.name|escape:'html'|nl2br}}</h1>
+        <h2>{{$coupon.brief|escape:'html'|nl2br}}</h2>
+    </div>
+</header>
+<section class="album">
+    <div class="activity-time">
+        {{$coupon.start_time|date_format:'%Y年%m月%d日 %H:%M'}} -
+        {{$coupon.end_time|date_format:'%Y年%m月%d日 %H:%M'}}
+    </div>
+    <ul class="album-list">
+        {{foreach $coupon.images as $image}}
+        <li class="album-item">
+            <div class="photo">
+                <img src="{{$image.image_url|cdnfix}}@750w_380h_1e_1c">
+                <i class="adorn"></i>
+            </div>
+            <h2>{{$image.slogan|escape:'html'}}</h2>
+            <p>{{$image.description|escape:'html'}}</p>
+        </li>
+        {{/foreach}}
+    </ul>
+</section>
+<section class="part part-line seller">
+    <h2><span>购车顾问</span></h2>
+    <div class="part-content">
+        {{v_seller file="/includes/seller.html" activityId="`$coupon.id`"}}
+    </div>
+</section>
+<footer class="footer">
+    <p>{{$coupon.introduce_text|escape:'html'}}</p>
+    {{if $coupon.end_time|is_expired eq '0'}}
+    <a class="button" href="/activity/coupon/voucher?id={{$coupon.id}}">去领券</a>
+    {{else}}
+    <a class="button" style="line-height: 18px;padding-top:7px;"
+       href="/site/login-c?url={{'/activity/coupon/voucher?id='|escape:'url'}}{{$coupon.id}}">
+        <span style="color: #aaa;">已结束</span><br>查看我的券
+    </a>
+    {{/if}}
+</footer>
+{{/block}}
+{{block name="js"}}
+{{weixin_share
+    activityId="`$coupon.id`"
+    title="`$coupon.name|escape:'html'`"
+    desc="`$coupon.brief|escape:'html'`"
+    link="/activity/coupon/`$coupon.id`.html"
+    imgUrl="http:`$coupon.share_image_url|cdnfix`"}}
+{{/block}}

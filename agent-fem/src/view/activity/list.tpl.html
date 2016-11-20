@@ -1,0 +1,80 @@
+<div class="activity-list">
+    <ui-navbar title="活动列表" :can-back="!!$route.query.organizationId"></ui-navbar>
+    <ui-tabbar></ui-tabbar>
+    <section class="content" data-ptr-distance="44" data-distance="44" v-cloak>
+        <ui-listview v-ref:listview :api="$api.listActivity" :query="query"
+                 ptr-content=".activity-list > .content">
+            <div class="content-block-title">推广活动列表(<span v-text="page.totalCount"></span>)</div>
+            <div class="list-block list-block-card media-list list-block-full" v-if="listData.length">
+                <ul>
+                    <li v-for="activity in listData" track-by="id">
+                        <div v-if="!isExpired(activity.signup_end_time)">
+                            <a href="/api/activity/spread?activityId={{activity.id}}" target="_blank" class="item-link item-content">
+                                <div class="item-media">
+                                    <ui-lazyimage :width="60" :height="60" :src="activity.image|image-cdn '60w_60h_1c_1e.src'" :options="{container: '.activity-list>.content'}"></ui-lazyimage>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title" v-text="activity.name"></div>
+                                    </div>
+                                    <div class="item-subtitle">
+                                        <button v-if="!isExpired(activity.signup_end_time)" type="button" class="pull-right button button-fill button-agent">推广</button>
+                                        <p v-text="activity.activity_time|date 'YYYY.MM.DD HH:mm'"></p>
+                                        <address v-text="activity.organization.name"></address>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div v-else>
+                            <div class="item-content item-expired">
+                                <div class="item-media">
+                                    <ui-lazyimage :width="60" :height="60" :src="activity.image|image-cdn '60w_60h_1c_1e.src'" :options="{container: '.activity-list>.content'}"></ui-lazyimage>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title" v-text="activity.name"></div>
+                                    </div>
+                                    <div class="item-subtitle">
+                                        <button v-if="!isExpired(activity.signup_end_time)" type="button" class="pull-right button button-fill button-agent">推广</button>
+                                        <p v-text="activity.activity_time|date 'YYYY.MM.DD HH:mm'"></p>
+                                        <address v-text="activity.organization.name"></address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-extra item-inner" v-if="activity.awards.length">
+                            <dl class="award">
+                                <dt class="icon-c-coin">活动奖励：</dt>
+                                <dd v-for="award in activity.awards">
+                                    <span v-if="award.stage == consts.STAGE_SIGNUP">
+                                        每个有效客户<em class="stage-signup">报名奖励</em>
+                                    </span>
+                                    <span v-if="award.stage == consts.STAGE_DEAL">
+                                        每个有效客户<em class="stage-deal">成交奖励</em>
+                                    </span>
+                                    <span v-if="award.type == consts.AWARD_CASH">
+                                        <span class="currency">{{award.amount/100|currency '￥' 2}}</span>元现金
+                                    </span>
+                                    <span v-if="award.type == consts.AWARD_VOUCHER">
+                                        优惠券一张
+                                    </span>
+                                </dd>
+                            </dl>
+                            <div v-for="award in activity.awards">
+                                <dl class="coupon" v-if="award.type == consts.AWARD_VOUCHER">
+                                    <dt v-text="award.stage == consts.STAGE_SIGNUP ? '报名奖励' : '成交奖励'"></dt>
+                                    <dd>
+                                        <ui-voucher mode="tiny" :voucher="award.voucher"></ui-voucher>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center" v-else>
+                <p class="ui-txt-info">无活动</p>
+            </div>
+        </ui-listview>
+    </section>
+</div>

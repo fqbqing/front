@@ -1,0 +1,64 @@
+.my-index {
+    .profile {
+        height: 170px;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: url(./img/car_bg.png) no-repeat center center;
+        background-color: @color-primary;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+        .user-info {
+            padding: 10px 0;
+            height: 110px;
+            position: relative;
+        }
+        .btn-logout {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: none;
+            border: none;
+            font-size: .8rem;
+        }
+        .row {
+            background: #fff;
+            color: #333;
+            .hairline(bottom, @listBlockBorderColor);
+            font-size: 13px;
+            position: relative;
+            margin: 0;
+            height: 70px;
+            .col-50 {
+                width: 50%;
+                margin: 10px 0;
+                position: relative;
+                &:first-child {
+                    .hairline(right, @listBlockBorderColor);
+                }
+            }
+            .stat-value {
+                font-size: 12px;
+            }
+            i {
+                font-size: 20px;
+                font-style: normal;
+                margin-right: 4px;
+            }
+            p {
+                margin: 0;
+                color: #666;
+            }
+        }
+    }
+    > .content {
+        top: 130px;
+    }
+    .forbidden-label {
+        font-size: 12px;
+        color: @color-danger;
+    }
+}

@@ -1,0 +1,34 @@
+<!-- target: TPL_organization_pay -->
+<div class="organization-pay bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>4S店管理</span>
+        <span class="divider">/</span>
+        <span class="active">支付中心</span>
+    </div>
+    <div class="bbmc-content">
+        <h2 class="alipay-wrap-title">车大卖支付服务</h2>
+        <div style="margin: 30px 10px;">
+            <label class="radio-title">收款账户：</label>
+            <div data-ui-type="RadioSelect" data-ui-id="toggleServiceBtn" data-ui-value="${aliPayAccount.merchant_status}"></div>
+            <p v-if="enabled">
+                温馨提示：您已选择支付给自有对公账户，建议先测试能否收款成功，请根据您开通情况进行测试。若不能正常收款，请仔细查看信息配置，如有问题可咨询客服人员，点击测试
+                <a href="javascript:void(0)" @click="testPay">收款测试</a>
+            </p>
+        </div>
+        <div data-ui-type="Tab">
+            <ul data-role="navigator">
+                <li class="ui-tab-item" data-for="weixinpay" data-url="">微信支付开通</li>
+                <li class="ui-tab-item" data-for="alipay" data-url="">支付宝支付开通</li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="ui-tab-panel" title="微信支付" id="weixinpay">
+                    <div data-ui-type="ActionPanel" data-ui-id="weixinpayActionPanel" data-ui-url=""></div>
+                </div>
+                <div class="ui-tab-panel" title="支付宝支付" id="alipay">
+                    <div data-ui-type="ActionPanel" data-ui-id="alipayActionPanel" data-ui-url=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

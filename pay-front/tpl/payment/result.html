@@ -1,0 +1,18 @@
+{{extends file="layout/main.html"}}
+{{block name='title'}}支付结果页{{/block}}
+{{block name='head'}}
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    {{if $status == '2'}}
+    <div class="alert alert-success">支付成功</div>
+    <script>
+        setTimeout(function () {
+            top.location.replace('{{$returnUrl}}');
+        }, 1000);
+    </script>
+    {{else}}
+    <div class="alert alert-danger">支付失败</div>
+    {{/if}}
+</div>
+{{/block}}

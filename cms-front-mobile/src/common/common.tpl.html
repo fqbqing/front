@@ -1,0 +1,47 @@
+<!-- target: TPL_common_listview_load_more -->
+<div class="ui-loading-wrap">
+    <div class="action" v-show="!loading">
+        <button type="button" @click="loadMore" v-if="hasMore">点击加载更多</button>
+        <div class="no-more-content" v-if="!hasMore">没有更多了</div>
+    </div>
+    <div class="loading" v-show="loading">
+        <p><i class="ui-loading"></i> 加载中</p>
+    </div>
+</div>
+
+<!-- target: TPL_common_page_header -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <i class="ui-icon-return" @click="back"></i>
+    <h1>${title}</h1>
+</header>
+<!-- target: TPL_common_page_header_simple -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <h1>${title}</h1>
+</header>
+<!-- target: TPL_common_page_header_with_home -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <i class="ui-icon-return" @click="back"></i>
+    <h1>${title}</h1>
+    <i class="ui-icon-home" @click="redirect('/')"></i>
+</header>
+
+<!-- target: TPL_common_page_footer -->
+<footer class="ui-footer ui-footer-stable ui-border-t data-viewport-bar">
+    <ul class="ui-tiled">
+        <li <!-- if: ${name} == 'home' -->class="active"<!-- /if --> @click="redirect('/')">
+            <div class="ui-icon-home"></div><i>首页</i>
+        </li>
+        <li <!-- if: ${name} == 'tuan' -->class="active"<!-- /if --> @click="redirect('/activities')">
+            <div class="ui-icon-history"></div><i>活动</i>
+        </li>
+        <li <!-- if: ${name} == 'customer' -->class="active"<!-- /if --> @click="redirect('/customer/list')">
+        <div class="ui-icon-wallet"></div><i>客户</i>
+        </li>
+        <li <!-- if: ${name} == 'my' -->class="active"<!-- /if --> @click="redirect('/my/info')">
+            <div class="ui-icon-personal"></div><i>我</i>
+        </li>
+    </ul>
+</footer>
+
+
+

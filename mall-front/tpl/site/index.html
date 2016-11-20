@@ -1,0 +1,120 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}{{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/site/index.css">
+{{/block}}
+{{block name="body"}}
+
+<div class="">
+    <div class="carousel" data-ui-type="carousel">
+        <ul class="carousel-list">
+            {{foreach $bannerList as $banner}}
+            <li>
+                <a target="_blank" {{if $banner['url'] != null}} href="{{$banner['url']}}" {{else}} href="/mall-activity/?activityId={{$banner['id']}}" {{/if}}>
+                    <img src="{{$banner['image']|cdn}}">
+                </a>
+            </li>
+            {{/foreach}}
+        </ul>
+    </div>
+</div>
+<div class="bg-white">
+    <div class="container">
+        <ul class="list-media brand clearfix">
+            <li class="xb3 xm3 xs3 xl3">
+                <div class="media media-x">
+                    <div class="media-image">
+                        <img src="/static/images/ad-1.png" class="radius">
+                    </div>
+                    <div class="media-body">
+                        <strong>价格给力</strong>
+                        <p>在众多商家中挑选价格最具优势的商家合作，保证给力</p>
+                    </div>
+                </div>
+            </li>
+            <li class="xb3 xm3 xs3 xl3">
+                <div class="media media-x">
+                    <div class="media-image">
+                        <img src="/static/images/ad-2.png" class="radius">
+                    </div>
+                    <div class="media-body">
+                        <strong>订金随时退</strong>
+                        <p>购车过程中有任何不满意，订金随时可退</p>
+                    </div>
+                </div>
+            </li>
+            <li class="xb3 xm3 xs3 xl3">
+                <div class="media media-x">
+                    <div class="media-image">
+                        <img src="/static/images/ad-3.png" class="radius">
+                    </div>
+                    <div class="media-body">
+                        <strong>认证商家</strong>
+                        <p>合作经销商全部为正规4S店，入驻时会严格审核其资质</p>
+                    </div>
+                </div>
+            </li>
+            <li class="xb3 xm3 xs3 xl3">
+                <div class="media media-x">
+                    <div class="media-image">
+                        <img src="/static/images/ad-4.png" class="radius">
+                    </div>
+                    <div class="media-body">
+                        <strong>省心省力</strong>
+                        <p>不用再东奔西走挨家砍价，线上付定金线下提车省心省力</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!--<div class="brand-detail"></div>-->
+    </div>
+</div>
+<div class="container">
+    <h2 class="active-title"><span class="badge-corner padding-right padding-big-left">热门活动 <!--<span class="badge bg-red">荐</span>--></span></h2>
+    <div class="line-middle hot-activity">
+        {{foreach $hotActivity as $activity}}
+        <div class="xb12 xm12 xs12 xl12 margin-bottom hot-item">
+            <a target="_blank" {{if $activity['url'] != null}} href="{{$activity['url']}}" {{else}} href="/mall-activity/?activityId={{$activity['id']}}" {{/if}}>
+                <img src="{{$activity['image']|cdn}}" alt="" width="100%" height="100%">
+            </a>
+        </div>
+        {{foreachelse}}
+        <div class="text-center margin-large">暂无活动</div>
+        {{/foreach}}
+    </div>
+    <h2 class="active-title"><span class="badge-corner padding-right padding-big-left">特卖推荐</span></h2>
+    <div class="line-middle">
+        {{foreach $discounts as $discount}}
+        <div class="xb3 xm4 xs4 xl6 margin-bottom">
+            <div class="good-container">
+                <div class="good-image">
+                    <a target="_blank" href="/good/detail?goodId={{$discount.id}}">
+                        <img data-original="{{$discount.defaultImage|cdn}}">
+                    </a>
+                </div>
+                <div class="good-body">
+                    <h2 title="{{$discount.name}}">
+                        <a target="_blank" href="/good/detail?goodId={{$discount.id}}">{{$discount.name}}</a>
+                    </h2>
+                    <p class="good-tags">
+                        {{foreach $discount['tags'] as $tag}}
+                        <a href="javascript:void(0);" class="good-tag">{{$tag['name']}}</a>
+                        {{/foreach}}
+                    </p>
+                    <p class="good-market-price"><del>市场价：<em class="icon-rmb">{{$discount.market_price/1000000}}</em>万元</del></p>
+                    <p class="good-price"><em class="icon-rmb">{{$discount.low_price/1000000}}</em>万元</p>
+                </div>
+            </div>
+        </div>
+        {{foreachelse}}
+        <div class="text-center margin-large">暂无商品</div>
+        {{/foreach}}
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/site/index.js"></script>
+{{/block}}

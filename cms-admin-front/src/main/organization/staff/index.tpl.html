@@ -1,0 +1,56 @@
+<!-- target: TPL_organization_staff_index -->
+<div class="organization-staff-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">员工</span>
+    </div>
+
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="staff",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="group-tree">
+                    <div class="ui-row">
+                        <h1>组织结构</h1>
+                    </div>
+                    <ul class="group-nav">
+                        <staff-item
+                                v-ref:grouptree
+                                group-type="user-group"
+                                :state="treeState"
+                                :model="treeData">
+                        </staff-item>
+                    </ul>
+                </div>
+                <div class="group-staff">
+                    <div class="ui-row">
+                        <div class="ui-group">
+                            <button type="button" data-ui-type="Button" data-ui-skin="primary" data-ui-id="addGroupStaff"
+                                    v-show="isAllow('user-company.add') && selectedGroupItem && selectedGroupItem.level > 0">
+                                <i class="icon-plus"></i>增加组内员工
+                            </button>
+                        </div>
+                        <h1><i v-text="selectedGroup.name"></i> - 人员信息</h1>
+                    </div>
+                    <div class="list-table">
+                        <div data-ui-type="Table" data-ui-id="table" data-ui-datasource="@staffData.data"
+                             data-ui-extension-tip-type="TableTip"
+                             data-ui-extension-command-type="Command">
+                        </div>
+                    </div>
+                    <div class="list-table-footer">
+                        <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                             data-ui-count="@staffData.totalCount" data-ui-page="@staffData.pageNo" data-ui-page-
+                             size="@staffData.pageSize"
+                             data-ui-layout="alignRight" class="pager">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

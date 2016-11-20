@@ -1,0 +1,89 @@
+<!-- target: TPL_tuan_edit_gift -->
+<div class="tuan-edit-gift bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <a href="#/tuan/list">团购列表</a>
+        <span class="divider">/</span>
+        <span class="active">多重好礼</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/tuan/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/edit/gift~id=${id}">多重好礼</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/signup~id=${id}">报名信息</a></li>
+                <li class="ui-tab-item" v-if="formData.is_coupon > 0"><a href="#/tuan/edit/coupon~id=${id}">优惠信息</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="bbmc-detail tuan-form">
+                    <div class="form-body">
+                        <div class="form-row">
+                            <div class="form-key  form-key-required">多重好礼：</div>
+                            <div class="form-value">
+                                <div class="form-extra">（标题不超过20个字符，描述不超过50个字符）</div>
+                                <div v-show="gifts.length">
+                                    <div class="form-row"  v-for="gift in gifts">
+                                        <esuibox>
+                                            <div class="form-value">
+                                                <div class="form-row">
+                                                    <div class="form-key">标题</div>
+                                                    <div class="form-value">
+                                                        <div
+                                                                v-esui="gift.title"
+                                                                data-ui-type="TextBox"
+                                                                data-ui-required="required"
+                                                                data-ui-max-length="20"
+                                                                data-ui-width="350"
+                                                                data-ui-value="{{gift.title}}"
+                                                                data-ui-name="title"
+                                                                ></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key">描述</div>
+                                                    <div class="form-value">
+                                                        <div
+                                                                v-esui="gift.content"
+                                                                data-ui-type="TextBox"
+                                                                data-ui-required="required"
+                                                                data-ui-max-length="50"
+                                                                data-ui-width="350"
+                                                                data-ui-value="{{gift.content}}"
+                                                                data-ui-name="content"></div>
+                                                    </div>
+                                                </div>
+                                                <button v-show="gifts.length > 1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeGift($index)">删除</button>
+                                            </div>
+                                        </esuibox>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key"></div>
+                                    <div class="form-value">
+                                        <button data-ui-type="Button" data-ui-id="addGiftBtn" data-ui-skin="danger" type="button" id="addGiftBtn">
+                                            <i class="icon-plus"></i>增加多重好礼
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

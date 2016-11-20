@@ -1,0 +1,42 @@
+<!-- target: TPL_my_changepwd -->
+<div class="my-changepwd">
+    <!-- use: TPL_common_page_header(title="修改密码") -->
+    <!-- use: TPL_common_page_footer(name="my") -->
+    <section class="ui-container">
+        <div class="ui-tips ui-tips-warn">
+            <i></i><span>温馨提示：<br>请安全设置密码，不要将密码设置为个人财产密码!</span>
+        </div>
+        <div class="ui-flex ui-flex-pack-center ui-flex-align-center" style="min-height: 40px;">
+            <p class="ui-txt-highlight" v-if="!error && user.needPasswordChange">初次登录，请修改初始密码</p>
+            <p class="error" v-text="error" v-if="error"></p>
+        </div>
+        <div class="ui-form ui-border-t">
+            <form @submit.prevent="submit">
+                <!--<div class="ui-form-item ui-form-item-show ui-border-b">-->
+                    <!--<label>帐号</label>-->
+                    <!--<input type="text" value="18611081833" readonly>-->
+                <!--</div>-->
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="originpwd">原密码</label>
+                    <input id="originpwd" v-model="originpwd" type="password" placeholder="请输入原有的密码">
+                    <a href="#" tabindex="-1" class="ui-icon-close" v-show="originpwd" @click.prevent="originpwd=''"></a>
+                </div>
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="newpwd">新密码</label>
+                    <input id="newpwd" v-model="newpwd" type="password" placeholder="请输入要修改的新密码">
+                    <a href="#" tabindex="-1" class="ui-icon-close" v-show="newpwd" @click.prevent="newpwd=''"></a>
+                </div>
+                <div class="ui-form-item ui-form-item-show ui-border-b">
+                    <label for="confirmpwd">确认新密码</label>
+                    <input id="confirmpwd" v-model="confirmpwd" type="password" placeholder="请再次确认新密码">
+                    <a href="#" tabindex="-1" class="ui-icon-close" v-show="confirmpwd" @click.prevent="confirmpwd=''"></a>
+                </div>
+                <!-- 加一个隐藏的button，以支持`回车`提交表单 -->
+                <button style="display: none;"></button>
+            </form>
+        </div>
+        <div class="ui-btn-wrap">
+            <button class="ui-btn ui-btn-danger ui-btn-lg" @click="submit">确认修改</button>
+        </div>
+    </section>
+</div>

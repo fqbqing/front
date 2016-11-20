@@ -1,0 +1,141 @@
+<!-- target: TPL_aggregate_add_child -->
+<div class="aggregate-add bbmc-content-wrap">
+<form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+    <div class="form-block">
+        <div class="form-body">
+            <div class="form-row">
+                <div class="form-key">地区：</div>
+                <div class="form-value">
+
+                    <input data-ui-id="province_id"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="province_id"
+                           data-ui-value="{{province_id}}" hidden/>
+
+                    <span v-text="province_id|province_format province"></span>
+
+                    <!--<select data-ui-type="Select" data-ui-id="province_id" data-ui-name="province_id" data-ui-value="@formData.province_id">-->
+                        <!--&lt;!&ndash; for: ${province} as ${pr} &ndash;&gt;-->
+                        <!--<option value="${pr.id}">${pr.name}</option>-->
+                        <!--&lt;!&ndash; /for &ndash;&gt;-->
+                    <!--</select>-->
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-key">广告位：</div>
+                <div class="form-value">
+
+                    <input data-ui-id="place"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="place"
+                           data-ui-value="{{place}}" hidden/>
+
+                    <span v-text="place|ad_place_format ad_place"></span>
+
+                    <!--<select data-ui-type="Select" data-ui-id="place" data-ui-name="place" data-ui-value="@formData.place">-->
+                        <!--&lt;!&ndash; for: ${ad_place} as ${pl} &ndash;&gt;-->
+                        <!--<option value="${pl.value}">${pl.text}</option>-->
+                        <!--&lt;!&ndash; /for &ndash;&gt;-->
+                    <!--</select>-->
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-key">推广平台：</div>
+                <div class="form-value">
+
+                    <input data-ui-id="platform"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="platform"
+                           data-ui-value="{{platform}}" hidden/>
+                    <span v-text="platform == 1 ? 'PC端' : '移动端'"></span>
+
+
+                    <!--<select data-ui-type="Select" data-ui-id="platform" data-ui-name="platform" data-ui-value="@formData.platform">-->
+                        <!--<option value="1">PC端</option>-->
+                        <!--<option value="2">移动端</option>-->
+                    <!--</select>-->
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-key form-key-required">推广链接：</div>
+                <div class="form-value">
+                    <input data-ui-id="url"
+                        data-ui-type="TextBox"
+                        data-ui-required="required"
+                        data-ui-validateurl="validateurl"
+                        name="url"
+                        data-ui-value="@formData.url" />
+                    <button type="button" data-ui-type="Button" data-ui-skin="link" data-ui-id="makeChanel"
+                            v-show="isAllow('ad.add')">生成平台渠道</button>
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-key form-key-required">推广图片：</div>
+                <div class="form-value">
+                    <div data-ui-type="WebUploader"
+                         data-ui-hint="请选择封面图片（大小不超过2M,尺寸：750*480px）"
+                         data-ui-name="image_id"
+                         data-ui-value="@formData.image_id"
+                         data-ui-id="uploaderCover">选择文件</div>
+                    <div class="form-extra">
+                        <div class="preview cover-image" id="previewcover">
+                            <!-- if: ${formData.image_url}-->
+                            <img src="${formData.image_url}" alt="预览图片">
+                            <!-- /if-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-key form-key-required">推广标题：</div>
+                <div class="form-value">
+                    <input data-ui-id="title"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="title"
+                           data-ui-value="@formData.title" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">副标题：</div>
+                <div class="form-value">
+                    <input data-ui-id="desc"
+                           data-ui-type="TextBox"
+                           name="desc"
+                           data-ui-value="@formData.desc" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key form-key-required">排序：</div>
+                <div class="form-value">
+                    <input data-ui-id="weight"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           data-ui-number="number"
+                           name="weight"
+                           data-ui-value="@formData.weight" />
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+</form>
+
+
+</div>
+<!-- target: TPL_aggregate_add -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>聚合推广管理</span>
+    <span class="divider">/</span>
+    <span class="active"><!-- if: ${id} -->修改<!-- else -->添加<!-- /if -->推广</span>
+</div>
+<!-- import: TPL_aggregate_add_child -->

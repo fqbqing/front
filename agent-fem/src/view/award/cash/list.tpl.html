@@ -1,0 +1,81 @@
+<div class="award-cash-list">
+    <ui-listview v-ref:listview :api="$api.listOrder"
+                 :query="{awardType: consts.AWARD_CASH, status: consts.AWARD_STATUS_AUDITED}"
+                 ptr-content=".award-index > .content">
+        <div class="list-block media-list list-block-stat inset">
+            <ul>
+                <li>
+                    <a v-link="{path:'/award/cash/organization/total'}" class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title">总现金收益(元)</div>
+                            <div class="item-text item-text-large">
+                                <i v-text="stat.total/100|currency '￥' 2">0</i>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block list-block-stat inset">
+            <ul>
+                <li>
+                    <a v-link="{path:'/award/cash/organization/toWithdraw'}" class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title">可提现收益(元)</div>
+                            <div class="item-after">
+                                <i v-text="stat.toWithdraw/100|currency '￥' 2">0</i>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a v-link="{path:'/award/cash/withdraw-list'}" class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title">提现中收益(元)</div>
+                            <div class="item-after">
+                                <i v-text="stat.withdrawApply/100|currency '￥' 2">0</i>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a v-link="{path:'/award/cash/organization/withdrew'}" class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title">已提现收益(元)</div>
+                            <div class="item-after">
+                                <i v-text="stat.withdrew/100|currency '￥' 2">0</i>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block-title">收益明细</div>
+        <div class="list-block list-block-full inset" v-if="listData.length">
+            <ul class="cash-order">
+                <li v-for="order in listData">
+                    <div class="iitem-link item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">
+                                    <div v-if="order.stage==consts.STAGE_SIGNUP">报名收益</div>
+                                    <div v-if="order.stage==consts.STAGE_DEAL">成交收益</div>
+                                </div>
+                                <div class="item-subtitle">
+                                    <div v-text="order.organization.name"></div>
+                                    <time v-text="order.created_time|date 'YYYY.MM.DD HH:mm'"></time>
+                                </div>
+                            </div>
+                            <div class="item-after">
+                                {{order.amount/100|currency '￥' 2}}元
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center" v-else>
+            <p class="ui-txt-info">暂无收益</p>
+        </div>
+    </ui-listview>
+</div>

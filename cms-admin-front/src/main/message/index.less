@@ -1,0 +1,51 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.message-index {
+    .message-wrap {
+        float: left;
+        width: 330px;
+        .message-list {
+            margin: 10px 0;
+            border: 1px solid #26323c;
+            li {
+                padding: 1px 10px 10px 10px;
+                &:nth-child(odd) {
+                    background: #2D3B46;
+                }
+                h4 {
+                    margin: 10px 0
+                }
+                small {
+                    color: #aaa
+                }
+            }
+        }
+    }
+    .message-add, .message-detail {
+        overflow: hidden;
+    }
+    .list-table-footer {
+        overflow: visible;
+    }
+    .pager-count {
+        display: none;
+    }
+    .ui-tab {
+        position: relative;
+    }
+    .add-msg-btn {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+    .no-content-tip {
+        min-height: 300px;
+        padding-top: 20px;
+        text-align: center;
+        color: #999;
+    }
+
+}

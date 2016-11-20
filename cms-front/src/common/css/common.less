@@ -1,0 +1,96 @@
+// override ESF-MS settings
+@sys-logo-width: 160px;
+@sys-logo-height: 60px;
+@sys-nav-height: 27px;
+@sys-nav-item-bg-gradient: false;
+@sys-nav-item-color: #FFFFFF;
+@sys-nav-item-color-current: #FFF;
+@sys-nav-item-border-top-length: 0;
+
+// custom global variables
+@sys-blue-color: #3291DA;
+@sys-blue-hover-color: @sys-blue-color;
+@sys-blue-active-color: @sys-blue-color;
+@sys-disabled-bg-color: #999;
+
+// override framework variables
+@bat-link-color: @sys-blue-color;
+@bat-link-hover-color: @sys-blue-hover-color;
+/**
+ * 全局变量及样式
+ */
+
+/* 状态颜色 */
+// .my-status-active {
+//     color: @bat-success-color;
+// }
+
+// .my-status-denied {
+//     color: @bat-warning-color;
+// }
+body, html {
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+img{border:0;vertical-align:bottom;}
+::-webkit-input-placeholder{color:#999;}
+:-moz-placeholder{color:#999;}
+::-moz-placeholder{color:#999;}
+:-ms-input-placeholder{color:#ccc;}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0;}
+textarea{overflow:auto;}
+
+input:focus,textarea:focus,button:focus,select:focus{outline:none;}
+input::-ms-clear{display:none;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}
+
+ul, dd {
+    margin: 0;
+    padding: 0;
+}
+// 团购状态
+.tuan-status, .status-label-hl {
+    margin: 0 8px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    display: inline-block;
+}
+.tuan-status-online, .status-label-hl {
+    color: #fff;
+    background: @bb-main-color;
+}
+.tuan-status-offline {
+    color: #fff;
+    background: #999;
+}
+
+// 客户分级
+// ---------------------------------
+.customer-rating-h {
+    background: #00aaef;
+}
+.customer-rating-a {
+    background: #f70404;
+}
+.customer-rating-b {
+    background: #ff6200;
+}
+.customer-rating-c {
+    background: #ff8903;
+}
+.customer-rating-d {
+    background: #bababa;
+}
+.customer-rating-f {
+    background: #bababa;
+}
+.customer-rating-o {
+    background: #84d000;
+}
+.customer-rating-none {
+    background: #bbb;
+}

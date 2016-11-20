@@ -1,0 +1,98 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="item"}}
+    {{assign var="HEADER_FIXED_STYLE" value=""}}
+{{/block}}
+{{block name="title"}}{{$good[0]['name']}} - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/good/item.css">
+{{/block}}
+{{block name="body"}}
+<div class="container detail-container padding-big margin-big-top">
+    <div class="line">
+        <div class="xm5 xs12 xl12 item-images">
+            <div class="margin-big">
+                <div class="item-show">
+                    <img src="{{$good[0].defaultImage|cdn}}" alt="" id="img-show">
+                </div>
+                <div class="thumb margin-big-bottom">
+                    <div class="pager-prev icon-angle-left"></div>
+                    <div class="pager-next icon-angle-right"></div>
+                    <div class="item-wrap">
+                        <ul class="">
+                            {{foreach $good[0].images as $image}}
+                            <li class="item">
+                                <div class="item-inner">
+                                    <img src="{{$image|cdn}}">
+                                </div>
+                            </li>
+                            {{/foreach}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xm7 xs12 xl12">
+            <div class="margin-left good-detail">
+                <h2 class="text-18 margin-15-bottom margin-15-top good-name"><span>{{$good[0]['name']}}</span></h2>
+                <p class="good-tags">
+                    {{foreach $good[0]['tags'] as $tags}}
+                    <span class="good-tag" data-id="{{$tags['id']}}">{{$tags['name']}}</span>
+                    {{/foreach}}
+                </p>
+                <div class="item-price radius padding-big">
+                    <span><strong class="text-large text-dot icon-rmb price" id="price"></strong>万元</span>
+                    <del class="margin-big-left margin-big-right text-gray">厂商指导价: <em id="marketPrice">{{$good[0].market_price/1000000}}</em>万元</del>
+                    <span>省:<em class="text-big discount" id="discount"></em>万元</span>
+                </div>
+
+                <div class="specification">
+                    {{foreach $good[0].specifications as $spec}}
+                    <div class="specification-item">
+                        <label class="specification-name">{{$spec.name}}：</label>
+                        <div class="specification-list" id="meta_{{$spec.id}}"></div>
+                    </div>
+                    {{/foreach}}
+                </div>
+                <div class="margin-big-top margin-big-bottom">
+                    <button class="button bg-red button-big buybtn padding-large-left padding-large-right" type="button">立即抢购</button>
+                    <span class="margin-left">库存信息：<em class="text-yellow margin-left" id="stock">-</em></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-layout" id="navbar-part">
+    <div class="container nav-navicon nav-navicon good-config">
+        <div class="navbar-action hidden-l">
+            <button class="button bg-red buybtn" type="button">立即抢购</button>
+        </div>
+        <ul class="nav nav-inline nav-menu spy clearfix">
+            {{foreach $good[0].details as $detail}}
+            <li><a href="javascript:void(0);" data-target="#info{{$detail.id}}">{{$detail.title}}</a></li>
+            {{/foreach}}
+        </ul>
+    </div>
+</div>
+
+
+<div class="container detail-desc-wrap bg-white margin-big-bottom">
+    {{foreach $good[0].details as $detail}}
+    <div class="anchor" id="info{{$detail.id}}"></div>
+    <!--<h4 class="detail-title icon-caret-right">{{$detail.title}}</h4>-->
+    <div class="detail-content">
+        {{$detail.content|default:''|htmlsafe}}
+    </div>
+    {{/foreach}}
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/good/item.js"></script>
+<script>
+$(function (){
+    itemPage.init({
+        info: {{json_encode($good)}}
+    });
+});
+</script>
+{{/block}}

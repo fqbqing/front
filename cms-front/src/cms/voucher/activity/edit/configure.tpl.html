@@ -1,0 +1,74 @@
+<!-- target: TPL_voucher_activity_edit_configure -->
+<div class="voucher-activity-edit-configure bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券活动</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券配置</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/set~id=${id}">优惠活动设置</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/voucher/activity/edit/configure~id=${id}">优惠券配置</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap voucher-activity-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" class="bbmc-detail tuan-form voucher-activity-form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div class="row">
+                            <div v-for="voucher in vouchers" class="col-xs-6">
+                                <div class="voucher-view">
+                                    <a href="javascript:void(0)" @click="removeVoucher($index)" title="移出" class="voucher-del-btn icon-cancel"></a>
+                                    <div class="voucher-info">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <img :src="voucher.image_url|image-cdn '70w_70h_1e_1c_70-1ci.png'" alt="">
+                                                </td>
+                                                <td width="70%">
+                                                    <h2>{{voucher.name}}</h2>
+                                                    <p>{{voucher.brief}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="voucher-desc">
+                                        <dl>
+                                            <dt>有效时间：</dt>
+                                            <dd>
+                                                <span v-if="voucher.start_time>0">{{voucher.start_time|date 'YYYY年MM月DD日'}}~{{voucher.end_time|date 'YYYY年MM月DD日'}}</span>
+                                                <span v-else>永久有效</span>
+                                            </dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>优惠券张数：</dt>
+                                            <dd>{{voucher.count}}</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <button data-ui-type="Button" data-ui-id="addVoucherBtn" data-ui-skin="danger" type="button">
+                                    <i class="icon-plus"></i>增加优惠券
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

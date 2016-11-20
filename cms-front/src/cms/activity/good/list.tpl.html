@@ -1,0 +1,30 @@
+<!-- target: TPL_activity_good_list -->
+<div class="activity-good-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/activity/list">活动列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">关联商品管理</span>
+    </div>
+    <h1>活动：${activity.name}</h1>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button data-ui-type="Button" data-ui-id="addGoodBtn" data-ui-skin="primary" type="button">
+                <i class="icon-plus"></i>按商品添加
+            </button>
+            <button data-ui-type="Button" data-ui-id="addCategoryBtn" data-ui-skin="primary" type="button">
+                <i class="icon-plus"></i>按分类添加
+            </button>
+        </div>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button data-ui-type="Button" data-ui-id="deleteBtn" data-ui-skin="warn" type="button">
+                <i class="icon-trash-empty"></i>删除
+            </button>
+        </div>
+    </div>
+</div>

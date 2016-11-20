@@ -1,0 +1,154 @@
+<!-- target: TPL_site_index -->
+<div class="site-index">
+    <!-- use: TPL_common_page_header_simple(title="营销管理系统") -->
+    <!-- use: TPL_common_page_footer(name="home") -->
+    <section class="ui-container" v-cloak>
+        <section class="ui-blank-panel">
+            <div class="header-wrap">
+                <h2 class="organization-text" v-if="user" v-text="user.group.organization_name" :class="{'organization-text-hide':isSearchActive}"></h2>
+                <div class="search" id="headerSearch" :class="{'search-active':isSearchActive}">
+                    <div class="content">
+                        <input type="text" placeholder="按手机号搜索" autocomplete="off" name="phone" v-model="phone" @keyup.enter="search">
+                        <button type="button" class="ui-icon-search icon-search" @click="search"></button>
+                    </div>
+                </div>
+            </div>
+            <ul class="ui-list ui-list-stat ui-border-tb">
+                <li>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li class="ui-border-r" @click="redirect('/customer/list')">
+                            <i v-text="summary.customer_total_num"></i><div class="ui-link-color">客户</div>
+                        </li>
+                        <li @click="scanQRCode" v-if="env.browser.wechat">
+                            <i style="font-size: 60px;" class="ui-icon-scan"></i><div class="ui-link-color">扫一扫</div>
+                        </li>
+                        <li v-else><div>请在微信中<br>使用扫码核销</div></li>
+                    </ul>
+                </li>
+                <li class="ui-border-t stat-bottom">
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><span>今日新增</span><i v-cloak>{{summary.customer_today_num|dft 0}}<span>个</span></i></li>
+                        <li class="ui-arrowlink" @click="redirect('/customer/track')"><span>今日跟进</span><i v-cloak>{{summary.customer_track_today_num|dft 0}}<span>次</span></i></li>
+                    </ul>
+                </li>
+                <li class="ui-border-t stat-bottom">
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><span>公共客户</span></li>
+                        <li class="ui-arrowlink" @click="redirect('/customer/public')"><i v-cloak>{{summary.public_customer_num|dft 0}}<span>个</span></i></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section class="tuan-list" v-if="isLevelAllow('groupon-activity.list')">
+            <h2 class="ui-list-title">当前团购活动</h2>
+            <ul class="ui-list ui-list-pure ui-list-link ui-border-tb" v-if="groupons && groupons.length>0">
+                <li :class="{'ui-border-t':$index>0}"
+                    v-for="groupon in groupons"
+                    @click="redirect('/groupon/activity/detail?id=' + groupon.id)">
+                    <h3>
+                        {{groupon.name}}
+                    </h3>
+                    <p>
+                        活动时间：<i v-text="groupon.activity_time|date 'YYYY-MM-DD HH:mm'"></i>
+                        <template v-if="groupon.status==1">
+                            <i class="tuan-status tuan-status-online">上线中</i>
+                        </template>
+                        <template v-else>
+                            <i class="tuan-status tuan-status-offline">已下线</i>
+                        </template>
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="groupon.signup_count"></i><div>报名人数</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+                <p class="ui-txt-info">暂无活动</p>
+            </div>
+        </section>
+        <section class="tuan-list" v-if="isLevelAllow('tuan.list')">
+            <h2 class="ui-list-title">当前旧版团购活动</h2>
+            <ul class="ui-list ui-list-pure ui-list-link ui-border-tb" v-if="tuans && tuans.length>0">
+                <li :class="{'ui-border-t':$index>0}"
+                    v-for="tuan in tuans"
+                    @click="redirect('/tuan/detail?tuan_id=' + tuan.id)">
+                    <h3>
+                        {{tuan.title}}
+                    </h3>
+                    <p>
+                        活动时间：<i v-text="tuan.tuan_time|date 'YYYY-MM-DD HH:mm'"></i>
+                        <template v-if="tuan.status==1">
+                            <i class="tuan-status tuan-status-online">上线中</i>
+                        </template>
+                        <template v-else>
+                            <i class="tuan-status tuan-status-offline">已下线</i>
+                        </template>
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="tuan.order_count"></i><div>全部订单</div></li>
+                        <li><i class="gray" v-text="tuan.claimed_order_count"></i><div>已认领</div></li>
+                        <li><i class="gray" v-text="tuan.unclaimed_order_count"></i><div>未认领</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+                <p class="ui-txt-info">暂无活动</p>
+            </div>
+        </section>
+
+        <section class="tuan-list" v-if="isLevelAllow('activity.list')">
+            <h2 class="ui-list-title">当前优惠券活动</h2>
+            <ul class="ui-list ui-list-pure ui-list-link ui-border-tb" v-if="voucher_activitys && voucher_activitys.length>0">
+                <li :class="{'ui-border-t':$index>0}"
+                    v-for="voucher_activity in voucher_activitys"
+                    @click="redirect('/voucher/activity/detail?id=' + voucher_activity.id + '&status=' + voucher_activity.status)">
+                    <h3>
+                        {{voucher_activity.name}}
+                    </h3>
+                    <p>
+                        <!--活动时间：<br>-->
+                        {{voucher_activity.start_time|date 'YYYY-MM-DD HH:mm'}}至{{voucher_activity.end_time|date 'YYYY-MM-DD HH:mm'}}
+                        <!--<i class="tuan-status tuan-status-online">已上线</i>-->
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="voucher_activity.order_count"></i><div>领券数</div></li>
+                        <li><i class="gray" v-text="voucher_activity.customer_count"></i><div>客户数</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+                <p class="ui-txt-info">暂无活动</p>
+            </div>
+        </section>
+
+        <section class="tuan-list" v-if="isLevelAllow('exhibition-coupon-activity.list')">
+            <h2 class="ui-list-title">当前车展活动</h2>
+            <ul class="ui-list ui-list-pure ui-list-link ui-border-tb" v-if="exhibitions && exhibitions.length>0">
+                <li :class="{'ui-border-t':$index>0}"
+                    v-for="exhibition in exhibitions"
+                    @click="redirect('/exhibition/detail?exhibition_id=' + exhibition.id)">
+                    <h3>
+                        {{exhibition.activity_title}}
+                    </h3>
+                    <p>
+                        活动时间：{{exhibition.activity_start_time|date 'YYYY-MM-DD HH:mm'}}
+                        <i class="tuan-status tuan-status-online">已上线</i>
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="exhibition.order_count"></i><div>全部订单</div></li>
+                        <li><i class="gray" v-text="exhibition.claimed_order_count"></i><div>已认领</div></li>
+                        <li><i class="gray" v-text="exhibition.unclaimed_order_count"></i><div>未认领</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+                <p class="ui-txt-info">暂无活动</p>
+            </div>
+        </section>
+    </section>
+
+</div>

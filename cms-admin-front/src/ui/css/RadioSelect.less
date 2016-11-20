@@ -1,0 +1,67 @@
+/**
+ * @file RadioSelect控件css
+ * @author Yijun Deng(dengyijun@baidu.com)
+ */
+
+
+.ui-radioselect {
+    .clearfix();
+    overflow: hidden;
+    .inline-block();
+    border: 1px solid @bb-main-bgcolor;
+    .border-radius(2px);
+}
+.ui-radio-block {
+    float: left;
+    padding: 0 15px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    //.linear-gradient-background (top, #ffffff, #f6f6f6, #ffffff);
+    background: @bb-main-bgcolor;
+    cursor: pointer;
+    border-right: 1px solid @bb-main-bgcolor;
+
+    &:last-child {
+        border-right: none;
+    }
+}
+
+.ui-radio-disabled {
+    //background-color: #F1F5FD;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.ui-radio-selected {
+    color: #fff;
+    background: @bb-main-bgcolor * 0.8;
+    cursor: default;
+}
+
+
+.arrow-down {
+    position: absolute;
+    top: -17px;
+    width: 0; 
+    height: 0; 
+    border-color: @bb-main-bgcolor transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+    border-width: 10px;
+    display: none;
+
+    i {
+        width: 0; 
+        height: 0;
+        display: block;
+        position: absolute;
+        left: -10px;
+        top: -11px;
+        border-color: #fff transparent transparent transparent;
+        border-style: solid dashed dashed dashed;
+        border-width: 10px;
+    }
+}
+

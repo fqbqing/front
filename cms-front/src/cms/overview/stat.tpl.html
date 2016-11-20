@@ -1,0 +1,84 @@
+<!-- target: TPL_overview_stat -->
+<div class="overview-stat bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>首页</span>
+        <span class="divider">/</span>
+        <span class="active">数据统计</span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bbmc-panel total-kpi">
+                    <div class="bbmc-panel-head">
+                        <h2>关键指标 <small v-text="Date.now()|date '(YYYY-MM-DD)'"></small></h2>
+                    </div>
+                    <div class="bbmc-panel-body">
+                        <div class="row row-compact">
+                            <div class="col-xs-4 data-block">
+                                <p class="stat-value"><em v-text="stat.todayTuanOrderCount + stat.todayGrouponSingupCount"></em></p>
+                                <h3 class="stat-name">新增团购报名</h3>
+                            </div>
+                            <div class="col-xs-4 data-block">
+                                <p class="stat-value"><em v-text="stat.todayVoucherOrderCount"></em></p>
+                                <h3 class="stat-name">新增优惠券领取</h3>
+                            </div>
+                            <div class="col-xs-4 data-block">
+                                <p class="stat-value"><em v-text="stat.todayExhibitionOrderCount"></em></p>
+                                <h3 class="stat-name">新增车展报名</h3>
+                            </div>
+
+                            <div class="col-xs-4 data-block">
+                                <p class="stat-value"><em v-text="stat.todayCustomerCount"></em></p>
+                                <h3 class="stat-name">新增客户</h3>
+                            </div>
+                            <div class="col-xs-4 data-block">
+                                <p class="stat-value"><em v-text="stat.todayCustomerTrackCount"></em></p>
+                                <h3 class="stat-name">客户跟进</h3>
+                            </div>
+                            <div class="col-xs-4 data-block data-block-last">
+                                <p class="stat-value"><em v-text="stat.totalCustomerCount"></em></p>
+                                <h3 class="stat-name">全部客户</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel">
+            <div class="bbmc-panel-head">
+                <h2>关键指标详解</h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="bbmc-panel-content">
+                    <div data-ui-type="DateRangePicker" data-ui-id="dateRange"></div>
+                    <h3>趋势图</h3>
+                    <div data-ui-type="RadioSelect" data-ui-id="kpis"></div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div data-ui-type="Highchart" data-ui-id="kpiChart"></div>
+                        </div>
+                    </div>
+                    <h3>详细数据</h3>
+                    <table class="table table-kpi">
+                        <tr>
+                            <th>日期</th>
+                            <th>团购报名</th>
+                            <th>优惠券领取</th>
+                            <th>车展报名</th>
+                            <th>新增客户</th>
+                            <th>客户跟进</th>
+                        </tr>
+                        <tr v-for="item in kpi | orderBy 'date' -1">
+                            <td v-text="item.date"></td>
+                            <td v-text="item.data.tuanOrderCount + item.data.grouponSignupCount"></td>
+                            <td v-text="item.data.voucherOrderCount"></td>
+                            <td v-text="item.data.exhibitionOrderCount"></td>
+                            <td v-text="item.data.customerCount"></td>
+                            <td v-text="item.data.customerTrackCount"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

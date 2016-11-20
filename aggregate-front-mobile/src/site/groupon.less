@@ -1,0 +1,209 @@
+
+.site-groupon {
+
+    .yj-header {
+        position: relative;
+        padding: 10px;
+        //border-bottom: 1px solid #e5e5e5;
+        .slogan {
+            background: url(../common/images/slogan.png) left center no-repeat;
+            background-size: 139px 17px;
+            width: 139px;
+            height: 28px;
+        }
+        .city {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            height: 28px;
+            line-height: 28px;
+            border: 1px solid #e5e5e5;
+            background: #eee;
+            outline: none;
+            padding: 0 10px 0 8px;
+            border-radius: 3px;
+        }
+    }
+    .banner {
+        position: relative;
+        padding-bottom: 64%;
+        > .swiper-container {
+            width: 100%;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+        }
+        .swiper-slide {
+            img {
+                width: 100%;
+                vertical-align: middle;
+            }
+        }
+        .swiper-pagination {
+            bottom: 10px;
+            text-align: right;
+            width: 100%;
+            padding-right: 10px;
+        }
+        .swiper-slide-footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            height: 60px;
+            h2, h3 {
+                margin: 5px 0;
+                padding: 0 10px;
+                .text-nowrap();
+            }
+            h2 {
+                font-size: 16px;
+            }
+            h3 {
+                font-size: 13px;
+                color: #ddd;
+            }
+        }
+    }
+    .part {
+        h2 {
+            position: relative;
+            font-size: 20px;
+            padding: 5px 15px;
+            margin: 0;
+            border-bottom: 1px solid @x-border-color;
+            &:before {
+                content: '';
+                height: 20px;
+                width: 4px;
+                background: @x-main-color;
+                position: absolute;
+                left: 0;
+                top: 10px;
+            }
+        }
+    }
+    .brand-list {
+        padding: 10px;
+        a {
+            display: inline-block;
+            color: #333;
+            margin: 4px;
+            padding: 0 4px;
+            &.active {
+                color: @x-main-color;
+            }
+        }
+    }
+    .part-list {
+        .clearfix();
+        margin: 0;
+        padding: 0 0 0 10px;
+    }
+    .part-tuan .part-list {
+        border-bottom: 1px solid @x-border-color;
+    }
+    .part-item {
+        list-style: none;
+        margin: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid @x-border-color;
+        &:last-child {
+            border-bottom: none;
+        }
+        .clearfix();
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+        .tuan-item {
+            margin-right: 10px;
+        }
+        .tuan-item-img {
+            //overflow: hidden;
+            background: url(../common/images/car_holder.png) center center no-repeat #eee;
+            position: relative;
+            text-align: center;
+            padding-top: 64%;
+            overflow: hidden;
+            //width: 100px;
+            //height: 64px;
+            //float: left;
+            > a {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+        .tuan-item-img-footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            text-align: left;
+            .time {
+                padding: 0 5px;
+                margin: 0;
+            }
+            .state-valid, .state-invalid {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                padding: 0 8px;
+                color: #fff;
+                font-style: normal;
+                background: @x-main-color;
+                font-size: 12px;
+            }
+            .state-invalid {
+                background: #c5c5c5;
+            }
+        }
+        .tuan-item-detail {
+            //margin-left: 110px;
+            padding-right: 10px;
+            overflow: hidden;
+
+            > h3 {
+                margin: 10px 0 10px;
+                font-size: 16px;
+                line-height: 1.3;
+            }
+            p {
+                color: #666;
+                margin: 0 0 5px;
+                &:last-child {
+                    margin: 0;
+                }
+            }
+            dl {
+                margin: 5px 0;
+                dt {
+                    color: #666;
+                    float: left;
+                }
+                dd {
+                    margin: 0;
+                    color: #666;
+                }
+            }
+        }
+    }
+    .pager {
+        margin: 10px;
+        text-align: center;
+    }
+}
+

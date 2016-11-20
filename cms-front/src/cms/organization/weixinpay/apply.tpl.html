@@ -1,0 +1,214 @@
+<!-- target: TPL_organization_weixinpay_apply -->
+<div class="organization-weixinpay-apply bbmc-content-wrap">
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="pay-form" >
+            <div class="form-block">
+                <div class="form-body">
+                    <div>
+                        <h4 class="form-caption"><span>基本信息</span></h4>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">申请公司名称：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="organization_name"
+                                       data-ui-value="${formData.organization_name}" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">联系人(负责人)姓名：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="manager_name"
+                                       data-ui-value="${formData.manager_name}" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">联系人(负责人)手机号码：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-phone=""
+                                       name="manager_phone"
+                                       data-ui-value="${formData.manager_phone}" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">联系人(负责人)常用邮箱：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-max-length="100"
+                                       data-ui-email=""
+                                       name="manager_mail"
+                                       data-ui-value="${formData.manager_mail}" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">客服电话：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="customer_service_phone"
+                                       data-ui-value="${formData.customer_service_phone}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="form-caption"><span>结算账户信息</span></h4>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">开户名称：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="account_name"
+                                       data-ui-value="${formData.account_name}" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">开户银行：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="bank_name"
+                                       data-ui-value="${formData.bank_name}" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">开户银行城市：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="bank_city"
+                                       data-ui-value="${formData.bank_city}" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">开户支行：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       name="bank_branch_name"
+                                       data-ui-value="${formData.bank_branch_name}" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">银行账号：</div>
+                            <div class="form-value">
+                                <input
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-number=""
+                                       name="bank_account_num"
+                                       data-ui-value="${formData.bank_account_num}" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="form-caption"><span>企业信息</span></h4>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">营业执照照片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="需年检章齐全(当年成立公司除外)，必须为彩色图片(大小不超过2M）"
+                                     name="licence_img_url"
+                                     data-ui-id="uploaderLicenceImgUrl"
+                                     data-ui-value="${formData.licence_img_url}">上传文件</div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewLicenceImgUrl">
+                                        <!-- if: ${formData.licence_img_url}-->
+                                        <img src="${formData.licence_img_url}" alt="预览图片">
+                                        <!-- /if-->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">组织机构代码证照片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="必须为彩色图片(大小不超过2M）；若你的企业三证合一，此处请再次上传营业执照"
+                                     name="code_img_url"
+                                     data-ui-id="uploaderCodeImgUrl"
+                                     data-ui-value="${formData.code_img_url}">上传文件</div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewCodeImgUrl">
+                                        <!-- if: ${formData.code_img_url}-->
+                                        <img src="${formData.code_img_url}" alt="预览图片">
+                                        <!-- /if-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">法人身份证正面照片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="请选择法人身份证正面图片,必须为彩色图片（大小不超过2M）"
+                                     name="identity_card_front_img_url"
+                                     data-ui-id="uploaderIdentityCardFrontImgUrl"
+                                     data-ui-value="${formData.identity_card_front_img_url}">上传文件</div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewIdentityCardFrontImgUrl">
+                                        <!-- if: ${formData.identity_card_front_img_url}-->
+                                        <img src="${formData.identity_card_front_img_url}" alt="预览图片">
+                                        <!-- /if-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">法人身份证反面照片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="法人身份证反面照片,必须为彩色图片（大小不超过2M）"
+                                     name="identity_card_reverse_img_url"
+                                     data-ui-id="uploaderIdentityCardReverseImgUrl"
+                                     data-ui-value="${formData.identity_card_reverse_img_url}">上传文件</div>
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="previewIdentityCardReverseImgUrl">
+                                        <!-- if: ${formData.identity_card_reverse_img_url}-->
+                                        <img src="${formData.identity_card_reverse_img_url}" alt="预览图片">
+                                        <!-- /if-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="button">申请开通</button>
+                            <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal" type="button">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- target: TPL_organization_weixinpay_apply_child -->
+<!-- import: TPL_organization_weixinpay_apply -->
+

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>退款确认单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <style>
+        .list-wrap {
+            width: 800px;
+            padding: 20px;
+            overflow: hidden;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+        .list-title {
+            margin-bottom: 10px;
+        }
+        .list-title h2 {
+            text-align: center;
+        }
+        .list-title span {
+            float: right;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .table th,.table td {
+            text-align: center;
+        }
+        .table th {
+            width: 20%
+        }
+        .table td {
+            width: 30%;
+        }
+        .table th > div, .table td > div {
+            margin: 15px;
+            line-height: 1.5;
+        }
+        p {
+            margin: 0;
+        }
+
+        .download {
+            float: right;
+            padding: 0 10px;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 3px;
+            border: none;
+            background: #0088cc;
+        }
+        @media print {
+            .notprint{
+                display: none;
+            }
+        }
+        .sign-img {
+            max-width: 150px;
+            max-height: 70px;
+            margin: -15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!--[if lt IE 9]>
+<div class="browsehappy">
+    <em>车大卖</em>提醒您，<br>
+    <p>
+        您使用的浏览器已经过时了<br>
+        请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a> 以获取更好的用户体验。
+    </p>
+</div>
+<![endif]-->
+<div class="list-wrap">
+    <div class="list-title">
+        <h2>退款确认单</h2>
+        <p>爱车车(北京)网络科技有限公司 <span>{{$refund.updated_time|date_format:"%Y年%m月%d日"}}</span></p>
+    </div>
+    <table class="table table-kpi" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>
+                <div>
+                    退款金额
+                    <p>Refund Amount</p>
+                </div>
+            </th>
+            <td>
+                <div>
+                    {{$refund.amount/100}}元
+                </div>
+            </td>
+            <th>
+                <div>
+                    收款方
+                    <p>Receiving Side</p>
+                </div>
+            </th>
+            <td>
+                <div>{{$refund.receiving_side}}</div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <div>
+                    大写金额
+                    <p>Amount In Words</p>
+                </div>
+            </th>
+            <td>
+                <div id="amount">{{$refund.amount/100}}</div>
+            </td>
+            <th>
+                <div>
+                    收款账
+                    <p>Payment Account</p>
+                </div>
+            </th>
+            <td>
+                <div>{{$refund.receiving_account}}</div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <div>
+                    经手人
+                    <p>Attention Line</p>
+                </div>
+            </th>
+            <td>
+                <div>{{$refund.handler}}</div>
+            </td>
+            <th>
+                <div>
+                    开户银行
+                    <p>Bank Of Deposit</p>
+                </div>
+            </th>
+            <td>
+                <div>{{$refund.receiving_bank}}</div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <div>
+                    退款事由
+                    <p>Refund Reason</p>
+                </div>
+            </th>
+            <td>
+                <div>
+                    {{$refund.reason}}
+                </div>
+            </td>
+            <th>
+                <div>
+                    收款人签字
+                    <p>Sign The Payee</p>
+                </div>
+            </th>
+            <td><img src="{{$refund.sign}}" alt="" class="sign-img"></td>
+        </tr>
+    </table>
+    <p>操作人：{{$refund.staff_name}}</p>
+    <button type="button" id="download" class="download notprint" style="float:right;margin-top:20px;" onclick="download()">打印退款单</button>
+</div>
+
+<script>
+    function download () {
+        window.print();
+        return ;
+    }
+
+    function capitalMoney(num) {
+        var strOutput = '';
+        var strUnit = '仟佰拾亿仟佰拾万仟佰拾元角分';
+        num += '00';
+        var intPos = num.indexOf('.');
+        if (intPos >= 0) {
+            num = num.substring(0, intPos) + num.substr(intPos + 1, 2);
+        }
+        strUnit = strUnit.substr(strUnit.length - num.length);
+        for (var i=0; i < num.length; i++) {
+            strOutput += '零壹贰叁肆伍陆柒捌玖'.substr(num.substr(i,1),1) + strUnit.substr(i,1);
+        }
+        return strOutput.replace(/零角零分$/, '整')
+                .replace(/零[仟佰拾]/g, '零')
+                .replace(/零{2,}/g, '零')
+                .replace(/零([亿|万])/g, '$1')
+                .replace(/零+元/, '元')
+                .replace(/亿零{0,3}万/, '亿')
+                .replace(/^元/, '零元');
+    }
+    document.getElementById('amount').innerHTML = capitalMoney(document.getElementById('amount').innerHTML);
+</script>
+</body>
+</html>

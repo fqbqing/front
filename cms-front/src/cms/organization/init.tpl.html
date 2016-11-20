@@ -1,0 +1,81 @@
+<!-- target: TPL_organization_init -->
+<div class="organization-init bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>4S店管理</span>
+        <span class="divider">/</span>
+        <span class="active">初始化4S店</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key">4S店名称：</div>
+                    <div class="form-value">
+                        <input
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="organization_name"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">4S店地址：</div>
+                    <div class="form-value">
+                        <input data-ui-id="address"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               name="address"
+                               />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">4S店电话：</div>
+                    <div class="form-value">
+                        <input
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="telephone"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">管理员名称：</div>
+                    <div class="form-value">
+                        <input
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="name"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">管理员职位：</div>
+                    <div class="form-value">
+                        <input
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                name="title"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">管理员手机号：</div>
+                    <div class="form-value">
+                        <input
+                                data-ui-type="TextBox"
+                                data-ui-required="required"
+                                data-ui-phone=""
+                                name="phone"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring"
+                                type="submit">提交
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal"
+                                type="button">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

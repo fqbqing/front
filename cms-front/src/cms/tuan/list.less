@@ -1,0 +1,71 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.tuan-list {
+  .ui-tab-horizontal .ui-tab-navigator {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .aggregate-btn {
+    margin: 0 5px;
+  }
+
+  .ui-togglebutton{
+    width: 60px;
+    height: 22px;
+    line-height: 22px;
+    border: none;
+    background-color: @bce-lightgray-color;
+    .ui-togglebutton-part-off,
+    .ui-togglebutton-part-on{
+      width: 44px;
+      color: #fff;
+    }
+    .ui-togglebutton-part-off {
+      background-color: @bce-lightgray-color;
+      border: 1px solid @bce-lightgray-color;
+    }
+    &:after{
+      top: 1px;
+      color: @bce-lightgray-color;
+    }
+  }
+
+  .ui-togglebutton.ui-togglebutton-checked {
+    border: none;
+    background-color: #8fbb57;
+    &:after{
+      left: 44px;
+      color: #8fbb57;
+    }
+  }
+
+  .ui-togglebutton-disabled {
+    background-color: @bce-lightgray-color;
+    border: none;
+    color: #fff;
+    &:after{
+      color: @bce-lightgray-color;
+    }
+  }
+}
+.tuan-list-dialog-share-content{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  img{
+    -webkit-box-flex: 1;
+  }
+  p{
+    text-align: center;
+  }
+  em{
+    display: block;
+    margin: 10px;
+  }
+
+}

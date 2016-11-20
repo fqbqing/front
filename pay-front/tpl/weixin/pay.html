@@ -1,0 +1,65 @@
+{{extends file="layout/main.html"}}
+{{block name='title'}}微信支付{{/block}}
+{{block name='head'}}
+<link rel="stylesheet" href="./pay.less">
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    <div class="pay-info">
+        <div class="pay-info-item">
+            <p class="pay-amount">应付金额：<em class="glyphicon glyphicon-yen">{{$amount/100}}</em></p>
+            <p class="item">支付项目：<em>{{$orderTitle|escape:'html'|default:''}}</em></p>
+        </div>
+        <div class="pay-info-item">
+            <p class="item">收款方：<em>{{$merchantName|escape:'html'|default:''}}</em></p>
+        </div>
+        <input type="hidden" name="paymentId" value="{{$paymentId}}">
+        <input type="hidden" name="paySign" value="{{$paySign}}">
+    </div>
+    {{if $isInWeixin}}
+    <div class="paying">
+        <div class="alert alert-info text-center">正在支付中…</div>
+    </div>
+    <div class="pay-fail" style="display: none;">
+        <div class="alert alert-danger text-center"></div>
+    </div>
+    <div class="pay-cancel" style="display: none;">
+        <div class="alert alert-warning text-center">已取消支付</div>
+        <div>
+            <button class="btn btn-block btn-pay" type="button" id="rePay">重新支付</button>
+        </div>
+    </div>
+    {{else}}
+    <div class="paytype-container row">
+        <div class="col-md-6">
+            <div class="text-center pay-box">
+                <h2>微信支付</h2>
+                <div class="qrcode">
+                    <div class="qr-img">
+                        <img id="qrcode" src="/static/images/blank.png">
+                    </div>
+                    <div class="tip">
+                        <i class="glyphicon glyphicon-time"></i>二维码有效时长为2小时，请尽快支付
+                    </div>
+                </div>
+                <div class="qrcode-tip"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <img src="./images/wechat-hint.png">
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+{{/block}}
+{{block name="js"}}
+<script>
+    window.isInWeixin = {{json_encode($isInWeixin)}};
+</script>
+<script src="/static/dep/bootstrap/js/modal.js"></script>
+<script src="/static/ui/layer.js"></script>
+<script src="/static/ui/loading.js"></script>
+<script src="pay.js"></script>
+{{/block}}

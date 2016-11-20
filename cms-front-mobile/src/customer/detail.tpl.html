@@ -1,0 +1,149 @@
+<!-- target: TPL_customer_detail -->
+<div class="customer-detail">
+    <!-- use: TPL_common_page_header(title="客户详情") -->
+    <footer class="ui-footer ui-footer-stable ui-border-t" @click="distributeUser">
+        购车顾问：
+        <i v-if="customer.owner" v-text="customer.owner.name"></i>
+        <i v-else>无</i>
+        <i class="ui-icon-arrow" style="float: right;" v-if="isLevelAllow('customer.distribute|customer.distribute-public') && isUserAllow('customer.distribute|customer.distribute-public')"></i>
+    </footer>
+
+    <section class="ui-container" v-cloak>
+        <div class="text-center claimed-customer-wrap" v-if="!customer.owner" v-cloak>
+            <button type="button" class="ui-btn ui-btn-danger claimed-customer-btn" @click="claimedCustomer(customer)">一键认领</button>
+        </div>
+        <ul class="ui-list ui-list-text">
+            <li>
+                <div class="ui-list-info">
+                    <h2 class="customer-name" @click="editName">{{customer.name}}<i class="ui-icon-arrow" v-if="isLevelAllow('customer.update') && isUserAllow('customer.update')"></i></h2>
+                </div>
+                <div class="ui-list-action">
+                    <a href="tel:{{customer.phone}}" v-text="customer.phone"></a>
+                </div>
+            </li>
+        </ul>
+        <ul class="ui-list ui-list-text ui-list-link ui-border-b">
+            <li @click="$refs.gradesheet.showActionSheet">
+                <div class="ui-list-info">
+                    <h4>客户分级</h4>
+                </div>
+                <div class="ui-list-action">
+                    <div class="ui-badge" :class="customer.rating|rating-class">{{customer.rating|dft '未定'}}级</div>
+                </div>
+            </li>
+        </ul>
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li class="current">跟进记录</li>
+                <li>活动记录</li>
+            </ul>
+            <ul class="ui-tab-content" style="width: 200%;">
+                <li class="current">
+                    <!-- import: TPL_customer_detail_track_record -->
+                </li>
+                <li>
+                    <!-- import: TPL_customer_detail_activity_record -->
+                </li>
+            </ul>
+        </div>
+        <actionsheet v-ref:gradesheet title="设置客户分级" :actions="const.CUSTOMER_RATING"></actionsheet>
+    </section>
+</div>
+<!-- target: TPL_customer_detail_track_record -->
+<section class="track-text-wrap">
+    <div class="">
+        <textarea class="track-text" v-model="trackContent" placeholder="记两句..."></textarea>
+        <button class="ui-btn-lg ui-btn-danger" :disabled="trackContent.length==0" @click="addCustomerTrack">添加备注</button>
+    </div>
+</section>
+<listview v-ref:listview :api="api.listCustomerTrack"
+          :page-no="1"
+          :page-size="15"
+          :extra-data="listExtraData"
+          cache-type="mem">
+    <ul class="ui-list ui-list-track ui-list-pure ui-border-tb" v-if="tracks.length">
+        <li v-for="track in tracks" :class="{'ui-border-t':$index>0}">
+            <p class="track-header">
+                <span v-if="track.user" v-text="track.user.name"></span>
+                <span v-else>{{track.user_company_name}}(已删除)</span>
+                <time class="date" title="{{track.created_time|date}}">{{track.created_time|timeago}}</time>
+            </p>
+            <h4 v-if="track.type==1"><span v-text="track.content"></span></h4>
+            <h4 v-if="track.type==2">更新客户等级为<i class="type-rating" v-text="track.content"></i></h4>
+            <h4 v-if="track.type==3">更新客户归属为<i class="type-owner" v-text="track.content"></i></h4>
+            <h4 v-if="track.type==4">更新客户姓名为<i class="type-name" v-text="track.content"></i></h4>
+        </li>
+    </ul>
+    <div v-else class="text-center ui-txt-muted">还没有人跟进过~</div>
+</listview>
+<!-- target: TPL_customer_detail_activity_record -->
+<section v-if="isLevelAllow('groupon-activity') && grouponSignups && grouponSignups.length>0">
+    <h2 class="activity-type">团购报名记录</h2>
+    <div class="order" v-for="signup in grouponSignups">
+        <h2 v-if="signup.activity" v-text="signup.activity.name"></h2>
+        <h2 v-else class="ui-txt-warning">活动可能已删除</h2>
+        <p><time v-text="signup.created_time|date"></time></p>
+        <!--<p><span>意向车型：</span><span v-text="order.intention"></span></p>-->
+        <p v-for="opt in signup.options|signup-option">
+            <span>{{$key}}：</span><span v-text="opt"></span>
+        </p>
+        <p v-if="signup.order">
+            <span>订单状态：</span><span v-text="signup.order.status|voucher-order-status-text"></span>
+        </p>
+        <p v-if="signup.order">
+            <span>支付金额：</span><span v-text="signup.order.amount|currency 2"></span>
+        </p>
+    </div>
+</section>
+
+<section v-if="isLevelAllow('tuan|tuan-order') && tuanOrders && tuanOrders.length>0">
+    <h2 class="activity-type">旧团购活动记录</h2>
+    <div v-if="tuanOrders && tuanOrders.length>0">
+        <div class="order" v-for="order in tuanOrders">
+            <h2 v-if="order.tuan" v-text="order.tuan.title"></h2>
+            <h2 v-else class="ui-txt-warning">活动可能已删除</h2>
+            <p><time v-text="order.created_time|date"></time></p>
+            <p><span>意向车型：</span><span v-text="order.intention"></span></p>
+            <p><span>订单状态：</span><span v-text="order.status|tuan-order-status-text"></span></p>
+        </div>
+    </div>
+    <div class="ui-center" v-else>
+        <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+        <p class="ui-txt-info">暂无活动记录</p>
+    </div>
+</section>
+
+<section v-if="isLevelAllow('activity|voucher-order') && voucherOrders && voucherOrders.length>0">
+    <h2 class="activity-type">优惠券活动记录</h2>
+    <div v-if="voucherOrders && voucherOrders.length>0">
+        <div class="order" v-for="order in voucherOrders">
+            <h2>{{order.voucher.name}} <small>({{order.activity.name}})</small></h2>
+            <p><time v-text="order.created_time|date"></time></p>
+            <p><span>订单状态：</span><span v-text="order.status|voucher-order-status-text"></span></p>
+            <p v-if="order.amount!='0'"><span>支付金额：</span><span v-text="order.amount|currency 2"></span></p>
+        </div>
+    </div>
+    <div class="ui-center" v-else>
+        <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+        <p class="ui-txt-info">暂无活动记录</p>
+    </div>
+</section>
+
+<section v-if="isLevelAllow('exhibition-coupon-activity|exhibition-coupon-order') && exhibitionOrders && exhibitionOrders.length>0">
+    <h2 class="activity-type">车展活动记录</h2>
+    <div v-if="exhibitionOrders && exhibitionOrders.length>0">
+        <div class="order" v-for="order in exhibitionOrders" >
+            <h2 v-if="order.exhibitionCouponActivity" v-text="order.exhibitionCouponActivity.activity_title"></h2>
+            <h2 v-else class="ui-txt-warning">活动可能已删除</h2>
+            <p><time v-text="order.created_time|date"></time></p>
+            <p><span>优惠券状态：</span><span v-text="order.status|exhibition-order-status-text"></span></p>
+        </div>
+    </div>
+    <div class="ui-center" v-else>
+        <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+        <p class="ui-txt-info">暂无活动记录</p>
+    </div>
+</section>
+
+<!-- target: TPL_customer_detail_child -->
+<!-- import: TPL_customer_detail -->

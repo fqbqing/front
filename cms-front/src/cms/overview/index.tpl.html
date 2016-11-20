@@ -1,0 +1,100 @@
+<!-- target: TPL_overview_index -->
+<div class="overview-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>首页</span>
+        <span class="divider">/</span>
+        <span class="active">在线活动</span>
+    </div>
+    <!--<div style="font-size: 20px; margin: 80px auto; text-align: center;">车大卖营销管理系统</div>-->
+
+    <div class="container">
+        <div v-if="isAllow('groupon-activity.list') && isLevelAllow('groupon-activity.list')">
+            <h2>当前团购活动<a href="#/groupon/list">查看全部活动</a></h2>
+            <ul class="row" v-if="groupons && groupons.length>0">
+                <li class="col-xs-4" v-for="tuan in groupons">
+                    <div class="tuan-item">
+                        <h3><a href="#/groupon/detail~id={{tuan.id}}" v-text="tuan.name"></a></h3>
+                        <p>
+                            活动时间：<i v-text="tuan.activity_time|date 'YYYY-MM-DD HH:mm'"></i>
+                            <template v-if="tuan.status==constants.ACTIVITY_STATUS_ONLINE">
+                                <i class="tuan-status tuan-status-online">上线中</i>
+                            </template>
+                        </p>
+                        <ul class="row order-stat">
+                            <li class="col-xs-12"><i class="gray" v-text="tuan.signup_count"></i><div>报名数</div></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div v-else>暂无活动</div>
+        </div>
+        <div v-if="isAllow('tuan.list') && isLevelAllow('tuan.list')">
+            <h2>当前旧团购活动<a href="#/tuan/list">查看全部活动</a></h2>
+            <ul class="row" v-if="tuans && tuans.length>0">
+                <li class="col-xs-4" v-for="tuan in tuans">
+                    <div class="tuan-item">
+                        <h3><a href="#/tuan/detail~tuan_id={{tuan.id}}" v-text="tuan.title"></a></h3>
+                        <p>
+                            活动时间：<i v-text="tuan.tuan_time|date 'YYYY-MM-DD HH:mm'"></i>
+                            <template v-if="tuan.status==constants.ACTIVITY_STATUS_ONLINE">
+                                <i class="tuan-status tuan-status-online">上线中</i>
+                            </template>
+                            <template v-else>
+                                <i class="tuan-status tuan-status-offline">已下线</i>
+                            </template>
+                        </p>
+                        <ul class="row order-stat">
+                            <li class="col-xs-4"><i class="gray" v-text="tuan.order_count"></i><div>全部订单</div></li>
+                            <li class="col-xs-4"><i class="gray" v-text="tuan.claimed_order_count"></i><div>已认领</div></li>
+                            <li class="col-xs-4"><i class="gray" v-text="tuan.unclaimed_order_count"></i><div>未认领</div></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div v-else>暂无活动</div>
+        </div>
+
+        <div >
+            <h2>当前优惠券活动<a href="#/voucher/activity/list">查看全部活动</a></h2>
+            <ul class="row" v-if="vouchers && vouchers.length>0">
+                <li class="col-xs-4" v-for="activity in vouchers">
+                    <div class="tuan-item">
+                        <h3><a href="#/voucher/activity/detail~id={{activity.id}}" v-text="activity.name"></a></h3>
+                        <p>
+                            开始时间：<i>{{activity.start_time|date 'YYYY-MM-DD HH:mm'}}</i>
+                        </p>
+                        <p>
+                            结束时间：<i>{{activity.end_time|date 'YYYY-MM-DD HH:mm'}}</i><i class="tuan-status tuan-status-online">已上线</i>
+                        </p>
+                        <ul class="row order-stat">
+                            <li class="col-xs-6"><i class="gray" v-text="activity.order_count"></i><div>领券数</div></li>
+                            <li class="col-xs-6"><i class="gray" v-text="activity.customer_count"></i><div>客户数</div></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div v-else>暂无活动</div>
+        </div>
+
+        <div v-if="isAllow('exhibition-coupon-activity.list') && isLevelAllow('exhibition-coupon-activity.list')">
+            <h2>当前车展活动<a href="#/exhibition/coupon/activity/list">查看全部活动</a></h2>
+            <ul class="row" v-if="exhibitions && exhibitions.length>0">
+                <li class="col-xs-4" v-for="exhibition in exhibitions">
+                    <div class="tuan-item">
+                        <h3><a href="#/exhibition/coupon/activity/detail~exhibition_id={{exhibition.id}}" v-text="exhibition.activity_title"></a></h3>
+                        <p>
+                            活动时间：<i v-text="exhibition.activity_start_time|date 'YYYY-MM-DD HH:mm'"></i>
+                            <i class="tuan-status tuan-status-online">已上线</i>
+                        </p>
+                        <ul class="row order-stat">
+                            <li class="col-xs-4"><i class="gray" v-text="exhibition.order_count"></i><div>全部订单</div></li>
+                            <li class="col-xs-4"><i class="gray" v-text="exhibition.claimed_order_count"></i><div>已认领</div></li>
+                            <li class="col-xs-4"><i class="gray" v-text="exhibition.unclaimed_order_count"></i><div>未认领</div></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div v-else>暂无活动</div>
+        </div>
+    </div>
+</div>

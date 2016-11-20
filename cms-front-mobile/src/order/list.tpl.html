@@ -1,0 +1,59 @@
+<!-- target: TPL_order_list -->
+<div class="order_list">
+    <header class="ui-header ui-header-stable ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>订单列表</h1>
+        <i class="ui-icon-home" @click="redirect('/')"></i>
+    </header>
+    <section class="ui-container">
+        <div class="ui-searchbar-wrap focus ui-border-b">
+            <div class="ui-searchbar ui-border-radius">
+                <i class="ui-icon-search"></i>
+                <div class="ui-searchbar-input">
+                    <input type="text" v-el:searchbox v-model="phone" @keyup.enter="search" placeholder="按手机号搜索" autocapitalize="off">
+                </div>
+                <i class="ui-icon-close" v-show="phone" @click="phone=''"></i>
+            </div>
+        </div>
+        <ul class="ui-list ui-list-text ui-border-tb">
+            <li>
+                <div class="ui-list-info">
+                    <h4>订单状态</h4>
+                </div>
+                <div class="ui-txt-info ui-select">
+                    <select v-model="status" @change="search">
+                        <option v-for="item in const.ORDER_STATUS"
+                                :selected="item.value==status"
+                                value="{{item.value}}">
+                            {{item.text}}
+                        </option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+        <ul class="ui-list ui-list-pure ui-list-link ui-list-active ui-list-cover">
+            <li class="ui-border-b" v-for="order in orders" @click="showDetail(order)">
+                <p>
+                    单号：<span v-text="order.order_id"></span>
+                    <span class="date">{{order.created_time|date 'MM-DD HH:mm'}}</span>
+                </p>
+                <div class="">
+                    <h5 class="ui-nowrap">{{order.product.name}}</h5>
+
+                    <div class="ui-label-list">
+                        <label class="ui-label-s" v-for="spec in order.product.specification">
+                            {{spec.specificationValue.name}}
+                        </label>
+                    </div>
+                </div>
+                <p>{{order.user_info.user_name}}(<span>{{order.user_info.user_phone}}</span>)</p>
+
+                <p>{{order.status|order-status-text}}({{order.payment|payment-text}})</p>
+            </li>
+        </ul>
+        <div class="ui-loading-wrap" v-show="loading">
+            <p>加载中</p>
+            <i class="ui-loading"></i>
+        </div>
+    </section>
+</div>

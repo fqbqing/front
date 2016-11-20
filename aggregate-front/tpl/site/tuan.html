@@ -1,0 +1,99 @@
+{{extends file="layout/main.html"}}
+{{block name='title'}}{{$city.name}}{{if isset($brand)}} - {{$brand.name}}{{/if}} - 车大卖 - 汽车特卖汇{{/block}}
+{{block name='keywords'}}{{if isset($brand)}}{{$brand.name}}、{{/if}}{{/block}}
+{{block name="head"}}
+<!--<link rel="stylesheet" href="/static/dep/swiper/css/swiper.less">-->
+<link rel="stylesheet" href="/static/dep/swiper/idangerous.swiper.less">
+<link rel="stylesheet" href="./tuan.less">
+{{/block}}
+{{block name="header"}}
+{{include file="include/header.html" type='tuan'}}
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    {{include file="../include/brandlist.html" type="tuan"}}
+    {{if count($adsLeft) + count($adsRight) > 0 && !isset($brand)}}
+    <div class="x-banner">
+        <div class="x-banner-primary">
+            <!-- Swiper -->
+            <div class="swiper-container swiper-container-banner">
+                <div class="swiper-wrapper">
+                    {{foreach $adsLeft as $item}}
+                    <div class="swiper-slide">
+                        <a href="{{$item.url}}" target="_blank">
+                            <img src="{{$item.image_url|cdnfix}}@720w_380h_1e_1c">
+                        </a>
+                        <div class="swiper-slide-footer">
+                            <h2>{{$item.title|escape:"html"}}</h2>
+                            <h3>{{$item.desc|escape:"html"}}</h3>
+                        </div>
+                    </div>
+                    {{/foreach}}
+                </div>
+                {{if count($adsLeft) > 1}}
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination-white"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="x-banner-assist">
+            {{foreach $adsRight as $item}}
+            <div class="item">
+                <a href="{{$item.url}}" target="_blank" title="{{$item.title|escape:'html'}}">
+                    <img src="{{$item.image_url|cdnfix}}@250w_120h_1e_1c" alt="{{$item.title|escape:'html'}}">
+                </a>
+            </div>
+            {{/foreach}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="x-part part-activity">
+        {{if isset($brand)}}
+        <h3>按品牌筛选结果：</h3>
+        {{else}}
+        <h2>热门活动</h2>
+        {{/if}}
+        <ul class="x-part-list">
+            {{foreach $aggregateList.data as $item}}
+            <li class="x-part-item">
+                <div class="tuan-item">
+                    <div class="tuan-item-img">
+                        <a href="{{$item.activity.link}}" target="_blank">
+                            <img src="{{$item.activity.image_url|cdnfix}}@220w_150h_1e_1c" alt="">
+                        </a>
+                        {{if $item.activity.status eq '1'}}
+                        {{if time() < (int)$item.activity.end_time}}
+                        <i class="state-valid">报名中</i>
+                        {{else}}
+                        <i class="state-invalid">已结束</i>
+                        {{/if}}
+                        {{elseif $item.activity.status eq '2'}}
+                        <i class="state-invalid">已下线</i>
+                        {{elseif $item.activity.status eq '0'}}
+                        <i class="state-invalid">未开始</i>
+                        {{/if}}
+                    </div>
+                    <div class="tuan-item-detail">
+                        <h3><a href="{{$item.activity.link}}" title="{{$item.activity.title|escape:'html'}}" target="_blank">{{$item.activity.title|escape:"html"|truncate:30:"...":true}}</a></h3>
+                        <p>已报名人数：{{$item.activity.orderCount}}</p>
+                        <p>活动时间：{{$item.activity.tuan_time|date_format:'%Y年%m月%d日 %H:%M'}}</p>
+                        <p>经销商：{{$item.organization.name|escape:"html"}}</p>
+                    </div>
+                </div>
+            </li>
+            {{/foreach}}
+        </ul>
+        {{if $aggregateList.data|@count == 0}}
+        <p class="not-found-activity">没有找到任何活动，去<a href="/">主页</a>看看吧</p>
+        {{/if}}
+        {{pager pageSize="16" itemCount="`$aggregateList.pagination->totalCount`" curPage="`$smarty.get.pageNo|default:1`" url="?pageNo={page}"}}
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/dep/swiper/idangerous.swiper.js"></script>
+<script src="./tuan.js"></script>
+{{/block}}

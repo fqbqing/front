@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{{assign var="STATIC_URL" value=$smarty.const.STATIC_URL}}
+{{assign var="TITLE_SUFFIX" value="叭叭买车, 天天底价"}}
+{{assign var="MENU_NAME" value=""}}
+{{block name="variable"}}{{/block}}
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="{{block name='keywords'}}叭叭买车 天天底价{{/block}}" />
+    <meta name="description" content="{{block name='description'}}叭叭买车 天天底价{{/block}}" />
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>{{block name='title'}}叭叭买车, 天天底价{{/block}}</title>
+    <script>
+        window.GLOBAL = {};
+        GLOBAL['STATIC_URL'] = '{{$STATIC_URL}}';
+        {{if $app->user->isGuest}}
+        GLOBAL['USER'] = {isGuest:true};
+        {{else}}
+        GLOBAL['USER'] = {
+            isGuest:false,
+            phone: '{{$app->user->getIdentity()->phone}}'
+        };
+        {{/if}}
+    </script>
+    <script src="/static/libs/jquery.js"></script>
+    <script src="/static/libs/pintuer.js"></script>
+    <script src="/static/js/env.js"></script>
+    <script src="/static/libs/bootstrap/base.js"></script>
+    <script src="/static/libs/bootstrap/scrollspy.js"></script>
+    <script src="/static/libs/bootstrap/affix.js"></script>
+    <script src="/static/libs/layer/layer.js"></script>
+    <script src="/static/libs/jquery.lazyload.js"></script>
+    <script src="/static/js/common.js"></script>
+    <link rel="stylesheet" href="/static/css/pintuer.css">
+    <link rel="stylesheet" href="/static/libs/layer/skin/layer.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+
+    {{block name="head"}}{{/block}}
+    <!--[if lt IE 9]>
+    <script src="/static/libs/respond.js"></script>
+    <![endif]-->
+    {{include file="includes/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+{{block name="header"}}
+    {{include file="includes/header.html"}}
+{{/block}}
+{{block name="body"}}{{/block}}
+{{block name="footer"}}
+    {{include file="includes/footer.html"}}
+{{/block}}
+{{block name="floatBar"}}
+<div id="floatBar" class="hidden-s hidden-l">
+    <ul id="contactList">
+        <li id="callUs">
+            <a href="javascript:void(0);" class="icon-phone"></a>
+            <span class="hover-visible"><em>4008-955-088</em></span>
+        </li>
+        <li id="followWeixin">
+            <a href="javascript:void(0);" class="icon-weixin">
+            </a>
+            <div class="hover-visible icon-caret-right"><img src="/static/images/qrcode.png"></div>
+        </li>
+        <li id="totop">
+            <a href="javascript:void(0);" title="返回顶部" class="win-backtop icon-angle-up"></a>
+        </li>
+    </ul>
+</div>
+{{/block}}
+{{block name="js"}}
+{{/block}}
+</body>
+</html>

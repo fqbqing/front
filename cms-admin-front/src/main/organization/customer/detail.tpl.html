@@ -1,0 +1,67 @@
+<!-- target: TPL_organization_customer_detail -->
+<div class="organization-customer-detail bbmc-content-wrap">
+
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">客户</span>
+    </div>
+    <div class="bbmc-content">
+        <dl class="dl-horizontal">
+            <dt>姓名：</dt>
+            <dd>
+                <span id="naming">${userInfo.name}</span>
+            </dd>
+            <dt>手机号：</dt>
+            <dd>${userInfo.phone}</dd>
+            <dt>用户等级：</dt>
+            <dd>
+                <span id="rating">{{userInfo.rating}} {{userInfo.rating | keyToValue }}</span>
+            </dd>
+            <dt>销售顾问：</dt>
+            <dd>
+                <span id="ownerName">
+                    <!-- if: ${userInfo.owner} -->
+                    {{userInfo.owner.name}}
+                    <!-- else -->
+                    无
+                    <!-- /if -->
+                </span>
+            </dd>
+            <dt>所属4s店：</dt>
+            <dd>
+                <!-- if: ${userInfo.organization} -->
+                {{userInfo.organization.name}}
+                <!-- else -->
+                无
+                <!-- /if -->
+            </dd>
+        </dl>
+    </div>
+    <div class="bbmc-content">
+        <h2><i class="icon-ticket"></i>新版团购活动报名</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="grouponTable" data-ui-datasource="@grouponData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content">
+        <h2><i class="icon-ticket"></i>旧版团购活动订单</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="tuanTable" data-ui-datasource="@tuanData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content">
+        <h2><i class="icon-ticket"></i>车展活动订单</h2>
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="exhibitionTable" data-ui-datasource="@exhibitionData"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+    </div>
+
+
+</div>

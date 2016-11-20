@@ -1,0 +1,48 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}订单支付中心{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/tuan/index.less">
+<style>
+    .pay-info {
+        margin: 10px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .pay-info em {
+        float: right;
+        font-size: 22px;
+        color: #f50;
+    }
+</style>
+{{/block}}
+{{block name="body"}}
+<div class="pay-info">订金金额：<em class="price">¥{{$data['amount']/100}}</em></div>
+<section class="part">
+    <h2><span>支付方式</span></h2>
+    <div class="payment">
+        <ul class="paytype row">
+            {{if $isInWeixin || !$isMobile}}
+            <li class="col-6">
+                <input id="weixin" v-model="paytype" type="radio" name="paytype"
+                       value="weixin">
+                <label for="weixin" class="tag"><span>微信支付</span></label>
+            </li>
+            {{/if}}
+            <li class="col-6">
+                <input id="alipay" v-model="paytype" type="radio" name="paytype"
+                       value="alipay">
+                <label for="alipay" class="tag"><span>支付宝支付</span></label>
+            </li>
+        </ul>
+        <div class="button-block" style="margin-top: 20px;">
+            <button type="button" @click="pay" class="ui-button">立即支付</button>
+        </div>
+    </div>
+</section>
+{{/block}}
+{{block name="js"}}
+<script>
+    window.BBNS = {{json_encode($data)}};
+</script>
+<script src="/static/js/coupon/pay.js"></script>
+{{/block}}

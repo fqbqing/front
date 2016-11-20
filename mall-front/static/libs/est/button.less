@@ -1,0 +1,56 @@
+
+@import "./variables.less";
+@import "./compatibility.less";
+
+.@{ui-class-prefix}-button {
+    .user-select(none);
+    overflow:hidden;
+    cursor:pointer;
+    text-decoration: none;
+    border: 1px solid @button-color;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    padding: 0 10px;
+    vertical-align: top;
+    border-radius: 2px;
+    .inline-block();
+    .box-sizing(content-box);
+
+    height: 23px;
+    line-height: 23px;
+    background: @button-color;
+    &:hover {
+        background: @button-color * 0.95;
+    }
+    &:active {
+        background: @button-color * 0.9;
+    }
+}
+
+button.@{ui-class-prefix}-button {
+    // IE7下不支持设置box-sizing，且显示属性是按照border-box的
+    // 所以这里做下兼容
+    *height: 25px;
+}
+
+/**
+ * 基础按钮样式状态
+ */
+.@{ui-class-prefix}-button:hover {
+}
+.@{ui-class-prefix}-button:active {
+    //border: 1px solid #BEBEBE;
+}
+
+.@{ui-class-prefix}-button-disabled {
+    background: #f6f6f6;
+    //border-color: #cfcfcf;
+    color: #999;
+}
+
+.@{ui-class-prefix}-button-lg {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+}

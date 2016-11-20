@@ -1,0 +1,252 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="help"}}
+{{/block}}
+{{block name="title"}}帮助中心 - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/site/help.css">
+{{/block}}
+{{block name="body"}}
+
+<div class="container">
+    <div class="bb-help-nav">
+        <ul class="nav nav-navicon">
+            <li class="nav-head text-big margin-big-top margin-big-bottom">帮助中心</li>
+            <li><a href="#">首页</a> </li>
+            <li><a href="#">CSS</a> </li>
+            <li class="active"><a href="#">元件</a>
+                <ul>
+                    <li><a href="#">概述</a> </li>
+                    <li><a href="#">网格系统</a></li>
+                    <li><a href="#">图标</a> </li>
+                </ul>
+            </li>
+            <li class="nav-more"><a href="#">更多</a>
+                <ul>
+                    <li><a href="#">组件</a> </li>
+                    <li><a href="#">模块</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="bb-help-content margin-large-bottom">
+        <h1 class="text-center margin-large-top">展厅地址</h1>
+        <hr>
+        <div class="padding">
+            <p>我们知道大家都想看现车，目前我们已经有多家展厅分布于全国各地。我们正在努力发展线下展厅，很快就会在全国各地看到我们的展厅。</p>
+            <table cellpadding="0" class="table">
+                <thead>
+                <tr>
+                    <th class="th1" width="100">城市</th>
+                    <th class="th2" width="150">展厅名称</th>
+                    <th class="th1">展厅地址</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="td1">北京市</td>
+                    <td class="td2">北京中宝时一店</td>
+                    <td class="td3">北京市昌平区东三旗亚北名车港一层 A11</td>
+                </tr>
+                <tr>
+                    <td class="td1">北京市</td>
+                    <td class="td2">博奥路捷</td>
+                    <td class="td3">北京市昌平区东三旗亚北名车港3楼cz03</td>
+                </tr>
+                <tr>
+                    <td class="td1">东莞市</td>
+                    <td class="td2">东莞中宏通</td>
+                    <td class="td3">广东省东莞市常平镇振兴三街汇俊中心1309号</td>
+                </tr>
+                <tr>
+                    <td class="td1">广州市</td>
+                    <td class="td2">广东泰卡特名车中心</td>
+                    <td class="td3">广东省广州市天河区天源路1202号(天顺达汽车城内)</td>
+                </tr>
+                <tr>
+                    <td class="td1">深圳市</td>
+                    <td class="td2">华纳宝鑫</td>
+                    <td class="td3">罗湖区红岭北路3002号梅园仓库9号楼大昌汽车</td>
+                </tr>
+                <tr>
+                    <td class="td1">贵阳市</td>
+                    <td class="td2">众汇名车</td>
+                    <td class="td3">贵阳市孟关国际汽车城C座（众汇名车）</td>
+                </tr>
+                <tr>
+                    <td class="td1">郑州市</td>
+                    <td class="td2">河南御胜汽车</td>
+                    <td class="td3">河南省郑州市金水区中州大道天伦路向西500米路南</td>
+                </tr>
+                <tr>
+                    <td class="td1">哈尔滨市</td>
+                    <td class="td2">哈尔滨名车汇</td>
+                    <td class="td3">哈尔滨市道外区先锋路154号</td>
+                </tr>
+                <tr>
+                    <td class="td1">哈尔滨市</td>
+                    <td class="td2">哈尔滨保时名车</td>
+                    <td class="td3">哈尔滨嵩山路38号</td>
+                </tr>
+                <tr>
+                    <td class="td1">绥化市</td>
+                    <td class="td2">庞大之星</td>
+                    <td class="td3">黑龙江省绥化市宝山路11号</td>
+                </tr>
+                <tr>
+                    <td class="td1">武汉市</td>
+                    <td class="td2">武汉名车汇集</td>
+                    <td class="td3">湖北省武汉市江岸区金桥大道66号吉祥谷1015号</td>
+                </tr>
+                <tr>
+                    <td class="td1">长沙市</td>
+                    <td class="td2">长沙捷鑫国际名车</td>
+                    <td class="td3">长沙市南二环一段146号（石马加油站旁）</td>
+                </tr>
+                <tr>
+                    <td class="td1">衡阳市</td>
+                    <td class="td2">华峻凯旋汽车</td>
+                    <td class="td3">衡阳市雁峰区沿江南路61号</td>
+                </tr>
+                <tr>
+                    <td class="td1">长春市</td>
+                    <td class="td2">五升汽车</td>
+                    <td class="td3">长春市经济开发区浦东路2831号（东环城路与浦东路交汇处东行100米）</td>
+                </tr>
+                <tr>
+                    <td class="td1">南京市</td>
+                    <td class="td2">南京永耀</td>
+                    <td class="td3">南京市大明路595号</td>
+                </tr>
+                <tr>
+                    <td class="td1">南昌市</td>
+                    <td class="td2">平行车贸</td>
+                    <td class="td3">江西省南昌市红谷滩新区汽车广场B区1号</td>
+                </tr>
+                <tr>
+                    <td class="td1">沈阳市</td>
+                    <td class="td2">佳美林汽贸</td>
+                    <td class="td3">辽宁省沈阳市铁西区北二中路7号8门（星摩尔商场对面）</td>
+                </tr>
+                <tr>
+                    <td class="td1">济南市</td>
+                    <td class="td2">济南博戎店</td>
+                    <td class="td3">山东省济南市槐荫区济齐路108号（匡山公园对面）</td>
+                </tr>
+                <tr>
+                    <td class="td1">临沂市</td>
+                    <td class="td2">正直名车广场</td>
+                    <td class="td3">临沂市沂州路与陶然路交汇处</td>
+                </tr>
+                <tr>
+                    <td class="td1">青岛市</td>
+                    <td class="td2">青岛中宝时店</td>
+                    <td class="td3">青岛市黄岛保税区莫斯科路青岛国际汽车城一层A020号</td>
+                </tr>
+                <tr>
+                    <td class="td1">淄博市</td>
+                    <td class="td2">天治安汽车</td>
+                    <td class="td3">山东省淄博高新区中心路283号南邻</td>
+                </tr>
+                <tr>
+                    <td class="td1">晋城市</td>
+                    <td class="td2">晋城卡马特汽车</td>
+                    <td class="td3">山西省晋城市白水东街与文峰路交叉口(景泽苑小区与皇城新区中间)</td>
+                </tr>
+                <tr>
+                    <td class="td1">太原市</td>
+                    <td class="td2">晋融通名车汇</td>
+                    <td class="td3">太原市小店区建设南路迎宾桥北西侧27号</td>
+                </tr>
+                <tr>
+                    <td class="td1">汉中市</td>
+                    <td class="td2">信泰汽车</td>
+                    <td class="td3">陕西省汉中市汉台区西新街滨江印象36号楼一楼6号</td>
+                </tr>
+                <tr>
+                    <td class="td1">西安市</td>
+                    <td class="td2">买好车线下体验中心</td>
+                    <td class="td3">西安市文景路与凤城十二路交汇处向北300米</td>
+                </tr>
+                <tr>
+                    <td class="td1">上海市</td>
+                    <td class="td2">中宝时上海店</td>
+                    <td class="td3">上海市闵行区吴中路1189号M8名车港D1</td>
+                </tr>
+                <tr>
+                    <td class="td1">成都市</td>
+                    <td class="td2">名仕达鑫瑞汽车</td>
+                    <td class="td3">成都市武侯区九兴大道长益路96号</td>
+                </tr>
+                <tr>
+                    <td class="td1">成都市</td>
+                    <td class="td2">四川中创</td>
+                    <td class="td3">四川省眉山市东坡区铁环东路1号</td>
+                </tr>
+                <tr>
+                    <td class="td1">天津市</td>
+                    <td class="td2">天津中宝时一店</td>
+                    <td class="td3">天津港保税区京门大道386号A座（天保酒店旁）</td>
+                </tr>
+                <tr>
+                    <td class="td1">天津市</td>
+                    <td class="td2">天津中宝时二店</td>
+                    <td class="td3">天津港保税区天保大道99号名车港</td>
+                </tr>
+                <tr>
+                    <td class="td1">曲靖市</td>
+                    <td class="td2">曲靖福源汽车</td>
+                    <td class="td3">云南省曲靖市麻黄工业园区双友钢铁厂斜对面</td>
+                </tr>
+                <tr>
+                    <td class="td1">玉溪市</td>
+                    <td class="td2">徳堡汽车</td>
+                    <td class="td3">云南省玉溪市红塔区彩虹路31号</td>
+                </tr>
+                <tr>
+                    <td class="td1">杭州市</td>
+                    <td class="td2">好车惠</td>
+                    <td class="td3">杭州市拱墅区石祥路485号</td>
+                </tr>
+                <tr>
+                    <td class="td1">杭州市</td>
+                    <td class="td2">中德汽车</td>
+                    <td class="td3">杭州市西溪路938号</td>
+                </tr>
+                <tr>
+                    <td class="td1">嘉兴市</td>
+                    <td class="td2">豪雅名车</td>
+                    <td class="td3">桐乡市中华东路汽车商贸城一区10号</td>
+                </tr>
+                <tr>
+                    <td class="td1">宁波市</td>
+                    <td class="td2">宁波星悦</td>
+                    <td class="td3">浙江省宁波市北仑区松花江路与大港中路交叉口</td>
+                </tr>
+                <tr>
+                    <td class="td1">宁波市</td>
+                    <td class="td2">宁波甬耀</td>
+                    <td class="td3">宁波市北仑松花江路与大港中路交叉路口</td>
+                </tr>
+                <tr>
+                    <td class="td1">绍兴市</td>
+                    <td class="td2">诸暨金达</td>
+                    <td class="td3">诸暨市浣东街道十里牌富润-菲达汽车城B202-203</td>
+                </tr>
+                <tr>
+                    <td class="td1">台州市</td>
+                    <td class="td2">博豪致尚汽车</td>
+                    <td class="td3">浙江省台州市路桥区西迎宾大道7号</td>
+                </tr>
+                <tr>
+                    <td class="td1">重庆市</td>
+                    <td class="td2">韩龙汽车</td>
+                    <td class="td3">重庆市南岸区九公里(江南车管所往巴南前行500米)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}{{/block}}

@@ -1,0 +1,223 @@
+<!-- target: TPL_overview_index -->
+<div class="overview-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>数据统计</span>
+        <span class="divider">/</span>
+        <span class="active">数据概览</span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bbmc-panel">
+                    <div class="bbmc-panel-head">
+                        <h2>关键指标 <small v-text="Date.now()|date '(YYYY-MM-DD)'"></small></h2>
+                        <div class="panel-action">
+                            <div data-ui-type="RadioSelect" data-ui-id="kpiTypeRadio"></div>
+                        </div>
+                    </div>
+                    <div class="bbmc-panel-body">
+                        <template v-if="kpiType=='today'">
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增开店</h3>
+                                    <p class="stat-value"><em v-text="stat.today.organizationCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增客户</h3>
+                                    <p class="stat-value"><em v-text="stat.today.customerCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增客户追踪</h3>
+                                    <p class="stat-value"><em v-text="stat.today.customerTrackCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增旧版团购活动</h3>
+                                    <p class="stat-value"><em v-text="stat.today.tuanCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增旧版团购订单</h3>
+                                    <p class="stat-value"><em v-text="stat.today.tuanOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增新版团购活动</h3>
+                                    <p class="stat-value"><em v-text="stat.today.grouponCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增新版团购报名</h3>
+                                    <p class="stat-value"><em v-text="stat.today.grouponSingupCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b data-block-last">
+                                    <h3 class="stat-name">新增优惠券活动</h3>
+                                    <p class="stat-value"><em v-text="stat.today.activityCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增优惠券</h3>
+                                    <p class="stat-value"><em v-text="stat.today.voucherCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增优惠券领券</h3>
+                                    <p class="stat-value"><em v-text="stat.today.voucherOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新增车展活动</h3>
+                                    <p class="stat-value"><em v-text="stat.today.exhibitionActivityCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b data-block-last">
+                                    <h3 class="stat-name">新增车展订单</h3>
+                                    <p class="stat-value"><em v-text="stat.today.exhibitionOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block">
+                                    <h3 class="stat-name">新增经纪人</h3>
+                                    <p class="stat-value"><em v-text="stat.today.agentCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">开店总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.organizationCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">客户总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.customerCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">客户追踪总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.customerTrackCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">旧版团购活动总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.tuanCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">旧版团购订单总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.tuanOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新版团购活动总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.grouponCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">新版团购报名总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.grouponSingupCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b data-block-last">
+                                    <h3 class="stat-name">优惠券活动总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.activityCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">优惠券总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.voucherCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">优惠券领券总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.voucherOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                                <div class="col-md-3 data-block bbmc-border-b">
+                                    <h3 class="stat-name">车展活动总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.exhibitionActivityCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+
+                                <div class="col-md-3 data-block bbmc-border-b data-block-last">
+                                    <h3 class="stat-name">车展订单总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.exhibitionOrderCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                            <div class="row row-compact">
+                                <div class="col-md-3 data-block">
+                                    <h3 class="stat-name">经纪人总数</h3>
+                                    <p class="stat-value"><em v-text="stat.all.agentCount"></em></p>
+                                    <!--<div class="stat-rate">20.0%</div>-->
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel">
+            <div class="bbmc-panel-head">
+                <h2>关键指标详解</h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="bbmc-panel-content">
+                    <div data-ui-type="DateRangePicker" data-ui-id="dateRange"></div>
+                    <h3>趋势图</h3>
+                    <div data-ui-type="RadioSelect" data-ui-id="kpis"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div data-ui-type="Highchart" data-ui-id="kpiChart"></div>
+                        </div>
+                    </div>
+                    <h3>详细数据</h3>
+                    <table class="table table-kpi">
+                        <tr>
+                            <th>日期</th>
+                            <th>新增开店</th>
+                            <th>新增客户</th>
+                            <th>客户追踪</th>
+                            <th>新增旧版团购</th>
+                            <th>旧版团购报名</th>
+                            <th>新增新版团购</th>
+                            <th>新版团购报名</th>
+                            <th>新增优惠券活动</th>
+                            <th>优惠券领券</th>
+                            <th>新增车展活动</th>
+                            <th>车展报名</th>
+                        </tr>
+                        <tr v-for="item in kpi | orderBy 'date' -1">
+                            <td v-text="item.date"></td>
+                            <td v-text="item.data.organizationCount"></td>
+                            <td v-text="item.data.customerCount"></td>
+                            <td v-text="item.data.customerTrackCount"></td>
+                            <td v-text="item.data.tuanCount"></td>
+                            <td v-text="item.data.tuanOrderCount"></td>
+                            <td v-text="item.data.grouponCount"></td>
+                            <td v-text="item.data.grouponSingupCount"></td>
+                            <td v-text="item.data.activityCount"></td>
+                            <td v-text="item.data.voucherOrderCount"></td>
+                            <td v-text="item.data.exhibitionActivityCount"></td>
+                            <td v-text="item.data.exhibitionOrderCount"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<!-- @file includes/login.html -->
+<form id="loginform" method="post" action="/site/login" class="margin-big-top">
+    <input type="hidden" name="url" value="{{$smarty.get.url|default:''}}">
+    <div class="form-group">
+        {{if !isset($smarty.get.boxonly)}}
+        <div class="label height-large">
+            <span class="float-right">
+                <span class="tips">登录账号为手机号</span>
+                <span class="error-tip text-red">手机号格式不正确</span>
+            </span>
+            <label for="phone">手机号</label>
+        </div>
+        {{/if}}
+        <div class="field field-icon">
+            <span class="icon icon-mobile"></span>
+            <input type="text" class="input" id="phone" name="phone"  maxlength="11" max="11" min="11" placeholder="请输入手机号" {{if (isset($phone)) }} value="{{$phone}}" {{/if}} />
+        </div>
+    </div>
+    <div class="form-group">
+        {{if !isset($smarty.get.boxonly)}}
+        <div class="label height-large">
+            <label for="verifyCode">验证码</label>
+        </div>
+        {{/if}}
+        <div class="field field-icon">
+            <span class="icon icon-unlock-alt"></span>
+            <button type="button" id="sendCodeBtn" class="button float-right bg-blue">发送验证码</button>
+            <div style="margin-right: 140px;">
+                <input type="text" class="input" id="verifyCode" name="verifyCode" maxlength="6" max="6" min="6" placeholder="请输入验证码" />
+            </div>
+        </div>
+    </div>
+    {{if !isset($smarty.get.loginType)}}
+    <div class="form-button">
+        <label class="label height-large"><input type="checkbox" checked>我已阅读并同意 <a href="javascript:void(0)" class="agreement">《叭叭买车用户注册协议》</a></label>
+    </div>
+    {{/if}}
+    <div class="form-button">
+        <button class="button bg-red button-block button-big padding-large-left padding-large-right" type="submit">
+            {{if isset($smarty.get.loginType)}}
+            确定
+            {{else}}
+            登录
+            {{/if}}
+        </button>
+    </div>
+    {{if isset($smarty.get.loginType)}}
+    <p style="margin-top: 10px;color: #999;">* 如一直无法收到验证码，请检查短信是否被拦截，或者更换手机号码</p>
+    {{/if}}
+</form>

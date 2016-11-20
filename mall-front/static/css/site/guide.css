@@ -1,0 +1,127 @@
+
+.guide-nav {
+    margin-right: 20px;
+}
+@media (max-width: 1000px) {
+    .guide-nav {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+.guide-nav li span {
+    display: block;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f3f3f3;
+    text-align: center;
+    font-size: 18px;
+
+
+}
+.guide-nav li a {
+    padding: 5px 0;
+}
+.guide-nav li ul {
+    margin: 20px;
+    list-style: disc;
+    color: #979797;
+}
+.guide-nav li ul a {
+    color: #979797;
+}
+.guide-nav li ul li.active {
+    color: #e10a05;
+}
+.guide-nav li ul li.active a {
+    color: #e10a05;
+}
+.guide-body {
+    min-height: 700px;
+}
+.guide-body h2 {
+    text-align: center;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #f3f3f3;
+    color: #000;
+}
+#guide-process .process-bg {
+    margin-bottom: 90px;
+}
+#guide-process .list-media li {
+    margin-bottom: 20px;
+}
+#discount-guide img {
+    border-radius: 15px;
+    width: 100%;
+}
+#discount-guide .media-body {
+    padding: 20px;
+}
+.img-wrap {
+    position: relative;
+    padding-top: 20%;
+    margin-bottom: 40px;
+}
+.img-wrap img {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+#guide-contact p {
+    margin-bottom: 5px;
+    color: #828282;
+}
+#guide-contact .phone {
+    font-size: 18px;
+}
+#guide-contact .deadline {
+    display: block;
+    text-indent: 5em;
+}
+#guide-contact h3 {
+    margin-bottom: 10px;
+    color: #000;
+}
+#guide-contact > div {
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+
+.guide-item {
+    display: none;
+}
+.guide-body  .guide-item:first-child {
+    display: block;
+}
+#guide-process .media .media-body > div {
+    line-height: 25px;
+    color: #878787;
+  }
+.guide-body strong {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+#guide-process strong {
+    border-bottom: 1px solid #f3f3f3;
+    color: #827f7f;
+}
+.discount-item strong {
+    display: block;
+    color: #000;
+}
+.discount-item {
+    margin-bottom: 30px;
+}
+.car-bg {
+    position: relative;
+    right: -50%;
+    z-index: 999999;
+    width: 60%;
+    padding-top: 20%;
+    margin-top: -10%;
+}
+.guide-body img {
+    /*width: 100%;*/
+}

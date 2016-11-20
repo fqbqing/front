@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="2016尚格广西（秋季）汽车交易会" />
+    <meta name="description" content="广西国际汽车文化节由南宁尚格会展服务有限公司承办，自2011年创办至今，已成功举办4届，是广西区年中规模最大的车市营销盛会，收到区内外汽车业界的一致好评与认可。 "/>
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>2016尚格广西（秋季）汽车交易会</title>
+    <link rel="stylesheet" href="/static/dep/bootstrap/less/bootstrap.less">
+    <link rel="stylesheet" href="/static/libs/swiper/css/swiper.less">
+    <link rel="stylesheet" href="/static/zt/gxqjh/index.less">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var GLOBAL = {};
+        {{if $app->user->isGuest}}
+        GLOBAL['USER'] = {isGuest:true};
+        {{else}}
+        GLOBAL['USER'] = {
+            isGuest:false,
+            name: '{{$app->user->getIdentity()->name}}',
+            phone: '{{$app->user->getIdentity()->phone}}'
+        };
+        {{/if}}
+    </script>
+    {{include file="includes/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+<div class="navbar-wrapper header">
+    <nav class="navbar navbar-portal navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="/static/zt/gxqjh/img/logo2x.png" width="130" height="28">
+                <span>尚格广西（秋季）汽车交易会</span>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <section class="sec sec1">
+        <div class="banner">
+            <img src="/static/zt/gxqjh/img/1.png" class="img-responsive" alt="">
+        </div>
+        <h2><img src="/static/zt/gxqjh/img/2.png" class="img-responsive" width="302" height="42" alt="我要报名"></h2>
+        <div class="row">
+            <div class="col-md-4 signup">
+                <div>
+                    <!--
+                    <ul class="nav nav-tabs" id="ticketOpt">
+                        <li class="active" data-type="e-ticket">要电子票</li>
+                        <li data-type="paper-ticket">要纸质票(可领礼品)</li>
+                    </ul>
+                    -->
+                    <div class="tab-content signup-form">
+                        <div class="form-group form-group-inline">
+                            <label for="username">姓名：</label>
+                            <input id="username" name="username" class="form-control" type="text" placeholder="请输入您的真实姓名">
+                        </div>
+                        <div class="form-group form-group-inline">
+                            <label for="phone">手机号：</label>
+                            <input id="phone" name="phone" class="form-control" type="text" placeholder="请输入手机号">
+                        </div>
+                        <div class="form-group form-group-inline form-item-with-action">
+                            <label for="verifyCode">验证码：</label>
+                            <button type="button" tabindex="-1" id="getVerifyCode" class="form-item-action btn btn-default">获取验证码</button>
+                            <input id="verifyCode" name="verifyCode" class="form-control" type="text" class="verify-code">
+                        </div>
+                        <div class="form-group form-group-inline">
+                            <label>预购品牌：</label>
+                            <select name="brand" id="brand" class="form-control"></select>
+                        </div>
+                        <div class="form-group form-group-inline">
+                            <label>预购车型：</label>
+                            <input type="text" class="form-control" name="vehicle">
+                        </div>
+                        <!--
+                        <div class="form-group form-group-inline paper-ticket-opt" id="idCard">
+                            <label>身份证：</label>
+                            <input type="text" class="form-control" name="idCard" placeholder="请正确填写，否则会影响礼品的领取">
+                        </div>
+                        <div class="form-group paper-ticket-opt" id="address">
+                            <label>地址(省、市、区、街道)：</label>
+                            <input type="text" class="form-control" name="address" placeholder="提供详细的通信地址，方便纸质票的邮寄">
+                        </div>
+                        <div class="form-group form-group-inline paper-ticket-opt">
+                            <label>邮费支付：</label>
+                            <select name="postage" id="postage" class="form-control">
+                                <option value="在线支付">在线支付</option>
+                                <option value="到付">到付</option>
+                            </select>
+                        </div>
+                        -->
+                        <div class="form-group">
+                            <button id="buy" class="btn btn-primary btn-block">
+                                <span>立即支付10元</span><br>
+                            </button>
+                            <p style="text-align: center; line-height: 2;">（{{$groupon.beautify_number + $statistics.signupCount}}人已报名）</p>
+                        </div>
+                    </div>
+                    <h3>报名须知</h3>
+                    <ul class="xuzhi">
+                        <!--<li>10元抢30元家庭套票（门票3张），选纸质票的客户请在展会期间到东侧兑票处，凭抢票页面截图和手机号领取；</li>-->
+                        <!--<li>10元即可获赠30元家庭套票（3张票），纸质票免费快递到家。凭票入场获赠百越山泉一瓶，纸质票现场可领取3M车膜礼品一份（送完即止）；</li>-->
+                        <!--<li>请填写准确的手机及地址，否则将无法为您安排派送门票，相关问题请咨询免费电话：4008-955-088；</li>-->
+                        <!--<li>禁止倒卖，一经发现，组委会有权无条件收回或作废；</li>-->
+                        <!--<li>领取家庭套票的网友请在地址栏备注“家庭”二字；</li>-->
+                        <!--<li>免费门票数量有限，赠完即止！</li>-->
+                        <li>9月22日12点起停售家庭套票与纸质票；</li>
+                        <li>支付10元可获得1张电子票，请注意查收，相关问题请咨询免费电话：4008-955-088；</li>
+                        <li>禁止倒卖，一经发现，组委会有权无条件收回或作废；</li>
+                        <li>免费门票数量有限，赠完即止！</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <a href="/activity/coupon/voucher?id=715">
+                    <img src="/static/zt/gxqjh/img/3.png" class="img-responsive" alt="">
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="sec2">
+    <section class="sec container">
+        <div class="banner">
+            <img src="/static/zt/gxqjh/img/4.png" class="img-responsive" alt="">
+        </div>
+        <div class="presented">
+            <table>
+                <tr>
+                    <th>主办单位</th>
+                    <td>尚格会展股份有限公司</td>
+                    <th>承办单位</th>
+                    <td>南宁国际会议展览有限责任公司<br>南宁尚格会展服务有限公司</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>
+<div class="container">
+    <section class="sec">
+        <h2><img src="/static/zt/gxqjh/img/5.png" class="img-responsive" width="387" height="81" alt="车展简介"></h2>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="article bread-text">
+                    <p>2016尚格广西（秋季）汽车交易会（以下简称“车交会”）将于9月23-25日在南宁国际会展中心举行。本届车交会由南宁尚格会展股份有限公司主办，是一场以消费为主的销售型车展。</p>
+                    <p>此次车交会，将启用南宁国际会展中心6个室内展馆，吸引自主、合资、进口等全球主流汽车品牌入驻现场，全面涵盖家轿、SUV、MPV等全系车型。一场全品牌的底价购车盛宴，不容错过！</p>
+                    <p>预计贷款买车的客户，现场将有30多个品牌享受“最高3年0费率”的车展专供优惠政策，且建设银行、招商银行对非贴息车型还分别推出了“万月息仅33元”、“10万分期，利息直降2000元”的专项优惠。现场驻点，现场咨询，现场办理，完美体验一站式购车服务。</p>
+                    <p>此外，现场成交客户将获得组委会提供的限量购车大礼包（内含价值1880元的3M车膜），还可参与组委会、招商银行的“购车抽奖”活动！</p>
+                    <p>还等什么呢？计划好时间路线，即刻出发！</p>
+                    <p>9月23-25日，南宁国际会展中心，2016尚格广西（秋季）汽车交易会，无限惊喜等着你！</p>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="bread-item-wrap">
+                    <div class="bread-item">
+                        <img src="/static/zt/gxqjh/img/17.jpg" width="370" height="164" style="float: left;">
+                        <div style="margin-left: 390px;">
+                            <h3>全球主流汽车品牌汇聚</h3>
+                            <p>本届广西车交会将吸引自主、合资、进口等全球主流汽车品牌入驻现场，全面涵盖家轿、SUV、MPV等全系车型。一场全品牌的底价购车盛宴，不容错过！</p>
+                        </div>
+                    </div>
+                    <div class="bread-item">
+                        <img src="/static/zt/gxqjh/img/16.jpg" width="272" height="130" style="float: right;" alt="">
+                        <div style="margin-right: 292px;">
+                            <h3>全新展馆 地铁直达</h3>
+                            <p>随着二期扩建工程的竣工，南宁国际会展中心这一广西区地标性建筑格局焕然一新。从区县乘高铁来的客户，可乘坐地铁1号线，直达会展中心；自驾来的客户，还可体验新展馆高效便捷的停车系统，3000多个停车位，虚位以待！</p>
+                        </div>
+                    </div>
+                    <div class="bread-item">
+                        <h3>车展专享 贷款政策</h3>
+                        <p>现场讲有多个银行驻点，提供30多个品牌享受“最高3年0费率”的车展专供优惠政策，此外，非贴息车型建设银行“万月息仅33元”，招商银行“10万分期，利息直降2000元”。现场咨询，现场办理，完美体验一站式购车服务。</p>
+                    </div>
+                    <div class="bread-item">
+                        <h3 style="clear: both;">全程空调 便捷舒适的智能车展</h3>
+                        <p>扫描电子票二维码即刻进场，全程空调，舒适观展。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="container">
+    <section class="sec">
+        <h2><img src="/static/zt/gxqjh/img/6.png" class="img-responsive" width="599" height="96" alt="历届部分参展品牌"></h2>
+        <div>
+            <img src="/static/zt/gxqjh/img/14.png" class="img-responsive" alt="">
+        </div>
+    </section>
+</div>
+<div class="container">
+    <h2><img src="/static/zt/gxqjh/img/8.png" class="img-responsive" width="445" height="111" alt="观展攻略"></h2>
+</div>
+<div class="sec4">
+    <section class="sec container">
+        <div style="margin-top: 240px;">
+            <img src="/static/zt/gxqjh/img/13.png" class="img-responsive" width="1180" height="520" alt="">
+        </div>
+    </section>
+</div>
+<div class="sec5">
+    <section class="sec container">
+        <h2><img src="/static/zt/gxqjh/img/9.png" class="img-responsive" width="311" height="87" alt="交通指南"></h2>
+        <img src="/static/zt/gxqjh/img/18.png" class="img-responsive" width="1314" height="471" alt="">
+    </section>
+</div>
+<div class="sec6">
+    <section class="sec container">
+        <h2><img src="/static/zt/gxqjh/img/10.png" class="img-responsive" width="622" height="119" alt="历届车展回顾"></h2>
+        <!-- Swiper -->
+        <div class="swiper-container review-motor-show">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                    <img data-src="/static/zt/gxqjh/img/review/1.jpg" class="swiper-lazy">
+                    <!-- Preloader image -->
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/2.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/3.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/4.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/5.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/6.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/review/7.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+        <h2><img src="/static/zt/gxqjh/img/26.png" class="img-responsive" width="153" height="39" alt="媒体支持"></h2>
+        <img src="/static/zt/gxqjh/img/27.png" class="img-responsive" alt="媒体">
+        <!--
+        <ul class="media-list">
+            <li><img src="/static/zt/gxqjh/img/media/1.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/2.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/3.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/4.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/5.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/6.png" width="130" height="50"></li>
+            <li><img src="/static/zt/gxqjh/img/media/7.png" width="130" height="50"></li>
+        </ul>
+        -->
+    </section>
+</div>
+<div class="sec7">
+    <section class="sec container">
+        <h2><img src="/static/zt/gxqjh/img/11.png" class="img-responsive" width="444" height="124" alt="全年连锁车展"></h2>
+        <!-- Swiper -->
+        <div class="swiper-container swiper-exhibition">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                    <img data-src="/static/zt/gxqjh/img/exhibition/1.jpg" class="swiper-lazy">
+                    <!-- Preloader image -->
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/exhibition/2.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/exhibition/3.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img data-src="/static/zt/gxqjh/img/exhibition/4.jpg" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-white"></div>
+            <!-- Navigation -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+    </section>
+</div>
+<div class="footer">
+    <div class="container">
+        <p>客服热线：<i>4008-955-088</i> &nbsp;&nbsp; 服务时间：每天8:30 - 18:00</p>
+        <p>地址：南宁国际会展中心行政办公室南楼305室</p>
+        <p>公司电话：0771-2021061</p>
+        <div>
+            <img src="/static/zt/gxqjh/img/19.png" alt="">
+        </div>
+        <!--<p style="margin-top: 20px; font-size: 12px;">爱车车（北京）网络科技有限公司 技术支持</p>-->
+        <!--<p style="font-size: 12px;">&copy; 2016 版权所有</p>-->
+    </div>
+</div>
+<div class="qr">
+    <i class="closeqr">&times;</i>
+    <div class="detail"></div>
+</div>
+<!--
+<div class="dmblh" style="left: 0;">
+    <i class="close-btn">&times;</i>
+    <a href="http://dwz.sungoal.org/rP82KV" target="_blank">
+        <img src="//img01.chedamai.cn/asset/20160912-gxqjh/dmblh.jpg" width="136" height="379">
+    </a>
+</div>
+-->
+<script src="/static/libs/jquery.js"></script>
+<script src="/static/zt/gxqjh/index.js"></script>
+<script src="/static/libs/swiper/swiper.jquery.js"></script>
+<script src="/static/libs/swiper/swiper.animate1.0.2.min.js"></script>
+<script>
+    $(function () {
+        app.init({
+            groupon: {{json_encode($groupon)}}
+        });
+    });
+    var swiper = new Swiper('.review-motor-show', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // Disable preloading of all images
+        preloadImages: false,
+        // Enable lazy loading
+        lazyLoading: true,
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 2, //'auto',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        }
+    });
+    new Swiper('.swiper-exhibition', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 20,
+        slidesPerView: 2, //'auto',
+        // Disable preloading of all images
+        preloadImages: false,
+        // Enable lazy loading
+        lazyLoading: true
+    });
+</script>
+</body>
+</html>

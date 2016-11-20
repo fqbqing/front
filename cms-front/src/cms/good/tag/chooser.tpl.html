@@ -1,0 +1,14 @@
+<!-- target: TPL_good_tag_chooser_child -->
+<div class="good-tag-chooser">
+
+    <div class="ui-row">
+        <ul class="tag-list">
+            <li v-for="tag in tags" :class="{active:tag.selected}" @click="changeState(tag)">
+                <span v-text="tag.name"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- target: TPL_good_tag_chooser -->
+<!-- import: TPL_good_tag_chooser_child -->

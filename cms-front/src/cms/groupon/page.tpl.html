@@ -1,0 +1,229 @@
+<!-- target: TPL_groupon_page -->
+<div class="groupon-page bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <a href="#/groupon/list">团购活动</a>
+        <span class="divider">/</span>
+        <span class="active">样式修改</span>
+    </div>
+
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal" style="margin-right: 370px;">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/groupon/edit~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="javascript:void(0)">页面样式</a></li>
+                <!--<li>-->
+                    <!--<button data-ui-type="Button" data-ui-skin="primary" @click="save" class="btn-save">保存</button>-->
+                <!--</li>-->
+            </ul>
+            <div class="ui-tab-content">
+                <div class="phonewrap">
+                    <div class="phone-top"></div>
+                    <div class="phone-bottom">
+                        <button data-step="6" data-intro="预览之前记得先进行保存操作" data-position="top" type="button" @click="preview" class="btn-phone btn-preview-phone" title="预览之前，请先保存修改内容">预览</button>
+                        <button data-step="5" data-intro="点击这里保存对样式的修改" data-position="top" type="button" @click="save" class="btn-phone btn-save-phone">保存</button>
+                    </div>
+                    <div class="phone phone-theme-{{pageInfo.theme}}">
+                        <div class="banner">
+                            <img src="${groupon.image}" alt="">
+                            <div class="banner-desc">
+                                <h1>${groupon.name}</h1>
+                                <p>40人已报名</p>
+                            </div>
+                        </div>
+                        <div class="item-title">
+                            <h2><span>活动倒计时</span></h2>
+                        </div>
+                        <div class="countdown">
+                            10<span>天</span> 04:50:50
+                        </div>
+                        <div class="item-title">
+                            <h2><span>活动信息</span></h2>
+                        </div>
+                        <div class="item-content item-content-groupon-info">
+                            <dl>
+                                <dt>优惠价格：</dt>
+                                <dd><editable-content :content.sync="pageInfo.global.price"></editable-content></dd>
+                            </dl>
+                            <dl>
+                                <dt>举办时间：</dt>
+                                <dd>${groupon.activity_time|date('YYYY年MM月DD日 HH:mm')}</dd>
+                            </dl>
+                            <dl>
+                                <dt>活动地址：</dt>
+                                <dd><editable-content :content.sync="pageInfo.global.organization_name"></editable-content></dd>
+                                <dd class="small"><editable-content :content.sync="pageInfo.global.address"></editable-content></dd>
+                            </dl>
+                            <p>
+                                <editable-content :content.sync="pageInfo.global.buytips"></editable-content>
+                            </p>
+                        </div>
+                        <div class="items">
+                            <edit-component v-for="item in pageInfo.items" :item="item" :index="$index" transition="item">
+                                <div class="item-title" v-if="item.type=='TITLE'">
+                                    <h2><span><editable-content :content.sync="item.text"></editable-content></span></h2>
+                                </div>
+                                <div class="item-content-text1" v-if="item.type=='ARTICLE'">
+                                    <h3><editable-content :content.sync="item.data.title"></editable-content></h3>
+                                    <div>
+                                        <editable-content :content.sync="item.data.content"></editable-content>
+                                    </div>
+                                </div>
+                                <div class="item-content-text2" v-if="item.type=='ARTICLE_GROUP'">
+                                    <div class="item-content-box" v-for="article in item.data">
+                                        <h3><editable-content :content.sync="article.title"></editable-content></h3>
+                                        <div><editable-content :content.sync="article.content"></editable-content></div>
+                                    </div>
+                                </div>
+                                <div class="item-content-paragraph" v-if="item.type=='PARAGRAPH'">
+                                    <p><editable-content :content.sync="item.text"></editable-content></p>
+                                </div>
+                                <div class="item-content-image" v-if="item.type=='IMAGE'">
+                                    <editable-image :src.sync="item.url"></editable-image>
+                                </div>
+                                <div class="item-content-image-text" v-if="item.type=='IMAGE_TEXT'">
+                                    <div class="image">
+                                        <editable-image :src.sync="item.url"></editable-image>
+                                    </div>
+                                    <p><editable-content :content.sync="item.text"></editable-content></p>
+                                </div>
+                            </edit-component>
+                        </div>
+                        <div class="item-title">
+                            <h2><span>活动报名</span></h2>
+                        </div>
+                        <div class="signup">
+                            <dl>
+                                <template v-for="prop in signupOptions">
+                                    <dt>{{prop.name}}：</dt>
+                                    <dd>
+                                        <label v-for="value in prop.value|trimwhitespace" track-by="$index" v-if="value&&value.length"><input name="{{prop.name}}_demo" type="{{prop.type}}">{{value}}</label>
+                                    </dd>
+                                </template>
+                                <dt>姓名：</dt>
+                                <dd><input type="text" class="input-text"></dd>
+                                <dt>手机号：</dt>
+                                <dd><input type="text" class="input-text"></dd>
+                            </dl>
+                            <div>
+                                <button type="button" class="btn">立即报名</button>
+                            </div>
+                        </div>
+                        <div class="item-title">
+                            <h2><span>专属购车顾问</span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="editor-panel">
+                    <h2>主题</h2>
+                    <div class="container" data-step="1" data-intro="选择合适的主题风格" data-position="top">
+                        <div class="row">
+                            <div class="col-xs-2" v-for="theme in themes">
+                                <div @click="changeTheme(theme)" v-if="pageInfo.theme==theme.name" class="theme theme-active theme-{{theme.name}}-handler"></div>
+                                <div @click="changeTheme(theme)" v-else class="theme theme-{{theme.name}}-handler"></div>
+                                <p class="text-center">{{theme.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>内容模块</h2>
+                    <div class="container">
+                        <div class="ui-tips">
+                            点击插入按钮，可将对应的组件插入到右侧的模拟页面中。
+                        </div>
+                        <div class="row ui-components" data-step="2" data-intro="选择UI组件，点击插入到右侧的手机模拟器中" data-position="top">
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-title"></i>
+                                    <p>标题</p>
+                                </div>
+                                <button type="button" @click="addItem('TITLE')">插入</button>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-article"></i>
+                                    <p>标题+正文-单列</p>
+                                </div>
+                                <button type="button" @click="addItem('ARTICLE')">插入</button>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-article-group"></i>
+                                    <p>标题+正文-双列</p>
+                                </div>
+                                <button type="button" @click="addItem('ARTICLE_GROUP')">插入</button>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-text"></i>
+                                    <p>纯文本内容</p>
+                                </div>
+                                <button type="button" @click="addItem('PARAGRAPH')">插入</button>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-image"></i>
+                                    <p>图片</p>
+                                </div>
+                                <button type="button" @click="addItem('IMAGE')">插入</button>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="ui-component">
+                                    <i class="com-image-text"></i>
+                                    <p>图片+文字</p>
+                                </div>
+                                <button type="button" @click="addItem('IMAGE_TEXT')">插入</button>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 data-step="3" data-intro="管理报名信息，添加的报名统计项，参考信息：如“期望车型”、“期望购车方式”等。" data-position="top">报名信息</h2>
+                    <div class="container">
+                        <div class="ui-tips">
+                            添加的报名统计项，参考信息：如“期望车型”、“期望购车方式”等。<br>
+                        </div>
+                        <div class="row signup-config">
+                            <div class="col-xs-6" :class="{'clear-both': $index%2==0}" v-for="opt in signupOptions">
+                                <esuibox>
+                                    <dl>
+                                        <dt>统计项：</dt>
+                                        <dd>
+                                            <div type="text" data-ui-width="150" data-ui-placeholder="如：期望车型、购车方式" data-ui-group="optName" data-ui-type="TextBox" v-esui="opt.name" data-ui-value="{{opt.name}}"></div>
+                                            <label><input type="checkbox" v-model="opt.required" :checked="opt.required">必填项</label>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>选择类型：</dt>
+                                        <dd>
+                                            <div data-ui-type="BoxGroup" data-ui-orientation="horizontal" v-esui="opt.type"
+                                                 data-ui-name="{{opt.name}}" data-ui-box-type="radio">
+                                                <input type="radio" name="{{opt.name}}" value="radio" title="单选" :checked="opt.type=='radio'" />
+                                                <input type="radio" name="{{opt.name}}" value="checkbox" title="多选" :checked="opt.type=='checkbox'" />
+                                                <input type="radio" name="{{opt.name}}" value="text" title="文本输入" :checked="opt.type=='text'" />
+                                                </ul>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl v-show="opt.type!='text'">
+                                        <dt>可选项：</dt>
+                                        <dd>
+                                            <div data-ui-type="TextBox" data-ui-group="optValue" data-ui-placeholder="按行填写，每行代表一个可选项" data-ui-mode="textarea" v-esui="opt.value" data-ui-value="{{opt.value}}"></div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>&nbsp;</dt>
+                                        <dd>
+                                            <button data-ui-type="Button" data-ui-skin="danger" @click="removeSignupOption($index)">删除</button>
+                                        </dd>
+                                    </dl>
+                                </esuibox>
+                            </div>
+                        </div>
+                        <div>
+                            <button data-step="4" data-intro="点击添加新的统计项" data-position="top" type="button" data-ui-type="Button" data-ui-skin="primary" @click="addSignupOption">添加报名项</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

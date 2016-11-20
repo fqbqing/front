@@ -1,0 +1,223 @@
+<!-- target: TPL_groupon_detail -->
+<div class="groupon-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <a href="#/groupon/list">团购列表</a>
+        <span class="divider">/</span>
+        <span class="active">团购详情</span>
+    </div>
+    <div class="bbmc-detail-content container">
+        <section class="ui-container">
+            <section class="ui-panel">
+                <h1 style="line-height: 44px; margin-left: 0;" v-text="groupon.name"></h1>
+            </section>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>基本信息</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content info-content">
+                                <ul class="ui-list ui-list-pure ui-border-tb">
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">活动时间：</span>
+                                            <span class="ui-panel-title-tips">${groupon.activity_time|date}</span>
+                                        </h5>
+                                    </li>
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">报名截至时间：</span>
+                                            <span class="ui-panel-title-tips">${groupon.signup_end_time|date}</span>
+                                        </h5>
+                                    </li>
+                                    <!--if: ${groupon.intention}-->
+                                    <li>
+                                        <h5>
+                                            <span class="label">意向金：</span>
+                                            <span class="ui-panel-title-tips">${groupon.intention.amount|amount}元</span>
+                                        </h5>
+                                    </li>
+                                    <!--/if-->
+                                    <!--if: ${groupon.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+                                    <li>
+                                        <h5>
+                                            <span class="label">分享链接：</span>
+                                            <span class="ui-panel-title-tips">${shareLink}</span>
+                                            <a data-ui-id="cp"
+                                               data-ui-type="Clipboard"
+                                               data-ui-clipboard-text="@shareLink" href="javascript:void(0)" style="padding:0 10px;">复制</a>
+                                        </h5>
+                                        <!--
+                                        <div class="bdsharebuttonbox">
+                                            <label>多渠道分享：</label>
+                                            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+                                            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+                                            <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友">QQ好友</a>
+                                            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+                                            <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+                                            <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧">百度贴吧</a>
+                                            <a href="#" class="bds_mshare" data-cmd="mshare" title="分享到一键分享">一键分享</a>
+                                        </div>
+                                        -->
+                                    </li>
+                                    <!--/if-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--if: ${groupon.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>二维码</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <div class="row row-compact text-center">
+                                    <div class="col-xs-6 data-block data-block-last-bottom">
+                                        <p class="stat-value"><img src="/api/groupon-activity/qrcode-share?id=${id}" alt="分享二维码"></p>
+                                        <h3 class="stat-name">分享二维码</h3>
+                                        <span class="tip">扫描“分享二维码”，用手机分享该活动</span>
+                                    </div>
+                                    <div class="col-xs-6 data-block data-block-last data-block-last-bottom">
+                                        <p class="stat-value">
+                                            <img src="/api/groupon-activity/checkin-qrcode?id=${id}" alt="签到二维码">
+                                        </p>
+                                        <h3 class="stat-name">
+                                            签到二维码
+                                            <a href="/api/groupon-activity/checkin-qrcode?id=${id}&download=1" target="_self" style="padding-left:10px;">下载</a>
+                                        </h3>
+                                        <span class="tip">建议下载该二维码并打印，用于客户入场扫码进行签到</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/if-->
+            <div class="bbmc-panel">
+                <div class="bbmc-panel-head">
+                    <h2 class="ui-arrowlink">
+                        <span>按报名状态统计</span>
+                        <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                    </h2>
+                </div>
+                <div class="bbmc-panel-body">
+                    <div class="bbmc-panel-content">
+                        <div class="row row-compact" v-cloak>
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_SIGNUP}}/{{signupStatistics.signups.all.STATUS_SIGNUP}}</em></p>
+                                <h3 class="stat-name">报名总数</h3>
+                            </div>
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_SUCCESS}}/{{signupStatistics.signups.all.STATUS_SUCCESS}}</em></p>
+                                <h3 class="stat-name">已支付</h3>
+                            </div>
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_USED}}/{{signupStatistics.signups.all.STATUS_USED}}</em></p>
+                                <h3 class="stat-name">已使用</h3>
+                            </div>
+                            <div class="col-xs-3 data-block data-block-last">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_NOT_PAY}}/{{signupStatistics.signups.all.STATUS_NOT_PAY}}</em></p>
+                                <h3 class="stat-name">未支付</h3>
+                            </div>
+                        </div>
+                        <div class="row row-compact">
+                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_APPLY_REFUND}}/{{signupStatistics.signups.all.STATUS_APPLY_REFUND}}</em></p>
+                                <h3 class="stat-name">申请退款</h3>
+                            </div>
+                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_REFUNDED}}/{{signupStatistics.signups.all.STATUS_REFUNDED}}</em></p>
+                                <h3 class="stat-name">已退款</h3>
+                            </div>
+                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                <p class="stat-value"><em>{{signupStatistics.signups.today.STATUS_REFUND_FAILED}}/{{signupStatistics.signups.all.STATUS_REFUND_FAILED}}</em></p>
+                                <h3 class="stat-name">退款失败</h3>
+                            </div>
+                            <div class="col-xs-3 data-block data-block-last data-block-last-bottom">
+                                <p class="stat-value">
+                                    <em>
+                                    {{signupStatistics.signups.today.STATUS_SYSTEM_CANCELED + signupStatistics.signups.today.STATUS_CANCELED}}/{{signupStatistics.signups.all.STATUS_SYSTEM_CANCELED + signupStatistics.signups.all.STATUS_CANCELED}}
+                                    </em>
+                                </p>
+                                <h3 class="stat-name">订单取消</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" v-if="signupStatistics.options">
+                <div class="col-xs-6" v-for="opt in signupStatistics.options" :style="{clear: $index%2==0 ? 'both' : 'none'}">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2>{{$key}}</h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr>
+                                        <th>{{$key}}</th>
+                                        <th>已报名</th>
+                                        <th>已支付</th>
+                                        <th>已使用</th>
+                                    </tr>
+                                    <tr v-for="item in opt">
+                                        <td v-text="$key"></td>
+                                        <td v-text="item.signup"></td>
+                                        <td v-text="item.payed"></td>
+                                        <td v-text="item.used"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>渠道效果</span>
+                                <small v-text="'('+channels.length+')'"></small>
+                            </h2>
+
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr><th>排名</th><th>报名渠道</th><th>人数</th></tr>
+                                    <tr v-for="channel in channels">
+                                        <td v-text="$index + 1"></td>
+                                        <td v-text="channel.name"></td>
+                                        <td v-text="channel.count"></td>
+                                    </tr>
+                                </table>
+                                <div v-if="!channels || channels.length==0" class="ui-table-body-nodata">
+                                    <p>还没有渠道信息！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

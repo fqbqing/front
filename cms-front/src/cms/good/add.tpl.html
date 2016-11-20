@@ -1,0 +1,240 @@
+<!-- target: TPL_good_add -->
+<div class="good-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>商品管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/good/list">商品列表</a></span>
+        <span class="divider">/</span>
+        <span class="active"><!-- if: ${id} -->修改<!-- else -->添加<!-- /if -->商品</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品编号：</div>
+                    <div class="form-value">
+                        <input data-ui-id="bn"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="商品编号不能为空"
+                               data-ui-number=""
+                               data-ui-width="400"
+                               name="bn"
+                               data-ui-value="@formData.bn"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品名称：</div>
+                    <div class="form-value">
+                        <input data-ui-id="name"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="名称不能为空"
+                               data-ui-width="400"
+                               name="name"
+                               data-ui-value="@formData.name"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key">商品备注：</div>
+                    <div class="form-value">
+                        <textarea data-ui-id="brief"
+                                  data-ui-type="TextBox"
+                                  data-ui-width="400"
+                                  data-ui-height="80"
+                                  rows="4"
+                                  name="brief"
+                                  data-ui-value="@formData.brief"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品分类：</div>
+                    <div class="form-value">
+                        <button type="button" data-ui-type="Button" data-ui-id="chooseCategory">选择分类</button>
+                        <span v-text="category.name"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">市场指导价：</div>
+                    <div class="form-value">
+                        <input data-ui-id="market_price"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-dollars=""
+                               data-ui-min="0.01"
+                               data-ui-required-error-message="市场指导价不能为空"
+                               data-ui-validity-label="market_priceErrorMessage"
+                               data-ui-width="150"
+                               name="market_price"
+                               data-ui-value="${formData.market_price | amount}"/>
+                        <span data-ui-type="Label">元</span>
+                        <span data-ui-type="Validity" data-ui-id="market_priceErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">最低售价：</div>
+                    <div class="form-value">
+                        <input data-ui-id="low_price"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-dollars=""
+                               data-ui-min="0.01"
+                               data-ui-required-error-message="最低售价不能为空"
+                               data-ui-validity-label="low_priceErrorMessage"
+                               data-ui-width="150"
+                               name="low_price"
+                               data-ui-value="${formData.low_price | amount}"/>
+                        <span data-ui-type="Label">元</span>
+                        <span data-ui-type="Validity" data-ui-id="low_priceErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">最高售价：</div>
+                    <div class="form-value">
+                        <input data-ui-id="high_price"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-dollars=""
+                               data-ui-min="0.01"
+                               data-ui-required-error-message="最高售价不能为空"
+                               data-ui-validity-label="high_priceErrorMessage"
+                               data-ui-width="150"
+                               name="high_price"
+                               data-ui-value="${formData.high_price | amount}"/>
+                        <span data-ui-type="Label">元</span>
+                        <span data-ui-type="Validity" data-ui-id="high_priceErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">是否上架：</div>
+                    <div class="form-value">
+                        <div data-ui-type="BoxGroup"
+                             data-ui-id="marketable"
+                             data-ui-name="marketable"
+                             data-ui-value="@formData.marketable"
+                             data-ui-required="required"
+                             data-ui-required-error-message="请选择是否需要上架"
+                             data-ui-box-type="radio">
+                            <input name="marketable" type="radio" value="1" title="是">
+                            <input name="marketable" type="radio" value="0" title="否">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">展示权重：</div>
+                    <div class="form-value">
+                        <input data-ui-id="order"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="展示权重不能为空"
+                               data-ui-number=""
+                               data-ui-width="100"
+                               name="order"
+                               data-ui-value="@formData.order"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">封面图片：</div>
+                    <div class="form-value">
+                        <div data-ui-type="WebUploader"
+                             data-ui-hint="请选择封面图片（大小不超过2M）"
+                             data-ui-name="image_default_id"
+                             data-ui-id="uploaderCover">选择文件</div>
+                        <div class="form-extra">
+                            <div class="preview cover-image" id="previewcover">
+                                <!-- if: ${formData.defaultImage} -->
+                                <img src="${formData.defaultImage}" alt="预览图片"/>
+                                <!-- /if -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品详情图片：</div>
+                    <div class="form-value">
+                        <div data-ui-type="WebUploader"
+                             data-ui-hint="请选择商品详情图片（大小不超过2M）"
+                             data-ui-name="images"
+                             data-ui-id="uploaderImage">选择文件</div>
+                        <div class="form-extra">
+                            <div class="preview" v-show="images.length">
+                                <ul class="image-list">
+                                    <li v-for="image in images">
+                                        <img :src="image.url">
+                                        <button class="remove" type="button" title="删除" @click="removeImage(image)">╳</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">标签：</div>
+                    <div class="form-value">
+                        <button type="button" data-ui-type="Button" data-ui-id="chooseTag">添加标签</button>
+                        <ul class="tag-list" v-show="tags.length">
+                            <li v-for="tag in tags">
+                                <span v-text="tag.name"></span>
+                                <button class="remove" type="button" title="删除标签" @click="removeSelectedTag(tag)">╳</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品规格：</div>
+                    <div class="form-value">
+                        <button type="button" data-ui-type="Button" data-ui-id="chooseSpec">添加规格</button>
+                        <!-- if: ${id} -->
+                        <span>注：修改规格后，对应商品的货品也需要进行修改</span>
+                        <!-- /if -->
+                        <ul class="tag-list" v-show="specifications.length">
+                            <li v-for="spec in specifications">
+                                <span v-text="spec.name"></span>
+                                <button class="remove" type="button" title="删除规格" @click="removeSelectedSpec(spec)">╳</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">描述：</div>
+                    <div class="form-value">
+                        <ul class="detail-list" v-show="details.length">
+                            <li v-for="detail in details">
+                                <esuibox>
+                                    <div class="detail-title">
+                                        描述名称<i v-text="$index + 1"></i>：
+                                        <div data-ui-type="TextBox"
+                                             v-esui="detail.title"
+                                             data-ui-value="{{detail.title}}"
+                                             data-ui-placeholder="如：车型详解、配置参数等"></div>
+                                        <button v-show="details.length>1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeDetail($index)">删除描述</button>
+                                    </div>
+                                    <div class="richeditor">
+                                        <div data-ui-type="RichTextEditor"
+                                             v-esui="detail.content"
+                                             data-ui-editor-content="{{detail.content}}"
+                                             data-ui-editor-options="@editorOptions"></div>
+                                    </div>
+                                </esuibox>
+                            </li>
+                        </ul>
+                        <div>
+                            <button type="button" data-ui-type="Button" data-ui-id="addDetails">添加描述</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

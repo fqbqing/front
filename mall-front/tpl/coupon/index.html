@@ -1,0 +1,95 @@
+{{extends file="./layout.html"}}
+
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/coupon/index.less">
+{{/block}}
+{{block name="body"}}
+<div class="container-box">
+    <div class="header">
+        <div class="channel-box">
+            <div class="channel-logo">
+                <img src="{{$data.channel.logoImage}}" alt="" width="30" height="30">
+            </div>
+            <div class="channel-tool">
+                <p>{{$data.channel.channelName}}</p>
+                <a href="tel:{{$data.channel.phone}}">{{$data.channel.phone}}</a>
+            </div>
+            <div class="channel-phone">
+                <a href="tel:{{$data.channel.phone}}"><i class="icon-call"></i></a>
+            </div>
+        </div>
+
+    </div>
+    <section class="part coupon-title">
+        <h1 class="text-center">{{$data.couponActivity.activityTitle}} </h1>
+    </section>
+    <section class="part upload-img">
+        <div class="img-wrap">
+            <div class="img-box"><img src="/static/images/coupon/upload-img.png" alt="" width="300" height="300"></div>
+        </div>
+    </section>
+    <section class="part coupon-detail">
+        <p><i class="spot">*</i>{{$data.couponActivity.activityIntroduction}} </p>
+        <div class="detail-box">
+            <div>
+                <p>活动时间：{{$data.couponActivity.activityStartTime|date_format:'%Y.%m.%d'}}  - {{$data.couponActivity.activityEndTime|date_format:'%Y.%m.%d'}}</p>
+                <p>活动地点：{{$data.couponActivity.activityAddress}}</p>
+            </div>
+        </div>
+    </section>
+    <section class="part btn-wrap">
+        {{if !$app->user->isGuest}}
+        <p class="user-phone">手机号：{{$app->user->getIdentity()->phone}}</p>
+        {{/if}}
+        {{if !isset($data.order)}}
+            {{if !$data.couponActivity.isEnd}}
+            <button class="btn" @click="showLogin=1">我要领券</button>
+            {{else}}
+            <button class="btn" disabled>活动已结束</button>
+            {{/if}}
+        {{else}}
+            <a class="btn" href="/coupon/show-order?orderId={{$data.order.orderId}}">查看我的礼券</a>
+        {{/if}}
+        {{if $app->user->isGuest}}
+            <a href="javascript:void(0)" @click="checkCoupon" class="check-success">我已领取，查看</a>
+        {{/if}}
+    </section>
+</div>
+<div class="loginbox-mask" :class="{'show-login':showLogin!=0}" v-cloak></div>
+<div class="loginbox" :class="{'show-login':showLogin!=0}" v-cloak>
+      <button class="loginbox-close-btn" @click="showLogin=0" type="button"></button>
+    <div class="login-header">
+        <h2>验证手机号码</h2>
+        <p>报名或查看报名情况</p>
+    </div>
+    <form @submit.prevent="signup">
+        <div class="form-item">
+            <i class="icon-user"></i><input type="text" v-model="name" @focus="hideErrorMessage" placeholder="请输入您的姓名">
+        </div>
+        <div class="form-item">
+            <i class="icon-phone"></i>
+            <input type="text" v-model="phone" @focus="hideErrorMessage" placeholder="请输入您的手机号码" {{if !$app->user->isGuest}} disabled {{/if}}>
+        </div>
+        {{if $app->user->isGuest}}
+        <div class="form-item">
+            <i class="icon-psd"></i><input type="text" v-model="verifyCode" @focus="hideErrorMessage" placeholder="请输入验证码">
+            <button type="button" @click="sendVerifyCode" :disabled="!canSendVerifyCode" class="btn vcode-btn" v-text="verifyCodeText"></button>
+        </div>
+        {{/if}}
+        <div class="form-item">
+            <button type="submit" class="btn btn-block" v-text="loginText"></button>
+        </div>
+        <div class="error-info" v-text="loginErrorMessage"></div>
+    </form>
+    <p><i class="spot">*</i>如一直无法收到验证码，请检查短信是否被拦截，或者更换手机号码</p>
+</div>
+<weixin-favorite></weixin-favorite>
+{{/block}}
+{{block name="js"}}
+<script>
+    window.BBNS = {{json_encode($data)}};
+</script>
+<script src="/static/ui/weixin-favorite.js"></script>
+<script src="/static/js/coupon/index.js"></script>
+{{include file="./weixinshare.html"}}
+{{/block}}

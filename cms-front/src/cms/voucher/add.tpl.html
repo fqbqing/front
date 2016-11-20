@@ -1,0 +1,205 @@
+<!-- target: TPL_voucher_add -->
+<div class="voucher-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active"><!-- if: ${id} -->修改<!-- else -->添加<!-- /if -->优惠券</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="voucher-form">
+            <div class="form-block">
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券类型：</div>
+                        <div class="form-value">
+                            <!-- if: ${id} -->
+                                <!-- if: ${formData.type} == ${config.VOUCHER_TYPE_AGENT} -->
+                                经纪人优惠券
+                                <!-- elif: ${formData.type} == ${config.VOUCHER_TYPE_COMMON}-->
+                                普通优惠券
+                                <!-- /if -->
+                            <!-- else -->
+                            <div data-ui-type="BoxGroup"
+                                 data-ui-id="voucherType"
+                                 data-ui-name="type"
+                                 data-ui-box-type="radio"
+                                 data-ui-required="required">
+                            </div>
+                            <!-- /if -->
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券名称：</div>
+                        <div class="form-value">
+                            <input data-ui-id="name"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   data-ui-width="400"
+                                   data-ui-name="name"
+                                   data-ui-value="@formData.name">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券图片：</div>
+                        <div class="form-value">
+                            <div data-ui-type="WebUploader"
+                                 data-ui-hint="大小不超过2M，尺寸不小于100*100px，且长宽比为1：1"
+                                 data-ui-name="image_url"
+                                 data-ui-id="uploaderCover">选择文件</div>
+                            <div class="form-extra">
+                                <div class="preview cover-image" id="preview">
+                                    <!-- if: ${formData.image_url}-->
+                                    <img src="${formData.image_url|imgUrl(200,200)}" alt="预览图片">
+                                    <!-- /if-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券简述：</div>
+                        <div class="form-value">
+                            <input data-ui-id="brief"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   data-ui-width="400"
+                                   data-ui-name="brief"
+                                   data-ui-value="@formData.brief">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券使用须知：</div>
+                        <div class="form-value">
+                            <div data-ui-id="instruction"
+                                 data-ui-type="TextBox"
+                                 data-ui-required="required"
+                                 data-ui-width="400"
+                                 data-ui-height="100"
+                                 data-ui-name="instruction"
+                                 data-ui-value="@formData.instruction"
+                                 data-ui-mode="textarea"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券价格：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup"
+                                 data-ui-id="ispay"
+                                 data-ui-name="ispay"
+                                 data-ui-box-type="radio"
+                                 data-ui-value=<!-- if: ${formData.amount} > ${config.PAY_NO} --> ${config.PAY_YES} <!-- else -->${config.PAY_NO}<!-- /if -->
+                                 data-ui-required="required">
+                                <div>
+                                    <label><input type="radio" name="ispay" value="${config.PAY_NO}" title="免费领取"></label>
+                                </div>
+                                <div>
+                                    <label><input type="radio" name="ispay" value="${config.PAY_YES}" title="设置价格"></label>
+                                </div>
+                            </div>
+                            <span v-show="isAmount">
+                                <input data-ui-id="amount"
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-dollars="dollars"
+                                       data-ui-width="100"
+                                       data-ui-name="amount"
+                                       data-ui-value="${formData.amount|amount}">
+                                <span data-ui-type="Label">元</span>
+
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key form-key-required">有效时间：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup"
+                                 data-ui-id="islimited"
+                                 data-ui-name="islimited"
+                                 data-ui-box-type="radio"
+                                 data-ui-value=<!-- if: ${formData.start_time} > ${config.LIMITED_NO} --> ${config.LIMITED_YES} <!-- else -->${config.LIMITED_NO}<!-- /if -->
+                                 data-ui-required="required">
+                                <div>
+                                    <label><input type="radio" name="islimited" value="${config.LIMITED_NO}" title="永久有效"></label>
+                                </div>
+                                <div>
+                                    <label><input type="radio" name="islimited" value="${config.LIMITED_YES}" title="设置时间"></label>
+                                </div>
+                            </div>
+                            <span v-show="isTime">
+                                <input data-ui-id="start_time"
+                                       data-ui-type="DatePicker"
+                                       data-ui-required="required"
+                                       data-ui-value="@formData.start_time"
+                                       data-ui-format='YYYY-MM-DD'
+                                       name="start_time">
+                                <i data-ui-type="Label">至</i>
+                                <input data-ui-id="end_time"
+                                       data-ui-type="DatePicker"
+                                       data-ui-required="required"
+                                       data-ui-value="@formData.end_time"
+                                       data-ui-format='YYYY-MM-DD'
+                                       data-ui-minDate="@formData.start_time"
+                                       name="end_time">
+                            </span>
+                            <div class="form-extra" v-show="isTime">优惠券有效日期截止到当日23点59分59秒</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key form-key-required">优惠券数量：</div>
+                        <div class="form-value">
+                            <div v-if="isAgentVoucher">
+                                无限张
+                            </div>
+                            <esuibox v-else>
+                                <div v-esui="formData.count"
+                                     data-ui-id="count"
+                                     data-ui-type="TextBox"
+                                     data-ui-required="required"
+                                     data-ui-number=""
+                                     data-ui-validity-label="countErrorMessage"
+                                     data-ui-width="100"
+                                     data-ui-name="count"
+                                     data-ui-value="@formData.count">
+                                </div>
+                                <span data-ui-type="Label">张</span>
+                                <span data-ui-type="Validity" data-ui-id="countErrorMessage"></span>
+                            </esuibox>
+                        </div>
+                    </div>
+
+                    <!-- if: ${id} -->
+                    <div class="form-row">
+                        <div class="form-key">已领取数量：</div>
+                        <div class="form-value">
+                            {{formData.used_count}}
+                        </div>
+                    </div>
+                        <!-- if: ${formData.type} != ${config.VOUCHER_TYPE_AGENT} -->
+                        <div class="form-row">
+                            <div class="form-key">剩余数量：</div>
+                            <div class="form-value">
+                                {{formData.count - formData.used_count}}
+                            </div>
+                        </div>
+                        <!-- /if -->
+                    <!-- /if -->
+
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring" type="submit">提交</button>
+                            <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="link" type="button">取消</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

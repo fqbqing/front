@@ -1,0 +1,100 @@
+<!-- target: TPL_good_specification_values -->
+<div class="good-specification-values bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>规格管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/good/specification/list">规格列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">规格取值</span>
+    </div>
+    <h1>规格名称：${spec.name}</h1>
+    <div class="bbmc-content bbmc-detail-content">
+        <div class="bbmc-detail">
+            <h3>取值列表</h3>
+            <p v-show="specValues.length==0" v-cloak>还未添加任何取值</p>
+            <ul class="spec-value-list">
+                <li v-for="item in specValues">
+                    <div v-show="!item.editing">
+                        <div class="content">
+                            <div class="value">取值{{$index + 1}}：<span v-text="item.name"></span></div>
+                            <div class="extra">附加值：<span v-text="item.extra"></span></div>
+                        </div>
+                        <div class="actions">
+                            <i class="icon-pencil"
+                               @click="item.editing=true"
+                               title="修改"></i>
+                            <i class="icon-trash-empty"
+                               @click="deleteSpecValue(item)"
+                               title="删除"></i>
+                        </div>
+                    </div>
+                    <div v-show="item.editing">
+                        <div class="content">
+                            <esuibox>
+                                <div class="value">取值{{$index + 1}}：
+                                    <div data-ui-type="TextBox"
+                                         data-ui-value="{{item.name}}"
+                                         v-esui="item.name"
+                                         :class="{invalidtext:item.name.length==0}"
+                                         @keyup.enter="updateSpecValue(item)"
+                                         data-ui-id="spec-{{item.id}}"></div>
+                                </div>
+                                <div class="extra">附加值：
+                                    <div data-ui-type="TextBox"
+                                         v-esui="item.extra"
+                                         data-ui-value="{{item.extra}}"
+                                         @keyup.enter="updateSpecValue(item)"
+                                         data-ui-id="spec-extra-{{item.id}}"></div>
+                                </div>
+                            </esuibox>
+                        </div>
+                        <div class="actions">
+                            <i class="icon-ok"
+                               @click="updateSpecValue(item)"
+                               title="确定"></i>
+                            <i class="icon-cancel"
+                               @click="item.editing=false"
+                               title="取消"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="bbmc-detail">
+            <h3>新增取值</h3>
+            <div class="ui-row">
+                <form data-ui-type="Form"
+                      data-ui-auto-validate="true"
+                      data-ui-id="form">
+                    <div class="form-body">
+                        <div class="form-row">
+                            <div class="form-key">规格取值：</div>
+                            <div class="form-value">
+                                <input data-ui-type="TextBox"
+                                       data-ui-name="name"
+                                       autocomplete="off"
+                                       data-ui-validity-label="errorMessage"
+                                       data-ui-required-error-message="请填写规格取值"
+                                       data-ui-required="required"/>
+                                <div class="form-extra">
+                                    <span data-ui-type="Validity" data-ui-id="errorMessage"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">附加值：</div>
+                            <div class="form-value">
+                                <input data-ui-type="TextBox"
+                                       data-ui-name="extra"
+                                       autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" data-ui-skin="primary" data-ui-type="Button">新增规格值</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

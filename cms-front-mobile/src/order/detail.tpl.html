@@ -1,0 +1,101 @@
+<!-- target: TPL_order_detail -->
+<div class="order_detail">
+    <header class="ui-header ui-header-stable ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>订单详情</h1>
+    </header>
+    <section class="ui-container">
+        <section class="ui-panel">
+            <h2>订单信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b">
+                    <h5><span>订单号</span><span class="ui-panel-title-tips">{{order.order_id}}</span></h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>下单时间</span>
+                        <span class="ui-panel-title-tips">{{order.created_time|date}}</span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5><span>货品</span><span class="ui-panel-title-tips">{{order.product.name}}</span></h5>
+
+                    <div class="ui-label-list">
+                        <label class="ui-label-s" v-for="spec in order.product.specification">
+                            {{spec.specificationValue.name}}
+                        </label>
+                    </div>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>订单支付金额(元)</span>
+                        <span class="ui-panel-title-tips">{{order.deposit|currency 2}}</span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>支付方式</span>
+                        <span class="ui-panel-title-tips">{{order.payment|payment-text}}</span>
+                    </h5>
+                </li>
+                <li class="">
+                    <h5>
+                        <span>订单状态</span>
+                        <span class="ui-select ui-panel-title-tips">
+                            <select>
+                                <option v-for="item in const.ORDER_STATUS"
+                                        :selected="item.value==order.status"
+                                        value="{{item.value}}">
+                                    {{item.text}}
+                                </option>
+                            </select>
+                        </span>
+                    </h5>
+                </li>
+            </ul>
+            <h2>附加信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b" v-if="order.get_car_code">
+                    <h5>
+                        <span>提车码</span>
+                        <span class="ui-panel-title-tips">{{order.get_car_code}}</span>
+                    </h5>
+                </li>
+                <li class="ui-border-b">
+                    <h5><span>定金有效期</span></h5>
+                    <p>{{order.created_time|date}} 至 {{order.expire_time|date}}</p>
+                </li>
+                <li class="ui-border-b">
+                    <h5>
+                        <span>提车方式</span>
+                        <span class="ui-panel-title-tips">{{order.get_car}}</span>
+                    </h5>
+                </li>
+                <li class="">
+                    <h5>
+                        <span>交易方式</span>
+                        <span class="ui-panel-title-tips">{{order.trade}}</span>
+                    </h5>
+                </li>
+            </ul>
+            <h2>客户信息</h2>
+            <ul class="ui-list ui-list-pure ui-border-tb">
+                <li class="ui-border-b">
+                    <h5>
+                        <span>姓名</span>
+                        <span class="ui-panel-title-tips">{{order.user_info.user_name}}</span>
+                    </h5>
+                </li>
+                <li class="">
+                    <h5>
+                        <span>手机号</span>
+                        <span class="ui-panel-title-tips">{{order.user_info.user_phone}}</span>
+                    </h5>
+                </li>
+            </ul>
+            <div class="ui-btn-wrap">
+                <button class="ui-btn ui-btn-danger ui-btn-lg">保存</button>
+            </div>
+        </section>
+    </section>
+</div>

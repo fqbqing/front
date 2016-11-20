@@ -1,0 +1,108 @@
+<!-- target: TPL_groupon_signup_list -->
+<div class="groupon-signup-list">
+    <!-- use: TPL_common_page_header(title="活动订单") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <ul class="ui-tab-nav ui-border-b" v-show="query.claimed==1">
+            <li @click="resetRouter('/groupon/activity/detail', {id: query.activity_id})">基本信息</li>
+            <li class="current">已认领订单</li>
+            <!--<li @click="resetRouter('/tuan/channel', {tuan_id: query.tuan_id})">渠道效果</li>-->
+        </ul>
+        <search-box name="search" placeholder="按手机号搜索"></search-box>
+        <div class="ui-row filterbar">
+            <div class="ui-col ui-col-50">共<span v-text="totalCount"></span>人</div>
+            <div class="ui-col ui-col-50 text-right">
+                <button type="button" @click="$refs.orderstatussheet.showActionSheet">订单状态<i class="ui-icon-unfold"></i></button>
+            </div>
+        </div>
+        <listview v-ref:listview :api="api.listGrouponSignup" :page-no="1" :page-size="15" :extra-data="listExtraData">
+            <ul class="ui-list ui-list-pure ui-border-tb" v-cloak v-if="signups.length">
+                <li v-for="signup in signups" :class="{'ui-border-t':$index > 0}">
+                    <div class="order-info" @click="toggleOrder(signup)">
+                        <h4 class="ui-nowrap">
+                            <template v-if="signup.customer && signup.customer.name != signup.username">
+                                {{signup.customer.name}}<i class="ui-txt-muted">({{signup.username}})</i>
+                            </template>
+                            <template v-else>
+                                {{signup.username}}
+                            </template>
+                            <small class="ui-txt-muted">({{signup.phone}})</small>
+                            <label class="ui-label-s" v-if="!signup.customer.user_company_id">无归属</label>
+                        </h4>
+                        <p class="ui-row">
+                            <label class="ui-col ui-col-25">报名时间：</label>
+                            <span class="ui-col ui-col-75">{{signup.created_time|date 'YYYY-MM-DD HH:mm'}}</span>
+                        </p>
+                        <p class="ui-row" v-if="signup.order">
+                            <label class="ui-col ui-col-25">单号：</label>
+                            <span v-text="signup.order.order_id" class="ui-col ui-col-75"></span>
+                        </p>
+                        <p class="ui-row" v-if="signup.order">
+                            <label class="ui-col ui-col-25">订单状态：</label>
+                            <span class="ui-col ui-col-75">
+                                {{signup.order.status|voucher-order-status-text}}
+                                <small>({{signup.order.payment|payment-text}})</small>
+                            </span>
+                        </p>
+                        <p class="ui-row" v-for="opt in signup.options|signup-option">
+                            <label class="ui-col ui-col-25">{{$key}}：</label>
+                            <span class="ui-col ui-col-75">{{opt}}</span>
+                        </p>
+                    </div>
+                    <div class="order-extra" v-if="signup.showExtraInfo">
+                        <div class="ui-row">
+                            <label class="ui-col ui-col-25">是否签到：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="signup.signin_status != 0">是</template>
+                                <template v-else>否</template>
+                            </span>
+                        </div>
+                        <div class="ui-row">
+                            <label class="ui-col ui-col-25">报名渠道：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="signup.channel">
+                                    {{signup.channel.name}}
+                                </template>
+                                <template v-else>无渠道</template>
+                            </span>
+                        </div>
+                        <div class="ui-row" v-if="signup.order">
+                            <label class="ui-col ui-col-25">核销渠道：</label>
+                            <span class="ui-col ui-col-75">
+                                <template v-if="signup.order.usedChannel">
+                                    {{signup.order.usedChannel.name}}
+                                </template>
+                                <template v-else>未核销</template>
+                            </span>
+                        </div>
+                        <template v-if="signup.customer">
+                            <div class="ui-row">
+                                <label class="ui-col ui-col-25">客户分级：</label>
+                                <span class="ui-col ui-col-75">
+                                    <i class="ui-badge" :class="signup.customer.rating|rating-class">{{signup.customer.rating|dft '未定'}}级</i>
+                                </span>
+                            </div>
+                            <div class="ui-row track" v-if="signup.lastestTrack">
+                                <label class="ui-col">上次跟进记录：<small v-text="signup.lastestTrack.created_time|date"></small></label>
+                                <div class="ui-col">
+                                    <p v-if="signup.lastestTrack.type==1">{{signup.lastestTrack.content}}</p>
+                                    <p v-if="signup.lastestTrack.type==2">更新客户等级为 {{signup.lastestTrack.content}}</p>
+                                    <p v-if="signup.lastestTrack.type==3">更新客户归属为 {{signup.lastestTrack.content}}</p>
+                                    <p v-if="signup.lastestTrack.type==4">更新客户姓名为 {{signup.lastestTrack.content}}</p>
+                                </div>
+                            </div>
+                            <div class="ui-btn-group">
+                                <a class="ui-btn ui-btn-primary" href="tel:{{signup.phone}}">电话联系</a>
+                                <button class="ui-btn" @click="redirect('/customer/detail', {id: signup.customer.id})">客户信息</button>
+                            </div>
+                        </template>
+                    </div>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <p class="ui-txt-info">无订单</p>
+            </div>
+        </listview>
+        <actionsheet v-ref:orderstatussheet title="按订单状态筛选" :actions="const.VOUCHER_ORDER_STATUS|support-all-option"></actionsheet>
+    </section>
+</div>

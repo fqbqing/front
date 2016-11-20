@@ -1,0 +1,97 @@
+<!-- target: TPL_level_authorization -->
+<div class="level-authorization bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>级别管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/level/list">级别列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">授权中心</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <h1>给<em>${level.name}</em>授权</h1>
+        <div data-ui-type="Tab"
+             data-ui-id="order-tab" data-ui-orientation="horizontal">
+            <ul data-role="navigator">
+                <li data-for="a">功能权限</li>
+                <li data-for="b">数据权限</li>
+                <li data-for="c">资源规模</li>
+            </ul>
+            <div class="ui-tab-content" id="a">
+                <div class="ctrl-wrap">
+                    <dl class="ctrl-list" v-for="ctrl in ctrls">
+                        <dt>
+                            <label>
+                                <input type="checkbox" :checked="ctrl.checked" :value="ctrl.name"
+                                       name="ctrl" @click="changeCtrl(ctrl, $event)">
+                                {{ctrl.text}}
+                            </label>
+                        </dt>
+                        <dd>
+                            <ul class="act-list">
+                                <li v-for="act in ctrl.actions">
+                                    <label>
+                                        <input type="checkbox" :disabled="act.disabled" :checked="act.checked" :value="ctrl.name"
+                                               name="act" @click="changeAct(ctrl, act, $event)">
+                                        {{act.text}}
+                                    </label>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="ui-row">
+                    <button data-ui-type="Button" type="button" data-ui-skin="primary" @click="save" v-if="isAllow('role.update-permissions')">确认授权</button>
+                </div>
+            </div>
+            <div class="ui-tab-content" id="b">
+                <!--数据权限-->
+                <div class="ctrl-wrap">
+                    <dl class="ctrl-list">
+                        <dt>
+                            <label>数据权限：</label>
+                        </dt>
+                        <dd>
+                            <ul class="act-list">
+                                <li v-for="item in allDataPermissions">
+                                    <label>
+                                        <input type="checkbox" value="{{item.value}}" name="permissions" :checked="item.checked" @click="changeDataAccess(item, $event)">
+                                        <span v-text="item.text"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+
+                </div>
+                <div class="ui-row">
+                    <button data-ui-type="Button" type="button" data-ui-skin="primary" @click="saveDataAccess" v-if="isAllow('role.update-data-permissions')">确认授权</button>
+                </div>
+            </div>
+
+            <div class="ui-tab-content" id="c">
+                <form data-ui-type="Form" class="bbmc-detail" data-ui-id="limitsForm" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div class="form-row" v-for="item in allDataLimits">
+                            <div class="form-key form-key-required">{{item}}：</div>
+                            <div class="form-value">
+                                <input data-ui-id="{{$key}}"
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-required-error-message="不能为空"
+                                       data-ui-number="number"
+                                       data-ui-name="{{$key}}"
+                                       data-ui-value="{{dataLimits[$key]}}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" type="submit" data-ui-skin="primary">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

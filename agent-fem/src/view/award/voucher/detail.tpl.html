@@ -1,0 +1,29 @@
+<div class="page award-voucher-detail">
+    <ui-navbar title="优惠券"></ui-navbar>
+    <div class="content">
+        <div class="voucher" v-if="order">
+            <div class="voucher-info">
+                <img :src="order.voucher.image_url|image-cdn '80w_80h_1c_1e_80-1ci.png'" width="80" height="80">
+                <h1 v-text="order.voucher.name"></h1>
+                <p v-text="order.voucher.brief"></p>
+                <!--<p>有效期：2016.05.01 - 2016.12.30</p>-->
+            </div>
+            <div class="used-box" v-if="order.status==consts.VOUCHER_ORDER_USED">
+                <h2></h2>
+                <i class="icon-ok-circle"></i>
+                <p>已使用</p>
+            </div>
+            <div v-else>
+                <h2><span>核销码</span></h2>
+                <div>
+                    <p class="order-cn" v-text="order.cn"></p>
+                    <img src="/api/award/voucher-check-qrcode?cn={{order.cn}}" width="160" height="160">
+                </div>
+            </div>
+            <div class="voucher-detail">
+                <h3>使用说明</h3>
+                <p v-html="order.voucher.instruction|nl2br"></p>
+            </div>
+        </div>
+    </div>
+</div>

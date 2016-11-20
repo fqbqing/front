@@ -1,0 +1,81 @@
+<!-- target: TPL_voucher_detail -->
+<div class="voucher-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券详情</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-block">
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-key">优惠券名称：</div>
+                        <div class="form-value">
+                            {{formData.name}}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">图片：</div>
+                        <div class="form-value">
+                            <img src="{{formData.image_url|imgUrl 200 200}}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">优惠券简述：</div>
+                        <div class="form-value">
+                            {{formData.brief}}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">优惠券使用须知：</div>
+                        <div class="form-value instruction">
+                            {{formData.instruction}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">优惠券价格：</div>
+                        <div class="form-value">
+                            <span v-if="formData.amount>0">{{formData.amount|amount}}元</span>
+                            <span v-else>免费</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">有效时间：</div>
+                        <div class="form-value">
+                            <span v-if="formData.start_time>0">{{formData.start_time|date 'YYYY年MM月DD日'}}~{{formData.end_time|date 'YYYY年MM月DD日'}}</span>
+                            <span v-else>永久有效</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">优惠券数量：</div>
+                        <div class="form-value">
+                            {{formData.count}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">已领取数量：</div>
+                        <div class="form-value">
+                            {{formData.used_count}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">剩余数量：</div>
+                        <div class="form-value">
+                            {{formData.count-formData.used_count}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+

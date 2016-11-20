@@ -1,0 +1,31 @@
+<!-- target: TPL_good_specification_list -->
+<div class="good-specification-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>规格管理</span>
+        <span class="divider">/</span>
+        <span class="active">规格列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button data-ui-type="Button" data-ui-id="addBtn" data-ui-skin="primary"
+                    @click="state.add=!state.add"
+                    type="button">
+                <i class="icon-plus"></i>添加规格
+            </button>
+        </div>
+        <div class="add-box" v-show="state.add">
+            <div v-esui="spectype" data-ui-type="Select" data-ui-id="spectype"></div>
+            <div v-esui="specname" data-ui-type="TextBox" data-ui-placeholder="请输入要新增的规格名称"></div>
+            <button data-ui-type="Button" @click="addSpecification" type="button">确定</button>
+        </div>
+        <div class="list-table">
+            <!-- import: listEditableTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button data-ui-type="Button" data-ui-id="deleteBtn" data-ui-skin="warn" type="button">
+                <i class="icon-trash-empty"></i>批量删除
+            </button>
+        </div>
+    </div>
+</div>

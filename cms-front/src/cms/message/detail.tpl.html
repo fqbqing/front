@@ -1,0 +1,27 @@
+<!-- target: TPL_message_detail -->
+<div class="message-detail bbmc-content-wrap">
+    <div class="message-detail-body">
+        <h1 class="title">
+            <!--if:  ${messageInfo.type} == ${config.MESSAGE_TYPE_ANNOUNCEMENT}-->
+            ${messageInfo.title}
+            <!--elif: ${messageInfo.type} == ${config.MESSAGE_TYPE_NOTICE}-->
+            ${messageInfo.job.title}
+            <!--/if-->
+        </h1>
+        <small class="date">${messageInfo.created_time|date}</small>
+        <div class="message-detail-content">
+            <div>
+                <p>
+                    <!--if:  ${messageInfo.type} == ${config.MESSAGE_TYPE_ANNOUNCEMENT}-->
+                    ${messageInfo.content|raw}
+                    <!--elif: ${messageInfo.type} == ${config.MESSAGE_TYPE_NOTICE}-->
+                    ${messageInfo.job.content|raw}
+                    <!--/if-->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- target: TPL_message_detail_child -->
+<!-- import: TPL_message_detail -->

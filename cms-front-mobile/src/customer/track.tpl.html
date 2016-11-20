@@ -1,0 +1,32 @@
+<!-- target: TPL_customer_track -->
+<div class="customer-track">
+    <!-- use: TPL_common_page_header(title="今日跟进") -->
+    <!-- use: TPL_common_page_footer(name="customer") -->
+    <section class="ui-container" v-cloak>
+        <listview v-ref:listview :api="api.listCustomerTrack"
+                  :page-no="1"
+                  :page-size="15"
+                  :extra-data="listExtraData"
+                  cache-type="mem">
+            <ul class="ui-list ui-list-track ui-list-pure ui-border-tb" v-if="tracks.length">
+                <li v-for="track in tracks" :class="{'ui-border-t':$index>0}">
+                    <p class="track-header">
+                        <span v-if="track.user" v-text="track.user.name"></span>
+                        <span v-else>{{track.user_company_name}}(已删除)</span>
+                        跟进了
+                        <span v-if="track.customer" v-text="track.customer.name"></span>
+                    </p>
+                    <h4 v-if="track.type==1"><span v-text="track.content"></span></h4>
+                    <h4 v-if="track.type==2">更新客户等级为<i class="type-rating" v-text="track.content"></i></h4>
+                    <h4 v-if="track.type==3">更新客户归属为<i class="type-owner" v-text="track.content"></i></h4>
+                    <h4 v-if="track.type==4">更新客户姓名为<i class="type-name" v-text="track.content"></i></h4>
+                    <p class="track-header">
+                        <span class="date">{{track.created_time|date}}</span>
+                    </p>
+                </li>
+            </ul>
+            <div v-else class="text-center ui-txt-muted">还没有人跟进过~</div>
+        </listview>
+    </section>
+</div>
+

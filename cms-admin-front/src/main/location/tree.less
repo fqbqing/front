@@ -1,0 +1,33 @@
+/**
+ * @file [Please Input File Description]
+ * @author lifayu(lifayu@babamaiche.com)
+ */
+
+.location-tree {
+    // Tree
+    .ui-tree-content-wrapper {
+        padding: 5px 0 5px 15px;
+        &:hover {
+            background: @bb-box-bgcolor;
+        }
+    }
+    .ui-tree-content-wrapper-selected {
+        background: @bb-header-bgcolor;
+        border-left: 4px solid @bb-main-color;
+    }
+    .skin-location-tree-node-indicator-current {
+        background: url(../../common/img/icon/location.png) center center no-repeat;
+        background-size: cover;
+    }
+    .skin-location-tree-node-indicator-expanded {
+        background: url(../../common/img/icon/arrow_down.png) center center no-repeat;
+        background-size: cover;
+    }
+    .skin-location-tree-node-indicator-collapsed {
+        background: url(../../common/img/icon/arrow_right.png) center center no-repeat;
+        background-size: cover;
+    }
+    .skin-location-tree-node-indicator-previous, .skin-location-tree-node-indicator-far-previous {
+        background: none;
+    }
+}

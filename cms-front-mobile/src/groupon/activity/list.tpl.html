@@ -1,0 +1,39 @@
+<!-- target: TPL_groupon_activity_list -->
+<div class="groupon-activity-list">
+    <!-- use: TPL_common_page_header_simple(title="活动列表") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <search-box name="search" placeholder="按名称搜索"></search-box>
+        <div class="ui-row filterbar">
+            <div class="ui-col ui-col-67">共<i v-text="totalCount"></i>场</div>
+            <div class="ui-col ui-col-33 text-right">
+                <!--// 待定-->
+            </div>
+        </div>
+        <listview v-ref:listview :api="api.listGroupon" :page-no="1" :page-size="15">
+            <ul class="ui-list ui-list-pure ui-list-link ui-list-active ui-list-cover ui-border-t" v-cloak v-if="groupons.length">
+                <li class="ui-border-b" v-for="groupon in groupons" @click="redirect('/groupon/activity/detail', {id: groupon.id})">
+                    <h4>{{groupon.name}}</h4>
+                    <p>
+                        活动时间：{{groupon.activity_time|date 'YYYY-MM-DD HH:mm'}}
+                        <template v-if="groupon.status==0">
+                            <i class="tuan-status tuan-status-offline">未上线</i>
+                        </template>
+                        <template v-if="groupon.status==1">
+                            <i class="tuan-status tuan-status-online">上线中</i>
+                        </template>
+                        <template v-if="groupon.status==2">
+                            <i class="tuan-status tuan-status-offline">已下线</i>
+                        </template>
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="groupon.signup_count"></i><div>报名人数</div></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <p class="ui-txt-info">无活动</p>
+            </div>
+        </listview>
+    </section>
+</div>

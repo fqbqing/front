@@ -1,0 +1,32 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}活动订单{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/tuan/index.less">
+{{/block}}
+{{block name="body"}}
+<div class="order-info">
+    <div class="order-part">
+        <h2><span>微信支付</span></h2>
+        <div class="entry-cert coupon" v-cloak v-if="!wechat">
+            <div class="entry-cert-code">
+                <img :src="qrcode" v-if="qrcode">
+            </div>
+            <div class="price" v-if="deposit"><em>¥${deposit}</em></div>
+            <p>扫描二维码进行支付</p>
+        </div>
+        <div class="entry-cert" v-else>
+            <p>如果支付失败，请稍后重试</p>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script>
+    window.BBNS = {
+        version: '{{$smarty.get.version|default:"new"}}',
+        orderId: {{$smarty.get.orderId|default:""}},
+    };
+</script>
+<script src="/static/js/tuan/weixin-pay.js"></script>
+{{/block}}

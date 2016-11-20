@@ -1,0 +1,30 @@
+<!-- target: TPL_good_tag_list -->
+<div class="good-tag-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>标签管理</span>
+        <span class="divider">/</span>
+        <span class="active">标签列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button data-ui-type="Button" data-ui-id="addTagBtn" data-ui-skin="primary"
+                    @click="state.add=!state.add"
+                    type="button">
+                <i class="icon-plus"></i>添加标签
+            </button>
+        </div>
+        <div class="add-tag-box" v-show="state.add">
+            <div v-esui="tagname" data-ui-type="TextBox" data-ui-placeholder="请输入要新增的标签名称"></div>
+            <button data-ui-type="Button" @click="addTag" type="button">确定</button>
+        </div>
+        <div class="list-table">
+            <!-- import: listEditableTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button data-ui-type="Button" data-ui-id="deleteTagBtn" data-ui-skin="warn" type="button">
+                <i class="icon-trash-empty"></i>批量删除
+            </button>
+        </div>
+    </div>
+</div>

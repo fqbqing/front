@@ -1,0 +1,53 @@
+<div class="page award-cash-withdrawlist">
+    <ui-navbar title="提现记录"></ui-navbar>
+    <div class="bar bar-header-secondary">
+        <div class="buttons-row">
+            <div class="tab-link button"
+                 v-for="item in FILTER_STATUS"
+                 :class="{active:item.value==curStatus}"
+                 @click="filterByStatus(item.value)"
+                 v-text="item.text">
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <ui-listview v-ref:listview :api="$api.listCashWithdraw"
+                     ptr-content=".award-cash-withdrawlist > .content">
+            <div class="list-block media-list list-block-full inset" v-if="listData.length">
+                <ul class="withdraw-list">
+                    <li v-for="order in listData">
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">
+                                        <span class="currency">{{order.amount/100|currency '' 2}}元</span>
+                                    </div>
+                                    <div class="item-after">
+                                        <label v-if="order.status==consts.WITHDRAWING" class="withdraw-status">申请中</label>
+                                        <label v-if="order.status==consts.WITHDREW" class="withdraw-status">已提现</label>
+                                        <label v-if="order.status==consts.WITHDRAW_CANCELED" class="withdraw-status">已驳回</label>
+                                    </div>
+                                </div>
+                                <div class="item-subtitle">
+                                    <div v-text="order.organization.name"></div>
+                                    <time v-text="order.created_time|date 'YYYY.MM.DD HH:mm'"></time>
+                                </div>
+                                <div class="item-text">
+                                    <div class="remark" v-if="order.remark">
+                                        备注：<span v-text="order.remark"></span>
+                                    </div>
+                                    <div class="message" v-if="order.status==consts.WITHDRAW_CANCELED">
+                                        驳回原因：<span v-text="order.message|dft '无'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center" v-else>
+                <p class="ui-txt-info">无记录</p>
+            </div>
+        </ui-listview>
+    </div>
+</div>

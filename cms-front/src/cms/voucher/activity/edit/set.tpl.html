@@ -1,0 +1,82 @@
+<!-- target: TPL_voucher_activity_edit_set -->
+<div class="voucher-activity-edit-set bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券活动</span>
+        <span class="divider">/</span>
+        <span class="active">优惠活动设置</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/voucher/activity/edit/set~id=${id}">优惠活动设置</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/configure~id=${id}">优惠券配置</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap voucher-activity-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" class="bbmc-detail tuan-form voucher-activity-form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div class="form-row">
+                            <div class="form-key form-key-required">活动时间：</div>
+                            <div class="form-value">
+                                <input data-ui-id="start_time"
+                                       data-ui-type="DatePicker"
+                                       data-ui-required="required"
+                                       data-ui-value="@formData.start_time"
+                                       name="start_time">
+                                <span data-ui-type="Label">至</span>
+                                <input data-ui-id="end_time"
+                                       data-ui-type="DatePicker"
+                                       data-ui-required="required"
+                                       data-ui-value="@formData.end_time"
+                                       data-ui-minDate="@formData.start_time"
+                                       name="end_time">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">领取导语：</div>
+                            <div class="form-value">
+                                <input data-ui-id="voucher_introduce_text"
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-width="400"
+                                       data-ui-name="voucher_introduce_text"
+                                       data-ui-value="@formData.voucher_introduce_text">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">活动规则：</div>
+                            <div class="form-value">
+                                <div data-ui-id="rule"
+                                     data-ui-type="TextBox"
+                                     data-ui-required="required"
+                                     data-ui-width="400"
+                                     data-ui-name="rule"
+                                     data-ui-value="@formData.rule"
+                                     data-ui-mode="textarea"
+                                     data-ui-placeholder="可添加活动说明，如
+1.本活动适用于中秋节期间购车用户
+2.本活动最终解释权归本店所有…
+                                    "></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

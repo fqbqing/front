@@ -1,0 +1,53 @@
+<!-- target: TPL_tuan_order_deal -->
+<div class="tuan-order-deal">
+    <!-- use: TPL_common_page_header(title="标为已购车") -->
+    <section class="ui-container">
+        <div v-if="order">
+            <div class="check-notice" v-if="order.tuan-order-deal!=0">
+                <i class="ui-icon-warn check-notice-icon"></i>
+                <p>
+                    请选择<span v-text="order.name"></span>
+                    <small class="ui-txt-muted">({{order.phone}})</small>
+                    购买的车型
+                </p>
+                <div class="check-info">
+                    <ul class="intention ui-row">
+                        <li class="ui-col ui-col-33" v-for="item in order.tuan.intention">
+                            <div class="ui-group-radio">
+                                <input id="intention{{$index}}" v-model="intention" lazy type="radio" name="intention" value="{{item}}">
+                                <label for="intention{{$index}}" class="ui-nowrap"><span v-text="item"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="checkDeal">确定</button>
+                    <button class="ui-btn-lg" @click="toHome">取消</button>
+                </div>
+            </div>
+            <div class="check-notice" v-else>
+                <i class="ui-icon-success check-notice-icon"></i>
+                <p class="check-notice-main">
+                    <em v-text="order.name"></em>
+                    <small class="ui-txt-muted" v-text="order.phone"></small>
+                </p>
+                <p>
+                    已确认购车，无需再次标记！
+                </p>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">返回</button>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="ui-notice">
+                <i></i>
+                <p>抱歉，无法核销！</p>
+                <p>可能原因：该客户由其他销售顾问负责</p>
+                <div class="ui-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">返回</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

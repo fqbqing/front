@@ -1,0 +1,39 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+    {{assign var="MENU_NAME" value="login"}}
+{{/block}}
+{{block name="title"}}用户登录 - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<style>
+    #loginform {
+        margin-bottom: 100px;
+    }
+    .field-error .input {
+        border-color: red;
+    }
+    .error-tip {
+        display: none;
+    }
+    .field-error .error-tip {
+        display: block;
+    }
+    .field-error .tips {
+        display: none;
+    }
+    .label .float-right {
+        line-height: 40px;;
+    }
+</style>
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    <div class="line">
+        <div class="xb4 xb4-move xm4 xm4-move xs6 xs3-move xl10 xl1-move margin-large-top margin-large-bottom">
+            {{include file="includes/login_box.html"}}
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/site/login.js"></script>
+{{/block}}

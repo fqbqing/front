@@ -1,0 +1,16 @@
+
+.car-buying {
+    background-color: #f2f2f2;
+}
+@media (min-width: 760px) {
+    .good-detail {
+        margin-left: 30px;
+    }
+}
+
+ul.tab-nav {
+    padding-left: 0;
+}
+.order-detail .order-detail-box {
+    border-top-left-radius: 0;
+}

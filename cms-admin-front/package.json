@@ -1,0 +1,39 @@
+{
+    "name": "cms",
+    "version": "0.0.1",
+    "description": "edp project",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "edp": {
+        "wwwroot": "/",
+        "depDir": "dep",
+        "srcDir": "src",
+        "loaderAutoConfig": "js,htm,html,tpl,vm,phtml",
+        "loaderUrl": "http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js",
+        "dependencies": {
+            "ef": "~3.1.0-beta.3",
+            "eoo": "~0.1.4",
+            "er": "~3.1.0-rc.2",
+            "esui": "~3.1.0",
+            "etpl": "~3.0.1",
+            "mini-event": "~1.0.2",
+            "moment": "~2.7.0",
+            "underscore": "~1.8.5",
+            "esf-ms": "~1.0.2",
+            "est": "~1.3.0",
+            "bat-ria": "~0.2.8",
+            "er-track": "~0.9.1",
+            "urijs": "~1.12.0"
+        }
+    },
+    "dependencies": {
+        "ali-oss": ">4.0",
+        "co": "4.6.0"
+    },
+    "author": "",
+    "repository": "empty",
+    "license": "BSD",
+    "readme": "README"
+}

@@ -1,0 +1,26 @@
+<!-- target: TPL_organization_role_list -->
+<div class="organization-role-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span>角色管理</span>
+        <span class="divider">/</span>
+        <span class="active">角色列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button data-ui-type="Button" data-ui-id="addBtn" data-ui-skin="primary"
+                    @click="addRole"
+                    type="button"  v-if="isAllow('role.add')">
+                <i class="icon-plus"></i>添加角色
+            </button>
+        </div>
+
+        <div class="list-table">
+            <!-- import: listEditableTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+    </div>
+</div>

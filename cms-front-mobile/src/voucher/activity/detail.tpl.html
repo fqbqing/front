@@ -1,0 +1,100 @@
+<!-- target: TPL_voucher/activity_detail -->
+<div class="voucher-activity-detail">
+    <!-- use: TPL_common_page_header(title="活动详情") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li class="current">基本信息</li>
+                <li @click="redirect('/voucher/order/list', {id: voucher_activity.id, claimed: '1'})">已认领订单</li>
+                <li @click="resetRouter('/voucher/activity/channel', {id: voucher_activity.id})">渠道效果</li>
+            </ul>
+            <ul class="ui-tab-content" v-cloak>
+                <li class="current">
+                    <section class="ui-panel">
+                        <h1 style="line-height: 1.5; margin: 8px 0;" v-text="voucher_activity.name"></h1>
+                        <ul class="ui-list ui-list-text ui-border-tb">
+                            <li>
+                                <div class="ui-list-info">
+                                    <h4>活动时间</h4>
+                                    <p style="font-size: 12px;">
+                                        {{voucher_activity.start_time|date}} 至
+                                        {{voucher_activity.end_time|date}}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="ui-btn-group" style="margin: 10px auto 0; width: 240px;">
+                            <button class="ui-btn ui-btn-primary" @click="href('/api/coupon-activity/transmit?id=' + voucher_activity.id)">直接分享</button>
+                            <button class="ui-btn ui-btn-primary" @click="showShareQRCode">二维码分享</button>
+                        </div>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-tb order-panel">
+                        <h2 class="ui-border-b ui-arrowlink" @click="redirect('/voucher/order/list', {id: voucher_activity.id, claimed: '1'})">
+                            <span>已认领订单</span>
+                        </h2>
+                        <section class="ui-panel ui-panel-simple ui-border-tb ui-border-l ui-border-r" v-for="item in activityStatistics.vouchers.claimedOrders">
+                            <h2 class="ui-arrowlink" @click="redirect('/voucher/order/list', {voucher_id: item.voucher.id,activity_id: query.id, claimed: '1'})">
+                                <span>{{item.voucher.name}}</span>
+                                <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                            </h2>
+                            <ul class="ui-list ui-list-pure ui-list-stat ui-border-t">
+                                <li :class="{'ui-border-b':item.voucher.amount!='0'}">
+                                    <ul class="ui-tiled ui-tiled-stat">
+                                        <li><i>{{item.statistics.GET_VOUCHER.today}}/{{item.statistics.GET_VOUCHER.total}}</i><div>领券数</div></li>
+                                        <li><i>{{item.statistics.STATUS_SUCCESS.today}}/{{item.statistics.STATUS_SUCCESS.total}}</i><div>未使用</div></li>
+                                        <li><i>{{item.statistics.STATUS_USED.today}}/{{item.statistics.STATUS_USED.total}}</i><div>已使用</div></li>
+                                        <li><i>{{item.statistics.STATUS_NOT_PAY.today}}/{{item.statistics.STATUS_NOT_PAY.total}}</i><div>未支付</div></li>
+                                    </ul>
+                                </li>
+                                <li class="" v-if="item.voucher.amount!='0'">
+                                    <ul class="ui-tiled ui-tiled-stat">
+                                        <li><i>{{item.statistics.STATUS_APPLY_REFUND.today}}/{{item.statistics.STATUS_APPLY_REFUND.total}}</i><div>申请退款</div></li>
+                                        <li><i>{{item.statistics.STATUS_REFUNDED.today}}/{{item.statistics.STATUS_REFUNDED.total}}</i><div>已退款</div></li>
+                                        <li><i>{{item.statistics.STATUS_REFUND_FAILED.today}}/{{item.statistics.STATUS_REFUND_FAILED.total}}</i><div>退款失败</div></li>
+                                        <li><i>{{item.statistics.STATUS_SYSTEM_CANCELED.today + item.statistics.STATUS_CANCELED.today}}/{{item.statistics.STATUS_SYSTEM_CANCELED.total + item.statistics.STATUS_CANCELED.total}}</i><div>订单取消</div></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-tb order-panel">
+                        <h2 class="ui-border-b ui-arrowlink" @click="redirect('/voucher/order/list', {id: voucher_activity.id, claimed: '0'})">
+                            <span>未认领订单</span>
+                        </h2>
+                        <section class="ui-panel ui-panel-simple ui-border-tb ui-border-l ui-border-r" v-for="item in activityStatistics.vouchers.unclaimedOrders">
+                            <h2 class="ui-arrowlink" @click="redirect('/voucher/order/list', {voucher_id: item.voucher.id,activity_id: query.id, claimed: '0'})">
+                                <span>{{item.voucher.name}}</span>
+                                <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                            </h2>
+                            <ul class="ui-list ui-list-pure ui-list-stat ui-border-t">
+                                <li :class="{'ui-border-b':item.voucher.amount!='0'}">
+                                    <ul class="ui-tiled ui-tiled-stat">
+                                        <li><i>{{item.statistics.GET_VOUCHER.today}}/{{item.statistics.GET_VOUCHER.total}}</i><div>领券数</div></li>
+                                        <li><i>{{item.statistics.STATUS_SUCCESS.today}}/{{item.statistics.STATUS_SUCCESS.total}}</i><div>未使用</div></li>
+                                        <li><i>{{item.statistics.STATUS_USED.today}}/{{item.statistics.STATUS_USED.total}}</i><div>已使用</div></li>
+                                        <li><i>{{item.statistics.STATUS_NOT_PAY.today}}/{{item.statistics.STATUS_NOT_PAY.total}}</i><div>未支付</div></li>
+                                    </ul>
+                                </li>
+                                <li class="" v-if="item.voucher.amount!='0'">
+                                    <ul class="ui-tiled ui-tiled-stat">
+                                        <li><i>{{item.statistics.STATUS_APPLY_REFUND.today}}/{{item.statistics.STATUS_APPLY_REFUND.total}}</i><div>申请退款</div></li>
+                                        <li><i>{{item.statistics.STATUS_REFUNDED.today}}/{{item.statistics.STATUS_REFUNDED.total}}</i><div>已退款</div></li>
+                                        <li><i>{{item.statistics.STATUS_REFUND_FAILED.today}}/{{item.statistics.STATUS_REFUND_FAILED.total}}</i><div>退款失败</div></li>
+                                        <li><i>{{item.statistics.STATUS_SYSTEM_CANCELED.today + item.statistics.STATUS_CANCELED.today}}/{{item.statistics.STATUS_SYSTEM_CANCELED.total + item.statistics.STATUS_CANCELED.total}}</i><div>订单取消</div></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="qrcode-wrap" v-if="qrCodeImage && isQRCodeImageShow" v-cloak @click="isQRCodeImageShow=false">
+        <div class="qrcode">
+            <img :src="qrCodeImage" width="200" height="200">
+        </div>
+    </div>
+</div>

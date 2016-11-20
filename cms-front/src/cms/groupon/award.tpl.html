@@ -1,0 +1,138 @@
+<!-- target: TPL_groupon_award -->
+<div class="groupon-award bbmc-content-wrap">
+    <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+        <div class="form-row">
+            <div class="form-key"></div>
+            <div class="form-value">
+                <div class="configure-wrap">
+                    <div class="ui-tips configure-tips">温馨提示: 请确认经纪人奖励内容。为避免产生不必要纠纷，一旦客户通过经纪人报名活动，则经纪人奖励不允许再修改。</div>
+                    <h4>配置经纪人奖励方式</h4>
+                    <div class="row">
+                        <div class="col-xs-6 border-right">
+                            <span>每个有效客户报名奖励</span>
+                            <p data-ui-type="Validity" data-ui-id="signupAwardTypeErrorMessage"
+                               class="award-type-error"></p>
+
+                            <div class="award-row">
+                                <div class="award-label">
+                                    <div data-ui-type="BoxGroup"
+                                         data-ui-id="signupAwardType"
+                                         data-ui-name="signup_award_type"
+                                         data-ui-box-type="radio"
+                                         data-ui-required="required"
+                                         data-ui-required-error-message="请选择奖励类型"
+                                         data-ui-validity-label="signupAwardTypeErrorMessage"
+                                         data-ui-orientation="vertical"
+                                         data-ui-value="{{signupAward.type}}">
+                                    </div>
+                                </div>
+                                <div class="award-value">
+                                    <div class="award-type-item"></div>
+                                    <div class="award-type-item">
+                                        <esuibox v-if="signupAwardType == constants.AWARD_TYPE_CASH" v-cloak>
+                                            <input data-ui-id="signupAwardAmount"
+                                                    data-ui-type="TextBox"
+                                                    type="text"
+                                                    data-ui-name="signup_award_amount"
+                                                    data-ui-required="required"
+                                                    data-ui-dollars=""
+                                                    data-ui-min="0.01"
+                                                    data-ui-validity-label="signupAwardAmountErrorMessage"
+                                                    data-ui-width="100"
+                                                    data-ui-value="{{signupAward.amount|amount}}"/>
+                                            <span data-ui-type="Label">元</span>
+                                            <span data-ui-type="Validity"
+                                                  data-ui-id="signupAwardAmountErrorMessage"></span>
+                                        </esuibox>
+                                    </div>
+                                    <div>
+                                        <esuibox v-if="signupAwardType == constants.AWARD_TYPE_VOUCHER" v-cloak>
+                                            <button data-ui-type="Button" type="button"
+                                                    data-ui-id="chooseSignupAwardVoucherBtn"
+                                                    data-ui-skin="spring" @click="chooseSignupAwardVoucher">
+                                                选择优惠券
+                                            </button>
+                                            <span class="ui-textbox-validity-label-invalid" v-if="signupInvalid">请选择优惠券</span>
+                                        </esuibox>
+                                        <div v-if="signupAwardType == constants.AWARD_TYPE_VOUCHER && signupAwardVoucher">
+                                            <div class="voucher-info">
+                                                <h2>{{signupAwardVoucher.name}}</h2>
+                                                <span>有效期: 永久有效</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <span>每个有效客户成交奖励</span>
+
+                            <p data-ui-type="Validity" data-ui-id="dealAwardTypeErrorMessage"
+                               class="award-type-error"></p>
+
+                            <div class="award-row">
+                                <div class="award-label">
+                                    <div data-ui-type="BoxGroup"
+                                         data-ui-id="dealAwardType"
+                                         data-ui-name="deal_award_type"
+                                         data-ui-box-type="radio"
+                                         data-ui-required="required"
+                                         data-ui-required-error-message="请选择奖励类型"
+                                         data-ui-validity-label="dealAwardTypeErrorMessage"
+                                         data-ui-orientation="vertical" data-ui-value="{{dealAward.type}}">
+                                    </div>
+
+                                </div>
+                                <div class="award-value">
+                                    <div class="award-type-item"></div>
+                                    <div class="award-type-item">
+                                        <esuibox v-if="dealAwardType == constants.AWARD_TYPE_CASH" v-cloak>
+                                            <input  data-ui-id="dealAwardAmount"
+                                                    data-ui-type="TextBox"
+                                                    type="text"
+                                                    data-ui-name="deal_award_amount"
+                                                    data-ui-required="required"
+                                                    data-ui-dollars=""
+                                                    data-ui-min="0.01"
+                                                    data-ui-validity-label="dealAwardAmountErrorMessage"
+                                                    data-ui-width="100"
+                                                    data-ui-value="{{dealAward.amount|amount}}"/>
+                                            <span data-ui-type="Label">元</span>
+                                            <span data-ui-type="Validity"
+                                                  data-ui-id="dealAwardAmountErrorMessage"></span>
+                                        </esuibox>
+                                    </div>
+                                    <div>
+                                        <esuibox v-if="dealAwardType == constants.AWARD_TYPE_VOUCHER" v-cloak>
+                                            <button data-ui-type="Button" type="button"
+                                                    data-ui-id="chooseDealAwardVoucherBtn" data-ui-skin="spring"
+                                                    @click="chooseDealAwardVoucher">选择优惠券
+                                            </button>
+                                            <span class="ui-textbox-validity-label-invalid" v-if="dealInvalid">请选择优惠券</span>
+                                        </esuibox>
+                                        <div v-if="dealAwardType == constants.AWARD_TYPE_VOUCHER && dealAwardVoucher">
+                                            <div class="voucher-info">
+                                                <h2>{{dealAwardVoucher.name}}</h2>
+                                                <span>有效期: 永久有效</span>
+                                            </div>
+                                        </div>
+                                        <span data-ui-type="Validity" data-ui-id="voucherIdErrorMessage"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<!-- target: TPL_groupon_award_child -->
+<!-- import: TPL_groupon_award -->

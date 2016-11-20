@@ -1,0 +1,94 @@
+
+@import "variables";
+
+.x-brand {
+    border: 1px solid @x-border-color;
+    background: #f1f1f1;
+    position: relative;
+    .brand-title {
+        float: left;
+        width: 80px;
+        text-align: center;
+        padding: 10px 0;
+    }
+    .brand-top-list {
+        margin-left: 80px;
+        background: #fff;
+        padding: 10px 60px 10px 10px;
+        line-height: 1.5;
+        a {
+            margin: 0 10px;
+            display: inline-block;
+            color: #666;
+            text-decoration: none;
+            &.active {
+                color: @x-main-color;
+            }
+        }
+    }
+    .brand-more {
+        background: #fff;
+        color: @x-main-color;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        a {
+            color: @x-main-color;
+            text-decoration: none;
+        }
+    }
+    .brand-list {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        top: 100%;
+        left: 80px;
+        right: 2px;
+        border: 1px solid @x-main-color;
+        background: #fff;
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            border: 10px solid @x-main-color;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            width: 0;
+            height: 0;
+            top: -20px;
+            right: 20px;
+        }
+        &:after {
+            top: -19px;
+            border-bottom-color: #fff;
+        }
+        > dl {
+            width: 50%;
+            float: left;
+            overflow: hidden;
+            margin: 0;
+            > dt {
+                text-align: center;
+                width: 60px;
+                float: left;
+                padding: 8px 0;
+                color: @x-main-color;
+            }
+            > dd {
+                padding: 8px;
+                margin-left: 60px;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            border-radius: 3px;
+            padding: 2px 5px;
+            display: inline-block;
+            &:hover {
+                color: @x-main-color;
+                background: #eee;
+            }
+        }
+    }
+}

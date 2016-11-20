@@ -1,0 +1,29 @@
+<!-- target: TPL_organization_customer_list -->
+<div class="organization-customer-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <!-- if: ${organization_id} -->
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <!-- /if -->
+        <span class="active">客户列表</span>
+    </div>
+
+    <div class="bbmc-content">
+        <!-- if: ${organization_id} -->
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="customer",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <!-- /if -->
+                <div class="list-table">
+                    <!-- import: listTableWithCommand -->
+                </div>
+                <div class="list-table-footer">
+                    <!-- import: listPager -->
+                </div>
+                <!-- if: ${organization_id} -->
+            </div>
+        </div>
+        <!-- /if -->
+    </div>
+
+</div>

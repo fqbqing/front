@@ -1,0 +1,53 @@
+<div class="my-index">
+    <ui-tabbar></ui-tabbar>
+    <div class="profile">
+        <div class="user-info">
+            <div class="avatar">
+                <img src="http://img01.chedamai.cn/asset/201606/avatar.png@80w_80h_1c_1e_80-1ci.png" width="60" height="60">
+            </div>
+            <div><span v-text="user.name"></span></div>
+            <button class="btn-logout icon-logout" @click="logout">退出</button>
+        </div>
+        <div class="row">
+            <div class="col-50" @click="$router.go('/award/cash')">
+                <div class="stat-value">
+                    <i v-text="statistics.income/100|currency '￥' 2"></i>元
+                </div>
+                <p>现金</p>
+            </div>
+            <div class="col-50" @click="$router.go('/award/voucher')">
+                <div class="stat-value">
+                    <i v-text="statistics.couponCount"></i>张
+                </div>
+                <p>优惠券</p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-inner">
+            <ui-listview v-ref:listview :api="$api.listMyOrganizations"
+                         ptr-content=".my-index > .content">
+                <div class="content-block-title">我代理的经销商</div>
+                <div class="list-block list-block-full inset" v-if="listData.length">
+                    <ul class="cash-order">
+                        <li v-for="data in listData" track-by="id">
+                            <a v-link="{path:'/activity/list', query: {organizationId: data.id}}" class="item-link item-content">
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div v-text="data.name"></div>
+                                        <div class="item-subtitle">
+                                            <address class="font-small" v-text="data.address"></address>
+                                        </div>
+                                    </div>
+                                    <div class="item-after forbidden-label" v-if="data.status==consts.AGENT_STATUS_FORBIDDEN">
+                                        封禁
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ui-listview>
+        </div>
+    </div>
+</div>

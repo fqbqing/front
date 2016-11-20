@@ -1,0 +1,85 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.voucher-order-detail {
+    .tuan-order-panel {
+        .bbmc-panel-body {
+            padding: 5px 10px;
+        }
+    }
+    .tuan-order-item {
+        width: 50%;
+        border: 1px solid @bb-border-color;
+        padding: 0 10px;
+        margin-left: 70px;
+        position: relative;
+        h3 {
+            time {
+                float: right;
+                color: #666;
+            }
+        }
+        h3 a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .tuan-info {
+            font-size: 14px;
+        }
+        .buying-way, .tuan-order-status, .payment {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 3px 5px;
+            color: #fff;
+        }
+        .buying-way {
+            background: #00aa00;
+        }
+        .tuan-order-status {
+            background: @bb-main-color;
+        }
+        .payment {
+            background: #1094fa;
+        }
+    }
+    .customer-info {
+        margin-top: 30px;
+        margin-left: 80px;
+    }
+    .voucher {
+        background: #fffae2;
+        padding: 10px;
+        color: #e6803e;
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #fff;
+        }
+        &:before {
+            left: -20px;
+        }
+        &:after {
+            right: -20px;
+        }
+        a {
+            text-decoration: none;
+            color: #ff2002;
+        }
+        h3 {
+            border-bottom: 1px dashed #ffdac2;
+            padding: 5px 10px 15px;
+            font-size: 16px;
+            margin: 0;
+        }
+    }
+
+}

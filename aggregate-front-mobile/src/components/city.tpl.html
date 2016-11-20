@@ -1,0 +1,9 @@
+<!-- target: TPL_components_city -->
+<div class="components-city">
+    <h2 class="icon-location">已开通城市：</h2>
+    <ul class="city-list">
+        <li v-for="city in cities" :class="{active:query.id==city.id}" @click="changeCity(city)" v-text="city.name"></li>
+    </ul>
+</div>
+<!-- target: TPL_components_city_child -->
+<!-- import: TPL_components_city -->

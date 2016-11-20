@@ -1,0 +1,20 @@
+<div class="x-header">
+    <div class="container">
+        <a href="/" class="x-header-slogan"></a>
+        {{if isset($city)}}
+        <div class="x-header-location-wrap">
+            <div class="x-header-location">{{$city.name}}<i class="glyphicon glyphicon-menu-down"></i></div>
+            <div class="x-header-location-list">
+                <dl>
+                    <dt>开通城市</dt>
+                    <dd>
+                        {{foreach $aggregateCities as $item}}
+                        <a href="/s/{{$type}}/{{$item.id}}.html">{{$item.name}}</a>
+                        {{/foreach}}
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

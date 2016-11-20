@@ -1,0 +1,133 @@
+// file: 
+// author: lifayu(lifayu@babamaiche.com)
+
+.refund-index {
+    font-size: 14px;
+    .refund-confirm-info {
+        background: #ff7c4e;
+        color: #fff;
+        padding: 20px;
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin: 0 0 10px;
+        }
+        h2 {
+            font-size: 12px;
+        }
+        .amount {
+            text-align: center;
+            i {
+                font-size: 20px;
+                font-weight: 600;
+            }
+        }
+    }
+    .confirm-list {
+        margin-top: 30px;
+        li {
+            clear: both;
+            padding: 5px 0;
+            line-height: 1.2;
+        }
+        .list-title {
+            width: 80px;
+            float: left;
+        }
+        .list-detail {
+            margin-left: 80px;
+            text-align: right;
+            font-size: 13px;
+        }
+    }
+    .signature {
+        padding: 20px;
+        h2 {
+            font-size: 22px;
+            color: #ff7c4e;
+        }
+        .signature-box {
+            border: 1px solid #ff7c4e;
+            border-radius: 6px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            p {
+                color: #aaa;
+                text-align: center;
+            }
+            img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+        .checked {
+            font-size: 18px;
+            line-height: 32px;
+            display: inline-block;
+            color: #21d621;
+            i {
+                line-height: 32px;
+                color: #21d621;
+                vertical-align: middle;
+            }
+        }
+    }
+    .signature-act {
+        text-align: center;
+        .ui-btn {
+            margin: 0 5px;
+        }
+    }
+    .signature-view {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        h2 {
+            color: #666;
+            text-align: center;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .signature-canvas {
+            position: relative;
+            flex: 1;
+            background: #fdf8df;
+            width: 100%;
+        }
+        .signature-act {
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            width: 100%;
+        }
+    }
+    .vue-signature {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .refund-error {
+        p {
+            text-align: center;
+            margin: 20px 0;
+            color: #666;
+        }
+    }
+}
+.orientation-landscape {
+    .refund-index {
+        .signature-view {
+            background: #ff7c4e;
+            h2 {
+                display: none;
+            }
+        }
+    }
+}

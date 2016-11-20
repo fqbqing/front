@@ -1,0 +1,20 @@
+
+@import "variables";
+.pager {
+    ul {
+        display: inline-block;
+    }
+    li {
+        margin: 0 2px;
+        > a, > span {
+            border: none;
+            background: none;
+            border-radius: 4px;
+            padding: 3px 8px;
+        }
+        a.cur {
+            background: @x-main-color;
+            color: #fff;
+        }
+    }
+}

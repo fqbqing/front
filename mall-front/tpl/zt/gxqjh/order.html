@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="keywords" content="2016尚格广西（秋季）汽车交易会" />
+    <meta name="description" content="广西国际汽车文化节由南宁尚格会展服务有限公司承办，自2011年创办至今，已成功举办4届，是广西区年中规模最大的车市营销盛会，收到区内外汽车业界的一致好评与认可。 "/>
+    <meta name="_csrf" content="{{$app->request->csrfToken}}">
+    <title>订单详情 - 2016尚格广西（秋季）汽车交易会</title>
+    <link rel="stylesheet" href="/static/dep/bootstrap/less/bootstrap.less">
+    <link rel="stylesheet" href="/static/libs/swiper/css/swiper.less">
+    <link rel="stylesheet" href="/static/zt/gxqjh/order.less">
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var GLOBAL = {};
+        {{if $app->user->isGuest}}
+        GLOBAL['USER'] = {isGuest:true};
+        {{else}}
+        GLOBAL['USER'] = {
+            isGuest:false,
+            name: '{{$app->user->getIdentity()->name}}',
+            phone: '{{$app->user->getIdentity()->phone}}'
+        };
+        {{/if}}
+    </script>
+    {{include file="includes/tongji.html"}}
+</head>
+<body>
+<noscript>
+    <div class="nojs">
+        <p>您的浏览器已经禁用了JavaScript脚本的执行，这会影响您正常使用本站的功能。</p>
+    </div>
+</noscript>
+<div class="navbar-wrapper header">
+    <nav class="navbar navbar-portal navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="/static/zt/gxqjh/img/logo2x.png" width="65" height="14">
+                <span>尚格广西（秋季）汽车交易会</span>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <section class="sec sec1">
+        <div class="banner">
+            <img src="/static/zt/gxqjh/img/1.png" class="img-responsive" alt="">
+        </div>
+    </section>
+    {{if !isset($order) || $order.status == 2 || $order.status == 3 || $order.status == 8}}
+    <div class="gift-wrap">
+        <div class="sec3 signup-tip  signup-tip-paper">
+            <div class="banner sec2">
+                <img src="/static/zt/gxqjh/img/20.png" width="418" height="226" class="img-responsive" alt="">
+            </div>
+            <p>
+                工作人员会尽快与您核实领票信息，请保持电话畅通！
+            </p>
+        </div>
+        <div class="payinfo">
+            <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+            <div class="price">
+                <!--<p>意向金不订车随时退</p>-->
+                <em>¥{{$groupon.intention.amount/100}}</em>元
+            </div>
+            <div class="pay-button">
+                <button type="button" class="ui-button ui-button-lg paybtn">立即支付</button>
+            </div>
+        </div>
+        <div class="explain">
+            <div class="caption">报名须知：<i></i></div>
+            <div class="guide ensured">
+                <ul class="xuzhi">
+                    <li>10元抢30元家庭套票（门票3张），选纸质票的客户请在展会期间到东侧兑票处，凭抢票页面截图和手机号领取；</li>
+                    <li>请填写准确的手机及地址，否则将无法为您安排派送门票，相关问题请咨询免费电话：4008-955-088；</li>
+                    <li>禁止倒卖，一经发现，组委会有权无条件收回或作废；</li>
+                    <li>免费门票数量有限，赠完即止！</li>
+                </ul>
+            </div>
+        </div>
+        <div class="sec4">
+            <a href="/activity/coupon/voucher?id=715" class="btn btn-danger btn-lg">点击领2000元购车补贴</a>
+        </div>
+    </div>
+    {{elseif $order.status == 1}}
+    <div class="gift-wrap">
+        <!-- 已支付 -->
+        <div class="banner sec2">
+            <img src="/static/zt/gxqjh/img/20.png" width="418" height="226" class="img-responsive" alt="">
+        </div>
+        <div class="sec3 signup-tip signup-tip-paper">
+            <!--工作人员会尽快与您核实领票信息，请保持电话畅通！-->
+            10元抢30元家庭套票（门票3张），请在展会期间到东侧兑票处，凭抢票页面截图和手机号领取
+        </div>
+        <div class="sec3 signup-tip signup-tip-e">
+            <p>* 请注意查收并保存购票短信，如有问题，请联系客服：4008-955-088</p>
+        </div>
+        <div class="sec4">
+            <a href="/activity/coupon/voucher?id=715" class="btn btn-danger btn-lg">点击领2000元购车补贴</a>
+        </div>
+    </div>
+    {{elseif $order.status == 5}}
+    <div class="gift-wrap">
+        <div class="payed">
+            <div class="payed-info">
+                <!--已购车-->
+                <img src="/static/images/weixin/used.png" alt="" width="60" height="60">
+                <p>已使用</p>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    <div class="order-detail">
+        <h2><span>报名信息</span></h2>
+        {{foreach $signup.options as $opt}}
+        <dl class="info-list">
+            <dt>{{$opt.key}}：</dt>
+            <dd>
+                {{foreach $opt.values as $val}}
+                <span>{{$val}}</span>
+                {{foreachelse}}
+                无
+                {{/foreach}}
+            </dd>
+        </dl>
+        {{/foreach}}
+        <dl class="info-list">
+            <dt>姓名：</dt>
+            <dd>{{$signup.username}}</dd>
+        </dl>
+        <dl class="info-list">
+            <dt>手机号码：</dt>
+            <dd>{{$signup.phone}}</dd>
+        </dl>
+    </div>
+</div>
+<script src="/static/libs/jquery.js"></script>
+<script src="/static/zt/gxqjh/order.js"></script>
+<script>
+    $(function () {
+        app.init({
+            groupon: {{json_encode($groupon)}},
+            signup: {{json_encode($signup.options)}},
+            orderStatus: '{{if isset($order)}}{{$order.status}}{{/if}}'
+        });
+    });
+</script>
+</body>
+</html>

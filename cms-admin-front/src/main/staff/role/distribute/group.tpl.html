@@ -1,0 +1,44 @@
+<!-- target: TPL_staff_role_distribute_group_child -->
+<div class="staff-role-distribute-group bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <!--  <h1 class="page-title">给<em>${group.name}</em>分配角色</h1>-->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="bbmc-box">
+                    <h2>角色列表</h2>
+                    <div>
+                        <!-- import: listTableWithCommand -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="bbmc-box">
+                    <h2>
+                        已分配角色
+                    </h2>
+                    <div class="tips" v-show="roles.length==0">
+                        还没有分配任何角色
+                    </div>
+                    <ul class="role-list" v-show="roles.length">
+                        <li v-for="role in roles">
+                            <span v-text="role.name"></span>
+                            <button @click="removeRole(role)" class="remove" type="button" title="删除">╳</button>
+                        </li>
+                    </ul>
+                    <!--  <div class="ui-row">
+                          <button data-ui-type="Button" data-ui-id="saveBtn" data-ui-skin="warn">保存</button>
+                      </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- target: TPL_staff_role_distribute_group -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>权限管理</span>
+    <!--<span class="divider">/</span>-->
+    <!--<a href="#/access/group/list">用户组列表</a>-->
+    <span class="divider">/</span>
+    <span class="active">角色分配</span>
+</div>
+<!-- import: TPL_staff_role_distribute_group_child -->

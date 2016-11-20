@@ -1,0 +1,99 @@
+.payment {
+    padding: 10px 20px 0 20px;
+    color: #666464;
+}
+.payment .weixin,
+.payment .ali {
+    width: 100%;
+    margin-bottom: 8px;
+    text-decoration: none;
+    background-color: #f00;
+    color: #fff;
+}
+.payment .price {
+    float: right;
+}
+
+.payment-type {
+    overflow: hidden;
+    margin: 30px 0 50px 0;
+    color: #696868;
+}
+.paymentbtn {
+    display: inline-block;
+    width: 46%;
+    height: 35px;
+    border: 1px solid #ddd;
+    line-height: 35px;
+    font-size: 16px;
+    text-align: center;
+
+}
+.paymentbtn.active {
+    border-color: #ff5000;
+    background: url(../images/pay-select.png) right bottom no-repeat;
+    background-size: 15px 15px;
+}
+.wechat-icon, .alipay-icon {
+    position: relative;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.wechat-icon {
+    display: inline-block;
+    background: url(../images/wechat-icon.png) 0 center no-repeat;
+    background-size: 20px;
+}
+.alipay-icon {
+    display: inline-block;
+    background: url(../images/alipay-icon.png) 0 center no-repeat;
+    background-size: 20px;
+}
+.payment h3 {
+    margin: 30px 0;
+    font-weight: bold;
+}
+.payment h3 em {
+    color: #df1418;
+}
+.payment .payment-title {
+    position: relative;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #666464;
+
+}
+.payment .payment-title:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 100%;
+    height: 8px;
+    margin-top: -4px;
+    background: url(../images/weixin/istatic.png) repeat-x;
+}
+.payment .payment-title span {
+    position: relative;
+    padding: 0 20px;
+    font-weight: bold;
+    background-color: #efeff4;
+}
+.paybtn {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ff5000;
+    color: #fff;
+}
+.alipay {
+    float: right;
+}
+
+@media screen and (min-width: 760px) {
+    .paymentbtn {
+        height: 45px;
+        line-height: 45px;
+    }
+}

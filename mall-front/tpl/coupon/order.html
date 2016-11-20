@@ -1,0 +1,168 @@
+{{extends file="./layout.html"}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/coupon/order.less">
+{{/block}}
+{{block name="body"}}
+<div class="container-box">
+    <section class="section header coupon">
+        <h1>{{$data.activity.coupon}}</h1>
+        <span class="expiry-date">（有效时间：{{$data.activity.couponStartTime|date_format:'%Y.%m.%d %H:%M:%S'}}-{{$data.activity.couponEndTime|date_format:'%Y.%m.%d %H:%M:%S'}}）</span>
+        <span><i class="spot">*</i>{{$data.activity.couponUsedIntroduction}}</span>
+    </section>
+    <section class="section coupon-detial">
+        <div class="code-box">
+            <h2 class="coupon-code">优惠码：${order.orderId}</h2>
+            <span>(请截图或收藏页面保存您的活动参与凭证）</span>
+            {{if $data.order.status == 2}}
+            <p class="used"><i class="icon-used"></i>支付成功</p>
+            {{elseif $data.order.status == 3}}
+            <p class="used"><i class="icon-used"></i>使用成功</p>
+            {{else}}
+                {{if $data.activity.isEnd}}
+                <button class="btn end-btn">活动已结束</button>
+                {{else}}
+                    {{if $data.order.status == 0}}
+                    <button class="btn use-btn" @click="scanQRCode">立即使用<i class="icon-qrcode"></i></button>
+                    {{elseif $data.order.status == 1}}
+                    <a href="/coupon/pay?orderId=${order.orderId}" class="btn pay-btn">立即支付${order.amount/100}元</a>
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+            {{if !$data.activity.isEnd}}
+            <small>如果页面长时间未响应，可点击 <a href="javascript:void(0)" target="_self" class="refresh" @click="refresh">立即刷新 <i class="icon-refresh"></i></a></small>
+            {{/if}}
+
+        </div>
+        <div class="explain">
+            <p><label>活动地点：</label><span>{{$data.activity.activityAddress}}</span></p>
+            <p><label>活动时间：</label><span>{{$data.activity.activityStartTime|date_format:'%Y.%m.%d'}}  - {{$data.activity.activityEndTime|date_format:'%Y.%m.%d'}}</span></p>
+            <div>
+                <div class="caption">使用说明：</div>
+                <div class="guide">
+                    <span v-text="guide_expand_text"></span>
+                    <i class="icon-guide icon-angle-down" @click="guideExpand" :class="{'icon-angle-up':guide_expand_text.length === activity.couponUsedDetailIntroduction.length }"></i>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="section ticket-wrap">
+        <div class="ticket-bg">
+            <div class="ticket" v-if="win_status==1" v-cloak>
+                <h2>购车大奖券 <span class="red">（赠券）</span></h2>
+                <div class="red coupon-tip">第${order_static.num | order}波开奖：${order_static.time | dateFormat 'YYYY-MM-DD HH:mm:ss'}</div>
+                <p>
+                    <i class="spot">*</i>您可以立即联系客服4008-955-088确认领奖事宜
+                </p>
+            </div>
+            <div class="ticket" v-if="win_status==2" v-cloak>
+                <h2>购车大奖券 <span class="red">（赠券）</span></h2>
+                <div class="tuan-time-show countdown">
+                    <h3>第${countdown_order | order}轮开奖倒计时</h3>
+                    <div class="time">
+                        <em v-text="countdown.d1">0</em>
+                        <em v-text="countdown.d2">0</em>
+                        <i class="day">天</i>
+                        <em v-text="countdown.h1">0</em>
+                        <em v-text="countdown.h2">0</em>
+                        <i class="dot">:</i>
+                        <em v-text="countdown.m1">0</em>
+                        <em v-text="countdown.m2">0</em>
+                        <i class="dot">:</i>
+                        <em v-text="countdown.s1">0</em>
+                        <em v-text="countdown.s2">0</em>
+                    </div>
+                </div>
+                <p>
+                    * 领取购车礼后可参与线上抽奖，车展每天下午3点准时 开奖，电冰箱、微波炉、行车记录仪免费拿！
+                </p>
+            </div>
+
+            <div class="ticket" v-if="win_status==3" v-cloak>
+                <div class="prize">
+                    <i class="icon-prize" style="background:#f3543b url(${user.winRecord.prize.image}) center center no-repeat;">
+                    </i>
+                    <span>V 恭喜您获得购车大奖 ${user.winRecord.prize.level | order}等奖 </span>
+                    <span v-text="user.winRecord.prize.name+'一台'">XXX一台</span>
+                </div>
+                <p>
+                    <i class="spot">*</i>您可以立即联系客服4008-955-088确认领奖事宜
+                </p>
+            </div>
+            <div class="ticket" v-if="win_status==4" v-cloak>
+                <div class="prize">
+                    <i class="icon-prize icon-prize-no"></i>
+                    <span>V 本次车展抽奖已结束，很遗憾</span>
+                    <span>您未中奖~</span>
+                </div>
+                <p>
+                    <i class="spot">*</i>您可以立即联系客服4008-955-088确认领奖事宜
+                </p>
+            </div>
+
+            <div class="oper">
+                <a href="javascript:void(0)" class="oper-btn" @click="showWinList">查看中奖名单</a>
+            </div>
+        </div>
+
+    </section>
+    <section class="user-wrap">
+        <h4>个人信息</h4>
+        <div>
+            <p><label>姓名：</label><span>{{$data.user.name}}</span></p>
+            <p><label>联系电话：</label><span>{{$data.user.phone}}</span></p>
+        </div>
+    </section>
+</div>
+<section class="win-layout" :class="{'win-layout-show':isWinListShow}" id="winlayout">
+    <section class="win-wrap">
+        <button class="win-close" @click="isWinListShow = !isWinListShow" type="button"></button>
+
+        <section class="win-header">
+            <img src="/static/images/coupon/win-bg.png" alt="" class="win-bg">
+        </section>
+        <section class="win-main">
+            <div class="ui-scroller-wrap">
+                <div class="ui-scroller">
+                    <div>
+                        <section class="part win-tile-list">
+                            <ul>
+                                <li v-for="prize in lottery.prizes"><span>${prize.level | order}</span>等奖：<em class="red" v-text="prize.name"></em></li>
+                            </ul>
+                        </section>
+
+                        <section class="part win-content">
+                            <div>
+                                <div class="win-section"  v-for="config in lottery.configs">
+                                    <h2>第<span>${$index+1 | order}</span>波开奖：${config.draw_time | dateFormat 'YYYY-MM-DD HH:mm:ss'}</h2>
+                                    <ul class="win-list" v-if="config.orders && config.orders.length>0">
+                                        <li v-for="order in config.orders">恭喜尾号${order.phone | phoneSubstr}的<em>${order.name | nameSubstr}</em>获得<em class="red" v-text="order.prize"></em>奖品</li>
+                                    </ul>
+                                    <p v-else>还没有人摇中，您还有机会哦！</p>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+            <section class="part win-guide">
+                <h4>规则说明</h4>
+                <ul>
+                    <li> 1、中奖后服务人员会联系您，确认您的领奖方式， 您也可以联系客服专线：4008-955-088；</li>
+                    <li> 2、本奖品由车展主办方联合车大卖提供，保留最终解释权。 </li>
+                </ul>
+            </section>
+        </section>
+    </section>
+</section>
+{{/block}}
+{{block name="js"}}
+<script>
+    window.BBNS = {{json_encode($data)}};
+</script>
+<script src="/static/js/coupon/order.js"></script>
+{{include file="./weixinshare.html"}}
+{{/block}}

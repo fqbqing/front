@@ -1,0 +1,206 @@
+@import "../../dep/bootstrap/less/variables";
+@import "../../dep/bootstrap/less/mixins";
+@btn-color: #e22b27;
+body {
+    background: #000;
+    position: relative;
+    font-size: 14px;
+    font: 14px/18px "Microsoft Yahei","微软雅黑",Tahoma,Arial,Helvetica,STHeiti;
+    color: #fff;
+}
+.navbar-wrapper {
+    border-bottom: 1px solid #333;
+    position: relative;
+    z-index: 99;
+    background: #222;
+    .navbar {
+        margin-bottom: 0;
+    }
+    a {
+        color: #fff;
+    }
+    .navbar-header {
+        line-height: 50px;
+        padding-left: 10px;
+        span {
+            margin-left: 10px;
+        }
+    }
+}
+.banner {
+    img {
+        margin: 0 auto;
+    }
+}
+.sec1 {
+    margin: 30px auto;
+}
+.sec2 {
+    margin: 40px auto;
+}
+.sec3, .sec4 {
+    text-align: center;
+    margin: 40px 0;
+}
+.sec4 .btn {
+    width: 280px;
+}
+
+.signup-tip {
+    display: none;
+}
+.gift-wrap {
+    padding: 0 10px;
+    max-width: 750px;
+    margin: 0 auto;
+    h3 {
+        font-size: 14px;
+        margin: 10px 0;
+        text-align: center;
+        background: #FF7645;
+        padding: 10px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        border-radius: 3px;
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            margin-top: -6px;
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+        }
+        &:after {
+            left: auto;
+            right: -8px;
+        }
+    }
+    hr {
+        border: none;
+        border-top: 1px solid #eee;
+    }
+    .price {
+        font-size: 12px;
+        color: #999;
+        line-height: 30px;
+        em {
+            color: #f50;
+            font-size: 22px;
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        p {
+            float: right;
+            color: #f50;
+        }
+    }
+    .pay-button {
+        padding: 10px 0;
+        button {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            background: @btn-color;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            &:active {
+                background: @btn-color * .9;
+            }
+        }
+    }
+    .explain {
+        .caption {
+            margin: 8px 0;
+            font-size: 12px;
+        }
+        .guide {
+            color: #ccc;
+            font-size: 12px;
+            ul {
+                margin-left: 15px;
+                padding: 0;
+            }
+            li {
+                margin: 5px 0;
+                list-style-type: decimal;
+            }
+        }
+    }
+    .payed-info {
+        text-align: center;
+        p {
+            color: #999;
+            margin: 8px;
+            font-size: 13px;
+            &.code {
+                color: #333;
+                letter-spacing: 2px;
+            }
+        }
+    }
+    .refund-info {
+        text-align: center;
+        h4 {
+            font-size: 30px;
+            margin: 20px 0;
+        }
+        p {
+            color: #999;
+            font-size: 13px;
+        }
+    }
+}
+.order-detail {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 10px;
+    h2 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 16px;
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 0;
+            line-height: 0;
+            border-bottom: 1px solid #fff;
+        }
+        span {
+            background: #000;
+            padding: 0 10px;
+            display: inline-block;
+            position: relative;
+            z-index: 99;
+        }
+    }
+    dl {
+        color: #ccc;
+        margin: 0;
+        clear: both;
+        &:last-child {
+            margin-bottom: 20px;
+        }
+    }
+    dt {
+        float: left;
+        width: 80px;
+        clear: both;
+        padding: 8px 0;
+    }
+    dd {
+        margin-left: 80px;
+        padding: 8px 0;
+    }
+}

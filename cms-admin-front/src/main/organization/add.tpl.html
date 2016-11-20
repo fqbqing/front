@@ -1,0 +1,185 @@
+<!-- target: TPL_organization_add -->
+<div class="organization-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">新建加盟店</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <section>
+                    <h2>基本信息</h2>
+                    <div class="form-row">
+                        <div class="form-key">4S店名称：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    name="name"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">4S店logo：</div>
+                        <div class="form-value">
+                            <div data-ui-type="WebUploader"
+                                 data-ui-hint="请选择封面图片（大小不超过2M）"
+                                 data-ui-name="logo"
+                                 data-ui-id="uploader">选择文件</div>
+                            <div class="form-extra">
+                                <div class="preview cover-image" id="preview">
+                                    <!-- if: ${formData.logo}-->
+                                    <img src="${formData.logo}" alt="预览图片" class="logo">
+                                    <!-- /if-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">城市：</div>
+                        <div class="form-value">
+
+                            <input  data-ui-id="location_id"
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    name="location_id"
+                                    readonly
+                                    hidden/>
+                            <span data-ui-type="Label" data-ui-id="city_name"></span>
+                            <button data-ui-type="Button" data-ui-id="chooseCity" type="button" data-ui-skin="link">选择</button>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-key">4S店详细地址：</div>
+                        <div class="form-value">
+                            <input data-ui-id="address"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   name="address"
+                                    />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">4S店电话：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    name="phone"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">管理员名称：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    name="manager_name"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">管理员职位：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    name="manager_title"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">管理员手机号：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    data-ui-phone=""
+                                    name="manager_phone"/>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">车大卖联系人：</div>
+                        <div class="form-value">
+                            <input
+                                    data-ui-type="TextBox"
+                                    data-ui-required="required"
+                                    data-ui-id="staff_id"
+                                    name="staff_id"
+                                    readonly
+                                    hidden/>
+                            <span data-ui-type="Label" data-ui-id="staff_name"></span>
+                            <button data-ui-type="Button" data-ui-id="distribute" type="button" data-ui-skin="link">分配</button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">公共数据是否公开：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup" data-ui-id="box-group-horizontal" data-ui-name="show_public_customers" data-ui-box-type="radio" data-ui-value="0">
+                                <div>
+                                    <label><input type="radio" name="show_public_customers" value="1" title="是"></label>
+                                </div>
+                                <div>
+                                    <label><input type="radio" name="show_public_customers" value="0" title="否"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>会员信息</h2>
+                    <div class="form-row">
+                        <div class="form-key">会员级别：</div>
+                        <div class="form-value">
+                            <div data-ui-type="BoxGroup" data-ui-id="level_id"
+                                 data-ui-name="level_id" data-ui-box-type="radio" data-ui-required="required">
+                                <!-- for: ${levelList} as ${level} -->
+                                <div>
+                                    <label><input type="radio" name="level_id" title="${level.name}" value="${level.id}"></label>
+                                </div>
+
+                                <!-- /for -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">有效期：</div>
+                        <div class="form-value">
+                            <select
+                                    data-ui-type="Select"
+                                    data-ui-id="level_expire_time"
+                                    data-ui-width="200"
+                                    data-ui-required="required"
+                                    name="level_expire_time"
+                                    id="level_expire_time">
+                                <option value="">请选择</option>
+                                <option value="3">3个月</option>
+                                <option value="12">12个月</option>
+                            </select>
+                            <div class="form-extra" data-ui-type="Label" data-ui-id='expire_time_text'></div>
+                        </div>
+                    </div>
+
+
+                </section>
+
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring"
+                                type="submit">提交
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal"
+                                type="button">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

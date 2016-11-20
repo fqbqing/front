@@ -1,0 +1,47 @@
+<!-- target: TPL_message_index -->
+<div class="message-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">公告管理</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="message-wrap">
+            <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+                <ul data-role="navigator" class="ui-tab-navigator">
+                    <li class="ui-tab-item ui-tab-item-active"><a href="#/message/index">公告</a></li>
+                    <li class="ui-tab-item"><a href="#/message/drafts">草稿箱</a></li>
+                </ul>
+                <esuibox v-if="isAllow('message-job.send|message-job.draft-send')">
+                    <button data-ui-type="Button" data-ui-id="addMsgBtn" data-ui-skin="primary" type="button" class="add-msg-btn">
+                        <i class="icon-plus"></i>
+                    </button>
+                </esuibox>
+
+            </div>
+            <div class="ui-tab-content ui-tab-content-top-border">
+                <div class="ui-tab-panel" title="公告" v-if="noticePager.data && noticePager.data.length>0">
+                    <ul class="message-list">
+                        <li v-for="notice in noticePager.data" @click="getMessageJobInfo(notice._id.$id)">
+                            <h4 class="ui-nowrap">{{notice.title}}</h4>
+                            <small>{{notice.created_time | date}}</small>
+                        </li>
+                    </ul>
+                    <div class="list-table-footer">
+                        <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                             data-ui-count="@noticePager.totalCount" data-ui-page="@noticePager.pageNo" data-ui-page-size="@noticePager.pageSize"
+                             data-ui-url-template="@noticePager.urlTemplate" data-ui-layout="alignRight">
+                        </div>
+                    </div>
+                </div>
+                <div class="no-content-tip" v-else>
+                    暂时没有公告信息
+                </div>
+            </div>
+        </div>
+        <!--if: ${id}-->
+        <div data-ui-type="ActionPanel" data-ui-id="actionPanel" data-ui-url="/message/detail~id=${id}" data-ui-height="700"></div>
+        <!--else-->
+        <div data-ui-type="ActionPanel" data-ui-id="actionPanel" data-ui-url="/message/add" data-ui-height="700"></div>
+        <!--/if-->
+    </div>
+
+</div>

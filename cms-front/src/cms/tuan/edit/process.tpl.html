@@ -1,0 +1,119 @@
+<!-- target: TPL_tuan_edit_process -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>活动管理</span>
+    <span class="divider">/</span>
+    <span class="active">团购活动</span>
+    <span class="divider">/</span>
+    <a href="#/tuan/list">团购列表</a>
+    <span class="divider">/</span>
+    <span class="active">参与流程</span>
+</div>
+<div class="tuan-edit-process bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/tuan/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/description~id=${id}">描述信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/edit/process~id=${id}">参与流程</a></li>
+                <li class="ui-tab-item"><a href="#/tuan/edit/gift~id=${id}">报名成功大礼包信息</a></li>
+            </ul>
+            <div class="ui-tab-content">
+                <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div v-show="process.length">
+                            <div class="form-row">
+                                <div class="form-key">参与流程：</div>
+                                <div class="form-value">
+                                    <div class="form-extra">（标题不超过4个字符，描述不超过200个字符）</div>
+                                    <div class="form-row" v-for="pro in process">
+                                        <esuibox>
+                                           <!-- <div class="form-key"><i v-text="$index + 1"></i>：</div>-->
+                                            <div class="form-value">
+                                                <div class="form-row">
+                                                    <div class="form-key">标题</div>
+                                                    <div class="form-value">
+                                                        <div  v-esui="pro.title"
+                                                               data-ui-type="TextBox"
+                                                               data-ui-required="required"
+                                                               data-ui-max-length="4"
+                                                               data-ui-value="{{pro.title}}"
+                                                               data-ui-name="title"></div>
+                                                        <i class="token" v-text="2*$index + 1" v-if="$index < 4"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key">描述</div>
+                                                    <div class="form-value">
+                                                    <div     v-esui="pro.content"
+                                                              data-ui-type="TextBox"
+                                                              data-ui-required="required"
+                                                              data-ui-max-length="200"
+                                                              data-ui-value="{{pro.content}}"
+                                                              data-ui-width="500"
+                                                              data-ui-name="content"></div>
+                                                        <i class="token" v-text="2*($index+1)" v-if="$index < 4"></i>
+                                                    </div>
+                                                </div>
+                                                <button v-show="process.length > 1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeProcess($index)">删除</button>
+                                            </div>
+                                       </esuibox>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key"></div>
+                                        <div class="form-value">
+                                            <button data-ui-type="Button" data-ui-id="addProcessBtn" data-ui-skin="danger" type="button">
+                                                <i class="icon-plus"></i>增加参与流程
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div v-show="coupon_refund.length">
+                            <div class="form-row">
+                                <div class="form-key">意向金退还政策：</div>
+                                <div class="form-value">
+                                    <div class="form-extra">（每项不超过50个字符）</div>
+                                    <div class="form-row" v-for="refund in coupon_refund" track-by="$index">
+                                        <esuibox>
+                                          <!--  <div class="form-key"><i v-text="$index + 1"></i>：</div>-->
+                                            <div class="form-value">
+                                                <div  v-esui="refund"
+                                                      data-ui-type="TextBox"
+                                                      data-ui-required="required"
+                                                      data-ui-max-length="50"
+                                                      data-ui-value="{{refund}}"
+                                                      data-ui-width="500"
+                                                      data-ui-name="refund"></div>
+                                                <i class="token" v-text="$index+9" v-if="$index < 2"></i>
+                                                <button v-show="coupon_refund.length > 1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeRefund($index)">删除</button>
+                                            </div>
+                                        </esuibox>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key"></div>
+                                        <div class="form-value">
+                                            <button data-ui-type="Button" data-ui-id="addRefundBtn" data-ui-skin="danger" type="button">
+                                                <i class="icon-plus"></i>增加退还政策
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

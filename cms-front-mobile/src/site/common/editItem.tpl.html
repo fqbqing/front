@@ -1,0 +1,20 @@
+<!-- target: TPL_site_common_editItem -->
+<div class="site-common-editItem">
+
+    <section class="ui-container">
+        <form @submit.prevent="submit">
+            <div class="ui-form">
+                <div class="ui-form-item ui-form-item-pure ui-border-b">
+                    <input type="text" v-model="keywords" placeholder="{{query.placeholder}}" @click.prevent="errorMsg=''">
+                    <a href="#" tabindex="-1" class="ui-icon-close" v-show="keywords" @click.prevent="keywords=''"></a>
+                </div>
+                <div v-text="errorMsg" class="ui-txt-red error-msg"></div>
+            </div>
+            <div class="ui-btn-wrap btn-login-wrap">
+                <button class="ui-btn ui-btn-danger ui-btn-lg">确定</button>
+            </div>
+        </form>
+    </section>
+</div>
+<!-- target: TPL_site_common_editItem_child -->
+<!-- import: TPL_site_common_editItem -->

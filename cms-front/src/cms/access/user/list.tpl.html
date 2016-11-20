@@ -1,0 +1,29 @@
+<!-- target: TPL_access_user_list -->
+<div class="access-user-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>权限管理</span>
+        <span class="divider">/</span>
+        <span class="active">用户列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button v-if="isAllow('user-company.add')" data-ui-type="Button" data-ui-id="addUserBtn" data-ui-skin="primary" type="button">
+                <i class="icon-user-plus"></i>添加用户
+            </button>
+            <div class="ui-group">
+                <form data-ui-type="Form" data-ui-id="filter">
+                    <div data-ui-type="SearchBox" data-ui-placeholder="用户名" data-ui-id="searchbox" data-ui-text="${username}"></div>
+                </form>
+            </div>
+        </div>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <button v-if="isAllow('user-company.delete')" data-ui-type="Button" data-ui-id="deleteUserBtn" data-ui-skin="warn" type="button">
+                <i class="icon-trash-empty"></i>批量删除
+            </button>
+        </div>
+    </div>
+</div>

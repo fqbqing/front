@@ -1,0 +1,44 @@
+.cash-order {
+    time {
+        font-size: 12px;
+    }
+}
+.award-cash-list {
+    .list-block-stat {
+        .item-inner {
+            overflow: visible;
+        }
+        .item-title {
+            font-size: .8rem;
+            color: #999;
+            font-weight: 500;
+            position: relative;
+            overflow: visible;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 6px;
+                height: 16px;
+                background: @color-primary;
+                left: -0.75rem;
+                top: 50%;
+                margin-top: -8px;
+                border-radius: 0 3px 3px 0;
+            }
+        }
+        .item-after {
+        }
+        .item-text-large {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+            i {
+                font-size: 24px;
+                font-weight: 500;
+            }
+        }
+        i {
+            font-style: normal;
+        }
+    }
+}

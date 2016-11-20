@@ -1,0 +1,185 @@
+<!-- target: TPL_tuan_add -->
+<div class="tuan-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <span class="active">添加团购</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/tuan/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">活动信息</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">多重好礼</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">报名信息</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" class="bbmc-detail tuan-form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                        <div class="form-body">
+                            <div class="form-row">
+                                <div class="form-key form-key-required">选择主题：</div>
+                                <div class="form-value">
+                                    <ul class="theme-nav">
+                                        <li v-for="theme in themes" @click="selectTheme(theme)"  :class="{active: theme.name == selectedName}">
+                                            <img :src="theme.src" alt="" width="100" height="100"><p v-text="theme.text">现代绿</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">活动名称：</div>
+                                <div class="form-value">
+                                    <input data-ui-id="title"
+                                        data-ui-type="TextBox"
+                                        data-ui-required="required"
+                                        data-ui-width="400"
+                                        data-ui-name="title"
+                                        data-ui-value="@formData.title">
+                                    <div class="form-extra">不超过16个字符</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">封面图片：</div>
+                                <div class="form-value">
+                                    <div data-ui-type="WebUploader"
+                                         data-ui-hint="请选择封面图片（大小不超过2M,尺寸：750*480px）"
+                                         data-ui-name="image_default_id"
+                                         data-ui-id="uploaderCover">选择文件</div>
+                                    <div class="form-extra">
+                                        <div class="preview cover-image" id="previewcover">
+                                            <!-- if: ${formData.defaultImage}-->
+                                            <img src="${formData.defaultImage}" alt="预览图片">
+                                            <!-- /if-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key">分享封面图片：</div>
+                                <div class="form-value">
+                                    <div data-ui-type="WebUploader"
+                                         data-ui-hint="请选择封面图片（大小不超过2M,尺寸：200*200px）"
+                                         data-ui-name="share_image_id"
+                                         data-ui-id="uploaderShare">选择文件</div>
+                                    <div class="form-extra">
+                                        <div class="preview cover-image" id="previewshare">
+                                            <!-- if: ${formData.defaultImage}-->
+                                            <img src="${formData.shareImage}" alt="预览图片">
+                                            <!-- /if-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key form-key-required">报名人数美化： </div>
+                                <div class="form-value">
+                                    <span class="base-num-label">真实人数+</span>
+                                    <input data-ui-id="tuan_base_num"
+                                           data-ui-type="TextBox"
+                                           data-ui-required="required"
+                                           data-ui-number="100"
+                                           data-ui-max="100"
+                                           data-ui-name="tuan_base_num"
+                                           data-ui-value="@formData.tuan_base_num" data-ui-placeholder="请输入美化人数">
+                                    <span data-ui-type="Label">人</span>
+                                    <div class="form-extra">（若该活动真实报名人数为20人，输入美化人数30人，则美化后网页显示的报名人数为50人）</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-key form-key-required">活动特点：</div>
+                                <div class="form-value">
+                                    <div class="form-extra">（标题不超过4个字符，描述不超过30个字符）</div>
+                                    <div class="form-row">
+                                        <div class="form-value">
+                                            <div class="form-row sub-row">
+                                                <div class="form-key">标题</div>
+                                                <div class="form-value">
+                                                    <input  data-ui-id="character-title0"
+                                                           data-ui-type="TextBox"
+                                                           data-ui-required="required"
+                                                           data-ui-max-length="4"
+                                                            data-ui-width="350"
+                                                           data-ui-name="character-title0"
+                                                           data-ui-value="优先提车">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-key">描述</div>
+                                                <div class="form-value">
+                                                      <input
+                                                                data-ui-id="character-content0"
+                                                                data-ui-name="character-content0"
+                                                                data-ui-required="required"
+                                                                data-ui-max-length="30"
+                                                                data-ui-width="350"
+                                                                data-ui-type="TextBox"
+                                                                data-ui-value="当天下单可享受优先提车权，特权保证年前买车先人一步！"
+                                                                data-ui-width="500">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-value">
+                                            <div class="form-row">
+                                                <div class="form-key">标题</div>
+                                                <div class="form-value">
+                                                    <input  data-ui-id="character-title1"
+                                                            data-ui-type="TextBox"
+                                                            data-ui-required="required"
+                                                            data-ui-max-length="4"
+                                                            data-ui-width="350"
+                                                            data-ui-name="character-title1"
+                                                            data-ui-value="全城底价">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-key">描述</div>
+                                                <div class="form-value">
+                                                    <input
+                                                            data-ui-id="character-content1"
+                                                            data-ui-name="character-content1"
+                                                            data-ui-required="required"
+                                                            data-ui-max-length="30"
+                                                            data-ui-width="350"
+                                                            data-ui-type="TextBox"
+                                                            data-ui-value="承诺当日价格全城最低，如有更低价，可立即享受双倍赔付！">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key">
+                                    <input data-ui-id="is_coupon"
+                                           data-ui-type="CheckBox"
+                                           data-ui-name="is_coupon"
+                                           data-ui-checked="true">
+                                </div>
+                                <div class="form-value">
+                                    预付意向金优惠
+                                    <div class="form-extra">（若勾选该项，则需配置后续意向金优惠信息，用户报名后可以通过预付意向金的方式参与活动优惠;<br>
+                                        若未勾选该项，则不需配置后续意向金优惠信息，活动上线后无该优惠方式）</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key"></div>
+                                <div class="form-value">
+                                    <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交
+                                    </button>
+                                    <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal" type="button">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

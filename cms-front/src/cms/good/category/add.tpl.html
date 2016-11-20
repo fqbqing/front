@@ -1,0 +1,73 @@
+<!-- target: TPL_good_category_add_child -->
+<div class="good-category-add">
+    <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+        <div class="form-body">
+            <div class="form-row">
+                <div class="form-key">分类名称：</div>
+                <div class="form-value">
+                    <input data-ui-id="name"
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           data-ui-required-error-message="分类不能为空"
+                           data-ui-width="200"
+                           data-ui-value="@formData.name"
+                           name="name"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">分类简介：</div>
+                <div class="form-value">
+                <textarea data-ui-id="brief"
+                          data-ui-type="TextBox"
+                          data-ui-width="400"
+                          data-ui-height="80"
+                          rows="4"
+                          data-ui-value="@formData.brief"
+                          name="brief"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">分类图片：</div>
+                <div class="form-value">
+                    <div data-ui-type="WebUploader"
+                         data-ui-hint="请选择分类图片（大小不超过2M）"
+                         data-ui-id="uploader">选择文件
+                    </div>
+                    <div class="form-extra">
+                        <div class="preview" data-ui-type="Panel" data-ui-id="preview">
+                            <!-- if: ${formData.category_img_path} -->
+                            <img src="${formData.category_img_path}">
+                            <!-- /if -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="form-row">
+                <div class="form-key"></div>
+                <div class="form-value">
+                    <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="primary" class="ui-button-submit"
+                            type="submit">提交
+                    </button>
+                    <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" class="ui-button-submit"
+                            type="button">取消
+                    </button>
+                </div>
+            </div>
+            -->
+        </div>
+    </form>
+</div>
+<!-- target: TPL_good_category_add -->
+<div class="bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>商品分类管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/good/category/list">分类列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">添加分类</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <!-- import: TPL_good_category_add_child -->
+    </div>
+</div>

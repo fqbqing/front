@@ -1,0 +1,21 @@
+<!-- target: TPL_user-company_list -->
+<div class="user-company_list">
+    <section class="ui-container">
+        <ul class="ui-list ui-list-text" v-if="user_company_list && user_company_list.length>0">
+            <li v-for="item in user_company_list" class="ui-border-b" @click="changeUser(item)">
+                <div class="ui-list-info">
+                    <h4 v-text="item.name"></h4>
+                </div>
+                <div class="ui-list-action">
+                    <div class="ui-badge customer-rating-none" v-text="item.phone1"></div>
+                </div>
+            </li>
+        </ul>
+        <div class="ui-center" v-else>
+            <img src="${const.BASE_URL}/common/images/no-tuan.png" width="116" height="91">
+            <p class="ui-txt-info">暂无销售人员</p>
+        </div>
+    </section>
+</div>
+<!-- target: TPL_user-company_list_child -->
+<!-- import: TPL_user-company_list -->

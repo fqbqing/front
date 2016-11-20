@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>车大卖 - 汽车特卖汇</title>
+    <link rel="dns-prefetch" href="//static.chedamai.cn">
+    <link rel="apple-touch-icon" href="[__CDN__]/apple-touch-icon.png" />
+    <link rel="stylesheet" href="[__CDN__]/dep/swiper/3.3.1/src/css/swiper.less"/>
+    <link rel="stylesheet" href="[__CDN__]/src/biz.less"/>
+    <script src="//static.chedamai.cn/js/esl/2.0.8/esl.js"></script>
+    <script>
+        var SERVER_CONSTANTS = {};
+        function _constants (json) {
+            if (json.success) {
+                SERVER_CONSTANTS = json.data;
+            }
+        }
+    </script>
+    <script src="/api/system/constants?callback=_constants"></script>
+</head>
+<body>
+<div id="viewport" class="page-group">
+    <div class="launch">
+        <div class="ui-center">
+            <img src="[__CDN__]/src/common/images/slogan.png" width="213" height="28">
+        </div>
+    </div>
+</div>
+<script>
+    require.config({
+        'urlArgs': 'r[__version__]=1',
+        'baseUrl': '[__CDN__]/src',
+        'paths': {},
+        'packages': [
+            {
+                'name': 'etpl',
+                'location': '../dep/etpl/3.0.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'fastclick',
+                'location': '../dep/fastclick/1.0.6/src',
+                'main': 'fastclick'
+            },
+            {
+                'name': 'saber-ajax',
+                'location': '../dep/saber-ajax/2.1.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-dom',
+                'location': '../dep/saber-dom/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-emitter',
+                'location': '../dep/saber-emitter/2.0.0/src',
+                'main': 'emitter'
+            },
+            {
+                'name': 'saber-firework',
+                'location': '../dep/saber-firework/2.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-lang',
+                'location': '../dep/saber-lang/2.0.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-mm',
+                'location': '../dep/saber-mm/1.0.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-promise',
+                'location': '../dep/saber-promise/2.0.0/src',
+                'main': 'promise'
+            },
+            {
+                'name': 'saber-router',
+                'location': '../dep/saber-router/2.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-run',
+                'location': '../dep/saber-run/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-string',
+                'location': '../dep/saber-string/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-uri',
+                'location': '../dep/saber-uri/1.0.6/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-viewport',
+                'location': '../dep/saber-viewport/1.1.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-widget',
+                'location': '../dep/saber-widget/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'zepto',
+                'location': '../dep/zepto/1.1.6/src',
+                'main': 'zepto'
+            },
+            {
+                'name': 'saber-matchmedia',
+                'location': '../dep/saber-matchmedia/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-cookie',
+                'location': '../dep/saber-cookie/2.0.0-alpha.2/src',
+                'main': 'cookie'
+            },
+            {
+                'name': 'saber-storage',
+                'location': '../dep/saber-storage/2.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-env',
+                'location': '../dep/saber-env/1.0.0/src'
+            },
+            {
+                'name': 'hammer',
+                'location': '../dep/hammer/2.0.4/src',
+                'main': 'hammer'
+            },
+            {
+                'name': 'vue',
+                'location': '../dep/vue/1.0.24/src',
+                'main': 'vue'
+            },
+            {
+                'name': 'underscore',
+                'location': '../dep/underscore/1.8.5/src',
+                'main': 'underscore'
+            },
+            {
+                'name': 'saber-scroll',
+                'location': '../dep/saber-scroll/1.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'crypt',
+                'location': '../dep/crypt/0.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-track',
+                'location': '../dep/saber-track/0.0.1/src',
+                'main': 'main'
+            },
+            {
+                'name': 'wx',
+                'location': '//res.wx.qq.com/open/js',
+                'main': 'jweixin-1.0.0'
+            },
+            {
+                'name': 'swiper',
+                'location': '../dep/swiper/3.3.1/src',
+                'main': 'swiper.jquery'
+            },
+            {
+                'name': 'jui',
+                'location': '../dep/jui/1.0.3/src/js',
+                'main': 'main'
+            }
+        ]
+    });
+</script>
+<script>
+    require(['app'], function (app) {
+        app.init({}, SERVER_CONSTANTS);
+    });
+</script>
+</body>
+</html>

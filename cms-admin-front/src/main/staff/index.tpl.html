@@ -1,0 +1,53 @@
+<!-- target: TPL_staff_index -->
+<div class="staff-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>权限管理</span>
+        <span class="divider">/</span>
+        <span class="active">员工管理</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="group-tree">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <button type="button" data-ui-type="Button" data-ui-skin="primary" data-ui-id="addGroup"
+                            v-show="isAllow('staff-group.add')">
+                        <i class="icon-plus"></i>添加员工组
+                    </button>
+                </div>
+                <h1>组织结构</h1>
+            </div>
+            <ul class="group-nav">
+                <staff-item
+                        v-ref:grouptree
+                        group-type="staff-group"
+                        :state="treeState"
+                        :model="treeData">
+                </staff-item>
+            </ul>
+        </div>
+        <div class="group-staff">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <button type="button" data-ui-type="Button" data-ui-skin="primary" data-ui-id="addGroupStaff"
+                            v-show="isAllow('staff.add') && selectedGroupItem && selectedGroupItem.level > 0">
+                        <i class="icon-plus"></i>增加组内员工
+                    </button>
+                </div>
+                <h1><i v-text="selectedGroup.name"></i> - 人员信息</h1>
+            </div>
+            <div class="list-table">
+                <div data-ui-type="Table" data-ui-id="table" data-ui-datasource="@staffData.data"
+                     data-ui-extension-tip-type="TableTip"
+                     data-ui-extension-command-type="Command">
+                </div>
+            </div>
+            <div class="list-table-footer">
+                <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                     data-ui-count="@staffData.totalCount" data-ui-page="@staffData.pageNo" data-ui-page-
+                     size="@staffData.pageSize"
+                     data-ui-layout="alignRight" class="pager">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

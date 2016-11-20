@@ -1,0 +1,39 @@
+{{extends file="layout/main.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="item"}}
+{{/block}}
+{{block name="title"}}订单支付 - {{$TITLE_SUFFIX}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/order/payment.css">
+{{/block}}
+{{block name="body"}}
+<input type="hidden" value="{{{{$payment['orderId']}}}}" id="orderId">
+<div class="container bg-white border payment-container">
+    <div class="border payment-wrap">
+        <h2>选择支付方式</h2>
+        <div class="padding-big">
+            <div class="border-bottom">
+                <h3 class="padding-big-left">第三方支付</h3>
+                <div class="payment-type">
+                    {{if $isInWeixin || !$isMobile}}
+                    <div class="inline-block payment wechatpay active" id="wechatpay"><span class="wechat-icon"></span>微信支付</div>
+                    {{/if}}
+                    <div class="payment alipay" id="alipay"><span class="alipay-icon"></span>支付宝支付</div>
+                </div>
+            </div>
+            <div class="text-right">
+                <p class="text-big margin-big-top margin-big-bottom">
+                    支付金额: <em class="icon-rmb text-dot text-large">{{$payment['deposit']/100}}</em>
+                </p>
+                <div>
+                    <button id="payBtn" class="button bg-red button-big payBtn">立即支付</button>
+                </div>
+                <p class="margin-big-top hint">温馨提示：请在23小时59分内完成支付，超时将自动取消订单</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/order/payment.js"></script>
+{{/block}}

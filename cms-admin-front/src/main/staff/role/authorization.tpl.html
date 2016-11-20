@@ -1,0 +1,73 @@
+<!-- target: TPL_staff_role_authorization -->
+<div class="staff-role-authorization bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>权限管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/staff/role/list">角色列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">授权中心</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <h1>给<em>${role.name}</em>授权</h1>
+        <div data-ui-type="Tab"
+             data-ui-id="order-tab" data-ui-orientation="horizontal">
+            <ul data-role="navigator">
+                <li data-for="a">功能权限</li>
+                <!--<li data-for="b">数据权限</li>-->
+            </ul>
+            <div class="ui-tab-content" id="a">
+                <div class="ctrl-wrap">
+                    <dl class="ctrl-list" v-for="ctrl in ctrls">
+                        <dt>
+                            <label>
+                                <input type="checkbox" :checked="ctrl.checked" :value="ctrl.name"
+                                       name="ctrl" @click="changeCtrl(ctrl, $event)">
+                                {{ctrl.text}}
+                            </label>
+                        </dt>
+                        <dd>
+                            <ul class="act-list">
+                                <li v-for="act in ctrl.actions">
+                                    <label>
+                                        <input type="checkbox" :disabled="act.disabled" :checked="act.checked" :value="ctrl.name"
+                                               name="act" @click="changeAct(ctrl, act, $event)">
+                                        {{act.text}}
+                                    </label>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="ui-row">
+                    <button data-ui-type="Button" type="button" data-ui-skin="primary" @click="save" v-if="isAllow('staff-role.update-permissions')">确认授权</button>
+                </div>
+            </div>
+            <!--<div class="ui-tab-content" id="b">-->
+                <!--&lt;!&ndash;数据权限&ndash;&gt;-->
+                <!--<div class="ctrl-wrap">-->
+                    <!--<dl class="ctrl-list">-->
+                        <!--<dt>-->
+                            <!--<label>-->
+                                <!--数据权限：-->
+                            <!--</label>-->
+                        <!--</dt>-->
+                        <!--<dd>-->
+                            <!--<ul class="act-list">-->
+                                <!--<li v-for="item in allDataPermissions">-->
+                                    <!--<label>-->
+                                        <!--<input type="checkbox" value="{{item.value}}" name="permissions" :checked="item.checked" @click="changeDataAccess(item, $event)">-->
+                                        <!--<span v-text="item.text"></span>-->
+                                    <!--</label>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</dd>-->
+                    <!--</dl>-->
+
+                <!--</div>-->
+                <!--<div class="ui-row">-->
+                    <!--<button data-ui-type="Button" type="button" data-ui-skin="warn" @click="saveDataAccess" v-if="isAllow('staff-role.update-data-permissions')">确认授权</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>

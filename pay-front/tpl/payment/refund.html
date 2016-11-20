@@ -1,0 +1,138 @@
+{{extends file="layout/main.html"}}
+{{block name='title'}}退款中心{{/block}}
+{{block name='head'}}
+<link rel="stylesheet" href="./refund.less">
+{{/block}}
+{{block name="body"}}
+<div class="container">
+    <input type="hidden" name="refundId" value="{{$refund_id}}">
+    <input type="hidden" name="paySign" value="{{$paySign}}">
+    <div class="paytype-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-refund" role="tablist">
+            <li role="presentation" class="active"><a href="#wx" data-toggle="tab">微信支付退款<small>({{count($wx)}})</small></a></li>
+            <li role="presentation"><a href="#alipay" data-toggle="tab">支付宝支付退款<small>({{count($ali)}})</small></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" id="wx" class="tab-pane refund-pane active">
+                {{if count($wx) == 0}}
+                <div class="alert alert-warning">未选择微信支付退款单</div>
+                {{else}}
+                {{assign var="count" value="0"}}
+                {{assign var="size" value="0"}}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>支付单号</th>
+                        <th>支付信息</th>
+                        <th width="90">支付状态</th>
+                        <th width="90">退款金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{foreach $wx as $item}}
+                    <tr>
+                        <td>{{$item.paymentId}}</td>
+                        <td>{{$item.payMsg}}</td>
+                        <td><span class="status-{{$item.status}}">{{$item.statusDesc}}</span></td>
+                        <td><em>{{$item.amount/100}}</em>元</td>
+                    </tr>
+                    <!-- 支付成功和退款失败的可以退款 -->
+                    {{if $item.status eq 2 || $item.status eq 6}}
+                    {{assign var="count" value="`$count+$item.amount`"}}
+                    {{assign var="size" value="`$size+1`"}}
+                    {{/if}}
+                    {{/foreach}}
+                    </tbody>
+                </table>
+                <div class="refund-confirm text-right">
+                    {{if $count > 0}}
+                    <p class="refund-amount">共计：{{$size}}笔，退款<em class="glyphicon glyphicon-yen">{{$count/100}}</em>元</p>
+                    <div class="st-refund">
+                        <button type="button" class="btn refund-pay" data-type="wx">确认退款</button>
+                    </div>
+                    {{else}}
+                    <div>
+                        <p>暂无可退款项，可以通过刷新页面查看退款进度</p>
+                        <p><button type="button" class="btn btn-done">刷新页面</button></p>
+                    </div>
+                    {{/if}}
+                    <div class="st-refunding">
+                        <p>可在提交退款申请1分钟后刷新页面，查看退款状态</p>
+                        <p><button type="button" class="btn btn-done">刷新页面</button></p>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+            <div role="tabpanel" id="alipay" class="tab-pane refund-pane">
+                {{if count($ali) == 0}}
+                <div class="alert alert-warning">未选择支付宝支付退款单</div>
+                {{else}}
+                {{assign var="count" value="0"}}
+                {{assign var="size" value="0"}}
+                <div class="notice">
+                    <h3>请在支付宝页面上完成退款申请</h3>
+                    <p>退款申请完成前不要关闭此窗口；</p>
+                    <!--<p>完成退款申请后请根据您的情况点击下面的按钮；</p>-->
+                    <p>可在提交退款申请1分钟后刷新页面，查看退款状态。</p>
+                    <p>
+                        <button type="button" class="btn btn-done">刷新页面</button>
+                    </p>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>支付单号</th>
+                        <th>支付信息</th>
+                        <th width="90">支付状态</th>
+                        <th width="90">退款金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{foreach $ali as $item}}
+                    <tr>
+                        <td>{{$item.paymentId}}</td>
+                        <td>{{$item.payMsg}}</td>
+                        <td><span class="status-{{$item.status}}">{{$item.statusDesc}}</span></td>
+                        <td><em>{{$item.amount/100}}</em>元</td>
+                    </tr>
+                    <!-- 支付成功和退款失败的可以退款 -->
+                    {{if $item.status eq 2 || $item.status eq 6}}
+                    {{assign var="count" value="`$count+$item.amount`"}}
+                    {{assign var="size" value="`$size+1`"}}
+                    {{/if}}
+                    {{/foreach}}
+                    </tbody>
+                </table>
+                <div class="refund-confirm text-right">
+                    {{if $count > 0}}
+                    <p class="refund-amount">共计：{{$size}}笔，退款<em class="glyphicon glyphicon-yen">{{$count/100}}</em>元</p>
+                    <div class="st-refund">
+                        <button type="button" class="btn refund-pay" data-type="alipay">确认退款</button>
+                    </div>
+                    {{else}}
+                    <div>
+                        <p>暂无可退款项，可以通过刷新页面查看退款进度</p>
+                        <p><button type="button" class="btn btn-done">刷新页面</button></p>
+                    </div>
+                    {{/if}}
+                    <div class="st-refunding">
+                        <p>可在提交退款申请1分钟后刷新页面，查看退款状态</p>
+                        <p><button type="button" class="btn btn-done">刷新页面</button></p>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script src="/static/dep/bootstrap/js/modal.js"></script>
+<script src="/static/dep/bootstrap/js/tab.js"></script>
+<script src="/static/ui/layer.js"></script>
+<script src="/static/ui/loading.js"></script>
+<script src="./refund.js"></script>
+{{/block}}

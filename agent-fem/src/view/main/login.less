@@ -1,0 +1,50 @@
+@login-main-color: #ffdf0b;
+.main-login {
+    background: #fff;
+    .list-block-form {
+        color: #666;
+        margin: 0 .75rem;
+        ul {
+            .hairline-remove(top);
+            .hairline-remove(bottom);
+        }
+        .item-media {
+            color: #666;
+        }
+        .item-inner {
+            .hairline-remove(bottom);
+            padding-right: 0;
+        }
+        .item-content {
+            .hairline(bottom, @listBlockBorderColor);
+        }
+    }
+    .button-warning {
+        width: 100%;
+        background-color: @login-main-color;
+        color: #f84632;
+        &:active {
+            background-color: @login-main-color * 0.9;
+        }
+    }
+    .button-light {
+        border-color: @login-main-color;
+        color: @login-main-color;
+        &:active {
+            border-color: @login-main-color * 0.9;
+            color: @login-main-color * 0.9;
+        }
+        &:disabled {
+            border-color: @listBlockBorderColor;
+            background: #fff !important;
+            color: @listBlockBorderColor;
+        }
+    }
+    .slogan {
+        background: url(./img/login_slogan.png) center center no-repeat;
+        background-size: cover;
+        width: 199px;
+        height: 24px;
+        margin: 3rem auto;
+    }
+}

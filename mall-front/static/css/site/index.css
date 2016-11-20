@@ -1,0 +1,127 @@
+
+.subnav_pagination span {
+    overflow: hidden;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border: 2px solid #fff;
+    border-color: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    text-align: left;
+    text-indent: -9999px;
+    _zoom: 1;
+    background: rgba(0,0,0,0.4);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#66000000", endColorstr="#66000000")\9;
+    -webkit-transition: all .2s;
+             transition: all .2s;
+
+}
+.subnav_pagination span.active {
+    border-color: rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.4);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#66ffffff", endColorstr="#66ffffff")\9;
+
+}
+.adlist .media {
+    margin-right: 10px;
+}
+.ad-pad {
+    left: auto;
+    right: 28%;
+    width: auto;
+    margin-left: 0;
+    margin-right: -7%;
+}
+
+.activity > div:nth-child(odd) > div {
+    margin-right: 10px;
+}
+.activity > div:nth-child(even) > div {
+    margin-left: 10px;
+}
+.hot-activity .hot-item {
+    padding-right: 9px;
+    margin-bottom: 14px;
+}
+.carousel .carousel-list {
+    padding-top: 30.0578%;
+}
+.brand {
+    position: relative;
+    padding: 20px 0;
+}
+.brand .media {
+    margin: 4px 0;
+}
+.brand li {
+    position: static;
+    min-height: 100px;
+    margin: 0;
+}
+.brand .media-image {
+    float: left;
+    margin-right: 8px;
+}
+.brand .media-body p {
+    line-height: 22px;
+}
+.brand .media-body strong {
+    border-bottom: 1px solid #ddd;
+    line-height: 30px;
+    font-size: 16px;
+}
+.brand img {
+    width: 90px;
+}
+@media (max-width: 1000px) {
+    .brand img {
+        width: 70px;
+    }
+}
+@media (min-width: 760px) {
+    .brand .media {
+        margin: 4px;
+    }
+}
+@media (max-width: 760px) {
+    .brand img {
+        width: 53px;
+    }
+    .brand {
+        text-align: center;
+    }
+    .brand .media-image {
+        float: none;
+        margin: 8px;
+    }
+    .brand .media-body strong {
+        overflow: hidden;
+        margin: 4px 0;
+        border: none;
+        line-height: 18px;
+        white-space: nowrap;
+
+    }
+    .brand .media-body p {
+        display: none;
+    }
+    .brand-detail {
+        display: none;
+        padding: 10px;
+        margin-bottom: 20px;
+        margin-top: -20px;
+        background-color: #ddd;
+        border-radius: 5px;
+    }
+}
+@media (max-width: 360px) and (min-width: 300px) {
+    .brand li {
+        /*width: 50%;*/
+        font-size: 10px;
+    }
+}
+
+.active-title {
+    margin: 20px 0;
+}

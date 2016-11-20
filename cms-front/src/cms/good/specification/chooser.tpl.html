@@ -1,0 +1,13 @@
+<!-- target: TPL_good_specification_chooser_child -->
+<div class="good-specification-chooser">
+
+    <div class="ui-row">
+        <ul class="spec-list">
+            <li v-for="spec in specifications" :class="{active:spec.selected}" @click="changeState(spec)">
+                <span v-text="spec.name"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- target: TPL_good_specification_chooser -->
+<!-- import: TPL_good_specification_chooser_child -->

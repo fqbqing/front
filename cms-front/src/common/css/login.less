@@ -1,0 +1,160 @@
+body {
+    background-color: #fff;
+    min-width: auto;
+}
+[v-cloak] {
+    display: none;
+}
+.loginbox {
+    .btn {
+        display: block;
+        height: 40px;
+        font-size: 15px;
+        text-align: center;
+        background-color: #ff6a21;
+        color: #fff;
+        border-radius: 6px;
+    }
+}
+
+
+button {
+    border: none;
+    outline: none;
+}
+.header .login-logo {
+    float: none;
+    width: 880px;
+    margin: 0 auto;
+}
+.main {
+    overflow: hidden;
+    width: 880px;
+    min-height: 550px;
+    padding-top: 80px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e5e5e5;
+    background: url(../img/login-bg.png) left 50% no-repeat;
+    background-size: 420px;
+}
+.login-bg {
+    float: left;
+    margin-right: 80px;
+}
+.loginbox {
+    /*float: left;*/
+    float: right;margin-right:80px;
+    width: 300px;
+    /*margin: 100px auto 10px;*/
+    padding: 30px;
+    margin-bottom: 25px;
+    border: 1px solid #dcdcdc;
+}
+.loginbox h1 {
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 1px solid #dcdcdc;
+}
+.loginbox form {
+}
+
+
+.loginbox .form-item {
+    position: relative;
+    margin: 10px 0;
+    display: -webkit-box;
+}
+.loginbox .form-item input {
+    display: block;
+    -webkit-box-flex: 1;
+    height: 40px;
+    padding: 0px 5px 0 30px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+}
+.loginbox .verify-code input {
+    display: inline-block;
+    -webkit-box-flex: 0
+}
+.loginbox .form-item input:focus {
+    border-color: #ff6a21;
+    outline: none;
+}
+
+.icon-phone, .icon-psd {
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 32px;
+    top: 50%;
+    margin-top: -14px;
+    left: 12px;
+}
+.icon-phone {
+    background: url(../img/icon-phone.png) no-repeat;
+    background-size: 100%;
+}
+.icon-psd {
+    background: url(../img/icon-psd.png) no-repeat;
+    background-size: 100%;
+}
+.icon-phone:before, .icon-psd:before {
+    content: '';
+}
+
+.loginbox a {
+    text-decoration: none;
+}
+.ui-button-large {
+    width: 100%;
+}
+.error-message {
+    position: fixed;
+    width: 300px;
+    margin-left: -150px;
+    top: 30%;
+    left: 50%;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.send-verify-code {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    width: 70px;
+    padding:0 5px;
+    text-decoration: none;
+    line-height: 40px;
+    background-color: #ff6a21;
+    color: #fff;
+    border-radius: 6px;
+
+}
+.send-verify-code:hover {
+    color: #fff;
+}
+.send-verify-code:disabled {
+    background-color: #c8c8c8;
+}
+.resetpwd {
+    display: block;
+    margin: 10px 0;
+    text-align: right;
+}
+.footer {
+    text-align: center;
+    color: #a1a1a1;
+}

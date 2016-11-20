@@ -1,0 +1,239 @@
+<!-- target: TPL_organization_pay_index -->
+<div class="organization-pay-index bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span class="active">加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">支付中心</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="pay",organization_id=${organization_id}) -->
+            <div class="ui-tab-content">
+                <div class="row-item">
+                    <h1>收款方式</h1>
+                    <p class="payment">收款方式：
+                        <!--if: ${aliPayAccount.merchant_status} == 1-->
+                        自有对公账户收款服务
+                        <!--else-->
+                        车大卖代收款服务
+                        <!--/if-->
+                    </p>
+                </div>
+                <div class="row-item">
+                    <h1>车大卖支付自有对公账户收款服务</h1>
+                    <div class="payment">
+                        <h2>支付宝支付开通</h2>
+                        <div class="alipay-info">
+                            <div class="form-row" v-if="aliOpened">
+                                <div class="form-key"><span class="success-title"><i class="ui-icon-tick"></i>已开通</span></div>
+                            </div>
+                            <div class="form-row" v-if="!aliOpened">
+                                <div class="form-key" v-if="!aliPayAccount.account.seller"><span class="success-title"><i class="ui-icon-error"></i>未开通</span></div>
+                                <div class="form-key" v-else><span class="success-title"><i class="ui-icon-error"></i>已停用</span></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-key">支付宝账号：</div>
+                                <div class="form-value">${aliPayAccount.account.seller}</div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key">合作者身份PID：</div>
+                                <div class="form-value">${aliPayAccount.account.partner}</div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key">支付宝公钥：</div>
+                                <div class="form-value">
+                                    <div data-ui-type="TextBox"
+                                         data-ui-value="${aliPayAccount.account.aliPublicKey}"
+                                         data-ui-mode="textarea"
+                                         data-ui-width="400"
+                                         data-ui-height="80"
+                                         data-ui-read-only="true"></div>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-key">RSA密钥：</div>
+                                <div class="form-value">
+                                    <div data-ui-type="TextBox"
+                                         data-ui-value="${aliPayAccount.account.rsaPublicKey}"
+                                         data-ui-mode="textarea"
+                                         data-ui-width="400"
+                                         data-ui-height="80"
+                                         data-ui-read-only="true"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment">
+                        <h2>微信支付开通</h2>
+                        <div>
+                            <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                                <div class="form-body">
+                                    <div class="form-row" v-if="weixinOpened">
+                                        <div class="form-key"><span class="success-title"><i class="ui-icon-tick"></i>已开通</span></div>
+                                    </div>
+                                    <div class="form-row" v-if="!weixinOpened">
+                                        <div class="form-key" v-if="!weixinPayAccount.account"><span class="success-title"><i class="ui-icon-error"></i>未开通</span></div>
+                                        <div class="form-key" v-else><span class="success-title"><i class="ui-icon-error"></i>已停用</span></div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key">子商户号：</div>
+                                        <div class="form-value">
+                                            <input
+                                                    data-ui-type="TextBox"
+                                                    data-ui-required="required"
+                                                    name="subMchId"
+                                                    data-ui-value="${weixinPayAccount.account.subMchId}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key"></div>
+                                        <div class="form-value">
+                                            <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring"
+                                                    type="submit" v-text="weixinOpened ? '修改':'开通'">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div v-if="opening" class="weixin-apply-info">
+                                <p><a @click="isShow=!isShow" style="cursor: pointer"><i class="icon-down-open"></i> <i v-text="showText">查看微信开通资料</i></a></p>
+                                <div class="form-block" v-if="isShow">
+                                    <esuibox>
+                                        <div class="form-body">
+                                            <div>
+                                                <h4 class="form-caption"><span>基本信息</span></h4>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">申请公司名称：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.organization_name}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">联系人(负责人)姓名：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.manager_name}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">联系人(负责人)手机号码：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.manager_phone}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">联系人(负责人)常用邮箱：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.manager_mail}
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">客服电话：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.customer_service_phone}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="form-caption"><span>结算账户信息</span></h4>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">开户名称：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.account_name}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">开户银行：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.bank_name}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">开户银行城市：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.bank_city}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">开户支行：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.bank_branch_name}
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">银行账号：</div>
+                                                    <div class="form-value">
+                                                        ${weixinApplyInfo.bank_account_num}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <h4 class="form-caption"><span>企业信息</span></h4>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">营业执照照片：</div>
+                                                    <div class="form-value">
+                                                        <div class="form-extra">
+                                                            <div class="preview cover-image">
+                                                                <!-- if: ${weixinApplyInfo.licence_img_url}-->
+                                                                <img src="${weixinApplyInfo.licence_img_url}" alt="预览图片">
+                                                                <!-- /if-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">组织机构代码证照片：</div>
+                                                    <div class="form-value">
+                                                        <div class="form-extra">
+                                                            <div class="preview cover-image">
+                                                                <!-- if: ${weixinApplyInfo.code_img_url}-->
+                                                                <img src="${weixinApplyInfo.code_img_url}" alt="预览图片">
+                                                                <!-- /if-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-key form-key-required">法人身份证正面照片：</div>
+                                                    <div class="form-value">
+                                                        <div class="preview cover-image">
+                                                            <!-- if: ${weixinApplyInfo.identity_card_front_img_url}-->
+                                                            <img src="${weixinApplyInfo.identity_card_front_img_url}" alt="预览图片">
+                                                            <!-- /if-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-key form-key-required">法人身份证反面照片：</div>
+                                                <div class="form-value">
+                                                    <div class="form-extra">
+                                                        <div class="preview cover-image">
+                                                            <!-- if: ${weixinApplyInfo.identity_card_reverse_img_url}-->
+                                                            <img src="${weixinApplyInfo.identity_card_reverse_img_url}" alt="预览图片">
+                                                            <!-- /if-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </esuibox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

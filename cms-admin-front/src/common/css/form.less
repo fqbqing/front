@@ -1,0 +1,69 @@
+
+
+.form-row {
+    .clearfix();
+    margin: 15px 0;
+    padding: 0 10px;
+    line-height: 30px;
+    .form-key {
+        float: left;
+        width: 120px;
+        color: @bb-normal-color;
+        text-align: right;
+        font-size: 12px;
+    }
+    .form-key-required:before {
+        content: '*';
+        margin-right: 5px;
+        color: #f00;
+    }
+    .form-value {
+        padding: 0;
+        margin: 0;
+        margin-left: 130px;
+        .ui-select {
+            vertical-align: middle;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .form-tips, .ui-webuploader-hint {
+        clear: both;
+        color: #999;
+    }
+    .ui-webuploader .webuploader-pick {
+        padding: 0 15px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .form-extra {
+        clear: both;
+        .ui-textbox-validity-label, .ui-textarea-validity-label {
+            padding: 0;
+        }
+        color:#999;
+    }
+    .form-row{
+        .form-key{
+            width: auto;
+            margin: 0 10px 0;
+        }
+        .form-value{
+            margin: 0;
+        }
+
+    }
+
+    .token{
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #f00;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 25px;
+        color: #f00;
+    }
+
+}

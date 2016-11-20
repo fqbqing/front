@@ -1,0 +1,48 @@
+
+.ui-table.ui-table-filter {
+
+    .ui-table-hcell-text {
+        overflow: visible;
+    }
+
+    .ui-table-filter-panel {
+        display: inline-block;
+        color: #0886e9;
+        cursor: pointer;
+        position: relative;
+        width: 30px;
+        text-align: center;
+
+        .ui-table-filter-head {
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .ui-table-filter-select {
+            cursor: pointer;
+            background-color: #fff;
+            position: absolute;
+            z-index: 1;
+            visibility: hidden;
+            .box-shadow();
+            left: -10px;
+            top: 39px;
+
+            ul li {
+                white-space: nowrap;
+                padding: 0 10px;
+                line-height: 30px;
+                font-size: 12px;
+                text-align: left;
+
+                &:hover {
+                    background-color: #E3E8F7;
+                }
+
+                &.active {
+                    background-color: #E3E8F7;
+                }
+            }
+        }
+    }
+}

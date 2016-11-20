@@ -1,0 +1,170 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}{{$groupon.name}} - 报名信息{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/activity/groupon/order.less">
+{{/block}}
+{{block name="body"}}
+<input type="hidden" name="activityId" value="{{$groupon.id}}">
+<input type="hidden" name="intentionId" value="{{$groupon.intention.id}}">
+{{if isset($order)}}
+<input type="hidden" name="orderId" value="{{$order.order_id}}">
+{{/if}}
+<div class="order-info theme-{{$groupon.page_info.theme|default:'default'}}">
+    <div class="header">
+        <h1>{{$groupon.name|escape:'html'}}</h1>
+    </div>
+    <div class="order-part">
+        <h2><span>活动信息</span></h2>
+        <div class="tuan-info">
+            <dl class="info-list">
+                <dt>举办时间：</dt>
+                <dd>{{$groupon.activity_time|date_format:'%Y年%m月%d日 %H:%M'}}</dd>
+                <dt>购车地址：</dt>
+                <dd>
+                    {{$groupon.page_info.global.organization_name|escape:'html'}}
+                    <p class="extra">{{$groupon.page_info.global.address|escape:'html'}}</p>
+                </dd>
+            </dl>
+            <span class="stamp">已报名</span>
+        </div>
+    </div>
+    <div class="order-part">
+        <h2><span>活动签到</span></h2>
+        <div class="entry-cert">
+            {{if $signup.signin_status == '0'}}
+            <p>请在活动现场扫描[签到二维码]完成签到</p>
+            {{else}}
+            <div class="entry-cert-code">
+                <img src="/static/images/weixin/used.png" width="60" height="60">
+            </div>
+            <p>已入场</p>
+            {{/if}}
+        </div>
+    </div>
+    {{if isset($groupon.intention) && !empty($groupon.intention)}}
+    <div class="order-part">
+        <h2><span>优惠信息</span></h2>
+        <div class="coupon">
+            {{if !isset($order) || $order.status == 2 || $order.status == 3 || $order.status == 8}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="price">
+                    <!--<p>意向金不订车随时退</p>-->
+                    <em>¥{{$groupon.intention.amount/100}}</em>意向金
+                </div>
+                <div class="pay-button">
+                    <button type="button" class="ui-button ui-button-lg paybtn">立即支付</button>
+                </div>
+                <div class="explain">
+                    <div class="caption">意向金退还政策 <i></i></div>
+                    <div class="guide ensured">
+                        {{$groupon.intention.instruction|nl2br}}
+                    </div>
+                </div>
+            </div>
+            {{elseif $order.status == 1}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--已支付-->
+                        <div>
+                            <img src="/tuan/qrcode?text={{$CHEDAMAI_URL|escape:url}}{{urlencode('/voucher/order/check?cn=')}}{{$order.cn}}"
+                                 alt="入场二维码" width="150" height="150">
+                        </div>
+                        <p class="code">{{$order.cn}}</p>
+                        <p>使用时请出示该二维码或号码</p>
+                    </div>
+                    <hr>
+                    <div class="price">
+                        <button class="ui-button ui-button-lg fr refundbtn">我要退款</button>
+                        <em>¥{{$groupon.intention.amount/100}}</em>意向金
+                    </div>
+                </div>
+            </div>
+            {{elseif $order.status == 4}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="payed">
+                    <div class="refund-info">
+                        <!--退款中-->
+                        <h4>退款中</h4>
+                        <p>(退款预计于3-15个工作日内退还到您的支付账户，请注意查收)</p>
+                    </div>
+                    <hr>
+                    <div class="price text-right"><em>¥{{$groupon.intention.amount/100}}</em>意向金</div>
+                </div>
+            </div>
+            {{elseif $order.status == 5}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="payed">
+                    <div class="payed-info">
+                        <!--已购车-->
+                        <img src="/static/images/weixin/used.png" alt="" width="60" height="60">
+                        <p>已使用</p>
+                    </div>
+                    <hr>
+                    <div class="price text-right"><em>¥{{$groupon.intention.amount/100}}</em>意向金</div>
+                </div>
+            </div>
+            {{elseif $order.status == 6}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="payed">
+                    <div class="refund-info">
+                        <!--已退款-->
+                        <h4>退款完成</h4>
+                    </div>
+                    <hr>
+                    <div class="price text-right"><em>¥{{$groupon.intention.amount/100}}</em>意向金</div>
+                </div>
+            </div>
+            {{elseif $order.status == 7}}
+            <div class="gift-wrap">
+                <h3>{{$groupon.intention.name|escape:'html'}}</h3>
+                <div class="payed">
+                    <div class="refund-info">
+                        <h4>退款失败</h4>
+                        <p>具体原因请联系下方专属销售顾问咨询，或联系车大卖客服：4008955088</p>
+                    </div>
+                    <hr>
+                    <div class="price text-right"><em>¥{{$groupon.intention.amount/100}}</em>意向金</div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="order-part">
+        <h2><span>报名信息</span></h2>
+        <div class="order-detail">
+            <dl class="info-list">
+                {{foreach $signup.options as $opt}}
+                <dt>{{$opt.key}}：</dt>
+                <dd>
+                    {{foreach $opt.values as $val}}
+                    <span>{{$val}}</span>
+                    {{foreachelse}}
+                    无
+                    {{/foreach}}
+                </dd>
+                {{/foreach}}
+                <dt>姓名：</dt>
+                <dd>{{$signup.username}}</dd>
+                <dt>手机号码：</dt>
+                <dd>{{$signup.phone}}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<section class="part">
+    <h2><span>您的专属销售顾问</span></h2>
+    <div class="part-content">
+        {{v_seller file="/includes/seller.html" activityId="`$groupon.id`"}}
+    </div>
+</section>
+{{/block}}
+{{block name="js"}}
+<script src="/static/js/activity/groupon/order.js"></script>
+{{/block}}

@@ -1,0 +1,70 @@
+<!-- target: TPL_agent_statistics -->
+<div class="agent-statistics bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>经纪人管理</span>
+        <span class="divider">/</span>
+        <span>经纪人效果统计</span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bbmc-panel">
+                    <div class="bbmc-panel-body">
+                        <div class="row row-compact">
+                            <div class="col-xs-6 data-block data-block-last data-center">
+                                <div>
+                                    <p class="stat-value"><em>${agentStatistics.agent_count}</em></p>
+                                    <h3 class="stat-name">经纪人总数</h3>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 data-block data-block-left data-block-last">
+                                <div class="row">
+                                    <div class="col-xs-6 data-block data-block-bottom data-center">
+                                        <div>
+                                            <p class="stat-value"><em>${agentStatistics.signup_customer_count}</em></p>
+                                            <h3 class="stat-name">经纪人客户报名数</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 data-block data-block-bottom data-block-last data-center">
+                                        <div>
+                                            <p class="stat-value"><em>${agentStatistics.agent_cost|amount}</em></p>
+                                            <h3 class="stat-name">经纪人推广花费（元）</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-compact">
+                                    <div class="col-xs-6 data-block data-center">
+                                        <div>
+                                            <p class="stat-value"><em>${agentStatistics.deal_customer_count}</em></p>
+                                            <h3 class="stat-name">经纪人客户成交数</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 data-block data-block-last data-center">
+                                        <div>
+                                            <h3><a href="#/agent/rank">经纪人收益排名</a><i class="icon-right-big" style="color: #3291da;"></i></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content">
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="table" data-ui-datasource="@agentActivityStatistics.data"
+                 data-ui-extension-tip-type="TableTip">
+            </div>
+        </div>
+        <div class="list-table-footer">
+            <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                 data-ui-count="@agentActivityStatistics.totalCount" data-ui-page="@agentActivityStatistics.pageNo" data-ui-page-size="@agentActivityStatistics.pageSize"
+                 data-ui-url-template="@agentActivityStatistics.urlTemplate" data-ui-layout="alignRight">
+            </div>
+        </div>
+    </div>
+</div>

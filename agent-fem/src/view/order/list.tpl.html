@@ -1,0 +1,140 @@
+<div class="order-list">
+    <header class="bar bar-nav">
+        <h1 class="title">订单列表</h1>
+    </header>
+    <div class="bar bar-header-secondary">
+        <div class="buttons-row">
+            <div class="tab-link button"
+                 v-for="item in FILTER_STATUS"
+                 :class="{active:item.value==curStatus}"
+                 @click="filterByStatus(item.value)"
+                 v-text="item.text">
+            </div>
+        </div>
+    </div>
+    <ui-tabbar></ui-tabbar>
+    <section class="content" data-ptr-distance="44" data-distance="44" v-cloak>
+        <ui-listview v-ref:listview :api="$api.listOrder"
+                     ptr-content=".order-list > .content">
+            <!--<div class="content-block-title">收益明细</div>-->
+            <div class="list-block list-block-full inset" v-if="listData.length">
+                <ul class="cash-order">
+                    <li v-for="order in listData">
+                        <a href="javascript:void(0)" class="item-link item-content" @click="showOrder(order)">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">
+                                        <div v-if="order.stage==consts.STAGE_SIGNUP">报名收益</div>
+                                        <div v-if="order.stage==consts.STAGE_DEAL">成交收益</div>
+                                    </div>
+                                    <div class="item-subtitle">
+                                        <div v-text="order.organization.name"></div>
+                                        <time v-text="order.created_time|date 'YYYY.MM.DD HH:mm'"></time>
+                                    </div>
+                                </div>
+                                <div class="item-extra">
+                                    <div class="award-status">
+                                        <label class="award-not-audit" v-if="order.status==consts.AWARD_STATUS_NOT_AUDIT">审核中</label>
+                                        <label class="award-audited" v-if="order.status==consts.AWARD_STATUS_AUDITED">通过审核</label>
+                                        <label class="award-refused" v-if="order.status==consts.AWARD_STATUS_REFUSED">被驳回</label>
+                                    </div>
+                                    <p v-if="order.award_type==consts.AWARD_CASH" class="currency">{{order.amount/100|currency '￥' 2}}元</p>
+                                    <p v-if="order.award_type==consts.AWARD_VOUCHER">优惠券</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center" v-else>
+                <p class="ui-txt-info">暂无收益</p>
+            </div>
+        </ui-listview>
+    </section>
+</div>
+<div class="panel-overlay"></div>
+<div class="order-list-panel panel panel-right panel-cover" v-if="order">
+    <header class="bar bar-nav" v-cloak>
+        <i class="icon pull-left icon-cancel close-panel"></i>
+        <h1 class="title">订单详情</h1>
+    </header>
+    <div class="content">
+        <div class="list-block media-list">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">
+                                    收益状态
+                                </div>
+                                <div class="item-after">
+                                    <div class="award-status">
+                                        <label class="award-not-audit" v-if="order.status==consts.AWARD_STATUS_NOT_AUDIT">审核中</label>
+                                        <label class="award-audited" v-if="order.status==consts.AWARD_STATUS_AUDITED">通过审核</label>
+                                        <label class="award-refused" v-if="order.status==consts.AWARD_STATUS_REFUSED">被驳回</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="order.status==consts.AWARD_STATUS_REFUSED" class="item-text refused-msg">驳回理由：{{order.message}}</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">
+                                    <span v-if="order.stage==consts.STAGE_SIGNUP">报名收益</span>
+                                    <span v-if="order.stage==consts.STAGE_DEAL">成交收益</span>
+                                </div>
+                                <div class="item-after">
+                                    <label class="award-type-cash" v-if="order.award_type==consts.AWARD_CASH">现金</label>
+                                    <label class="award-type-voucher" v-if="order.award_type==consts.AWARD_VOUCHER">优惠券</label>
+                                </div>
+                            </div>
+                            <div class="item-text" v-if="order.award_type==consts.AWARD_CASH">
+                                <span class="currency">{{order.amount/100|currency '￥' 2}}</span>元
+                            </div>
+                            <div class="item-text" v-if="order.award_type==consts.AWARD_VOUCHER">
+                                <ui-voucher :voucher="order.voucher"></ui-voucher>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-subtitle">活动</div>
+                            <div class="item-text">{{order.activity.name}}</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-subtitle">客户</div>
+                            <div class="item-text">
+                                {{order.customer.name}}({{order.customer.phone}})
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-subtitle">经销商</div>
+                            <div class="item-text">
+                                {{order.organization.name}}<br>
+                                <div class="font-small">
+                                    <i class="icon-phone"></i>{{order.organization.phone}}<br>
+                                    <i class="icon-direction"></i>{{order.organization.address}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

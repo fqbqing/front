@@ -1,0 +1,78 @@
+
+<!-- target: TPL_organization_level_edit -->
+<div class="organization-level-edit">
+    <div class="bbmc-detail-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="org-form">
+            <div class="form-block">
+                <div class="form-body">
+                    <div>
+                        <h4 class="form-caption"><span>当前会员信息</span></h4>
+                        <div class="form-row">
+                            <div class="form-key">会员级别：</div>
+                            <div class="form-value">
+                                ${formData.level.name}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">有效期：</div>
+                            <div class="form-value">
+                                ${formData.created_time | date('YYYY.MM.DD')} - ${formData.level_expire_time | date('YYYY.MM.DD')}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="form-caption"><span>升级&续费操作</span></h4>
+                        <div class="form-row">
+                            <div class="form-key">会员级别：</div>
+                            <div class="form-value">
+                                <div data-ui-type="BoxGroup"
+                                     data-ui-id="level_id"
+                                     data-ui-name="level_id"
+                                     data-ui-box-type="radio"
+                                     data-ui-required="required"
+                                     data-ui-value="${formData.level.id}"
+                                     v-esui="formData.level.id">
+                                    <!-- for: ${levelList} as ${level} -->
+                                    <div>
+                                        <label><input type="radio" name="level_id" title="${level.name}" value="${level.id}"></label>
+                                    </div>
+                                    <!-- /for -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">有效期至：</div>
+                            <div class="form-value">
+                                <div data-ui-id="level_expire_time"
+                                       data-ui-type="DatePicker"
+                                       data-ui-required="required"
+                                       data-ui-name="level_expire_time"
+                                       data-ui-format='YYYY-MM-DD'
+                                       data-ui-value="@formData.level_expire_time"
+                                       data-ui-min-date="${formData.level_expire_time}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="form-caption"><span>升级&续费操作后会员信息</span></h4>
+                        <div class="form-row">
+                            <div class="form-key">会员级别：</div>
+                            <div class="form-value">
+                                {{formData.level.name}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key">有效期：</div>
+                            <div class="form-value">
+                                ${formData.created_time | date('YYYY.MM.DD')} - {{formData.level_expire_time | date 'YYYY.MM.DD'}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- target: TPL_organization_level_edit_child -->
+<!-- import: TPL_organization_level_edit -->

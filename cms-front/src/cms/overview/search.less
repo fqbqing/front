@@ -1,0 +1,74 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.overview-search {
+
+    .bbmc-panel {
+        margin: 10px 0;
+    }
+    .customer-panel, .tuan-order-panel {
+        .bbmc-panel-body {
+            padding: 5px 10px;
+        }
+    }
+    .customer-item {
+        border: 1px solid @bb-border-color;
+        padding: 0 10px;
+        position: relative;
+        h3 a {
+            text-decoration: none;
+            font-size: 14px;
+        }
+    }
+    .customer-owner {
+        position: absolute;
+        bottom: 3px;
+        right: 3px;
+        color: #999;
+    }
+
+    .tuan-order-item {
+        border: 1px solid @bb-border-color;
+        padding: 0 10px;
+        position: relative;
+        h3 {
+            time {
+                float: right;
+                color: #666;
+            }
+        }
+        h3 a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .tuan-info {
+            font-size: 14px;
+        }
+        .buying-way, .tuan-order-status, .payment {
+            border-radius: 3px;
+            display: inline-block;
+            padding: 3px 5px;
+            color: #fff;
+        }
+        .buying-way {
+            background: #00aa00;
+        }
+        .tuan-order-status {
+            background: @bb-main-color;
+        }
+        .payment {
+            background: #1094fa;
+        }
+    }
+    .activity-type {
+        font-size: 12px;
+        border-radius: 3px;
+        display: inline-block;
+        padding: 2px 5px;
+        margin: 0 4px;
+        color: #fff;
+        background: @bb-main-color;
+    }
+}

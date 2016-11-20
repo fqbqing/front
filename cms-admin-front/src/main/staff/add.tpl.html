@@ -1,0 +1,71 @@
+<!-- target: TPL_staff_add_child -->
+<div class="staff-add bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key form-key-required">姓名：</div>
+                    <div class="form-value">
+
+                        <input data-ui-id="name"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               name="name"
+                               data-ui-value="@formData.name">
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">手机号：</div>
+                    <div class="form-value">
+                        <!-- if: ${id} -->
+                        ${formData.phone1}
+                        <!-- else -->
+                        <input data-ui-id="phone1"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-phone=""
+                               name="phone1"
+                               data-ui-value="@formData.phone1">
+                        <!-- /if -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key">职位：</div>
+                    <div class="form-value">
+                        <input data-ui-id="title"
+                               data-ui-type="TextBox"
+                               name="title"
+                               data-ui-value="@formData.title">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">组管理员：</div>
+                    <div class="form-value">
+                        <div data-ui-type="BoxGroup" data-ui-id="in_charge"
+                             data-ui-name="in_charge" data-ui-box-type="radio" data-ui-value="@formData.in_charge" data-ui-required="required">
+                            <!-- for: ${inCharge} as ${charge} -->
+                            <label for="in-charge-${charge.id}">
+                                <input type="radio" name="in_charge" id="in-charge-${charge.id}" value="${charge.id}">
+                                ${charge.name}</label>
+                            <!-- /for -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- target: TPL_staff_add -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>权限管理</span>
+    <!--<span class="divider">/</span>-->
+    <!--<span><a href="#/access/user/list">用户管理</a></span>-->
+    <span class="divider">/</span>
+    <span class="active"><!-- if: ${id} -->修改<!-- else -->添加<!-- /if -->用户</span>
+</div>
+<!-- import: TPL_staff_add_child -->

@@ -1,0 +1,94 @@
+<!-- target: TPL_voucher_activity_edit_description -->
+<div class="voucher-activity-edit-description bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券活动</span>
+        <span class="divider">/</span>
+        <span class="active">活动信息</span>
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/base~id=${id}">基本信息</a></li>
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/voucher/activity/edit/description~id=${id}">活动信息</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/set~id=${id}">优惠活动设置</a></li>
+                <li class="ui-tab-item"><a href="#/voucher/activity/edit/configure~id=${id}">优惠券配置</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap voucher-activity-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" class="bbmc-detail tuan-form voucher-activity-form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+                        <div class="items">
+                            <div v-for="voucher_img in voucher_imgs" :item="voucher_img">
+                                <esuibox>
+                                    <div class="form-row">
+                                        <div class="form-key form-key-required">图片：</div>
+                                        <div class="form-value">
+                                            <div class="image">
+                                                <editable-image :src.sync="voucher_img.image_url"></editable-image>
+                                            </div>
+                                            <div class="form-extra form-error" v-if="!voucher_img.image_url">请上传图片</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key form-key-required">图片标题：</div>
+                                        <div class="form-value">
+                                            <div
+                                                    v-esui="voucher_img.slogan"
+                                                    data-ui-type="TextBox"
+                                                    data-ui-required="required"
+                                                    data-ui-width="400"
+                                                    data-ui-name="slogan"
+                                                    data-ui-value="{{voucher_img.slogan}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key form-key-required">图片说明：</div>
+                                        <div class="form-value">
+                                            <div
+                                                    v-esui="voucher_img.description"
+                                                    data-ui-type="TextBox"
+                                                    data-ui-required="required"
+                                                    data-ui-width="400"
+                                                    data-ui-name="description"
+                                                    data-ui-value="{{voucher_img.description}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-key"></div>
+                                        <div class="form-value">
+                                            <button v-show="voucher_imgs.length > 1" data-ui-type="Button" data-ui-skin="warn" type="button" @click="removeVoucherImg($index)">删除</button>
+                                        </div>
+                                    </div>
+                                </esuibox>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="addVoucherImgBtn" data-ui-skin="danger" type="button" @click="addVoucherImg">
+                                    <i class="icon-plus"></i>增加图片项
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交修改
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

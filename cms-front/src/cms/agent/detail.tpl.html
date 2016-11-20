@@ -1,0 +1,74 @@
+<!-- target: TPL_agent_detail -->
+<div class="agent-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>经纪人管理</span>
+        <span class="divider">/</span>
+        <span>经纪人详情</span>
+    </div>
+    <div class="bbmc-content">
+        <dl class="dl-horizontal">
+            <dt>姓名：</dt>
+            <dd>${agentInfo.agent.name}</dd>
+            <dt>手机号：</dt>
+            <dd>${agentInfo.agent.phone}</dd>
+            <dt>销售对接人：</dt>
+            <dd>
+                <!--if: ${agentInfo.owner}-->
+                ${agentInfo.owner.name}
+                <!--else-->
+                <span data-ui-type="Label" data-ui-id="owner_name" data-ui-text="">-</span>
+                <button data-ui-type="Button" data-ui-id="distributeBtn" type="button" data-ui-skin="link">分配</button>
+                <!--/if: ${agentInfo.owner}-->
+                <span class="extra">（通过该经纪人报名的客户由此销售对接人负责）</span>
+            </dd>
+            <dt>录入时间：</dt>
+            <dd>${agentInfo.created_time|date}</dd>
+        </dl>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bbmc-panel">
+                    <div class="bbmc-panel-body">
+                        <div class="row row-compact">
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>${agentInfo.total_income|amount}</em></p>
+                                <h3 class="stat-name">总奖励现金（元）</h3>
+                            </div>
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>${agentInfo.enable_withdraw_income|amount}</em></p>
+                                <h3 class="stat-name">可提现现金（元）</h3>
+                            </div>
+                            <div class="col-xs-3 data-block">
+                                <p class="stat-value"><em>${agentInfo.withdrawed_income|amount}</em></p>
+                                <h3 class="stat-name">已提现现金（元）</h3>
+                            </div>
+
+                            <div class="col-xs-3 data-block data-block-last">
+                                <p class="stat-value"><em>${agentInfo.voucher_count}</em></p>
+                                <h3 class="stat-name">奖励优惠券（张）</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bbmc-content">
+        <div class="list-table">
+            <div data-ui-type="Table" data-ui-id="table" data-ui-datasource="@agentIncomeList.data"
+                 data-ui-extension-tip-type="TableTip"
+                 data-ui-extension-ex-type="TableEx"
+                 data-ui-extension-command-type="Command">
+            </div>
+        </div>
+        <div class="list-table-footer">
+            <div data-ui-type="Pager" data-ui-id="pager" data-ui-page-type="plain"
+                 data-ui-count="@agentIncomeList.totalCount" data-ui-page="@agentIncomeList.pageNo" data-ui-page-size="@agentIncomeList.pageSize"
+                 data-ui-url-template="@agentIncomeList.urlTemplate" data-ui-layout="alignRight">
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+<!-- target: TPL_good_product_add -->
+<div class="good-product-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>商品管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/good/product/list">货品列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">添加货品</span>
+    </div>
+    <div class="bbmc-content bbmc-detail-content">
+        <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key form-key-required">商品名称：</div>
+                    <div class="form-value">
+                        <button type="button" data-ui-type="Button" data-ui-id="chooseGood"><i class="icon-plus"></i>选择商品</button>
+                        <div v-text="good.name"></div>
+                    </div>
+                </div>
+                <div class="form-row" v-for="spec in good.specifications">
+                    <div class="form-key">{{spec.name}}：</div>
+                    <div class="form-value">
+                        <esuibox>
+                            <select data-ui-type="Select"
+                                    data-ui-id="spec_{{spec.id}}"
+                                    data-ui-width="150"
+                                    data-ui-required="required"
+                                    data-ui-required-error-message="{{spec.name}}不能为空">
+                                <option v-for="v in spec.values" :value="v.id" v-text="v.name"></option>
+                            </select>
+                        </esuibox>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">售价：</div>
+                    <div class="form-value">
+                        <input data-ui-id="price"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-dollars=""
+                               data-ui-min="0.01"
+                               data-ui-required-error-message="售价不能为空"
+                               data-ui-validity-label="priceErrorMessage"
+                               data-ui-width="150"
+                               name="price"/>
+                        <span data-ui-type="Label">元</span>
+                        <span data-ui-type="Validity" data-ui-id="priceErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">库存：</div>
+                    <div class="form-value">
+                        <input data-ui-id="stock"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="库存不能为空"
+                               data-ui-number=""
+                               data-ui-validity-label="stockErrorMessage"
+                               data-ui-width="150"
+                               name="stock"/>
+                        <span data-ui-type="Label">辆</span>
+                        <span data-ui-type="Validity" data-ui-id="stockErrorMessage"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">货品备注：</div>
+                    <div class="form-value">
+                         <textarea data-ui-id="brief"
+                                   data-ui-type="TextBox"
+                                   data-ui-width="400"
+                                   data-ui-height="80"
+                                   rows="4"
+                                   name="brief"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

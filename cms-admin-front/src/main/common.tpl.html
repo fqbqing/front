@@ -1,0 +1,30 @@
+
+<!-- target: TPL_common_tab_navigator -->
+<ul data-role="navigator" class="ui-tab-navigator">
+    <li class="ui-tab-item <!-- if: ${name} == 'detail' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/detail~organization_id=${organization_id}">基本信息</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'statistics' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/statistics/index~organization_id=${organization_id}">数据统计</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'activity' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/activity/index~organization_id=${organization_id}">活动</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'agent' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/agent/list~organization_id=${organization_id}">经纪人</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'customer' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/customer/list~organization_id=${organization_id}">客户</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'staff' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/staff/index~organization_id=${organization_id}">员工</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'refund' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/refund/list~organization_id=${organization_id}">退款管理</a>
+    </li>
+    <li class="ui-tab-item <!-- if: ${name} == 'pay' -->ui-tab-item-active<!-- /if -->">
+        <a href="#/organization/pay/index~organization_id=${organization_id}">支付中心</a>
+    </li>
+</ul>
+
+

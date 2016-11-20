@@ -1,0 +1,150 @@
+
+@import "../../static/css/variables";
+.pay-info {
+    background: #fcfcfc;
+    border-radius: 4px;
+    padding: 10px;
+    .pay-amount {
+        float: right;
+        em {
+            color: @x-main-color;
+            font-size: 18px;
+        }
+    }
+    p {
+        margin: 0;
+    }
+}
+.pay-info-item {
+    overflow: hidden;
+    line-height: 30px;
+    .item {
+        float: left;
+        em {
+            color: #666;
+        }
+    }
+}
+.paytype-container {
+    margin: 20px 0;
+}
+.pay-pane {
+    padding: 20px 0;
+}
+.pay-message {
+    display: none;
+}
+.paytype-box {
+    padding: 0;
+    overflow: hidden;
+    min-height: 100px;
+    li {
+        padding: 0;
+        float: left;
+        height: 40px;
+        margin: 10px 20px 10px 0;
+        list-style: none;
+        width: 130px;
+    }
+    a {
+        color: #333;
+        text-decoration: none;
+        display: block;
+    }
+}
+//.paytype {
+//    padding: 8px 30px;
+//    border: 2px solid #ddd;
+//
+//    &.active {
+//        border-color: @x-main-color;
+//    }
+//}
+.paytype {
+    //input {
+    //    //display: none;
+    //    &:checked ~ .paytype-label {
+    //        border:2px solid @x-main-color;
+    //    }
+    //}
+}
+.paytype-label {
+    background: #fff;
+    color: #666;
+    border:2px solid #ddd;
+    padding: 6px 10px;
+    margin: 0;
+    line-height: 15px;
+    &:before {
+        content: '';
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        vertical-align: -2px;
+        margin-right: 5px;
+    }
+}
+.paytype-active .paytype-label {
+    border: 2px solid @x-main-color;
+}
+.paytype-wx:before {
+    background: url(/static/images/pay-wx.png) center center no-repeat;
+    background-image: -webkit-image-set(url(/static/images/pay-wx.png) 1x,url(/static/images/pay-wx@2x.png) 2x);
+}
+.paytype-alipay:before {
+    background: url(/static/images/alipay.png) center center no-repeat;
+    background-image: -webkit-image-set(url(/static/images/alipay.png) 1x,url(/static/images/alipay@2x.png) 2x);
+}
+.pay-confirm {
+    border-top: 1px solid #ddd;
+    line-height: 40px;
+    .pay-amount {
+        em {
+            color: @x-main-color;
+            font-size: 18px;
+        }
+    }
+    .btn-pay {
+        background: @x-main-color;
+        padding: 8px 20px;
+        color: #fff;
+    }
+}
+.btn-main {
+    background: @x-main-color;
+    padding: 6px 20px;
+    color: #fff !important;
+}
+.modal-header {
+    padding: 8px 15px;
+    background: @x-main-color;
+    color: #fff;
+    border: none;
+}
+.modal-footer {
+    text-align: center;
+}
+.modal-content {
+    border-radius: 0;
+    border: none;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+         -o-box-shadow: none;
+            box-shadow: none;
+}
+@media (max-width: 640px) {
+    .pay-info {
+        .pay-amount {
+            float: none;
+        }
+    }
+    .paytype-box {
+        min-height: 0;
+    }
+    .pay-confirm {
+        .btn-pay {
+            display: block;
+            width: 100%;
+        }
+    }
+}

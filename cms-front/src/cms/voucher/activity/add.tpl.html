@@ -1,0 +1,101 @@
+<!-- target: TPL_voucher_activity_add -->
+<div class="voucher-activity-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券活动</span>
+
+    </div>
+    <div class="bbmc-detail-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <ul data-role="navigator" class="ui-tab-navigator">
+                <li class="ui-tab-item ui-tab-item-active"><a href="#/voucher/activity/add">基本信息</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">活动信息</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">优惠活动设置</a></li>
+                <li class="ui-tab-item"><a href="javascript:void(0)">优惠券配置</a></li>
+            </ul>
+            <div class="ui-tab-content tuan-form-wrap voucher-activity-form-wrap">
+                <div class="example-img"><img src="${exampleImg}" alt="" width="100%"></div>
+                <form data-ui-type="Form" class="bbmc-detail tuan-form voucher-activity-form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+                    <div class="form-body">
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">活动名称：</div>
+                            <div class="form-value">
+                                <div data-ui-id="name"
+                                     data-ui-type="TextBox"
+                                     data-ui-required="required"
+                                     data-ui-max-rows="2"
+                                     data-ui-max-length="30"
+                                     data-ui-width="400"
+                                     data-ui-height="80"
+                                     data-ui-name="name"
+                                     data-ui-value="@formData.name"
+                                     data-ui-mode="textarea"></div>
+                                <div class="form-extra">建议字数限制在30个字符内，可换手动换行,不能超过2行</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">活动简述：</div>
+                            <div class="form-value">
+                                <div data-ui-id="brief"
+                                     data-ui-type="TextBox"
+                                     data-ui-required="required"
+                                     data-ui-max-rows="2"
+                                     data-ui-max-length="30"
+                                     data-ui-width="400"
+                                     data-ui-height="80"
+                                     data-ui-name="brief"
+                                     data-ui-value="@formData.brief"
+                                     data-ui-mode="textarea"></div>
+                                <div class="form-extra">建议字数限制在30个字符内</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key form-key-required">引导文案：</div>
+                            <div class="form-value">
+                                <input data-ui-id="introduce_text"
+                                       data-ui-type="TextBox"
+                                       data-ui-required="required"
+                                       data-ui-width="400"
+                                       data-ui-name="introduce_text"
+                                       data-ui-value="@formData.introduce_text">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-key form-key-required">微信分享图片：</div>
+                            <div class="form-value">
+                                <div data-ui-type="WebUploader"
+                                     data-ui-hint="请选择微信分享图片（大小不超过2M，尺寸不小于100*100px，且长宽比为1：1）"
+                                     data-ui-name="share_image_url"
+                                     data-ui-id="uploaderCover">选择文件</div>
+
+                                <div class="form-extra">
+                                    <div class="preview cover-image" id="preview">
+                                        <!-- if: ${formData.share_image_url}-->
+                                        <img src="${formData.share_image_url|imgUrl(200,200)}" alt="预览图片">
+                                        <!-- /if-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-key"></div>
+                            <div class="form-value">
+                                <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">提交
+                                </button>
+                                <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" data-ui-skin="normal" type="button">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

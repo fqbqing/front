@@ -1,0 +1,16 @@
+output
+Release
+env/
+.idea/
+.project
+.settings/*
+.DS_Store
+web.sublime-project
+web.sublime-workspace
+test/
+tool/
+!**/tool/
+doc/
+
+#本地用的webserver-config
+edp-ws-config.js

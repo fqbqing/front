@@ -1,0 +1,18 @@
+_constants({
+    "success": true,
+    "data": {
+        "AGGREGATE_CHANNEL": 20291,
+        "currentCity": {
+            "id": 2,
+            "code": "110000",
+            "province": "北京市",
+            "city": "北京市",
+            "district": "",
+            "parent": "1",
+            "name": "北京市",
+            "path": "1_2",
+            "type": 4
+        },
+        "CDN_URL": "//img01.cdn.babamaiche.com"
+    }
+});

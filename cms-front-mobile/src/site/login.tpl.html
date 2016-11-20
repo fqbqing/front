@@ -1,0 +1,39 @@
+<!-- target: TPL_site_login -->
+<div class="site-login">
+    <section class="ui-container">
+        <div class="ui-center">
+            <div class="logo-wrap">
+                <div class="logo-edge"></div>
+                <img src="${const.BASE_URL}/common/images/login-circle.png" width="85" height="85">
+            </div>
+            <div>车大卖 v1.0</div>
+        </div>
+        <div class="box">
+            <form @submit.prevent="submit">
+                <div class="ui-form">
+                    <div class="ui-form-item ui-form-item-pure ui-border-b">
+                        <input type="text" v-model="phone" placeholder="手机号">
+                        <a href="#" tabindex="-1" class="ui-icon-close" v-show="phone" @click.prevent="phone=''"></a>
+                    </div>
+                    <div class="ui-form-item ui-form-item-pure ui-form-item-r">
+                        <input type="password" v-model="password" placeholder="密码">
+                        <a href="/resetpassword" class="forget-password">忘记密码</a>
+                        <a href="#" tabindex="-1" class="ui-icon-close" v-show="password" @click.prevent="password=''"></a>
+                    </div>
+                </div>
+                <div class="ui-btn-wrap btn-login-wrap">
+                    <button class="ui-btn ui-btn-danger ui-btn-lg">登录</button>
+                </div>
+            </form>
+            <div class="splite"><i></i></div>
+            <div class="ui-btn-wrap btn-apply-wrap">
+                <a href="tel:4008-955-088" class="ui-btn ui-btn-lg">申请加入</a>
+            </div>
+        </div>
+        <footer class="copyright">
+            <div>
+                &copy;爱车车(北京)网络科技有限公司 4008-955-088
+            </div>
+        </footer>
+    </section>
+</div>

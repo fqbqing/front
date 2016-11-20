@@ -1,0 +1,119 @@
+<!-- target: TPL_organization_detail -->
+<div class="organization-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span class="active">加盟店基本信息</span>
+    </div>
+
+    <div class="bbmc-content">
+        <div class="ui-ctrl ui-tab ui-tab-horizontal state-horizontal">
+            <!-- use: TPL_common_tab_navigator(name="detail",organization_id=${organization_id}) -->
+            <div class="ui-tab-content tuan-form-wrap">
+                <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="org-form">
+                    <div class="form-block">
+                        <div class="form-body">
+                            <section>
+                                <h2>基本信息 <a href="#/organization/edit~organization_id=${organization_id}" data-ui="type:Button;id:editOrg;skin:primary" class="org-edit-btn">修改</a>
+                                </h2>
+                                <div class="form-row">
+                                    <div class="form-key">4S店名称：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">4S店logo：</div>
+                                    <div class="form-value">
+                                        <!--if:${orgInfo.logo}-->
+                                        <img src="${orgInfo.logo}" alt="预览图片" class="logo">
+                                        <!--/if-->
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">所属品牌：</div>
+                                    <div class="form-value">
+                                        ${brands_name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">城市：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.location.name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">4S店详细地址：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.address}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-key">4S店电话：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.phone}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-key">管理员名称：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.manager_name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">管理员职位：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.manager_title}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">管理员手机号：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.manager_phone}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">车大卖联系人：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.staff.name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">公共数据是否公开：</div>
+                                    <div class="form-value">
+                                        <!-- if: ${orgInfo.show_public_customers} == 1 -->
+                                        是
+                                        <!-- else -->
+                                        否
+                                        <!-- /if -->
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <h2>会员信息
+                                    <button data-ui="type:Button;id:updateOrganizationLevel;skin:primary" class="org-edit-btn">修改</button>
+                                </h2>
+                                <div class="form-row">
+                                    <div class="form-key">会员级别：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.level.name}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-key">有效期：</div>
+                                    <div class="form-value">
+                                        ${orgInfo.created_time | date('YYYY.MM.DD')} - ${orgInfo.level_expire_time | date('YYYY.MM.DD')}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>

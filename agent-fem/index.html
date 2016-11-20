@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>车大卖 - 全民经纪人</title>
+    <link rel="dns-prefetch" href="//static.chedamai.cn">
+    <link rel="apple-touch-icon" href="[__CDN__]/apple-touch-icon.png" />
+    <!--<link rel="stylesheet" href="[__CDN__]/dep/swiper/3.3.1/src/css/swiper.less"/>-->
+    <link rel="stylesheet" href="[__CDN__]/src/biz.less"/>
+    <script src="//static.chedamai.cn/js/esl/2.0.8/esl.js"></script>
+</head>
+<body>
+<!-- 微信默认分享图片 -->
+<div style="width: 0; height: 0; overflow: hidden; position: absolute; left: -1000px;">
+    <img src="[__CDN__]/src/common/img/agent-300×300.png">
+</div>
+<div id="viewport" class="page-group">
+    <router-view>
+        <div class="launch"><i class="preloader"></i></div>
+    </router-view>
+</div>
+<script>
+    require.config({
+        'urlArgs': 'r[__version__]=1',
+        'baseUrl': '[__CDN__]/src',
+        'paths': {},
+        'packages': [
+            {
+                'name': 'zepto',
+                'location': '../dep/zepto/1.1.6/src',
+                'main': 'zepto'
+            },
+            {
+                'name': 'saber-cookie',
+                'location': '../dep/saber-cookie/2.0.0-alpha.2/src',
+                'main': 'cookie'
+            },
+            {
+                'name': 'saber-storage',
+                'location': '../dep/saber-storage/2.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'saber-env',
+                'location': '../dep/saber-env/1.0.0/src'
+            },
+            {
+                'name': 'vue',
+                'location': '../dep/vue/1.0.24/src',
+                'main': 'vue'
+            },
+            {
+                'name': 'underscore',
+                'location': '../dep/underscore/1.8.5/src',
+                'main': 'underscore'
+            },
+            {
+                'name': 'crypt',
+                'location': '../dep/crypt/0.0.0/src',
+                'main': 'main'
+            },
+            {
+                'name': 'wx',
+                'location': '//res.wx.qq.com/open/js',
+                'main': 'jweixin-1.0.0'
+            },
+            {
+                'name': 'swiper',
+                'location': '../dep/swiper/3.3.1/src',
+                'main': 'swiper.jquery'
+            },
+            {
+                'name': 'jui',
+                'location': '../dep/jui/1.0.3/src/js',
+                'main': 'main'
+            }
+        ]
+    });
+</script>
+<script>
+    require(['app'], function (app) {
+        app.init();
+    });
+</script>
+</body>
+</html>

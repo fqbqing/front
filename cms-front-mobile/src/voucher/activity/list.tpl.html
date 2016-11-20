@@ -1,0 +1,42 @@
+<!-- target: TPL_voucher/activity_list -->
+<div class="voucher_activity_list">
+    <!-- use: TPL_common_page_header_simple(title="活动列表") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <search-box name="search" placeholder="按名称搜索"></search-box>
+        <div class="ui-row filterbar">
+            <div class="ui-col ui-col-67">共<i v-text="totalCount"></i>场</div>
+            <div class="ui-col ui-col-33 text-right">
+                <!--// 待定-->
+            </div>
+        </div>
+        <listview v-ref:listview :api="api.listVoucherActivity" :page-no="1" :page-size="15">
+            <ul class="ui-list ui-list-pure ui-list-link ui-list-active ui-list-cover ui-border-t" v-cloak v-if="voucher_activitys.length">
+                <li class="ui-border-b" v-for="voucher_activity in voucher_activitys" @click="redirect('/voucher/activity/detail', {id: voucher_activity.id})">
+                    <h4>{{voucher_activity.name}}</h4>
+                    <p class="activity-time">
+                        <template v-if="voucher_activity.status==0">
+                            <i class="tuan-status tuan-status-offline">未上线</i>
+                        </template>
+                        <template v-if="voucher_activity.status==1">
+                            <i class="tuan-status tuan-status-online">上线中</i>
+                        </template>
+                        <template v-if="voucher_activity.status==2">
+                            <i class="tuan-status tuan-status-offline">已下线</i>
+                        </template>
+                        活动时间：<br>
+                        {{voucher_activity.start_time|date 'YYYY-MM-DD HH:mm'}}至{{voucher_activity.end_time|date 'YYYY-MM-DD HH:mm'}}
+                    </p>
+                    <ul class="ui-tiled ui-tiled-stat">
+                        <li><i class="gray" v-text="voucher_activity.order_count"></i><div>领券数</div></li>
+                        <li><i class="gray" v-text="voucher_activity.customer_count"></i><div>客户数</div></li>
+                        <!--<li><i class="gray" v-text="voucher_activity.order_count - voucher_activity.customer_count"></i><div>未认领</div></li>-->
+                    </ul>
+                </li>
+            </ul>
+            <div class="ui-center" v-else>
+                <p class="ui-txt-info">无活动</p>
+            </div>
+        </listview>
+    </section>
+</div>

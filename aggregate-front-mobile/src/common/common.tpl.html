@@ -1,0 +1,22 @@
+<!-- target: TPL_common_page_header -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <i class="ui-icon-return" @click="back"></i>
+    <h1>${title}</h1>
+</header>
+<!-- target: TPL_common_page_header_simple -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <h1>${title}</h1>
+</header>
+<!-- target: TPL_common_page_header_with_home -->
+<header class="ui-header ui-header-stable ui-border-b" v-if="!env.browser.wechat" v-cloak>
+    <i class="ui-icon-return" @click="back"></i>
+    <h1>${title}</h1>
+    <i class="ui-icon-home" @click="redirect('/')"></i>
+</header>
+
+<!-- target: TPL_common_page_footer -->
+<footer class="yj-footer">
+    <p>Copyright &copy; 2015-2016, All Rights Reserved.</p>
+    <p>版权所有：爱车车（北京）网络科技有限公司</p>
+    <p>京ICP备 15021855号-2</p>
+</footer>

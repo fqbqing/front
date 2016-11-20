@@ -1,0 +1,30 @@
+<!-- target: TPL_level_list -->
+<div class="level-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>加盟店管理</span>
+        <span class="divider">/</span>
+        <span>级别管理</span>
+        <span class="divider">/</span>
+        <span class="active">级别列表</span>
+    </div>
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <button data-ui-type="Button" data-ui-id="addBtn" data-ui-skin="primary"
+                    @click="state.add=!state.add"
+                    v-if="isAllow('level.add')"
+                    type="button">
+                <i class="icon-plus"></i>添加级别
+            </button>
+        </div>
+        <div class="ui-row" v-show="state.add">
+            <div v-esui="levelname" data-ui-type="TextBox" data-ui-placeholder="请输入要新增的级别名称"></div>
+            <button data-ui-type="Button" data-ui-skin="info" @click="addLevel" type="button">确定</button>
+        </div>
+        <div class="list-table">
+            <!-- import: listEditableTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+        </div>
+    </div>
+</div>

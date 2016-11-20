@@ -1,0 +1,109 @@
+<!-- target: TPL_groupon_activity_detail -->
+<div class="groupon-activity-detail">
+    <!-- use: TPL_common_page_header(title="活动详情") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li class="current">基本信息</li>
+                <li @click="redirect('/groupon/signup/list', {activity_id: groupon.id})">报名列表</li>
+                <!--<li @click="resetRouter('/groupon/activity/channel', {activity_id: groupon.id})">渠道效果</li>-->
+            </ul>
+            <ul class="ui-tab-content" v-cloak>
+                <li class="current">
+                    <section class="ui-panel">
+                        <h1 style="line-height: 44px;" v-text="groupon.name"></h1>
+                        <ul class="ui-list ui-list-pure ui-border-tb">
+                            <li>
+                                <h5>
+                                    <span>活动时间</span>
+                                    <span class="ui-panel-title-tips">{{groupon.activity_time|date}}</span>
+                                </h5>
+                            </li>
+                            <li class="ui-border-t">
+                                <h5>
+                                    <span>报名截至时间</span>
+                                    <span class="ui-panel-title-tips">{{groupon.signup_end_time|date}}</span>
+                                </h5>
+                            </li>
+                            <li class="ui-border-t" v-if="groupon.intention">
+                                <h5>
+                                    <span>意向金</span>
+                                    <span class="ui-panel-title-tips">{{groupon.intention.amount|currency 2}}</span>
+                                </h5>
+                            </li>
+                        </ul>
+                        <div class="ui-btn-group" style="margin: 10px auto 0; width: 240px;">
+                            <button class="ui-btn ui-btn-primary" @click="href(shareLink)">直接分享</button>
+                            <button class="ui-btn ui-btn-primary" @click="showShareQRCode">二维码分享</button>
+                        </div>
+                    </section>
+                    <section class="ui-panel ui-panel-simple ui-border-t">
+                        <h2 @click="redirect('/tuan/order/list', {tuan_id: tuan.id, claimed: '1'})">
+                            <span>按报名状态统计</span>
+                            <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                        </h2>
+                        <ul class="ui-list ui-list-pure ui-list-stat ui-border-tb" v-if="groupon.intention">
+                            <li class="ui-border-b">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{signupStatistics.signups.today.STATUS_SIGNUP}}/{{signupStatistics.signups.all.STATUS_SIGNUP}}</i><div>报名总数</div></li>
+                                    <li><i>{{signupStatistics.signups.today.STATUS_SUCCESS}}/{{signupStatistics.signups.all.STATUS_SUCCESS}}</i><div>已支付</div></li>
+                                    <li><i>{{signupStatistics.signups.today.STATUS_USED}}/{{signupStatistics.signups.all.STATUS_USED}}</i><div>已使用</div></li>
+                                    <li><i>{{signupStatistics.signups.today.STATUS_NOT_PAY}}/{{signupStatistics.signups.all.STATUS_NOT_PAY}}</i><div>未支付</div></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{signupStatistics.signups.today.STATUS_APPLY_REFUND}}/{{signupStatistics.signups.all.STATUS_APPLY_REFUND}}</i><div>申请退款</div></li>
+                                    <li><i>{{signupStatistics.signups.today.STATUS_REFUNDED}}/{{signupStatistics.signups.all.STATUS_REFUNDED}}</i><div>已退款</div></li>
+                                    <li><i>{{signupStatistics.signups.today.STATUS_REFUND_FAILED}}/{{signupStatistics.signups.all.STATUS_REFUND_FAILED}}</i><div>退款失败</div></li>
+                                    <li>
+                                        <i>
+                                        {{signupStatistics.signups.today.STATUS_SYSTEM_CANCELED + signupStatistics.signups.today.STATUS_CANCELED}}
+                                        /{{signupStatistics.signups.all.STATUS_SYSTEM_CANCELED + signupStatistics.signups.all.STATUS_CANCELED}}
+                                        </i>
+                                        <div>订单取消</div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="ui-list ui-list-pure ui-list-stat ui-border-tb" v-else>
+                            <li>
+                                <ul class="ui-tiled ui-tiled-stat">
+                                    <li><i>{{signupStatistics.signups.today.STATUS_SIGNUP}}/{{signupStatistics.signups.all.STATUS_SIGNUP}}</i><div>报名总数</div></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="ui-panel">
+                        <h2>按报名数据统计</h2>
+                        <table class="ui-table ui-table-pure ui-border-tb option-table" v-for="opt in signupStatistics.options">
+                            <tr><th>{{$key}}</th><th width="30%">已报名</th><th width="30%">已支付</th></tr>
+                            <tr v-for="item in opt">
+                                <td v-text="$key"></td>
+                                <td v-text="item.signup"></td>
+                                <td v-text="item.payed"></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section class="ui-panel">
+                        <h2>按渠道效果统计</h2>
+                        <table class="ui-table ui-table-pure ui-border-tb option-table">
+                            <tr><th>排名</th><th>{{$key}}</th><th width="30%">报名数</th></tr>
+                            <tr v-for="channel in channels">
+                                <td v-text="$index+1"></td>
+                                <td v-text="channel.name"></td>
+                                <td v-text="channel.count"></td>
+                            </tr>
+                        </table>
+                    </section>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="qrcode-wrap" v-if="qrCodeImage && isQRCodeImageShow" v-cloak @click="isQRCodeImageShow=false">
+        <div class="qrcode">
+            <img :src="qrCodeImage" width="200" height="200">
+        </div>
+    </div>
+</div>

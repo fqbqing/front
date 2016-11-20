@@ -1,0 +1,48 @@
+<div class="page main-login">
+    <!-- 标题栏 -->
+    <div class="content">
+        <div class="slogan"></div>
+        <div class="list-block list-block-form">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon-phone"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" v-model="formData.phone" placeholder="请输入您的手机号">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon-lock"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" v-model="formData.code" placeholder="请输入验证码">
+                            </div>
+                            <div class="item-after">
+                                <ui-verifycode :phone="formData.phone" :is-exist.sync="isExist"></ui-verifycode>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li v-if="!isExist">
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon-user"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" v-model="formData.name" placeholder="真实姓名">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <div>
+                <button type="button" @click="login" class="button button-big button-fill button-warning">立即登录</button>
+            </div>
+        </div>
+    </div>
+</div>

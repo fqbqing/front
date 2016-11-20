@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>车大卖</title>
+    <link rel="dns-prefetch" href="//static.chedamai.cn">
+    <link rel="apple-touch-icon" href="[__CDN__]/apple-touch-icon.png" />
+    <link rel="stylesheet" href="[__CDN__]/dep/frozen/1.3.0/src/css/frozen.scss">
+    <link rel="stylesheet" href="[__CDN__]/src/biz.less"/>
+    <!--<script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js"></script>-->
+    <script src="[__CDN__]/esl.js"></script>
+    <script>
+        require.config({
+            'urlArgs': 'r[__version__]=1',
+            'baseUrl': '[__CDN__]/src',
+            'paths': {},
+            'packages': [
+                {
+                    'name': 'etpl',
+                    'location': '../dep/etpl/3.0.1/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'echarts',
+                    'location': '../dep/echarts/3.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'fastclick',
+                    'location': '../dep/fastclick/1.0.6/src',
+                    'main': 'fastclick'
+                },
+                {
+                    'name': 'saber-ajax',
+                    'location': '../dep/saber-ajax/2.1.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-dom',
+                    'location': '../dep/saber-dom/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-emitter',
+                    'location': '../dep/saber-emitter/2.0.0/src',
+                    'main': 'emitter'
+                },
+                {
+                    'name': 'saber-firework',
+                    'location': '../dep/saber-firework/2.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-lang',
+                    'location': '../dep/saber-lang/2.0.1/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-mm',
+                    'location': '../dep/saber-mm/1.0.1/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-promise',
+                    'location': '../dep/saber-promise/2.0.0/src',
+                    'main': 'promise'
+                },
+                {
+                    'name': 'saber-router',
+                    'location': '../dep/saber-router/2.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-run',
+                    'location': '../dep/saber-run/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-string',
+                    'location': '../dep/saber-string/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-uri',
+                    'location': '../dep/saber-uri/1.0.6/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-viewport',
+                    'location': '../dep/saber-viewport/1.1.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-widget',
+                    'location': '../dep/saber-widget/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'zepto',
+                    'location': '../dep/zepto/1.1.6/src',
+                    'main': 'zepto'
+                },
+                {
+                    'name': 'saber-matchmedia',
+                    'location': '../dep/saber-matchmedia/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-cookie',
+                    'location': '../dep/saber-cookie/2.0.0-alpha.2/src',
+                    'main': 'cookie'
+                },
+                {
+                    'name': 'saber-storage',
+                    'location': '../dep/saber-storage/2.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-env',
+                    'location': '../dep/saber-env/1.0.0/src'
+                },
+                {
+                    'name': 'hammer',
+                    'location': '../dep/hammer/2.0.4/src',
+                    'main': 'hammer'
+                },
+                {
+                    'name': 'vue',
+                    'location': '../dep/vue/1.0.8/src',
+                    'main': 'vue'
+                },
+                {
+                    'name': 'underscore',
+                    'location': '../dep/underscore/1.8.5/src',
+                    'main': 'underscore'
+                },
+                {
+                    'name': 'frozen',
+                    'location': '../dep/frozen/1.3.0/src',
+                    'main': 'frozen'
+                },
+                {
+                    'name': 'saber-scroll',
+                    'location': '../dep/saber-scroll/1.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'crypt',
+                    'location': '../dep/crypt/0.0.0/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'saber-track',
+                    'location': '../dep/saber-track/0.0.1/src',
+                    'main': 'main'
+                },
+                {
+                    'name': 'wx',
+                    'location': '//res.wx.qq.com/open/js',
+                    'main': 'jweixin-1.0.0'
+                }
+            ]
+        });
+        function initsession(info) {
+            if (info.success) {
+                window.gSession = info.data;
+            }
+        }
+    </script>
+    <script src="[__CDN__]/src/app.js"></script>
+    <script src="[__CDN__]/dep/vue/1.0.8/src/vue.js"></script>
+    <script src="[__CDN__]/dep/zepto/1.1.6/src/zepto.js"></script>
+    <script src="/api/user-company/session?callback=initsession"></script>
+</head>
+<body>
+<div id="viewport">
+    <div>
+        <div class="ui-center" style="padding-top: 30%">
+            <div>
+                <img src="[__CDN__]/src/common/images/slogan.png" width="236" height="33">
+            </div>
+            <p class="ui-txt-info" style="line-height: 20px; margin-top: 20px;"><i class="ui-loading" style="margin: 0 10px;"></i></p>
+        </div>
+    </div>
+</div>
+<script>
+    require(['app', 'vue', 'zepto'], function (app) {
+        app.init();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+
+@tuan-bg-color-default: #323a46;
+@tuan-color-default: #2fcc70;
+
+
+@tuan-bg-color-yellow: #0D1827;
+@tuan-color-yellow: #ff6c15;
+
+@tuan-bg-color-young: #3d359a;
+@tuan-color-young: #fed303;
+
+@tuan-bg-color-freshness: #00ac86;
+@tuan-color-freshness: #fff;
+
+@tuan-bg-color-steady: #303a43;
+@tuan-color-steady: #ff6c15;
+
+html, body {
+    height: 100%;
+    font-size: 14px;
+}
+.make-theme(@tuan-bg-color: @tuan-bg-color-default, @tuan-color: @tuan-color-default) {
+    background: @tuan-bg-color;
+    .header {
+        > h1 {
+            background: @tuan-color;
+            &:before {
+                border-left: 10px solid @tuan-bg-color;
+            }
+            &:after {
+                border-right: 10px solid @tuan-bg-color;
+            }
+        }
+    }
+    .tuan-time-show {
+        h3 {
+            color: @tuan-color;
+        }
+        .time {
+            em, i {
+                background: @tuan-color;
+            }
+            em:before {
+                background-color: @tuan-bg-color;
+            }
+            i.day {
+                color: @tuan-color;
+            }
+            i.dot {
+                color: @tuan-color;
+            }
+        }
+    }
+    .part {
+        > h2 {
+            color: @tuan-color;
+            span {
+                background: @tuan-bg-color;
+            }
+            &:before {
+                border-top: 1px solid @tuan-color;
+            }
+        }
+        .tuan-detail-info {
+            background: @tuan-bg-color * 0.8;
+            p.tips {
+                color: @tuan-color;
+            }
+        }
+        .signup {
+            background: @tuan-bg-color * 0.8;
+            .intention {
+                input {
+                    &:checked + .tag {
+                        border-color: @tuan-color;
+                    }
+                }
+            }
+            .tag {
+                background: @tuan-bg-color;
+                &:before {
+                    background: @tuan-color;
+                }
+            }
+            .form-item {
+                background: @tuan-bg-color;
+                .form-item-action {
+                    background: @tuan-color;
+                    &:active {
+                        background: @tuan-color * .9;
+                    }
+                }
+            }
+            .button-block .ui-button {
+                background: @tuan-color;
+                &:active, &:focus {
+                    background: @tuan-color * .9;
+                }
+            }
+        }
+    }
+    footer {
+        hr {
+            border-top: 1px solid @tuan-color;
+        }
+    }
+    .item-article-group {
+        .item-article-item {
+            h3 {
+                color: @tuan-color;
+            }
+        }
+    }
+    .item-article {
+        background: @tuan-bg-color * 0.8;
+    }
+}
+
+.container {
+    background: @tuan-bg-color-default;
+    margin: 0 auto;
+    max-width: 750px;
+    color: #fff;
+    min-height: 100%;
+    box-sizing: border-box;
+    > div {
+        padding: 10px;
+    }
+    .header {
+        margin: -10px -10px 0;
+        > h1 {
+            font-size: 16px;
+            background: @tuan-color-default;
+            position: relative;
+            //height: 40px;
+            line-height: 1.3;
+            padding: 10px 10px;
+            text-align: center;
+            margin: 10px;
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 0;
+                width: 0;
+                border-left: 10px solid @tuan-bg-color-default;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 0;
+                width: 0;
+                border-right: 10px solid @tuan-bg-color-default;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+            }
+        }
+        .tuan-image-box {
+            background: #fff;
+            position: relative;
+        }
+        .tuan-image {
+            img {
+                width: 100%;
+                vertical-align: middle;
+            }
+        }
+        .sign-stat {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 0;
+            text-align: center;
+            h1 {
+                padding: 4px 10px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #fff;
+            }
+            p {
+                padding: 0 10px 4px;
+                color: #bbb;
+                font-size: 12px;
+            }
+        }
+    }
+    .item-article {
+        text-align: center;
+        background: @tuan-bg-color-default * 0.8;
+        h3 {
+            font-size: 16px;
+            padding: 10px 0;
+            font-weight: 700;
+        }
+        div {
+            //border: 1px solid @tuan-color-default;
+            padding: 0 8px 10px;
+            font-size: 12px;
+            color: #ddd;
+        }
+    }
+    .item-article-group {
+        text-align: center;
+        overflow: hidden;
+        .item-article-item {
+            float: left;
+            width: 50%;
+            h3 {
+                color: @tuan-color-default;
+                padding-top: 10px;
+            }
+            div {
+                margin: 5px;
+                padding: 5px;
+                font-size: 12px;
+                //background: #ddd;
+            }
+        }
+    }
+    .item-text {
+        padding: 10px 0;
+    }
+    .item-image {
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+    }
+    .item-image-text {
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+        p {
+            font-size: 12px;
+            padding: 8px 0;
+        }
+    }
+
+    .tuan-time-show {
+        .tuan-end {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px;
+        }
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: @tuan-color-default;
+            text-align: center;
+            line-height: 2;
+            margin: 10px 0;
+        }
+        .time {
+            font-size: 12px;
+            text-align: center;
+            em, i {
+                position: relative;
+                display: inline-block;
+                padding: 3px 5px;
+                font-family: arial, serif;
+                font-size: 20px;
+                font-weight: bolder;
+                border-radius: 4px;
+                background: @tuan-color-default;
+                color: #fff;
+                vertical-align: middle;
+            }
+            em:before {
+                content: "";
+                display: block;
+                height: 1px;
+                background-color: @tuan-bg-color-default;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                z-index: 0;
+            }
+            i.day {
+                height: 14px;
+                width: 14px;
+                font-size: 10px;
+                font-style: normal;
+                color: @tuan-color-default;
+                background: none;
+                font-weight: 700;
+                border-radius: 50%;
+                padding: 0;
+                //background: url('../../images/weixin/day.png') center center no-repeat;
+                //background-size: 12px 12px;
+            }
+            i.dot {
+                height: 20px;
+                width: 14px;
+                padding: 0;
+                font-size: 14px;
+                font-style: normal;
+                color: @tuan-color-default;
+                background: none;
+                font-weight: 700;
+                //background: url('../../images/weixin/dot.png') center center no-repeat;
+                //background-size: 7px 7px;
+            }
+        }
+    }
+    .part {
+        margin: 10px;
+        > h2 {
+            margin: 30px 0 20px 0;
+            font-weight: 700;
+            color: @tuan-color-default;
+            text-align: center;
+            position: relative;
+            span {
+                font-size: 16px;
+                background: @tuan-bg-color-default;
+                position: relative;
+                z-index: 1;
+                padding: 0 10px;
+            }
+            &:before {
+                content: '';
+                border-top: 1px solid @tuan-color-default;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                width: 100%;
+            }
+        }
+        .tuan-detail-info {
+            background: @tuan-bg-color-default * 0.8;
+            padding: 10px;
+            dl {
+                dt {
+                    float: left;
+                    clear: both;
+                    width: 100px;
+                    text-align: right;
+                }
+                dd {
+                    margin: 10px 0;
+                    margin-left: 105px;
+                    min-height: 16px;
+                    address {
+                        color: #ddd;
+                        font-size: 10px;
+                    }
+                }
+            }
+            p.tips {
+                font-size: 10px;
+                color: @tuan-color-default;
+            }
+        }
+
+        .signup {
+            background: @tuan-bg-color-default * 0.8;
+            padding: 10px;
+            h3 {
+                font-size: 16px;
+                text-align: center;
+                margin: 15px 0;
+                small {
+                    font-size: 80%;
+                    color: #eee;
+                }
+            }
+            > ul {
+                overflow: hidden;
+            }
+            .intention {
+                input {
+                    display: none;
+                    &:checked + .tag {
+                        border-color: @tuan-color-default;
+                    }
+                    &:checked + .tag:before {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+            .tag {
+                border: 1px solid #ddd;
+                background: @tuan-bg-color-default;
+                color: #ddd;
+                padding: 0;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-box-pack: center;
+                -webkit-box-align: center;
+                position: relative;
+                &:before {
+                    display: block;
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    margin: 0 auto;
+                    background: @tuan-color-default;
+                    -webkit-transition: all .3s ease-in;
+                    transition: all .3s ease-in;
+                }
+                span {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .form-item {
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                position: relative;
+                box-sizing: border-box;
+                line-height: 40px;
+                background: @tuan-bg-color-default;
+                label {
+                    position: absolute;
+                    width: 80px;
+                    text-align: right;
+                }
+                .form-item-action {
+                    float: right;
+                    width: 70px;
+                    color: #fff;
+                    padding: 0;
+                    border: none;
+                    background: @tuan-color-default;
+                    line-height: 34px;
+                    margin: 3px 3px 3px 0;
+                    font-size: 12px;
+                    &:active {
+                        background: @tuan-color-default * .9;
+                    }
+                }
+                input {
+                    display: block;
+                    box-sizing: border-box;
+                    background: none;
+                    border: none;
+                    width: 100%;
+                    height: 40px;
+                    padding-left: 85px;
+                    color: #fff;
+                }
+                .verify-code {
+                    width: 100px;
+                    padding-left: 0;
+                    margin-left: 85px;
+                }
+            }
+            .form-item-custom {
+                input {
+                    padding-left: 15px;
+                }
+            }
+            .form-item-with-action input {
+                margin-right: 80px;
+            }
+            .button-block .ui-button {
+                color: #fff;
+                width: 100%;
+                box-sizing: border-box;
+                background: @tuan-color-default;
+                line-height: 40px;
+                height: auto;
+                border: none;
+                font-size: 16px;
+                &:active, &:focus {
+                    background: @tuan-color-default * .9;
+                }
+            }
+        }
+    }
+    footer {
+        padding: 10px;
+        hr {
+            border: none;
+            border-top: 1px solid @tuan-color-default;
+            margin: 10px 0;
+        }
+        p {
+            text-align: center;
+            margin: 10px 0 0;
+        }
+    }
+    .v-seller a {
+        color: #fff;
+    }
+}
+// Theme
+.theme-default {
+    .make-theme(@tuan-bg-color-default, @tuan-color-default);
+}
+.theme-gold {
+    .make-theme(#ffd700, #f37b52);
+}
+.theme-yellow {
+    .make-theme(@tuan-bg-color-yellow, @tuan-color-yellow);
+}
+.theme-young {
+    .make-theme(@tuan-bg-color-young, @tuan-color-young);
+    .part {
+        .signup {
+            .tag span {
+                color: #fff;
+            }
+        }
+    }
+}
+.theme-steady {
+    .make-theme(@tuan-bg-color-steady, @tuan-color-steady);
+}
+.theme-freshness {
+    .make-theme(@tuan-bg-color-freshness, @tuan-color-freshness);
+    > .header {
+        > h1 {
+            color: @tuan-bg-color-freshness;
+        }
+    }
+    .tuan-time-show .time {
+        em, i {
+            color: @tuan-bg-color-freshness;
+        }
+    }
+    .part {
+        .signup {
+            .button-block .ui-button {
+                background: @tuan-bg-color-freshness;
+                &:active, &:focus {
+                    background: @tuan-bg-color-freshness * .9;
+                }
+            }
+            .intention {
+                input {
+                    &:checked + .tag {
+                        border-color: @tuan-color-freshness;
+                        color: @tuan-bg-color-freshness;
+                    }
+                }
+            }
+            .tag {
+                background: @tuan-bg-color-freshness;
+                &:before {
+                    background: @tuan-color-freshness;
+                }
+            }
+            .form-item{
+                .form-item-action{
+                    background: @tuan-color-default;
+                  /*  color: @tuan-bg-color-freshness;*/
+                }
+            }
+        }
+    }
+}
+
+.agent-intro {
+    text-align: center;
+    a {
+        color: #fff;
+        font-size: 20px;
+        text-decoration: none;
+        img {
+            width: 100%;
+            vertical-align: middle;
+        }
+    }
+}
+
+.favorite-wrap .favorite {
+    top: 10px;
+    right: 10px;
+}

@@ -1,0 +1,50 @@
+<!-- target: TPL_order_voucher_list -->
+<div class="order-voucher-list bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券订单列表</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="filter">
+            <div class="ui-row">
+                <div class="ui-group">
+                    <form data-ui-type="Form" data-ui-id="filter">
+                        <div data-ui-type="SearchBox"
+                             data-ui-placeholder="按手机号搜索"
+                             data-ui-id="searchbox"
+                             data-ui-text="${phone}"></div>
+                    </form>
+                </div>
+                <div>
+                    <label class="title">订单状态：</label>
+                    <div data-ui-type="BoxGroup" data-ui-id="voucherOrderStatus" data-ui-skin="custom"
+                         data-ui-name="status" data-ui-box-type="checkbox" data-ui-value="${status}" >
+                        <!-- for: ${voucherOrderStatus} as ${st} -->
+                        <input type="checkbox" name="status" title="${st.text}" value="${st.value}">
+                        <!-- /for -->
+                    </div>
+                    <!-- if: ${activity_id} -->
+                    <select data-ui-type="Select" data-ui-id="voucherSelect" data-ui-name="voucher_id" data-ui-value="${voucher_id}" class="voucher-select" data-ui-width="200" data-ui-skin="primary">
+                        <option value="">全部优惠券</option>
+                        <!-- for: ${vouchers} as ${st} -->
+                        <option value="${st.id}">${st.name}</option>
+                        <!-- /for -->
+                    </select>
+                    <!-- /if -->
+                </div>
+            </div>
+        </form>
+
+        <div class="list-tauuble">
+            <!-- import: listTableWithCommand -->
+        </div>
+        <div class="list-table-footer">
+            <!-- import: listPager -->
+            <a data-ui-type="Button" class="button bg-sub" href="/api/voucher-order/excel?${exportUrl}">导出</a>
+        </div>
+
+    </div>
+
+
+</div>

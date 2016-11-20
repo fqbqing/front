@@ -1,0 +1,105 @@
+<!-- target: TPL_organization_refund_add -->
+<div class="organization-refund-add">
+<form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+    <div class="form-block">
+        <div class="form-body">
+            <div class="form-row">
+                <div class="form-key">退款负责人：</div>
+                <div class="form-value">
+                    <input
+                            data-ui-type="TextBox"
+                            data-ui-required="required"
+                            data-ui-id="user_company_id"
+                            name="user_company_id"
+                            data-ui-validity-label="userCompanyIdErrorMessage"
+                            data-ui-value="${formData.user_company_id}"
+                            readonly
+                            hidden/>
+                    <span data-ui-type="Label" data-ui-id="user_company_name" data-ui-text="${formData.userCompany.name}"></span>
+                    <button data-ui-type="Button" data-ui-id="chooseMarchers" type="button" data-ui-skin="link">修改</button>
+                    <span data-ui-type="Validity" data-ui-id="userCompanyIdErrorMessage"></span>
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-key">退款金额：</div>
+                <div class="form-value">
+                    <input
+                        data-ui-type="TextBox"
+                        data-ui-required="required"
+                        data-ui-dollars="dollars"
+                        data-ui-validity-label="amountErrorMessage"
+                        name="amount"
+                        data-ui-value="<!-- if: ${formData.amount} -->${formData.amount|amount}<!-- /if -->" />
+                    <span data-ui-type="Label">元</span>
+                    <span data-ui-type="Validity" data-ui-id="amountErrorMessage"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">收款事由：</div>
+                <div class="form-value">
+                    <div
+                        data-ui-type="TextBox"
+                        data-ui-required="required"
+                        name="reason"
+                        data-ui-mode="textarea"
+                        data-ui-height="80"
+                        data-ui-value="@formData.reason"></div>
+                </div>
+            </div>
+        
+            <div class="form-row">
+                <div class="form-key">收款方：</div>
+                <div class="form-value">
+                    <input
+                        data-ui-type="TextBox"
+                        data-ui-required="required"
+                        name="receiving_side"
+                        data-ui-value="@formData.receiving_side" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">收款账户：</div>
+                <div class="form-value">
+                    <input
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="receiving_account"
+                           data-ui-value="@formData.receiving_account" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">开户银行：</div>
+                <div class="form-value">
+                    <input
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="receiving_bank"
+                           data-ui-value="@formData.receiving_bank" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">经手人：</div>
+                <div class="form-value">
+                    <input
+                           data-ui-type="TextBox"
+                           data-ui-required="required"
+                           name="handler"
+                           data-ui-value="@formData.handler" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-key">操作人：</div>
+                <div class="form-value">
+                    ${visitor_name}
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</form>
+
+
+</div>
+<!-- target: TPL_organization_refund_add_child -->
+<!-- import: TPL_organization_refund_add -->

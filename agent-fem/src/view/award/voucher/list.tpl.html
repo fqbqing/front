@@ -1,0 +1,33 @@
+<div class="award-voucher-list">
+    <ui-listview v-ref:listview :api="$api.listVoucherAward"
+                 ptr-content=".award-index > .content">
+        <div class="list-block media-list list-block-full" v-if="listData.length">
+            <ul>
+                <li v-for="data in listData">
+                    <a v-link="{name:'voucherDetail', params: {orderId: data.order.id}}" class="item-link item-content">
+                        <div class="item-media">
+                            <ui-lazyimage :width="60" :height="60" :src="data.voucher.image_url|image-cdn '60w_60h_1c_1e_60-1ci.png'" :options="{container: '.award-index>.content'}"></ui-lazyimage>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title" v-text="data.voucher.name"></div>
+                                <div class="item-after">
+                                    {{{data.order.status|voucher-order-status-text}}}
+                                </div>
+                            </div>
+                            <div class="item-subtitle">
+                                <div v-text="data.voucher.brief"></div>
+                                <div v-text="data.organization.name"></div>
+                                <!--<p v-text="activity.time|date 'YYYY.MM.DD HH:mm'"></p>-->
+                                <!--<div class="expire">有效期：2016.06.01 - 2016.12.30</div>-->
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center" v-else>
+            <p class="ui-txt-info">暂无收益</p>
+        </div>
+    </ui-listview>
+</div>

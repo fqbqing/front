@@ -1,0 +1,239 @@
+<!-- target: TPL_voucher_activity_detail -->
+<div class="voucher-activity-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">优惠券活动</span>
+        <span class="divider">/</span>
+        <span class="active">活动详情</span>
+    </div>
+    <div class="bbmc-detail-content container">
+        <section class="ui-container">
+            <section class="ui-panel">
+                <h1 style="line-height: 44px;" v-text="voucher_activity.name"></h1>
+            </section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>基本信息</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content info-content">
+                                <ul class="ui-list ui-list-pure ui-border-tb">
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">活动时间：</span>
+                                            <span class="ui-panel-title-tips">${voucher_activity.start_time|date} 至 ${voucher_activity.end_time|date}</span>
+                                        </h5>
+                                    </li>
+                                    <!--if: ${voucher_activity.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+                                    <li>
+                                        <h5>
+                                            <span class="label">分享链接：</span>
+                                            <span class="ui-panel-title-tips">${shareLink}</span>
+                                            <a data-ui-id="cp"
+                                               data-ui-type="Clipboard"
+                                               data-ui-clipboard-text="@shareLink" href="javascript:void(0)" style="padding:0 10px;">复制</a>
+                                        </h5>
+                                    </li>
+                                    <!--/if-->
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--if: ${voucher_activity.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>二维码</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <div class="row row-compact">
+                                    <div class="col-xs-6 data-block data-block-last-bottom data-block-last">
+                                        <p class="stat-value"><img src="/api/coupon-activity/qrcode-share?id=${id}" alt="分享二维码"></p>
+                                        <h3 class="stat-name">分享二维码</h3>
+                                        <span class="tip">扫描“分享二维码”，用手机分享该活动</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--/if-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>已认领订单</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content" v-for="item in activity_statistics.vouchers.claimedOrders">
+                                <h4 class="ui-arrowlink">
+                                    <span><a href="#/voucher/order/list~voucher_id={{item.voucher.id}}&activity_id=${id}&claimed=1">{{item.voucher.name}}</a><small>(今日/全部)</small></span>
+                                </h4>
+                                <div>
+                                    <div class="row row-compact first-row">
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.GET_VOUCHER.today}}/{{item.statistics.GET_VOUCHER.total}}</em></p>
+                                            <h3 class="stat-name">
+                                                领券数
+                                                <div data-ui-type="Tip" data-ui-content="领券数=未使用+已使用+未支付；<br>其中退款流程中的订单和取消的订单不计算在列。"></div>
+                                            </h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_SUCCESS.today}}/{{item.statistics.STATUS_SUCCESS.total}}</em></p>
+                                            <h3 class="stat-name">未使用</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_USED.today}}/{{item.statistics.STATUS_USED.total}}</em></p>
+                                            <h3 class="stat-name">已使用</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_NOT_PAY.today}}/{{item.statistics.STATUS_NOT_PAY.total}}</em></p>
+                                            <h3 class="stat-name">未支付</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row row-compact last-row" v-if="item.voucher.amount > 0">
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_APPLY_REFUND.today}}/{{item.statistics.STATUS_APPLY_REFUND.total}}</em></p>
+                                            <h3 class="stat-name">申请退款</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_REFUNDED.today}}/{{item.statistics.STATUS_REFUNDED.total}}</em></p>
+                                            <h3 class="stat-name">已退款</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_REFUND_FAILED.today}}/{{item.statistics.STATUS_REFUND_FAILED.total}}</em></p>
+                                            <h3 class="stat-name">退款失败</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_SYSTEM_CANCELED.today + item.statistics.STATUS_CANCELED.today}}/{{item.statistics.STATUS_SYSTEM_CANCELED.total + item.statistics.STATUS_CANCELED.total}}</em></p>
+                                            <h3 class="stat-name">
+                                                订单取消
+                                                <div data-ui-type="Tip" data-ui-content="订单取消数=系统取消订单数+用户主动取消订单数"></div>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>未认领订单</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content" v-for="item in activity_statistics.vouchers.unclaimedOrders">
+                                <h4 class="ui-arrowlink">
+                                    <span><a href="#/voucher/order/list~voucher_id={{item.voucher.id}}&activity_id=${id}&claimed=0">{{item.voucher.name}}</a><small>(今日/全部)</small></span>
+                                </h4>
+                                <div>
+                                    <div class="row row-compact first-row">
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.GET_VOUCHER.today}}/{{item.statistics.GET_VOUCHER.total}}</em></p>
+                                            <h3 class="stat-name">
+                                                领券数
+                                                <div data-ui-type="Tip" data-ui-content="领券数=未使用+已使用+未支付；<br>其中退款流程中的订单和取消的订单不计算在列。"></div>
+                                            </h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_SUCCESS.today}}/{{item.statistics.STATUS_SUCCESS.total}}</em></p>
+                                            <h3 class="stat-name">未使用</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_USED.today}}/{{item.statistics.STATUS_USED.total}}</em></p>
+                                            <h3 class="stat-name">已使用</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_NOT_PAY.today}}/{{item.statistics.STATUS_NOT_PAY.total}}</em></p>
+                                            <h3 class="stat-name">未支付</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row row-compact last-row" v-if="item.voucher.amount > 0">
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_APPLY_REFUND.today}}/{{item.statistics.STATUS_APPLY_REFUND.total}}</em></p>
+                                            <h3 class="stat-name">申请退款</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_REFUNDED.today}}/{{item.statistics.STATUS_REFUNDED.total}}</em></p>
+                                            <h3 class="stat-name">已退款</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_REFUND_FAILED.today}}/{{item.statistics.STATUS_REFUND_FAILED.total}}</em></p>
+                                            <h3 class="stat-name">退款失败</h3>
+                                        </div>
+                                        <div class="col-xs-3 data-block data-block-last-bottom">
+                                            <p class="stat-value"><em>{{item.statistics.STATUS_SYSTEM_CANCELED.today + item.statistics.STATUS_CANCELED.today}}/{{item.statistics.STATUS_SYSTEM_CANCELED.total + item.statistics.STATUS_CANCELED.total}}</em></p>
+                                            <h3 class="stat-name">
+                                                订单取消
+                                                <div data-ui-type="Tip" data-ui-content="订单取消数=系统取消订单数+用户主动取消订单数"></div>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>渠道效果</span>
+                                <small v-text="'('+channels.length+')'"></small>
+                                <select data-ui-type="Select" data-ui-id="status_select" name="status" data-ui-value="${status}" class="fr">
+                                    <option value="">全部</option>
+                                    <!-- for: ${voucher_order_status} as ${st} -->
+                                    <option value="${st.value}">${st.text}</option>
+                                    <!-- /for -->
+                                </select>
+                            </h2>
+
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr><th>排名</th><th>报名渠道</th><th>领券数</th><th>报名人数</th></tr>
+                                    <tr v-for="channel in channels">
+                                        <td v-text="$index + 1"></td>
+                                        <td v-text="channel.name"></td>
+                                        <td v-text="channel.orderCount"></td>
+                                        <td v-text="channel.customerCount"></td>
+                                    </tr>
+                                </table>
+                                <div v-if="!channels || channels.length==0" class="ui-table-body-nodata">
+                                    <p>还没有渠道信息！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+</div>

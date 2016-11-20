@@ -1,0 +1,64 @@
+<!-- target: TPL_organization_detail -->
+<div class="bbmc-content-wrap organization-detail">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>4S店管理</span>
+        <span class="divider">/</span>
+        <span class="active">基本信息</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="org-form">
+            <div class="form-block">
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-key">4S店名称：</div>
+                        <div class="form-value">
+                            ${orgInfo.group.name}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">4S店logo：</div>
+                        <div class="form-value">
+                            <!--if:${orgInfo.logo}-->
+                            <img src="${orgInfo.logo}" alt="预览图片" class="logo">
+                            <!--/if-->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">4S店地址：</div>
+                        <div class="form-value">
+                            ${orgInfo.address}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">4S店电话：</div>
+                        <div class="form-value">
+                            ${orgInfo.phone}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">公共数据是否公开：</div>
+                        <div class="form-value">
+                            ${orgInfo.show_public_customers | getPublicCustomer}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-key">是否开启经纪人模式：</div>
+                        <div class="form-value">
+                            ${orgInfo.agent_spread | getAgentSpread}
+                        </div>
+                    </div>
+                    <div class="form-row" v-if="isAllow('organization.update')">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <a href="#/organization/edit" data-ui="type:Button;id:editOrg;skin:primary" class="org-edit-btn">修改</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

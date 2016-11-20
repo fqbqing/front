@@ -1,0 +1,18 @@
+{
+    "History.md": "8595dda3384f156e821fb899929583ed",
+    "LICENSE": "f550cc6cbba5122380ad4cb648e3b1cd",
+    "README.md": "df040470048cb3b0219cb7997b1f8a99",
+    "bower.json": "8ee4698d2c8f01b954d8be8104ec0e62",
+    "edp-build-config.js": "cb1e61aa8d38dfd40c442a9ca02af05b",
+    "lib/memoryStorage.js": "945643eea36c3433434ef38fd1934e53",
+    "lib/Storage.js": "7b78e7a79e450e7b621180cf7dafc92b",
+    "main.js": "4904c32b29596e4a8a858353c9734f23",
+    "package.json": "8a5dd1e2975c0901b408f08634325105",
+    "src/main.js": "beba8770ec79c4a241da22cf9737e1d3",
+    "src/Storage.js": "554ec0e418e465b3656ec363e2bb25e7",
+    "src/memoryStorage.js": "4e8af50fe8a6d4e3d07aef16ced7c915",
+    "test/run-jasmine.js": "7c0d964113df9f083f21291056e23f0a",
+    "test/runSpec.js": "586a8c3ae675f98b31e5ad9fa5c81d7d",
+    "test/runner.html": "65c0fe4c5f65f5b5e4f5d94c80967834",
+    "test/spec/storage.js": "a61fcc4caf1d385b6261876bd3b9a95e"
+}

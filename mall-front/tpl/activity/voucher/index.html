@@ -1,0 +1,68 @@
+{{extends file="../coupon/layout.html"}}
+{{block name='title'}}优惠券 - {{$voucher.name|escape:'html'}}{{/block}}
+{{block name='description'}}{{$voucher.brief|escape:'html'}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/activity/voucher/index.less">
+{{/block}}
+{{block name="body"}}
+<input type="hidden" name="activityId" value="{{$smarty.get.activityId|default:''}}">
+<input type="hidden" name="voucherId" value="{{$smarty.get.id|default:''}}">
+<section class="voucher-part">
+    <div class="voucher">
+        <div class="img">
+            <img src="{{$voucher.image_url|cdnfix}}@70w_70h_1e_1c_70-1ci.png">
+        </div>
+        <div class="content">
+            <h3>{{$voucher.name|escape:'html'}}</h3>
+            <p>{{$voucher.brief|escape:'html'}}</p>
+        </div>
+        <div class="voucher-info">
+            <div class="info">
+                <div class="payinfo">
+                    {{if $voucher.end_time|is_expired eq '1'}}
+                    <button type="button" class="btn">已过期</button>
+                    {{else}}
+                    {{if $voucher.amount eq '0'}}
+                    <button type="button" class="btn btn-claim">立即免费领取</button>
+                    {{else}}
+                    <button type="button" class="btn btn-pay">￥{{$voucher.amount/100}}元, 立即支付</button>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                <dl>
+                    <dt>有效期：</dt>
+                    <dd>
+                        {{$voucher.start_time|date_format:'%Y.%m.%d'}} -
+                        {{if $voucher.end_time eq '0'}}长期有效{{else}}{{$voucher.end_time|date_format:'%Y.%m.%d'}}{{/if}}
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>使用须知：</dt>
+                    <dd>{{$voucher.instruction|escape:'html'|nl2br}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="part text-center">
+    <a class="btn btn-view-activity" href="/activity/coupon/{{$activity.id}}.html">查看活动详情</a>
+</section>
+<section class="part part-line seller">
+    <h2><span>购车顾问</span></h2>
+    <div class="part-content">
+        {{v_seller file="/includes/seller.html" activityId="`$activity.id`"}}
+    </div>
+</section>
+{{/block}}
+{{block name="js"}}
+
+{{weixin_share
+    activityId="`$activity.id`"
+    title="`$voucher.name|escape:'html'`"
+    titleFormat='{0}邀请您领取“{1}”'
+    desc="`$voucher.brief|escape:'html'`"
+    link="/activity/voucher/`$activity.id`/`$voucher.id`"
+    imgUrl="http:`$voucher.image_url|cdnfix`"}}
+<script src="/static/js/activity/voucher/voucher.js"></script>
+<script src="/static/js/activity/voucher/index.js"></script>
+{{/block}}

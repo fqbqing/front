@@ -1,0 +1,40 @@
+<!-- target: TPL_tuan/order_signin -->
+<div class="tuan-order-signin">
+    <!-- use: TPL_common_page_header(title="客户签到") -->
+    <section class="ui-container">
+        <div v-if="order">
+            <div class="check-notice" v-if="order.sign_in_status==0">
+                <i class="ui-icon-warn check-notice-icon"></i>
+                <p class="check-notice-main">
+                    姓名： <span v-text="order.name"></span><br>
+                    手机号：<span class="ui-txt-muted" v-text="order.phone"></span>
+                </p>
+                <p>请确认上述信息正确后点击『确定』进行签到</p>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="signIn">确定</button>
+                    <button class="ui-btn-lg" @click="toHome">取消</button>
+                </div>
+            </div>
+            <div class="check-notice" v-else>
+                <i class="ui-icon-success check-notice-icon"></i>
+                <p>已签到</p>
+                <p class="check-notice-main">
+                    姓名： <span v-text="order.name"></span><br>
+                    手机号：<span class="ui-txt-muted" v-text="order.phone"></span>
+                </p>
+                <div class="check-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">确定</button>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="ui-notice">
+                <i></i>
+                <p>抱歉，无法签到！</p>
+                <div class="ui-notice-btn">
+                    <button class="ui-btn-primary ui-btn-lg" @click="toHome">返回</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

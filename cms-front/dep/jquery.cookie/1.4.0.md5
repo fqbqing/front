@@ -1,0 +1,15 @@
+{
+    "CHANGELOG.md": "cda8a3a699ed0dc8dd2bf761b4a43388",
+    "CONTRIBUTING.md": "3acddd453ffe3a79b3988f21ca1c9c83",
+    "Gruntfile.js": "687ce6144fbb72528aaa9b33f6d4d59c",
+    "MIT-LICENSE.txt": "6566d17537541dbcfb62e80148f85d74",
+    "README.md": "846a727db78aaba5919579e5fb5be3af",
+    "bower.json": "c18688fecec063534c95cd03b52ddb5d",
+    "cookie.jquery.json": "a453d02d2f9d1fffe0df3d2700b77f6f",
+    "jquery.cookie.js": "1e3faa7fc49484964ecae46ca9494f35",
+    "package.json": "ac0999e08a796e188a44d212c168b38b",
+    "test/malformed_cookie.html": "9b6a4fb1823d4f428d01283f14985805",
+    "test/index.html": "f110caac98af4bbdba31f18eb7194448",
+    "test/server.js": "75c432dd52098455e9ae041b1b0f8525",
+    "test/tests.js": "8635182969344a096b385980b8f68d0e"
+}

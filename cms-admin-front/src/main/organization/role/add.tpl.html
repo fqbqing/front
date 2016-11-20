@@ -1,0 +1,49 @@
+<!-- target: TPL_organization_role_add_child -->
+<div class="organization-role-add bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <form data-ui-type="Form" class="bbmc-detail" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key form-key-required">角色名称：</div>
+                    <div class="form-value">
+                        <input data-ui-id="name"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               name="name"
+                               data-ui-value="@formData.name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">角色类型：</div>
+                    <div class="form-value">
+                        <div data-ui-type="BoxGroup" data-ui-id="type" data-ui-name="type" data-ui-box-type="radio" data-ui-value="@formData.type">
+                            <div>
+                                <label><input type="radio" name="type" value="1" title="基础角色"></label>
+                            </div>
+                            <div>
+                                <label><input type="radio" name="type" value="2" title="高级角色"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">备注：</div>
+                    <div class="form-value">
+                        <input data-ui-id="desc"
+                               data-ui-type="TextBox"
+                               name="desc"
+                               data-ui-value="@formData.desc">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- target: TPL_organization_role_add -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>角色管理</span>
+    <span class="divider">/</span>
+    <span class="active">添加角色</span>
+</div>
+<!-- import: TPL_organization_role_add_child -->

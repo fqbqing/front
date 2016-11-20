@@ -1,0 +1,142 @@
+<!-- target: TPL_exhibition_coupon_activity_detail -->
+<div class="exhibition-coupon-activity-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">车展活动</span>
+        <span class="divider">/</span>
+        <a href="#/exhibition/coupon/activity/list">活动列表</a>
+        <span class="divider">/</span>
+        <span class="active">活动详情</span>
+    </div>
+    <div class="container">
+        <section class="ui-container">
+            <section class="ui-panel">
+                <h1 style="line-height: 44px;" v-text="exhibition.activity_title"></h1>
+            </section>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>基本信息</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content info-content">
+                                <ul class="ui-list ui-list-pure ui-border-tb">
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">活动时间：</span>
+                                            <span class="ui-panel-title-tips">${exhibition.activity_start_time|date 'YYYY-MM-DD HH:mm'} - ${exhibition.activity_end_time|date 'YYYY-MM-DD HH:mm'}</span>
+                                        </h5>
+                                    </li>
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">活动地点：</span>
+                                            <span class="ui-panel-title-tips">${exhibition.activity_address}</span>
+                                        </h5>
+                                    </li>
+                                    <li>
+                                        <h5>
+                                            <span class="label">优惠券名称：</span>
+                                            <span class="ui-panel-title-tips">${exhibition.coupon}</span>
+                                        </h5>
+                                    </li>
+                                    <li>
+                                        <h5>
+                                            <span class="label">优惠券有效时间：</span>
+                                            <span class="ui-panel-title-tips">${exhibition.coupon_start_time|date 'YYYY-MM-DD HH:mm'}－${exhibition.coupon_end_time|date 'YYYY-MM-DD HH:mm'}</span>
+                                        </h5>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bbmc-panel">
+                                <div class="bbmc-panel-head">
+                                    <h2 class="ui-arrowlink">
+                                        <span><a href="#/exhibition/coupon/order/list~exhibition_id=${exhibition.id}&claimed=1">已认领订单</a></span>
+                                        <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                                    </h2>
+                                </div>
+                                <div class="bbmc-panel-body">
+                                    <div class="bbmc-panel-content">
+                                        <div class="row row-compact">
+                                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                                <p class="stat-value"><em>${statOrder.today_claimed_count}/${statOrder.claimed_count}</em></p>
+                                                <h3 class="stat-name">全部</h3>
+                                            </div>
+                                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                                <p class="stat-value"><em>${statOrder.today_receive_count}/${statOrder.receive_count}</em></p>
+                                                <h3 class="stat-name">已领券</h3>
+                                            </div>
+                                            <div class="col-xs-3 data-block data-block-last-bottom">
+                                                <p class="stat-value"><em>${statOrder.today_signin_count}/${statOrder.singin_count}</em></p>
+                                                <h3 class="stat-name">已签到</h3>
+                                            </div>
+                                            <div class="col-xs-3 data-block data-block-last data-block-last-bottom">
+                                                <p class="stat-value"><em>${statOrder.today_done_count}/${statOrder.done_count}</em></p>
+                                                <h3 class="stat-name">已使用</h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bbmc-panel">
+                                <div class="bbmc-panel-head">
+                                    <h2 class="ui-arrowlink">
+                                        <span style="margin: 0 auto;"><a href="#/exhibition/coupon/order/list~exhibition_id=${exhibition.id}&claimed=0">未认领订单</a><i>(${statOrder.unclaimed_count})</i></span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bbmc-panel">
+                                <div class="bbmc-panel-head">
+                                    <h2 class="ui-arrowlink">
+                                        <span>渠道效果</span>
+                                        <small v-text="'('+channels.length+')'"></small>
+                                        <select data-ui-type="Select" data-ui-id="status_select" name="status" data-ui-value="${status}" class="fr">
+                                            <!-- for: ${exibihitionStatus} as ${st} -->
+                                            <option value="${st.value}">${st.text}</option>
+                                            <!-- /for -->
+                                        </select>
+                                    </h2>
+
+                                </div>
+                                <div class="bbmc-panel-body">
+                                    <div class="bbmc-panel-content">
+                                        <table class="table table-kpi">
+                                            <tr><th>排名</th><th>报名渠道</th><th>人数</th></tr>
+                                            <tr v-for="channel in channels" v-if="channels && channels.length>0">
+                                                <td v-text="$index + 1"></td>
+                                                <td v-text="channel.signupChannel.name"></td>
+                                                <td v-text="channel.count"></td>
+                                            </tr>
+                                        </table>
+                                        <div v-if="!channels || channels.length==0" class="ui-table-body-nodata">
+                                            <p>还没有渠道信息！</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        </section>
+    </div>
+</div>

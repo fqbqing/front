@@ -1,0 +1,43 @@
+@import "../dep/bootstrap/less/bootstrap";
+html, body {
+    background: #fff;
+}
+.container {
+    max-width: 720px;
+}
+@import "../ui/loading";
+@import "header";
+
+.modal-alert {
+    .modal-content {
+        border-radius: 2px;
+        //box-shadow: 1px 1px 1px rgba(193, 193, 193, 0.58);
+        box-shadow: none;
+        border-color: #fff;
+    }
+    .modal-header {
+        padding: 8px 15px;
+        background: #eee;
+        border-radius: 2px 2px 0 0;
+    }
+    .modal-title {
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .modal-footer {
+        border: none;
+        padding: 8px 15px;
+        text-align: center;
+    }
+    .btn {
+        padding: 5px 15px;
+    }
+    .btn-ok {
+        background: @x-main-color;
+        color: #fff;
+    }
+    .btn-cancel {
+        background: #eee;
+        color: #666;
+    }
+}

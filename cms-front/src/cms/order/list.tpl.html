@@ -1,0 +1,30 @@
+<!-- target: TPL_order_list -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>订单管理</span>
+    <span class="divider">/</span>
+    <span class="active">商城订单列表</span>
+</div>
+<div class="order-list bbmc-content-wrap">
+    <div class="bbmc-content">
+        <div class="ui-row">
+            <form data-ui-type="Form" data-ui-id="filter">
+               <!-- <a data-ui-type="Button" class="button bg-sub" id="export" href="/api/order/excel?order_statuss=${order_statuss}">导出</a>-->
+                <div data-ui-type="SearchBox"  data-ui-placeholder="手机号" data-ui-id="searchbox" data-ui-text="${phone}"></div>
+                <input type="checkbox" data-ui-id="exclude" data-ui-type="CheckBox" data-ui-checked="${exclude}" name="exclude" value="staff" title="排除内部员工">
+                <div style="margin: 5px 0;">
+                    <label class="title">订单状态：</label>
+                    <div data-ui-type="BoxGroup" data-ui-id="orderStatus"
+                         data-ui-name="status" data-ui-box-type="checkbox" data-ui-box-class="ui-checkbox-custom" data-ui-value="${status}" >
+                        <!-- for: ${orderStatus} as ${st} -->
+                        <input type="checkbox" name="status" title="${st.text}" class="order-status" value="${st.value}">
+                        <!-- /for -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="list-table">
+            <!-- import: listTableWithCommand -->
+            <!-- import: listPager -->
+        </div>
+    </div>
+</div>

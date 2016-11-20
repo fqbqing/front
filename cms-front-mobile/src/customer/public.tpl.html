@@ -1,0 +1,38 @@
+<!-- target: TPL_customer_public -->
+<div class="customer-public">
+    <!-- use: TPL_common_page_header(title="公共客户") -->
+    <!-- use: TPL_common_page_footer(name="customer") -->
+    <section class="ui-container">
+        <ul>
+            <li class="current">
+                <div class="ui-row filterbar">
+                    <div class="ui-col ui-col-33">共<span v-text="totalCount"></span>个</div>
+                </div>
+                <div v-if="organization.show_public_customers">
+                    <listview v-ref:listview :api="api.listCustomer" :page-no="1" :page-size="15" :extra-data="listExtraData">
+                        <ul class="ui-list ui-list-text ui-list-active ui-list-cover ui-border-t" v-if="customers && customers.length">
+                            <li class="ui-border-b" v-for="customer in customers">
+                                <div class="ui-list-info" @click="redirect('/customer/detail', {id: customer.id})">
+                                    <h4 v-text="customer.name"></h4>
+                                    <p v-text="customer.phone"></p>
+                                </div>
+                                <div class="text-right" v-if="!customer.owner">
+                                    <button type="button" class="ui-btn" @click="claimedCustomer({id: customer.id},$index)">认领</button>
+                                </div>
+                                <div class="ui-badge" v-else>已认领</div>
+                            </li>
+                        </ul>
+                        <div class="ui-center" v-else>
+                            <p class="ui-txt-info">(当前无公共客户)</p>
+                        </div>
+                    </listview>
+                </div>
+                <div class="ui-center" v-else>
+                    <p class="ui-txt-info">(店内未开启抢单模式)</p>
+                </div>
+            </li>
+        </ul>
+
+    </section>
+</div>
+

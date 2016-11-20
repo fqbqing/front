@@ -1,0 +1,217 @@
+{{extends file="./layout.html"}}
+{{block name="title"}}{{$data.title|escape:'html'}}{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/css/tuan/index.less">
+{{/block}}
+{{block name="body"}}
+<div class="header">
+    <h1>{{$data.title|escape:'html'}}</h1>
+    <div class="tuan-image-box">
+        <div class="tuan-image">
+            <img src="{{$data.defaultImage}}">
+        </div>
+        <div class="sign-stat">{{$data.num}}人已报名</div>
+    </div>
+</div>
+<section class="part">
+    <div class="row">
+        {{foreach $data.characteristics as $characteristics}}
+        <div class="col-6">
+            <div class="feature">
+                <h3>{{$characteristics.title|escape:'html'}}</h3>
+                <p>{{$characteristics.content|escape:'html'}}</p>
+            </div>
+        </div>
+        {{/foreach}}
+    </div>
+</section>
+<div class="tuan-time-show countdown">
+    <h3>活动倒计时</h3>
+    <div class="time">
+        <em v-text="countdown.d1">0</em>
+        <em v-text="countdown.d2">0</em>
+        <i class="day">天</i>
+        <em v-text="countdown.h1">0</em>
+        <em v-text="countdown.h2">0</em>
+        <i class="dot">:</i>
+        <em v-text="countdown.m1">0</em>
+        <em v-text="countdown.m2">0</em>
+        <i class="dot">:</i>
+        <em v-text="countdown.s1">0</em>
+        <em v-text="countdown.s2">0</em>
+    </div>
+</div>
+<section class="part">
+    <h2><span>活动信息</span></h2>
+    <div class="tuan-detail-info">
+        <dl>
+            <dt>购车价格：</dt>
+            <dd>{{$data.price|escape:'html'}}</dd>
+            <dt>举办时间：</dt>
+            <dd>{{$data.tuan_time|date_format:'%Y年%m月%d日 %H:%M'}}</dd>
+            <dt>购车地址：</dt>
+            <dd>
+                {{$data.agency|escape:'html'}}
+                <address>{{$data.address|escape:'html'}}</address>
+            </dd>
+        </dl>
+        <p class="tips"><em>温馨提示：</em>现场订车用户请携身份证和订金（现金或刷卡皆可）以便现场办理订车手续</p>
+    </div>
+</section>
+{{if $data.gift|count > 0}}
+<section class="part">
+    <h2><span>多重好礼</span></h2>
+    <ul class="gift">
+        {{foreach $data.gift as $gift}}
+        <li>
+            <h4>{{$gift.title|escape:'html'}}</h4>
+            <p>{{$gift.content|escape:'html'}}</p>
+        </li>
+        {{/foreach}}
+    </ul>
+</section>
+{{/if}}
+
+{{if $data.orderStatus == 0}}
+    {{if $data.tuanStatus == 0}}
+    <!-- 未上线 -->
+    <section class="part">
+        <h2><span>活动未上线</span></h2>
+    </section>
+    {{elseif $data.tuanStatus == 1}}
+    <!-- 已上线 -->
+    <section class="part">
+        <h2><span>立即报名</span></h2>
+        <div class="signup">
+            <h3>期望特惠车型<small>(最多选择两个)</small></h3>
+            <ul class="intention row">
+                {{foreach $data.intention as $intention }}
+                <li class="col-4">
+                    <input id="intention{{$intention@index}}" v-model="sign.intention" lazy type="checkbox" name="intention" value="{{$intention}}">
+                    <label for="intention{{$intention@index}}" class="tag ui-nowrap"><span>{{$intention|escape:'html'}}</span></label>
+                </li>
+                {{/foreach}}
+            </ul>
+            <h3>期望购车方式</h3>
+            <ul class="buyway">
+                <li class="col-4">
+                    <input id="buyway1" v-model="sign.buyway" type="radio" name="buyway" value="1">
+                    <label for="buyway1" class="tag"><span>全款购车</span></label>
+                </li>
+                <li class="col-4">
+                    <input id="buyway2" v-model="sign.buyway" type="radio" name="buyway" value="2">
+                    <label for="buyway2" class="tag"><span>贷款购车</span></label>
+                </li>
+                <li class="col-4">
+                    <input id="buyway3" v-model="sign.buyway" type="radio" name="buyway" value="3">
+                    <label for="buyway3" class="tag"><span>未确定</span></label>
+                </li>
+            </ul>
+            <h3>购车人信息</h3>
+            <form @submit.prevent="signup">
+                <div class="form-item">
+                    <label for="username">姓名：</label>
+                    <input id="username" type="text" v-model="sign.username" placeholder="请输入您的真实姓名">
+                </div>
+                <div class="form-item">
+                    <label for="phone">手机号：</label>
+                    <input id="phone" type="text" v-model="sign.phone" :disabled="!isGuest" placeholder="请输入手机号">
+                </div>
+                <div class="form-item form-item-with-action" v-if="isGuest" v-cloak>
+                    <label for="verifyCode">验证码：</label>
+                    <button type="button" tabindex="-1" :disabled="canSendVerifyCode" @click="sendVerifyCode" class="form-item-action" v-text="verifyCodeText"></button>
+                    <input id="verifyCode" type="text" v-model="sign.verifyCode" class="verify-code">
+                </div>
+                <div class="button-block">
+                    <button type="submit" class="ui-button">立即报名</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    {{elseif $data.tuanStatus == 2}}
+    <!-- 已下线 -->
+    <section class="part">
+        <h2><span>活动已下线</span></h2>
+    </section>
+    {{elseif $data.tuanStatus == 3}}
+    <!-- 已结束 -->
+    <section class="part">
+        <h2><span>活动已结束</span></h2>
+    </section>
+    {{/if}}
+{{elseif $data.orderStatus == 1}}
+    <section class="part">
+        <h2><span>报名信息</span></h2>
+        <div class="signup">
+            <div class="button-block">
+                <a href="/tuan/order?orderId={{$data.orderId}}" class="ui-button">已报名，查看详情</a>
+            </div>
+        </div>
+    </section>
+{{/if}}
+{{if $app->user->isGuest}}
+<section class="part">
+    <div class="signup">
+        <div class="button-block">
+            <a href="/site/login-c?url={{$app->request->getAbsoluteUrl()|escape:url}}{{'&check=1'|escape:url}}" class="ui-button">我已报名</a>
+        </div>
+    </div>
+</section>
+{{/if}}
+{{if isset($data['channel'])}}
+<section class="part">
+    <h2><span>您的专属销售顾问</span></h2>
+    {{if isset($data['channel']['userGroup'])}}
+    <div class="seller">
+        <div class="avatar">
+            <img src="/static/images/avatar.png" alt="">
+        </div>
+        <div class="seller-info">
+            <a href="tel://{{$data['channel']['userGroup']['organization']['phone']}}">
+                <div class="seller-name">{{$data['channel']['userGroup']['name']}}</div>
+                <p>
+                    {{$data['channel']['userGroup']['organization']['phone']}}
+                </p>
+            </a>
+        </div>
+    </div>
+    {{elseif isset($data['channel']['userCompany'])}}
+    <div class="seller">
+        <div class="avatar">
+            <img src="/static/images/avatar.png" alt="">
+        </div>
+        <div class="seller-info">
+            <a href="tel://{{$data['channel']['userCompany']['phone1']}}">
+                <div class="seller-name">{{$data['channel']['userCompany']['name']}}</div>
+                <p>{{$data['channel']['userCompany']['phone1']}}</p>
+            </a>
+        </div>
+    </div>
+    {{/if}}
+</section>
+{{/if}}
+<weixin-favorite class="favorite-wrap"></weixin-favorite>
+{{if $data.userGroup}}
+<footer>
+    <hr>
+    <p>{{$data.userGroup.organization_name}}出品</p>
+</footer>
+{{/if}}
+{{/block}}
+
+{{block name="js"}}
+<script>
+    window.BBNS = {
+        endTime: '{{$data.end_time}}',
+        tuanId: '{{$data.id}}',
+        orderId: '{{$data.orderId}}',
+        // 需要检查订单
+        checkOrder: '{{$smarty.get.check|default:""}}',
+        // 报名后需要完成签入
+        signIn: '{{$smarty.get.signin|default:""}}'
+    };
+</script>
+<script src="/static/ui/weixin-favorite.js"></script>
+<script src="/static/js/tuan/index.js"></script>
+{{include file="./weixinshare.html"}}
+{{/block}}

@@ -1,0 +1,35 @@
+<!-- target: TPL_exhibition_channel -->
+<div class="exhibition-channel">
+    <!-- use: TPL_common_page_header(title="活动详情") -->
+    <!-- use: TPL_common_page_footer(name="tuan") -->
+    <section class="ui-container">
+        <div class="ui-tab">
+            <ul class="ui-tab-nav ui-border-b">
+                <li @click="resetRouter('/exhibition/detail', {exhibition_id: query.exhibition_id})">基本信息</li>
+                <li @click="redirect('/exhibition/order/list', {exhibition_id: query.exhibition_id, claimed: '1'})">已认领订单</li>
+                <li class="current">渠道效果</li>
+            </ul>
+            <ul class="ui-tab-content">
+                <li class="current">
+                    <div class="ui-row filterbar">
+                        <div class="ui-col ui-col-33">共<span v-text="totalCount"></span>个</div>
+                        <div class="ui-col ui-col-67 text-right">
+                            <button type="button" @click="$refs.orderstatussheet.showActionSheet">按订单状态统计<i class="ui-icon-unfold"></i></button>
+                        </div>
+                    </div>
+                    <listview v-ref:listview :api="api.statExhibitionChannel" :extra-data="listExtraData" cache-type="mem">
+                        <table class="ui-table ui-table-pure ui-border-tb">
+                            <tr><th>排名</th><th>报名渠道</th><th>人数</th></tr>
+                            <tr v-for="channel in channels">
+                                <td v-text="$index + 1"></td>
+                                <td v-text="channel.signupChannel.name"></td>
+                                <td v-text="channel.count"></td>
+                            </tr>
+                        </table>
+                    </listview>
+                </li>
+            </ul>
+        </div>
+        <actionsheet v-ref:orderstatussheet title="按优惠券状态筛选" :actions="const.EXHIBITION_STATUS|support-all-option"></actionsheet>
+    </section>
+</div>

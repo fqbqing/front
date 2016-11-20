@@ -1,0 +1,38 @@
+<!-- target: TPL_access_acl_authorization -->
+<div class="breadcrumb bbmc-breadcrumb">
+    <span>权限控制</span>
+    <span class="divider">/</span>
+    <span class="active">授权中心</span>
+</div>
+<div class="access-acl-authorization bbmc-content-wrap">
+    <div class="bbmc-detail-content">
+        <h1 class="page-title">给<!-- if: ${id_type} == ${config.ID_TYPE_USER} -->用户<!-- else -->用户组<!-- /if --><em>${who.name}</em>授权</h1>
+        <div class="bbmc-detail">
+            <div class="ctrl-wrap">
+                <dl class="ctrl-list" v-for="ctrl in ctrls">
+                    <dt>
+                        <label>
+                            <input type="checkbox" :checked="ctrl.checked" :value="ctrl.name"
+                                   name="ctrl" @click="changeCtrl(ctrl, $event)">
+                            {{ctrl.text}}
+                        </label>
+                    </dt>
+                    <dd>
+                        <ul class="act-list">
+                            <li v-for="act in ctrl.actions">
+                                <label>
+                                    <input type="checkbox" :disabled="act.disabled" :checked="act.checked" :value="ctrl.name"
+                                           name="act" @click="changeAct(ctrl, act, $event)">
+                                    {{act.text}}
+                                </label>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+            <div class="ui-row">
+                <button data-ui-type="Button" type="button" data-ui-skin="warn" @click="save">确认授权</button>
+            </div>
+        </div>
+    </div>
+</div>

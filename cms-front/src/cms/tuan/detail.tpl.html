@@ -1,0 +1,246 @@
+<!-- target: TPL_tuan_detail -->
+<div class="tuan-detail bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span class="active">团购活动</span>
+        <span class="divider">/</span>
+        <a href="#/tuan/list">团购列表</a>
+        <span class="divider">/</span>
+        <span class="active">团购详情</span>
+    </div>
+    <div class="bbmc-detail-content container">
+        <section class="ui-container">
+            <section class="ui-panel">
+                <h1 style="line-height: 44px;" v-text="tuan.title"></h1>
+            </section>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>基本信息</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content info-content">
+                                <ul class="ui-list ui-list-pure ui-border-tb">
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">活动时间：</span>
+                                            <span class="ui-panel-title-tips">${tuan.tuan_time|date}</span>
+                                        </h5>
+                                    </li>
+                                    <li class="ui-border-b">
+                                        <h5>
+                                            <span class="label">报名截至时间：</span>
+                                            <span class="ui-panel-title-tips">${tuan.end_time|date}</span>
+                                        </h5>
+                                    </li>
+                                    <li>
+                                        <h5>
+                                            <span class="label">意向金：</span>
+                                            <span class="ui-panel-title-tips">${tuan.amount|amount}元</span>
+                                        </h5>
+                                    </li>
+                                    <!--if: ${tuan.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+                                    <li>
+                                        <h5>
+                                            <span class="label">分享链接：</span>
+                                            <span class="ui-panel-title-tips">${shareLink}</span>
+                                            <a data-ui-id="cp"
+                                               data-ui-type="Clipboard"
+                                               data-ui-clipboard-text="@shareLink" href="javascript:void(0)" style="padding:0 10px;">复制</a>
+                                        </h5>
+                                    </li>
+                                    <!--/if-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--if: ${tuan.status} == ${constants.ACTIVITY_STATUS_ONLINE}-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>二维码</span>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <div class="row row-compact">
+                                    <div class="col-xs-6 data-block data-block-last-bottom">
+                                        <p class="stat-value"><img src="/api/tuan/qrcode-share?id=${tuan_id}" alt="分享二维码"></p>
+                                        <h3 class="stat-name">分享二维码</h3>
+                                        <span class="tip">扫描“分享二维码”，用手机分享该活动</span>
+                                    </div>
+                                    <div class="col-xs-6 data-block data-block-last data-block-last-bottom">
+                                        <p class="stat-value">
+                                            <img src="/api/tuan/checkin-qrcode?id=${tuan_id}" alt="签到二维码">
+                                        </p>
+                                        <h3 class="stat-name">
+                                            签到二维码
+                                            <a href="/api/tuan/checkin-qrcode?id=${tuan_id}&download=1" target="_self" style="padding-left:10px;">下载</a>
+                                        </h3>
+                                        <span class="tip">建议下载该二维码并打印，用于客户入场扫码进行签到</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--/if-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span><a href="#/order/tuan/list~tuan_id=${tuan.id}&claimed=1">已认领订单</a></span>
+                                <small class="ui-panel-subtitle" style="font-size: 12px;">(今日/全部)</small>
+                            </h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <div class="row row-compact">
+                                    <div class="col-xs-4 data-block">
+                                        <p class="stat-value"><em>${statOrder.today_claimed_count}/${statOrder.claimed_count}</em></p>
+                                        <h3 class="stat-name">全部</h3>
+                                    </div>
+                                    <div class="col-xs-4 data-block">
+                                        <p class="stat-value"><em>${statOrder.today_paid_count}/${statOrder.paid_count}</em></p>
+                                        <h3 class="stat-name">已支付</h3>
+                                    </div>
+                                    <div class="col-xs-4 data-block data-block-last">
+                                        <p class="stat-value"><em>${statOrder.today_used_count}/${statOrder.used_count}</em></p>
+                                        <h3 class="stat-name">已成交</h3>
+                                    </div>
+                                </div>
+                                <div class="row row-compact">
+                                    <div class="col-xs-4 data-block data-block-last-bottom">
+                                        <p class="stat-value"><em>${statOrder.today_apply_refund_count}/${statOrder.apply_refund_count}</em></p>
+                                        <h3 class="stat-name">申请退款</h3>
+                                    </div>
+                                    <div class="col-xs-4 data-block data-block-last-bottom">
+                                        <p class="stat-value"><em>${statOrder.today_refunding_count}/${statOrder.refunding_count}</em></p>
+                                        <h3 class="stat-name">退款中</h3>
+                                    </div>
+                                    <div class="col-xs-4 data-block data-block-last data-block-last-bottom">
+                                        <p class="stat-value"><em>${statOrder.today_refunded_count}/${statOrder.refunded_count}</em></p>
+                                        <h3 class="stat-name">已退款</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span style="margin: 0 auto;"><a href="#/order/tuan/list~tuan_id=${tuan.id}&claimed=0">未认领订单</a><i>(${statOrder.unclaimed_count})</i></span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2>报名车型统计</h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr>
+                                        <th>车型</th>
+                                        <th>已报名</th>
+                                        <th>已支付</th>
+                                    </tr>
+                                    <tr v-for="item in statIntention">
+                                        <td v-text="item.intention"></td>
+                                        <td v-text="item.signup_order_count"></td>
+                                        <td v-text="item.paid_order_count"></td>
+                                    </tr>
+                                </table>
+                                <div v-if="!statIntention || statIntention.length==0" class="ui-table-body-nodata">
+                                    <p>还没有报名数！</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2>成交车型统计</h2>
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr>
+                                        <th>车型</th>
+                                        <th>成交数</th>
+                                    </tr>
+                                    <tr v-for="deal in statDealModel | orderBy 'count' -1">
+                                        <td v-text="deal.deal_model"></td>
+                                        <td v-text="deal.count"></td>
+                                    </tr>
+                                </table>
+                                <div v-if="!statDealModel || statDealModel.length==0" class="ui-table-body-nodata">
+                                    <p>还没有成交！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bbmc-panel">
+                        <div class="bbmc-panel-head">
+                            <h2 class="ui-arrowlink">
+                                <span>渠道效果</span>
+                                <small v-text="'('+channels.length+')'"></small>
+                                <select data-ui-type="Select" data-ui-id="status_select" name="status" data-ui-value="${status}" class="fr">
+                                    <!-- for: ${tuanOrderStatus} as ${st} -->
+                                    <option value="${st.value}">${st.text}</option>
+                                    <!-- /for -->
+                                </select>
+                            </h2>
+
+                        </div>
+                        <div class="bbmc-panel-body">
+                            <div class="bbmc-panel-content">
+                                <table class="table table-kpi">
+                                    <tr><th>排名</th><th>报名渠道</th><th>人数</th></tr>
+                                    <tr v-for="channel in channels">
+                                        <td v-text="$index + 1"></td>
+                                        <td v-text="channel.signupChannel.name"></td>
+                                        <td v-text="channel.count"></td>
+                                    </tr>
+                                </table>
+                                <div v-if="!channels || channels.length==0" class="ui-table-body-nodata">
+                                    <p>还没有渠道信息！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

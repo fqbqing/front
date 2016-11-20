@@ -1,0 +1,138 @@
+body {
+    -webkit-font-smoothing: antialiased;
+}
+address {
+    font-style: normal;
+}
+p {
+    margin: .5rem 0;
+}
+.bar-header-secondary {
+    padding: 0;
+    .buttons-tab {
+        .button {
+            height: 2.2rem;
+            line-height: 2.2rem;
+            top: 0;
+        }
+    }
+}
+.page {
+    display: block;
+}
+.font-small {
+    font-size: 12px;
+}
+.currency {
+    &:first-letter {
+        //font-size: 80%;
+        vertical-align: middle !important;
+        //color: @color-danger;
+    }
+}
+.list-block-card {
+    ul {
+        background: none;
+        .hairline-remove(top);
+        .hairline-remove(bottom);
+    }
+    li {
+        background: #fff;
+        border-radius: 5px;
+        margin: .75rem;
+        .item-link {
+            border-radius: 5px;
+        }
+    }
+}
+
+.button-block {
+    width: 100%;
+}
+.button:disabled {
+    background: #aaa !important;
+}
+
+.preloader-modal {
+    padding: 8px 16px;
+    min-width: 120px;
+}
+.inline-block {
+    display: inline-block;
+}
+.panel {
+    background: #fff;
+    color: #333;
+    box-shadow: -1px 0 10px #aaa;
+}
+.panel-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, .5);
+}
+.with-panel-right-reveal, .with-panel-left-reveal {
+    .panel-overlay {
+        background: rgba(0, 0, 0, 0);
+    }
+}
+.launch {
+    margin: 200px 0 0;
+    text-align: center;
+}
+.special-title {
+    display: flex;
+    align-items: center;
+    .special-title-left, .special-title-right {
+        border-bottom: 1px solid #ddd;
+        flex: 1;
+        height: 0;
+        position: relative;
+        min-width: 30px;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            background: url(../img/linecar.png) left center no-repeat;
+            background-size: 30px 5px;
+            width: 15px;
+            height: 5px;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -2px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+    }
+    .special-title-right {
+        &:before {
+            background-position: right center;
+            left: auto;
+            right: 0;
+        }
+        &:after {
+            right: auto;
+            left: 0;
+        }
+    }
+    h2 {
+        margin: 0 .75rem;
+        font-size: 1rem;
+        line-height: 1.2;
+        font-weight: normal;
+    }
+}
+
+.voucher-order-status {
+    font-size: 14px;
+    background: @color-primary;
+    color: #fff;
+    border-radius: 3px;
+    height: 18px;
+    line-height: 1;
+    padding: 2px 4px;
+}

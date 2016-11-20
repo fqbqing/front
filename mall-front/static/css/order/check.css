@@ -1,0 +1,44 @@
+.check-step.pay-step {
+    overflow: hidden;
+    margin: 0 auto;
+}
+.form-inline .form-group {
+    display: block;
+}
+.form-inline .form-group .input {
+    border-radius: 0px;
+}
+.form-inline .form-group {
+    margin-bottom: 15px;
+}
+.form-group .field .help {
+    color: #979797;
+    margin-left: 20px;
+}
+.input-help {
+    float: right;
+}
+.input-help ul {
+    list-style: none;
+}
+.form-inline .form-group .label {
+    min-width: 100px;
+}
+#order-submit {
+    padding: 10px 30px;
+    font-size: 16px;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .outer-box {
+        padding: 0;
+        border: none;
+    }
+}
+
+@media (min-width: 1000px) {
+    .good-detail {
+        margin-left: 30px;
+    }
+}

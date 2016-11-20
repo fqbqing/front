@@ -1,0 +1,96 @@
+<!-- target: TPL_activity_show_add -->
+<div class="activity-show-add bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>活动管理</span>
+        <span class="divider">/</span>
+        <span><a href="#/activity/show/list">活动展示列表</a></span>
+        <span class="divider">/</span>
+        <span class="active">添加活动展示</span>
+    </div>
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST">
+            <div class="form-body">
+                <div class="form-row">
+                    <div class="form-key form-key-required">活动名称：</div>
+                    <div class="form-value">
+                        <!-- if: ${formData.id} -->
+                            ${formData.activity.name}
+                        <!--else-->
+                        <button data-ui-type="Button" data-ui-id="chooseActivityBtn" data-ui-skin="primary" type="button" class="chooseActivityBtn">
+                            <i class="icon-plus"></i>选择活动
+                        </button>
+                        <div data-ui-type="Label" data-ui-id="activity_name" ></div>
+                        <!-- /if -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-key form-key-required">展示权重：</div>
+                    <div class="form-value">
+                        <input data-ui-id="order"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="权重不能为空"
+                               data-ui-number=""
+                               data-ui-width="400"
+                               name="order"
+                               data-ui-value="@formData.order"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">展示类型：</div>
+                    <div class="form-value">
+                        <div name="type" data-ui-type="RadioSelect" data-ui-id="showType" data-ui-value="@formData.type"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">展示图片：</div>
+                    <div class="form-value">
+                        <div data-ui-type="WebUploader"
+                             data-ui-hint="请添加展示图片（大小不超过2M）"
+                             data-ui-name="image"
+                             data-ui-id="uploader">选择文件</div>
+                        <div class="form-extra">
+                            <div class="preview" id="preview">
+                                <!-- if: ${formData.image_url} -->
+                                <img src="${formData.image_url}" alt="预览图片"/>
+                                <!-- /if -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key form-key-required">图片对应色调：</div>
+                    <div class="form-value">
+                        <input data-ui-id="text"
+                               data-ui-type="TextBox"
+                               data-ui-required="required"
+                               data-ui-required-error-message="图片对应色调不能为空"
+                               data-ui-width="400"
+                               name="text"
+                               data-ui-value="@formData.text"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key">跳转url：</div>
+                    <div class="form-value">
+                        <input data-ui-id="url"
+                               data-ui-type="TextBox"
+                               data-ui-width="400"
+                               name="url"
+                               data-ui-value="@formData.url"/>
+                        <div class="form-tips">若配置该链接，则活动跳转至此链接页面</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-key"></div>
+                    <div class="form-value">
+                        <button data-ui-type="Button" data-ui-id="submit" data-ui-skin="spring" type="submit">提交
+                        </button>
+                        <button data-ui-type="Button" data-ui-id="cancel" data-ui-skin="normal" type="button">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

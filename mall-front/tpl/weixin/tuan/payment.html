@@ -1,0 +1,31 @@
+{{extends file="layout/weixinmain.html"}}
+{{block name="variable"}}
+{{assign var="MENU_NAME" value="index"}}
+{{/block}}
+{{block name="title"}}支付订金{{/block}}
+{{block name="head"}}
+<link rel="stylesheet" href="/static/weixin/payment.css">
+{{/block}}
+{{block name="body"}}
+<input type="hidden" value="{{$data['id']}}" id="orderId">
+<input type="hidden" value="{{$data['tuan_id']}}">
+<input type="hidden" value="{{$data['amount']/100}}">
+<div class="container-box payment">
+    <h3>订金金额：<em class="price">¥{{$data['amount']/100}}</em></h3>
+    <h3 class="payment-title"><span>支 付 方 式</span></h3>
+    <div class="payment-type">
+        {{if $isInWeixin || !$isMobile}}
+        <div class="inline-block paymentbtn wechatpay active" id="wechatpay"><span class="wechat-icon">微信支付</span></div>
+        <div class="paymentbtn alipay" id="alipay"><span class="alipay-icon">支付宝支付</span></div>
+        {{else}}
+        <div class="paymentbtn alipay active" id="alipay" style="width: 100%;float:none;"><span class="alipay-icon">支付宝支付</span></div>
+        {{/if}}
+    </div>
+    <button id="payBtn" class="btn paybtn">立即支付</button>
+</div>
+{{/block}}
+{{block name="js"}}
+{{include file="./weixinshare.html"}}
+<script src="/static/js/env.js"></script>
+<script src="/static/weixin/payment.js"></script>
+{{/block}}

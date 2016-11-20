@@ -1,0 +1,56 @@
+/**
+ * @file [Please Input File Description]
+ * @author ()
+ */
+
+.access-user-role {
+    .bbmc-detail-content {
+        .row {
+            overflow: hidden;
+            .bbmc-box{
+                -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+                box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+            }
+        }
+    }
+    .role-list {
+        clear: both;
+        margin: 0 -8px -8px;
+        overflow: hidden;
+        li {
+            float: left;
+            margin: 8px;
+            border: 2px solid #f60;
+            padding: 2px 6px 2px 15px;
+            line-height: 20px;
+            position: relative;
+            overflow: hidden;
+            &:after {
+                position: absolute;
+                right: 0;
+                bottom: -8px;
+                content: '';
+                width: 0;
+                height: 0;
+                border: 8px solid transparent;
+                border-right-color: #f60;
+            }
+        }
+        .remove {
+            background: none;
+            border: none;
+        }
+    }
+    .role-group-list {
+        li {
+            border-color: #3291da;
+            padding: 2px 15px;
+            &:after {
+                border-right-color: #3291da;
+            }
+        }
+    }
+    .pager-count {
+        display: none;
+    }
+}

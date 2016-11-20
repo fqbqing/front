@@ -1,0 +1,146 @@
+<!-- target: TPL_overview_search -->
+<div class="overview-search bbmc-content-wrap">
+    <div class="breadcrumb bbmc-breadcrumb">
+        <span>首页</span>
+        <span class="divider">/</span>
+        <span class="active">全局搜索</span>
+    </div>
+    <div class="container">
+        <template v-if="result.customers.data.length == 0 && result.tuanOrders.data.length == 0 && result.exhibitionCouponOrders.data.length == 0">
+            <p>没有查到任何结果!</p>
+        </template>
+        <div class="bbmc-panel customer-panel" v-if="result.customers.data.length > 0">
+            <div class="bbmc-panel-head">
+                <h2>客户 <small>查找到<i v-text="result.customers.totalCount"></i>条</small></h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="row">
+                    <div class="col-xs-3" v-for="customer in result.customers.data">
+                        <div class="customer-item">
+                            <h3>
+                                <a href="#/customer/info~id={{customer.id}}">{{customer.name}}</a>
+                                <small v-text="customer.phone"></small>
+                            </h3>
+                            <p>
+                                {{customer.rating|customer-rating}}
+                            </p>
+                            <span class="customer-owner" v-if="customer.owner">归属：<i v-text="customer.owner.name"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel tuan-order-panel" v-if="result.signups.data.length > 0">
+            <div class="bbmc-panel-head">
+                <h2>活动报名 <small>查找到<i v-text="result.signups.totalCount"></i>条</small></h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="row">
+                    <div class="col-xs-6" v-for="order in result.signups.data">
+                        <div class="tuan-order-item">
+                            <h3>
+                                <time v-text="order.created_time|date"></time>
+                                <a href="#/customer/info~id={{order.customer_id}}">{{order.username}}</a>
+                                <small v-text="order.phone"></small>
+                            </h3>
+                            <p v-if="order.activity" class="tuan-info">
+                                <span v-text="order.activity.name"></span><label class="activity-type" v-text="order.activity.type|activity-type"></label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel tuan-order-panel" v-if="result.tuanOrders.data.length > 0">
+            <div class="bbmc-panel-head">
+                <h2>旧团购报名 <small>查找到<i v-text="result.tuanOrders.totalCount"></i>条</small></h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="row">
+                    <div class="col-xs-6" v-for="order in result.tuanOrders.data">
+                        <div class="tuan-order-item">
+                            <h3>
+                                <time v-text="order.created_time|date"></time>
+                                <a href="#/customer/info~id={{order.customer_id}}">{{order.name}}</a>
+                                <small v-text="order.phone"></small>
+                            </h3>
+                            <p v-if="order.tuan" class="tuan-info">
+                                <span v-text="order.tuan.title"></span>
+                            </p>
+                            <p>
+                                订单号：<a href="#/order/tuan/detail~order_id={{order.order_id}}"><i v-text="order.order_id"></i></a>
+                            </p>
+                            <p>
+                                意向车型：<i v-text="order.intention"></i>
+                                <span v-if="order.deal_model" style="margin-left: 20px;">
+                                    成交车型：<i v-text="order.deal_model"></i>
+                                </span>
+                            </p>
+                            <p>
+                                <span class="tuan-order-status" v-text="order.status|tuan-order-status"></span>
+                                <span class="payment" v-text="order.payment|payment-type"></span>
+                                <span class="buying-way" v-text="order.car_buying_way|car-buying-way"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel tuan-order-panel" v-if="result.voucherOrders.data.length > 0">
+            <div class="bbmc-panel-head">
+                <h2>优惠券报名 <small>查找到<i v-text="result.voucherOrders.totalCount"></i>条</small></h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="row">
+                    <div class="col-xs-6" v-for="order in result.voucherOrders.data">
+                        <div class="tuan-order-item">
+                            <h3>
+                                <time v-text="order.created_time|date"></time>
+                                <a href="#/customer/info~id={{order.customer_id}}">{{order.customer.name}}</a>
+                                <small v-text="order.customer.phone"></small>
+                            </h3>
+                            <p v-if="order.voucher" class="tuan-info">
+                                <span v-text="order.voucher.name"></span>
+                            </p>
+                            <p>
+                                订单号：<a href="#/voucher/order/detail~id={{order.id}}"><i v-text="order.order_id"></i></a>
+                            </p>
+                            <p>
+                                <span class="tuan-order-status" v-text="order.status|voucher-order-status"></span>
+                                <span class="payment" v-text="order.payment|payment-type"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bbmc-panel tuan-order-panel" v-if="result.exhibitionCouponOrders.data.length > 0">
+            <div class="bbmc-panel-head">
+                <h2>车展报名 <small>查找到<i v-text="result.exhibitionCouponOrders.totalCount"></i>条</small></h2>
+            </div>
+            <div class="bbmc-panel-body">
+                <div class="row">
+                    <div class="col-xs-6" v-for="order in result.exhibitionCouponOrders.data">
+                        <div class="tuan-order-item">
+                            <h3>
+                                <time v-text="order.created_time|date"></time>
+                                <a href="#/customer/info~id={{order.customer_id}}">{{order.name}}</a>
+                                <small v-text="order.phone"></small>
+                            </h3>
+                            <p v-if="order.exhibitionCouponActivity" class="tuan-info">
+                                <span v-text="order.exhibitionCouponActivity.exhibitionCoupon.extra.activity_title"></span>
+                            </p>
+                            <p>
+                                订单号：<a href="#/exhibition/coupon/order/detail~order_id={{order.order_id}}"><i v-text="order.order_id"></i></a>
+                            </p>
+                            <p>
+                                <span class="tuan-order-status" v-text="order.status|exhibition-status"></span>
+                                <span class="payment" v-text="order.payment|payment-type"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

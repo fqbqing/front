@@ -1,0 +1,115 @@
+/**
+ * Copyright (c) 2014 Baidu.com, Inc. All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
+.ui-filepreview {
+    background: #f5f5f5;
+    font-size: 12px;
+    padding-left: 20px;
+    margin-top: 10px;
+
+    .clearfix();
+
+    p {
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
+
+    span {
+        position: absolute;
+        height: 0;
+        background: rgba(0,0,0,0.5);
+        width: 100%;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 300;
+    }
+
+    p:hover {
+        span {
+            height: 30px;
+            .transition(height .3s linear);
+        }
+    }
+
+    i {
+        width: 24px;
+        height: 24px;
+        display: inline;
+        float: right;
+        text-indent: -9999px;
+        overflow: hidden;
+        background: url(../img/icons.png) no-repeat;
+        margin: 5px 1px 1px;
+        cursor: pointer;
+    }
+    .ui-filepreview-delete-icon {
+        background-position: -48px -24px;
+        &:hover {
+            background-position: -48px 0;
+        }
+    }
+    .ui-filepreview-default-file, .ui-filepreview-error-file {
+        padding: 24px 26px;
+        width: 28px;
+        height: 32px;
+        background: #fff;
+    }
+    .ui-filepreview-loading-file {
+        padding: 32px 32px;
+        width: 16px;
+        height: 16px;
+    }
+
+    figure {
+        margin: 20px 20px 20px 0;
+        float: left;
+        width: 80px;
+        overflow: hidden;
+        img {
+            width: 80px;
+            height: 80px;
+            display: block;
+            &.default-file, &.error-file {
+                padding: 24px 26px;
+                width: 28px;
+                height: 32px;
+                background: #fff;
+            }
+            &.loading-file {
+                padding: 32px 32px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
+    figcaption {
+        color: #999;
+        height: 30px;
+        line-height: 30px;
+        .ellipsis();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* vim: set ts=4 sw=4 sts=4 tw=120: */

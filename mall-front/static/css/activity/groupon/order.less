@@ -1,0 +1,256 @@
+
+@tuan-bg-color-default: #323a46;
+//@tuan-color-default: #2fcc70;
+@tuan-color-default: #ff6c15;
+
+
+@tuan-bg-color-yellow: #0D1827;
+@tuan-color-yellow: #ff6c15;
+
+@tuan-bg-color-young: #3d359a;
+@tuan-color-young: #fed303;
+
+@tuan-bg-color-freshness: #00ac86;
+@tuan-color-freshness: #fff;
+
+@tuan-bg-color-steady: #303a43;
+@tuan-color-steady: #ff6c15;
+
+
+.container {
+    background: @tuan-bg-color-default;
+    margin: 0 auto;
+    max-width: 750px;
+    color: #fff;
+    padding: 10px;
+    min-height: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.order-info {
+    background: #fff;
+    color: #333;
+    position: relative;
+    padding: 20px;
+    margin: 10px;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -23px;
+        margin-left: -20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: @tuan-bg-color-default;
+    }
+    .header h1 {
+        font-size: 16px;
+        color: @tuan-color-default;
+        margin: 15px 0;
+        font-weight: 600;
+        text-align: center;
+    }
+    .order-part {
+        > h2 {
+            margin: 30px 0 20px 0;
+            font-weight: 700;
+            color: #777;
+            text-align: center;
+            position: relative;
+            span {
+                font-size: 16px;
+                background: #fff;
+                position: relative;
+                z-index: 1;
+                padding: 0 10px;
+            }
+            &:before {
+                content: '';
+                border-top: 1px solid #ddd;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                width: 100%;
+            }
+        }
+    }
+    dl.info-list {
+        font-size: 14px;
+        color: #888;
+        dt {
+            float: left;
+            clear: both;
+            width: 80px;
+        }
+        dd {
+            margin: 10px 0;
+            margin-left: 85px;
+            address, p.extra {
+                color: #999;
+                font-size: 10px;
+            }
+        }
+    }
+    .tuan-info {
+        position: relative;
+        .stamp {
+            position: absolute;
+            right: 0;
+            top: -25px;
+            color: @tuan-color-default;
+            border: 1px solid @tuan-color-default;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            -webkit-transform: rotate(35deg);
+            transform: rotate(35deg);
+        }
+    }
+    .entry-cert {
+        text-align: center;
+        p {
+            color: #999;
+            margin: 8px;
+            font-size: 12px;
+        }
+    }
+    .order-detail {
+        .info-list {
+            dt {
+                width: 100px;
+            }
+            dd {
+                margin-left: 105px;
+            }
+        }
+    }
+    .coupon {
+        padding: 0 10px;
+        h3 {
+            font-size: 14px;
+            margin: 10px 0;
+            text-align: center;
+            background: #FF7645;
+            padding: 10px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            &:before, &:after {
+                content: '';
+                position: absolute;
+                left: -8px;
+                top: 50%;
+                margin-top: -6px;
+                width: 12px;
+                height: 12px;
+                background: #fff;
+                border-radius: 50%;
+            }
+            &:after {
+                left: auto;
+                right: -8px;
+            }
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+        }
+        .price {
+            font-size: 12px;
+            color: #999;
+            line-height: 30px;
+            em {
+                color: #f50;
+                font-size: 22px;
+                font-weight: 700;
+                margin-right: 5px;
+            }
+            p {
+                float: right;
+                color: #f50;
+            }
+        }
+        .pay-button {
+            padding: 10px 0;
+            button {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+        .explain {
+            .caption {
+                margin: 8px 0;
+                font-size: 12px;
+            }
+            .guide {
+                color: #999;
+                font-size: 12px;
+                li {
+                    margin: 5px 0;
+                }
+            }
+        }
+        .payed-info {
+            text-align: center;
+            p {
+                color: #999;
+                margin: 8px;
+                font-size: 13px;
+                &.code {
+                    color: #333;
+                    letter-spacing: 2px;
+                }
+            }
+        }
+        .refund-info {
+            text-align: center;
+            h4 {
+                font-size: 30px;
+                margin: 20px 0;
+            }
+            p {
+                color: #999;
+                font-size: 13px;
+            }
+        }
+    }
+}
+.part {
+    margin: 10px;
+    > h2 {
+        margin: 30px 0 20px 0;
+        font-weight: 700;
+        color: @tuan-color-default;
+        text-align: center;
+        position: relative;
+        span {
+            font-size: 16px;
+            background: @tuan-bg-color-default;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+        &:before {
+            content: '';
+            border-top: 1px solid @tuan-color-default;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+    }
+    .v-seller a {
+        color: #fff;
+        font-size: 14px;
+    }
+}

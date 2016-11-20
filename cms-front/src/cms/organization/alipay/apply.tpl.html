@@ -1,0 +1,76 @@
+<!-- target: TPL_organization_alipay_apply -->
+<div class="organization-alipay-apply bbmc-content-wrap">
+    <div class="bbmc-content">
+        <form data-ui-type="Form" data-ui-id="form" data-ui-auto-validate="true" method="POST" class="pay-form">
+            <div class="form-block">
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-key">支付宝账号：</div>
+                        <div class="form-value">
+                            <input data-ui-id="seller"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   name="seller"
+                                   data-ui-value="@formData.account.seller"/>
+                            <a href="http://static.chedamai.cn/doc/v1/product_description/pay.html" target="_blank">查看帮助？</a>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">合作者身份ID：</div>
+                        <div class="form-value">
+                            <input data-ui-id="partner"
+                                   data-ui-type="TextBox"
+                                   data-ui-required="required"
+                                   name="partner"
+                                   data-ui-value="@formData.account.partner" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key"> 支付宝公钥：</div>
+                        <div class="form-value">
+                            <div data-ui-id="ali-public-key"
+                                 data-ui-type="TextBox"
+                                 data-ui-required="required"
+                                 data-ui-width="400"
+                                 data-ui-height="80"
+                                 name="ali_public_key"
+                                 data-ui-mode="textarea"
+                                 data-ui-value="@formData.account.aliPublicKey">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key">RSA密钥：</div>
+                        <div class="form-value">
+                            <div data-ui-id="rsaPublicKey"
+                                 data-ui-type="TextBox"
+                                 data-ui-required="required"
+                                 data-ui-width="400"
+                                 data-ui-height="80"
+                                 name="rsaPublicKey"
+                                 data-ui-mode="textarea"
+                                 data-ui-value="@formData.account.rsaPublicKey" data-ui-read-only="true">
+                            </div>
+                            <div data-ui-id="copyRSA"
+                                 data-ui-type="Clipboard"
+                                 data-ui-clipboard-text="@formData.account.rsaPublicKey" style="color: #3291da;cursor: pointer">复制</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-key"></div>
+                        <div class="form-value">
+                            <button data-ui-type="Button" data-ui-id="submit" class="ui-button-submit" data-ui-skin="spring" type="submit">开通</button>
+                            <button data-ui-type="Button" data-ui-id="cancel" class="ui-button-submit" type="button">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- target: TPL_organization_alipay_apply_child -->
+<!-- import: TPL_organization_alipay_apply -->
