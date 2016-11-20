@@ -10,10 +10,10 @@ var vueify = require('vueify');
 var u = require('underscore');
 var Imagemin = require('imagemin');
 
-var AliOss = require('edp-build-alioss');
+// var AliOss = require('edp-build-alioss');
 
-var CDN_DOMAIN = '//static.chedamai.cn';
-var PREFIX = 'agent-front/v/[oss_version]';
+// var CDN_DOMAIN = '//static.chedamai.cn';
+// var PREFIX = 'agent-front/v/1';
 
 /**
  * 输入目录
@@ -123,19 +123,19 @@ exports.getProcessors = function () {
     });
     var addCopyright = new AddCopyright();
 
-    var alioss = new AliOss({
-        files: [
-            'src/*',
-            'src/**/*',
-            'dep/*',
-            'dep/**/*',
-            'esl.js',
-            'apple-touch-icon.png'
-        ],
-        bucket: '',
-        prefix: PREFIX,
-        region: ''
-    });
+    // var alioss = new AliOss({
+    //     files: [
+    //         'src/*',
+    //         'src/**/*',
+    //         'dep/*',
+    //         'dep/**/*',
+    //         'esl.js',
+    //         'apple-touch-icon.png'
+    //     ],
+    //     bucket: '',
+    //     prefix: PREFIX,
+    //     region: ''
+    // });
 
     var indexPageCompiler = {
         name: 'IndexPageCompiler',
@@ -198,7 +198,7 @@ exports.getProcessors = function () {
             pathMapperProcessor,
             indexPageCompiler,
             addCopyright,
-            alioss
+            // alioss
         ]
     };
 };

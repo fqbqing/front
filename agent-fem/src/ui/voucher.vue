@@ -2,7 +2,7 @@
     <div class="ui-voucher-container" :class="{'ui-voucher-tiny':mode=='tiny'}">
         <div class="ui-voucher">
             <div class="voucher-image" v-if="mode!='tiny'">
-                <img :src="voucher.image_url|image-cdn '50w_50h_1c_1e_50-1ci.png'">
+               
             </div>
             <div class="voucher-info">
                 <h2 v-text="voucher.name"></h2>

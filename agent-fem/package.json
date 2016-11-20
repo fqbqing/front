@@ -24,5 +24,7 @@
   "repository": "empty",
   "license": "BSD",
   "readme": "README",
-  "devDependencies": {}
+  "devDependencies": {
+    "less": "^2.7.1"
+  }
 }
