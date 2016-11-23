@@ -6,8 +6,8 @@ exports.output = path.resolve(__dirname, 'output');
 var co = require('co');
 var OSS = require('ali-oss');
 
-var CDN_DOMAIN = '//static.cn';
-var PREFIX = 'cms-admin-front/v/[oss_version]';
+// var CDN_DOMAIN = '//static.cn';
+// var PREFIX = 'cms-admin-front/v/1';
 
 // var moduleEntries = 'html,htm,phtml,tpl,vm,js';
 // var pageEntries = 'html,htm,phtml,tpl,vm';
