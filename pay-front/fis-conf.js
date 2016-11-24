@@ -2,14 +2,17 @@
 //require('fis3-smarty')(fis);
 
 var fs = require('fs');
-var CDN_DOMAIN = '//static.chedamai.cn';
+var CDN_DOMAIN = '//oss.zhanqu.im';
 var CDN_PREFIX = 'pay-front';
 
-var nodeConfig = {oss: {}};
-if (process.env.NODE_ENV == 'prod') {
-    nodeConfig = fs.readFileSync('/home/work/.node-config', 'utf8');
-    nodeConfig = JSON.parse(nodeConfig);
-}
+var nodeConfig = {oss: {
+    accessKey:'iKz7jLlSvgxaeL61',
+    accessKeySecret:'37lvuBqppN4Lybv6TYdZff22ORZOZD'
+}};
+/*if (process.env.NODE_ENV == 'prod') {
+ nodeConfig = fs.readFileSync('/home/work/.node-config', 'utf8');
+ nodeConfig = JSON.parse(nodeConfig);
+ }*/
 
 fis.match('*', {
     useHash: false, // md5 都关掉
@@ -69,14 +72,19 @@ fis.match('/tpl/(**)/(*.html)', {
 
 var CDN_DEPLOY = [
     fis.plugin('aliyunoss', {
-        ak: nodeConfig.oss.accessKey,
-        sk: nodeConfig.oss.accessKeySecret,
-        region: '',
-        bucket: '',
-        prefix: CDN_PREFIX
+
+
+        ak: 'iKz7jLlSvgxaeL61', // 在阿里云OSS申请的 accessKeyId
+        sk: '37lvuBqppN4Lybv6TYdZff22ORZOZD', // 在阿里云OSS申请的 secretAccessKey
+        bucket: 'zhanqu', // 你的存储空间名称
+        prefix: CDN_PREFIX, // 目录前缀
+        region: 'oss-cn-shenzhen-internal',
+        ossServer: 'http://oss-cn-shenzhen.aliyuncs.com'
     }),
     fis.plugin('local-deliver')
 ];
+
+
 fis.match('*', {
     deploy: [
         fis.plugin('local-deliver')
